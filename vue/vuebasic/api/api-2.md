@@ -291,10 +291,10 @@ import를 사용해서 선언하면 바로 템플릿에 적용이 된다.
 
 반응형 API를 사용하여 반응형 상태를 선언하고&#x20;
 
-* `setup()`에서 객체를 반환
-* &#x20;`setup`에서 반환된 refs는 템플릿에서 접근할 때 자동으로 얕은 언래핑되므로, 접근할 때 `.value`를 사용할 필요 없으며 `this`에서 접근한다.
+* **`setup()`에서 객체를 반환**
+* &#x20;setup에서 반환된 refs는 템플릿에서 접근할 때 자동으로 얕은 언래핑되므로, 접근할 때 `.value`를 사용할 필요 없으며 `this`에서 접근한다.
 * 객체를 _동기적으로_ 반환해야 한다.
-  * `async setup()`을 사용할 수 있는 유일한 경우는 컴포넌트가 [Suspense](https://ko.vuejs.org/guide/built-ins/suspense.html) 컴포넌트의 자손인 경우이다.
+  * **`async setup()`을 사용할 수 있는 유일한 경우는 컴포넌트가** [**Suspense**](https://ko.vuejs.org/guide/built-ins/suspense.html) **컴포넌트의 자손인 경우이다.**
 
 ```html
 <script>
