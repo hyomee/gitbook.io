@@ -184,9 +184,9 @@ const vmodelMsg = ref("v-model");
 </template>
 ```
 
-| isShow = true                                                                  | isShow = false                                                                 |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| <img src="../../../.gitbook/assets/image (2).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (1).png" alt="" data-size="original"> |
+| isShow = true                                                                  | isShow = false                                                                     |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (2).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (1) (1).png" alt="" data-size="original"> |
 
 ### 3-2. v-if, v-else-if, v-else
 
@@ -400,10 +400,20 @@ html event handler 는 v-on:속성에 on를 제거 하고 작성한다. 단축�
 
 참고 : [이벤트 핸들링](https://ko.vuejs.org/guide/essentials/event-handling.html)
 
-## 6. Slot (v-slot)
+## 6. 한번만  렌더링 (v-once)
 
-## 7. 한번만  렌더링 (v-once)
+요소를 처음 렌더링한 후 Vue는 이를 정적 콘텐츠로 처리하고 다시 렌더링하지 않는다.
 
-## 8. 메모 (v-memo)
+```html
+<p v-once>초기값 cnt : {{ cnt }}</p>
+```
 
-## 9. 템플릿 숨기기(v-cloak) &#x20;
+버튼을 클릭 해도 초기값은 변경되지 않는다.
+
+<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+## 7. 메모 (v-memo)
+
+## 8. 템플릿 숨기기(v-cloak)
+
+## 9. Slot (v-slot) &#x20;
