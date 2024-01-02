@@ -172,6 +172,10 @@ Template 에 직접 참조 변수를 사용하는 것을 의미한다.
 
 이벤트는 지시문에 지정된 순서대로 실행할 수 있는데 할 일을 쉼표로 구분하여 코드를 작성하면 된다.
 
+```markup
+<element @event="one($event), two($event)" />
+```
+
 {% code lineNumbers="true" %}
 ```html
 <script setup>
@@ -215,27 +219,49 @@ Template 에 직접 참조 변수를 사용하는 것을 의미한다.
 
 참고 : [Event reference](https://developer.mozilla.org/en-US/docs/Web/Events), [event 속성 또는 메서드](https://developer.mozilla.org/en-US/docs/Web/API/Event) .
 
-### 3-1. 파라메터 방식
+### 4-1. 이벤트 수신&#x20;
 
+```javascript
+// 이벤트와 다른 파라메터가 있는 경우
+funcName(event, other_params) {
+  event.property
+}
 
+// 이벤트만 처리 하는 경
+funcName() {
+  // event is still
+  // available
+  event.property
+}
 
-### 3-1. 수식어
+<template> 
+  <input type="text" @input="getInput">
+</template>
 
-자바스크립트는 이벤트 동작을 제어 하기 위해 다양한 함수들을 제공하는 이것을 vue에서 사용하면&#x20;
+methods: {
+    getInput() {
+      // get value of input on event object
+      // and assign it to 'name' data property
+      this.name = event.target.value
+    }
+  }
 
-#### 3-1-1. 이벤트 수식어
+```
 
+### 4-2. 이벤트 지시자
 
+```markup
+<element @event_name.modifier_name />
+<element @keyup.page-up>
 
-#### 3-1-2. 키 수식어
+<form @submit.prevent="submitForm">
+    <p>
+        <button>Submit Form</button>
+    </p>
+</form>
 
-#### 3-1-2. 키보드 수식어
-
-
-
-
-
-
-
-@click.이벤트 를 사용하여 조작할 떄 사용&#x20;
+@click.right
+@keyup.enter
+<element @keyup.13>
+```
 
