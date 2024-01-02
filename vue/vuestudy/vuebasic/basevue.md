@@ -26,7 +26,7 @@ description: Vue 기본 분석
 
 div tag와 main,js 외는 별다른 사항은 없다. div는 id값을 가지고 있는데 이곳에 main.js에서 무엇인지 아직은 모르지만 연결되다는 것을 예측 할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (166).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (166).png" alt=""><figcaption></figcaption></figure>
 
 ### 2-2.  main.js
 
@@ -119,4 +119,4 @@ app.mount('#app')
 
 count 버튼을 클릭 하면 자동 증가 된다.
 
-<figure><img src="../../.gitbook/assets/image (167).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (167).png" alt=""><figcaption></figcaption></figure>

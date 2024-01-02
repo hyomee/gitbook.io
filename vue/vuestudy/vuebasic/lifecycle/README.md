@@ -2,11 +2,11 @@
 
 Vue 컴포넌트는 인스턴스를 생성할 때 초기화 , 감시 설정, 템플릿 컴파일, DOM 마운드을 생성 부터 소멸 까지의 생명주기에 따른 함수를 호출한다. 이 함수를 개발자가 의도적으로 코드를 삽입하여 실행 할 수 있다.
 
-<figure><img src="../../../.gitbook/assets/image (71).png" alt=""><figcaption><p>vue 3.0 생명주기</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (71).png" alt=""><figcaption><p>vue 3.0 생명주기</p></figcaption></figure>
 
 다음은 ko.vuejs.org에서 제공하는 인스턴스 생명 주기에 대한 표이다,
 
-<figure><img src="../../../.gitbook/assets/image (79).png" alt="" width="563"><figcaption><p>인스턴스 생명 주기에 대한 표</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (79).png" alt="" width="563"><figcaption><p>인스턴스 생명 주기에 대한 표</p></figcaption></figure>
 
 참고 : [옵션 API](https://ko.vuejs.org/api/options-lifecycle.html), [컴포지션 API](https://ko.vuejs.org/api/composition-api-lifecycle.html)
 
@@ -16,6 +16,6 @@ Vue 컴포넌트는 인스턴스를 생성할 때 초기화 , 감시 설정, 템
 
 ## 참고1. vue2와 vue3 생명 주기 차이
 
-<figure><img src="../../../.gitbook/assets/image (72).png" alt="" width="563"><figcaption><p>vue2와 vue3 생명 주기 차이</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (72).png" alt="" width="563"><figcaption><p>vue2와 vue3 생명 주기 차이</p></figcaption></figure>
 
 참고 : [https://vuejs.org/guide/essentials/lifecycle.html](https://vuejs.org/guide/essentials/lifecycle.html)

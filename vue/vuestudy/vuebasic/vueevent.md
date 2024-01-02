@@ -1,4 +1,4 @@
-# 이벤트
+# Methods & 이벤트처리
 
 ## 1. Methods
 
@@ -42,4 +42,4 @@ Option API에서 컴포넌트 인스턴스에서 사용할 메서드를 선언�
     * script 내부에서 this. 으로 접근해야 한다.
     * template 에서는 this. 없이  함수로 접근해야 한다.
 
-<figure><img src="../../.gitbook/assets/image (193).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (193).png" alt="" width="563"><figcaption></figcaption></figure>

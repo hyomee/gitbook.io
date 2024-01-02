@@ -2,7 +2,7 @@
 
 ## 1. 컴포지션 API&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
 
 * 참고 : 이 문서는 ko.vuejs.org를  참고해서 작성 되었으며 [**script setup**](https://ko.vuejs.org/api/composition-api-setup.html)  [**setup**](https://ko.vuejs.org/api/composition-api-setup.html#basic-usage) 을 자세한 정보를 얻을 수 있다.
 

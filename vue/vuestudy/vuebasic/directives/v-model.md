@@ -26,7 +26,7 @@ const text = ref("알수없는값");
 1. const text = ref("알수없는값"); text에 초기 값 설정
 2. v-model="text" : 양방향 바인딩을 위해 input tag에 추가
 
-<figure><img src="../../../.gitbook/assets/image (64).png" alt="" width="407"><figcaption><p> 양방향 바인딩 : v-model</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (64).png" alt="" width="407"><figcaption><p> 양방향 바인딩 : v-model</p></figcaption></figure>
 
 **text에 "알수없는값"으로 초기화 되고 입력 필드에 값을 수정하면 화면에 수정된 값이 표시 됩니다**.
 
@@ -47,7 +47,7 @@ const text= ref('알수없는값')
 1. const text = ref("알수없는값"); text에 초기 값 설정
 2. :value="text" or v-bind: 단방향 바인딩을 위해 input tag에 추가
 
-<figure><img src="../../../.gitbook/assets/image (65).png" alt="" width="288"><figcaption><p>단방향 바인딩 : v-text</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (65).png" alt="" width="288"><figcaption><p>단방향 바인딩 : v-text</p></figcaption></figure>
 
 **text에 "알수없는값"으로 초기화 되고 입력 필드에 값을 수정하여도 입력 필드는 수정이 되지 않는다**.
 
@@ -92,7 +92,7 @@ const person = reactive({ firstName: 'John', lastName: 'Smith' })
 2. const person = reactive({ firstName: 'John', lastName: 'Smith' }) : person 객체에 저장
 3. v-model="person.firstName" : 바인딩
 
-<figure><img src="../../../.gitbook/assets/image (63).png" alt="" width="316"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (63).png" alt="" width="316"><figcaption></figcaption></figure>
 
 이름을 입력하면 바인딩되는 것을 확인 할 수 있습니다.
 

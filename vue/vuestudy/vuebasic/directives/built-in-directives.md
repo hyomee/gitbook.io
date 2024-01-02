@@ -1,6 +1,6 @@
 # 빌드 인디렉티브 (Built-in Directives)
 
-<figure><img src="../../../.gitbook/assets/image (173).png" alt=""><figcaption><p>디렉티브 문법을 시각화</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (173).png" alt=""><figcaption><p>디렉티브 문법을 시각화</p></figcaption></figure>
 
 ## 1. 데이터 바인딩
 
@@ -27,7 +27,7 @@
 </script>
 ```
 
-<figure><img src="../../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-2. v-html
 
@@ -86,7 +86,7 @@ const msg = ref("일반");
 </template
 ```
 
-<figure><img src="../../../.gitbook/assets/image (15).png" alt=""><figcaption><p>vue devtools</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (15).png" alt=""><figcaption><p>vue devtools</p></figcaption></figure>
 
 ```html
 // 1. Composition API - script setup
@@ -159,7 +159,7 @@ const msg = ref("일반");
 const vmodelMsg = ref("v-model");
 ```
 
-<figure><img src="../../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
 
 ## 3. 조건부  렌더링
 
@@ -184,9 +184,9 @@ const vmodelMsg = ref("v-model");
 </template>
 ```
 
-| isShow = true                                                                  | isShow = false                                                                     |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| <img src="../../../.gitbook/assets/image (2).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (1) (1).png" alt="" data-size="original"> |
+| isShow = true                                                                     | isShow = false                                                                        |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| <img src="../../../../.gitbook/assets/image (2).png" alt="" data-size="original"> | <img src="../../../../.gitbook/assets/image (1) (1).png" alt="" data-size="original"> |
 
 ### 3-2. v-if, v-else-if, v-else
 
@@ -220,11 +220,11 @@ const vmodelMsg = ref("v-model");
 
 ```
 
-<figure><img src="../../../.gitbook/assets/image (3).png" alt="" width="518"><figcaption><p>초기 웹 페이지 화면</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3).png" alt="" width="518"><figcaption><p>초기 웹 페이지 화면</p></figcaption></figure>
 
 전환 버튼을 클릭 하고 텍스트 박스에 B를 입력 하면 변경 되는 것을 확인 할 수 있다.
 
-<figure><img src="../../../.gitbook/assets/image (4).png" alt="" width="515"><figcaption><p>화면에서 조작 후 </p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4).png" alt="" width="515"><figcaption><p>화면에서 조작 후 </p></figcaption></figure>
 
 ### 3-3. `v-if` vs `v-show`
 
@@ -297,7 +297,7 @@ const vmodelMsg = ref("v-model");
 * 3 line : nations 변수에 나라를 객체로 할당
   * 25 line : select-option 태그에 v-for 를 사용하여 nations 변수에 있는 값을 화면 출력한다.
 
-<figure><img src="../../../.gitbook/assets/image (184).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (184).png" alt=""><figcaption></figcaption></figure>
 
 ## 5. 이벤트 핸드링 (v-on)
 
@@ -410,7 +410,7 @@ html event handler 는 v-on:속성에 on를 제거 하고 작성한다. 단축�
 
 버튼을 클릭 해도 초기값은 변경되지 않는다.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ## 7. 메모 (v-memo)
 
