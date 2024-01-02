@@ -156,7 +156,7 @@ _Vue를 사용하면 요소의 모든 속성에 데이터를 바인딩할 수 �
 </script>
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p>v-bind 를 사용한 단방향 바인딩</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption><p>v-bind 를 사용한 단방향 바인딩</p></figcaption></figure>
 
 #### -  양방향으로 변경
 
@@ -176,7 +176,7 @@ _Vue를 사용하면 요소의 모든 속성에 데이터를 바인딩할 수 �
 
 * 6 line : @input 디렉티브를 사용해서 이벤트 발생시 해당값($event.target.value)을 vbindMsg 변수에 할당한다.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption><p>v-bind 를 사용한 단방향 바인딩을 @input으로 양방향으로 변경</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption><p>v-bind 를 사용한 단방향 바인딩을 @input으로 양방향으로 변경</p></figcaption></figure>
 
 #### 2-2-2. setup()
 
@@ -309,9 +309,9 @@ class 속성에 vue 바인딩을 하여 스타일을 동적으로 변경 할 수
 
 변수 값이 변경 되면 class 속성이 변경 되어 글자의 컬러가 변경되는 것을 확인 할 수 있다.
 
-| status = 'valid'                                                            | status = 'invalid'                                                          |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (9).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (8).png" alt="" data-size="original"> |
+| status = 'valid'                                                               | status = 'invalid'                                                             |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| <img src="../../../.gitbook/assets/image (9).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (8).png" alt="" data-size="original"> |
 
 #### 3-1-1. 조건식 바인딩
 
@@ -340,9 +340,9 @@ class 속성에 v-bind를 적용하고 삼항 연산자를 적용 하면 조건�
 
 * 3 line : class 적용된 삼항 연산자 isValid가 true이면 style의 valid가 적용되고 false이면 style의 invalid 가 적용된다.
 
-| isValid = true                                                                | isValid = false                                                               |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (169).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (171).png" alt="" data-size="original"> |
+| isValid = true                                                                   | isValid = false                                                                  |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (169).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (171).png" alt="" data-size="original"> |
 
 #### 3-1-2 배열 클래스 바인딩
 
@@ -372,7 +372,7 @@ class 속성에 v-bind를 적용하고 삼항 연산자를 적용 하면 조건�
 
 * 2 line : class 속성을 v-bind 를 적용하고 배열을 사용하여   'bold', 'italic', isValid ? 'valid' : 'invalid' 세개의 클래스를 적용한다.
 
-<figure><img src="../../.gitbook/assets/image (172).png" alt="" width="563"><figcaption><p> </p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (172).png" alt="" width="563"><figcaption><p> </p></figcaption></figure>
 
 #### 3-1-2  객체 클래스바인딩&#x20;
 

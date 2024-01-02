@@ -115,4 +115,4 @@ setup() 함수 만 사용하지 않는 것으로 작성 코드 및 방법은 2-1
 </script>
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (10).png" alt="" width="563"><figcaption></figcaption></figure>

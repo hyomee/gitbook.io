@@ -28,9 +28,9 @@ Template 에 직접 참조 변수를 사용하는 것을 의미한다.
   * \<button v-on:click="cnt++">인라인 핸들러 추가\</button> 와 동일함
 * 12 line : 템플릿 문법을 사용해서 화면에 출력 한다.
 
-| 초기 로딩                                                                         | 추가 버튼 클릭                                                                      |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (194).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (195).png" alt="" data-size="original"> |
+| 초기 로딩                                                                            | 추가 버튼 클릭                                                                         |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (194).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (195).png" alt="" data-size="original"> |
 
 ## 2. 메세드 핸들러
 
@@ -66,9 +66,9 @@ Template 에 직접 참조 변수를 사용하는 것을 의미한다.
     * <mark style="color:orange;">**템플릿에서 이벤트 핸들러로 사용시 메서드이름( @click="fnAddCnt")로 작성하면 "Unhandled error during execution of native event handler 오류가 발생한다.**</mark>
     * <mark style="color:orange;">**그러므로 메서드( @click="fnAddCnt()")로 작성을 해야 한다**</mark>.
 
-| 초기 로딩                                                                         | 추가 버튼 클릭                                                                      |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (196).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (197).png" alt="" data-size="original"> |
+| 초기 로딩                                                                            | 추가 버튼 클릭                                                                         |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (196).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (197).png" alt="" data-size="original"> |
 
 ### 2-2 setup() & Option API
 
@@ -126,9 +126,9 @@ Template 에 직접 참조 변수를 사용하는 것을 의미한다.
   * 36 \~ 37 line : v-on 단축형인 @click를 사용하였으면 script setup와 틀리게 메서드 이름(fnAddCnt)  or 메서드(fnAddCnt ())로 작성해도 된다.
 * 19 \~ 29 line : Option API로 작성한 코드로 적용 방법은 Compsition API setup()를 사용한 방법과 동일 하다,
 
-| 초기 로딩                                                                         | 추가 버튼 클릭                                                                      |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (199).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (200).png" alt="" data-size="original"> |
+| 초기 로딩                                                                            | 추가 버튼 클릭                                                                         |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (199).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (200).png" alt="" data-size="original"> |
 
 ## 2. 함수 파라메터 전달
 
@@ -164,9 +164,9 @@ Template 에 직접 참조 변수를 사용하는 것을 의미한다.
 * 6 line : 매개변수 1개인 함수 작성&#x20;
 * 17 line : 이벤트 발생시 데이터 전
 
-| 초기 로딩                                                                         | 추가 버튼 클릭                                                                      |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (202).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (203).png" alt="" data-size="original"> |
+| 초기 로딩                                                                            | 추가 버튼 클릭                                                                         |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (202).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (203).png" alt="" data-size="original"> |
 
 ## 3. 여러 이벤트 처리
 
@@ -211,7 +211,7 @@ Template 에 직접 참조 변수를 사용하는 것을 의미한다.
 
 * 21 line : v-on:click="fnHello('홍길동'), fnAddCnt() " 처럼 실행 하고자 하는 순서 대로 , 로 작성한다.
 
-<figure><img src="../../.gitbook/assets/image (204).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (204).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Javascript 이벤트 객체&#x20;
 

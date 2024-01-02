@@ -7,7 +7,7 @@
       \
 
 
-      <figure><img src="../../.gitbook/assets/image (179).png" alt=""><figcaption><p>오류 </p></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (179).png" alt=""><figcaption><p>오류 </p></figcaption></figure>
 
 ## 1. v-if
 
@@ -29,9 +29,9 @@
 ```
 {% endcode %}
 
-| 초기 로딩                                                                         | 텍스트 입력                                                                        |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (174).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (176).png" alt="" data-size="original"> |
+| 초기 로딩                                                                            | 텍스트 입력                                                                           |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (174).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (176).png" alt="" data-size="original"> |
 
 * 3 line :  페이지 로딩 시 초기값으로 ref  변수로  num이  0으로 할당 되고 11 line이 표시된다.
 * 화면에서 입력 박스에 숫자를 입력 하는 num 변수가 0이 아니므로 화면에서 제거 된다.
@@ -64,9 +64,9 @@ v-else-if 지시문은 단독으로 사용할 수 없으며 별도의 요소에�
 ```
 {% endcode %}
 
-| 양수 입력                                                                         | 음수 입력                                                                         |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (177).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (178).png" alt="" data-size="original"> |
+| 양수 입력                                                                            | 음수 입력                                                                            |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (177).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (178).png" alt="" data-size="original"> |
 
 * 11 \~ 17 line : 양수, 음수, 0을 입력 하면 조건에 따라 변경되는 것을 확인 할 수 있다.
 
@@ -96,7 +96,7 @@ v-else-if 지시문은 단독으로 사용할 수 없으며 별도의 요소에�
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (180).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (180).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. template if 적용
 
@@ -147,6 +147,6 @@ v-if 만으로 화면을 구성 하면 불필요한 코드를 추가하고 DOM �
 
 전환 버튼을 클릭하면 템플릿이 전환되는 것을 확인 할 수 있다.
 
-| 전환버튼 isNumber = true                                                          | 전환버튼 isNumber = false                                                         |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (181).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (182).png" alt="" data-size="original"> |
+| 전환버튼 isNumber = true                                                             | 전환버튼 isNumber = false                                                            |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img src="../../../.gitbook/assets/image (181).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (182).png" alt="" data-size="original"> |
