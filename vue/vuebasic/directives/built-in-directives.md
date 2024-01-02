@@ -330,11 +330,73 @@ html event handler 는 v-on:속성에 on를 제거 하고 작성한다. 단축�
 
 @click.prevent.once 형태로 여러개 사용가능하다.
 
-<table><thead><tr><th width="151"></th><th></th></tr></thead><tbody><tr><td>.stop</td><td><p>이벤트.전파방지</p><p>e.stopPropagation()<br><br>&#x3C;a @click.stop="doThis"></p></td></tr><tr><td>.prevent</td><td><p>브라우저의 기본 동작 금지</p><p>e.preventDefault()</p></td></tr><tr><td>.capture</td><td>이벤트 리스너의 capture옵션 활성시키다.</td></tr><tr><td>.self</td><td> 이벤트가 자식 엘리먼트가 아닌 현재 엘리먼트에서 발생했을 때만 핸들러를 호출한다.</td></tr><tr><td>.once</td><td>클릭이벤트는 여러번 가능하지만 handler라는 메서드는 한번만 실행됨</td></tr><tr><td>.passive</td><td>이벤트리스너의 passive 옵션 활성시키다.</td></tr><tr><td>.exact</td><td>정확히 해당 키만 눌렀을 때 핸들러 호출한다.<br>@click.ctrl.exact</td></tr><tr><td>.left</td><td>마우스 왼쪽 버튼을 눌렀을 때 핸들러 호출한다.</td></tr><tr><td>.right</td><td>마우스  오른쪽 버튼을 눌렀을 때 핸들러 호출한다.</td></tr><tr><td>.middle</td><td>마우스가운데 버튼을 눌렀을 때 핸들러 호출한다.</td></tr></tbody></table>
+<table><thead><tr><th width="151"></th><th></th></tr></thead><tbody><tr><td>.stop</td><td><p>이벤트.전파방지</p><p>e.stopPropagation()</p></td></tr><tr><td>.prevent</td><td><p>브라우저의 기본 동작 금지</p><p>e.preventDefault()<br><br>// submit 이벤트가 더 이상 페이지 리로드하지 않습니다.<br></p></td></tr><tr><td>.capture</td><td>이벤트 리스너의 capture옵션 활성시키다.</td></tr><tr><td>.self</td><td> 이벤트가 자식 엘리먼트가 아닌 현재 엘리먼트에서 발생했을 때만 핸들러를 호출한다.</td></tr><tr><td>.once</td><td>클릭이벤트는 여러번 가능하지만 handler라는 메서드는 한번만 실행됨</td></tr><tr><td>.passive</td><td>이벤트리스너의 passive 옵션 활성시키다.</td></tr><tr><td>.exact</td><td>정확히 해당 키만 눌렀을 때 핸들러 호출한다.<br>@click.ctrl.exact</td></tr><tr><td>.left</td><td>마우스 왼쪽 버튼을 눌렀을 때 핸들러 호출한다.</td></tr><tr><td>.right</td><td>마우스  오른쪽 버튼을 눌렀을 때 핸들러 호출한다.</td></tr><tr><td>.middle</td><td>마우스가운데 버튼을 눌렀을 때 핸들러 호출한다.</td></tr></tbody></table>
+
+```markup
+<!-- 클릭 이벤트 전파가 중지. -->
+<a @click.stop="doThis"></a>
+
+<!-- submit 이벤트가 더 이상 페이지 리로드하지 않음. -->
+<form @submit.prevent="onSubmit"></form>
+
+<!-- 수식어를 연결할 수 있습니다. -->
+<a @click.stop.prevent="doThat"></a>
+
+<!-- 이벤트에 핸들러 없이 수식어만 사용할 수 있다. -->
+<form @submit.prevent></form>
+
+<!-- event.target이 엘리먼트 자신일 경우에만 핸들러가 실행된다. -->
+<!-- 예를 들어 자식 엘리먼트에서 클릭 액션이 있으면 핸들러가 실행되지 않는다. -->
+<div @click.self="doThat">...</div>
+
+<!-- 이벤트 리스너를 추가할 때 캡처 모드 사용 -->
+<!-- 내부 엘리먼트에서 클릭 이벤트 핸들러가 실행되기 전에, 여기에서 먼저 핸들러가 실행된다. -->
+<div @click.capture="doThis">...</div>
+
+<!-- 클릭 이벤트는 단 한 번만 실행된다. -->
+<a @click.once="doThis"></a>
+
+<!-- 핸들러 내 `event.preventDefault()`가 포함되었더라도 -->
+<!-- 스크롤 이벤트의 기본 동작(스크롤)이 발생한다.        -->
+<div @scroll.passive="onScroll">...</div>
+```
 
 #### 5-1-2. 키 수식어
 
-키보드와 관련이 있는 수식
+키보드와 관련이 있는 수식어
+
+**입력키 별칭** : Vue는 가장 일반적으로 사용되는 키에 대한 별칭을 제공
+
+* `.enter`
+* `.tab`
+* `.delete` ("Delete" 및 "Backspace" 키 모두 캡처)
+* `.esc`
+* `.space`
+* `.up`
+* `.down`
+* `.left`
+* `.right`
+
+**시스템 입력키 수식어 :** 마우스 또는 키보드 이벤트 리스너는 아래 수식어를 사용하여, 해당 입력키를 누를 때만 트리거 되도록 할 수 있다:
+
+* `.ctrl`
+* `.alt`
+* `.shift`
+* `.meta`
+
+```html
+<!-- `key`가 `Enter`일 때만 `submit`을 호출다 -->
+<input @keyup.enter="submit" />
+
+// KeyboardEvent.key를 통해 유효한 입력키 이름을 kebab-case로 변환하여 수식어로 사용할 수 있다:
+<input @keyup.page-down="onPageDown" />
+
+<!-- Alt + Enter -->
+<input @keyup.alt.enter="clear" />
+
+<!-- Ctrl + Click -->
+<div @click.ctrl="doSomething">시작하기</div>
+```
 
 참고 : [이벤트 핸들링](https://ko.vuejs.org/guide/essentials/event-handling.html)
 
