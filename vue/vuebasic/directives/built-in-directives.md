@@ -306,6 +306,36 @@ v-on 디렉티브는 단축 문법으로 `@` 기호를 사용하며,  DOM 이벤
 1. **인라인 핸들러:** 이벤트가 트리거될 때 실행되는 인라인 JavaScript(네이티브 `onclick` 속성과 유사).
 2. **메서드 핸들러:** 컴포넌트에 정의된 메서드 이름 또는 메서드를 가리키는 경로
 
+### 5-1. Javascript 이벤트 객체
+
+v-on:click="handler" 또는 줄여서 @click="handler"은 실제 클릭 이벤트에 대한 것으로 자바스트립트의 이벤트 객체를 사용하는 것한다.
+
+참고 :  [mdn Event](https://developer.mozilla.org/en-US/docs/Web/API/Event), [HTML attribute reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#event\_handler\_attributes)
+
+### 5-1. [html event handler](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#event\_handler\_attributes)
+
+html event handler 는 v-on:속성에 on를 제거 하고 작성한다. 단축은 @를 붙인다.&#x20;
+
+| Event handler | v-on       | v-on 축약 |
+| ------------- | ---------- | ------- |
+| onclick       | v-on:click | @click  |
+| onkeyup       | v-on:keyup | @keyup  |
+| oninput       | v-on:input | @input  |
+
+* The [event handler](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#event\_handler\_attributes) attributes: `onabort`, `onautocomplete`, `onautocompleteerror`, `onblur`, `oncancel`, `oncanplay`, `oncanplaythrough`, `onchange`, `onclick`, `onclose`, `oncontextmenu`, `oncuechange`, `ondblclick`, `ondrag`, `ondragend`, `ondragenter`, `ondragleave`, `ondragover`, `ondragstart`, `ondrop`, `ondurationchange`, `onemptied`, `onended`, `onerror`, `onfocus`, `oninput`, `oninvalid`, `onkeydown`, `onkeypress`, `onkeyup`, `onload`, `onloadeddata`, `onloadedmetadata`, `onloadstart`, `onmousedown`, `onmouseenter`, `onmouseleave`, `onmousemove`, `onmouseout`, `onmouseover`, `onmouseup`, `onmousewheel`, `onpause`, `onplay`, `onplaying`, `onprogress`, `onratechange`, `onreset`, `onresize`, `onscroll`, `onseeked`, `onseeking`, `onselect`, `onshow`, `onsort`, `onstalled`, `onsubmit`, `onsuspend`, `ontimeupdate`, `ontoggle`, `onvolumechange`, `onwaiting`.
+
+### 5-1. 수식어
+
+#### 5-1-1. 이벤트 수식어
+
+@click.prevent.once 형태로 여러개 사용가능하다.
+
+<table><thead><tr><th width="151"></th><th></th></tr></thead><tbody><tr><td>.stop</td><td><p>이벤트.전파방지</p><p>e.stopPropagation()<br><br>&#x3C;a @click.stop="doThis"></p></td></tr><tr><td>.prevent</td><td><p>브라우저의 기본 동작 금지</p><p>e.preventDefault()</p></td></tr><tr><td>.capture</td><td>이벤트 리스너의 capture옵션 활성시키다.</td></tr><tr><td>.self</td><td> 이벤트가 자식 엘리먼트가 아닌 현재 엘리먼트에서 발생했을 때만 핸들러를 호출한다.</td></tr><tr><td>.once</td><td>클릭이벤트는 여러번 가능하지만 handler라는 메서드는 한번만 실행됨</td></tr><tr><td>.passive</td><td>이벤트리스너의 passive 옵션 활성시키다.</td></tr><tr><td>.exact</td><td>정확히 해당 키만 눌렀을 때 핸들러 호출한다.<br>@click.ctrl.exact</td></tr><tr><td>.left</td><td>마우스 왼쪽 버튼을 눌렀을 때 핸들러 호출한다.</td></tr><tr><td>.right</td><td>마우스  오른쪽 버튼을 눌렀을 때 핸들러 호출한다.</td></tr><tr><td>.middle</td><td>마우스가운데 버튼을 눌렀을 때 핸들러 호출한다.</td></tr></tbody></table>
+
+#### 5-1-2. 키 수식어
+
+키보드와 관련이 있는 수식
+
 참고 : [이벤트 핸들링](https://ko.vuejs.org/guide/essentials/event-handling.html)
 
 ## 6. Slot (v-slot)
