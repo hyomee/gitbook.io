@@ -41,7 +41,7 @@
       * [양방향 바인딩 v-model](vue/vuebasic/directives/v-model.md)
     * [ref와 reactive의 차이점](vue/vuebasic/ref-reactive.md)
     * [setup() 와 script setup 차이점](vue/vuebasic/setup-script-setup.md)
-    * [이벤트](vue/vuebasic/vueevent.md)
+    * [Methods & 이벤트처리](vue/vuebasic/vueevent.md)
   * [Vue 실습](vue/vueexample/README.md)
     * [프로젝트 생성](vue/vueexample/vuecli.md)
     * [인스턴스 생성](vue/vueexample/vueinstance.md)
