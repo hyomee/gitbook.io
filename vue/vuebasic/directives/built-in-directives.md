@@ -301,6 +301,13 @@ const vmodelMsg = ref("v-model");
 
 ## 5. 이벤트 핸드링 (v-on)
 
+v-on 디렉티브는 단축 문법으로 `@` 기호를 사용하며,  DOM 이벤트를 수신하고 트리거될 때, 사전 정의해둔 JavaScript 코드를 실행할 수 있다. `v-on:click="handler"` 또는 줄여서 `@click="handler"`와 같이 사용하며 핸드러 값은 다음 중 하나일 수 있다
+
+1. **인라인 핸들러:** 이벤트가 트리거될 때 실행되는 인라인 JavaScript(네이티브 `onclick` 속성과 유사).
+2. **메서드 핸들러:** 컴포넌트에 정의된 메서드 이름 또는 메서드를 가리키는 경로
+
+참고 : [이벤트 핸들링](https://ko.vuejs.org/guide/essentials/event-handling.html)
+
 ## 6. Slot (v-slot)
 
 ## 7. 한번만  렌더링 (v-once)
