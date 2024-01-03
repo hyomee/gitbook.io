@@ -184,9 +184,9 @@ const vmodelMsg = ref("v-model");
 </template>
 ```
 
-| isShow = true                                                                     | isShow = false                                                                        |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| <img src="../../../../.gitbook/assets/image (2).png" alt="" data-size="original"> | <img src="../../../../.gitbook/assets/image (1) (1).png" alt="" data-size="original"> |
+| isShow = true                                                                     | isShow = false                                                                            |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| <img src="../../../../.gitbook/assets/image (2).png" alt="" data-size="original"> | <img src="../../../../.gitbook/assets/image (1) (1) (1).png" alt="" data-size="original"> |
 
 ### 3-2. v-if, v-else-if, v-else
 
@@ -410,7 +410,7 @@ html event handler 는 v-on:속성에 on를 제거 하고 작성한다. 단축�
 
 버튼을 클릭 해도 초기값은 변경되지 않는다.
 
-<figure><img src="../../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 7. 메모 (v-memo)
 

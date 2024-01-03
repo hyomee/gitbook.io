@@ -43,6 +43,7 @@
       * [ref와 reactive의 차이점](vue/vuestudy/vuebasic/ref-reactive.md)
       * [setup() 와 script setup 차이점](vue/vuestudy/vuebasic/setup-script-setup.md)
       * [Methods & 이벤트처리](vue/vuestudy/vuebasic/vueevent.md)
+      * [Computed](vue/vuestudy/vuebasic/computed.md)
     * [Vue Router](vue/vuestudy/vue-router.md)
     * [상태관리](vue/vuestudy/vue-staus/README.md)
       * [Vuex](vue/vuestudy/vue-staus/vuex.md)
