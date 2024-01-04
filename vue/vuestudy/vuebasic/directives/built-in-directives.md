@@ -184,9 +184,9 @@ const vmodelMsg = ref("v-model");
 </template>
 ```
 
-| isShow = true                                                                     | isShow = false                                                                            |
-| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| <img src="../../../../.gitbook/assets/image (2).png" alt="" data-size="original"> | <img src="../../../../.gitbook/assets/image (1) (1) (1).png" alt="" data-size="original"> |
+| isShow = true                                                                         | isShow = false                                                                                |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| <img src="../../../../.gitbook/assets/image (2) (1).png" alt="" data-size="original"> | <img src="../../../../.gitbook/assets/image (1) (1) (1) (1).png" alt="" data-size="original"> |
 
 ### 3-2. v-if, v-else-if, v-else
 
@@ -220,11 +220,11 @@ const vmodelMsg = ref("v-model");
 
 ```
 
-<figure><img src="../../../../.gitbook/assets/image (3).png" alt="" width="518"><figcaption><p>초기 웹 페이지 화면</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (1).png" alt="" width="518"><figcaption><p>초기 웹 페이지 화면</p></figcaption></figure>
 
 전환 버튼을 클릭 하고 텍스트 박스에 B를 입력 하면 변경 되는 것을 확인 할 수 있다.
 
-<figure><img src="../../../../.gitbook/assets/image (4).png" alt="" width="515"><figcaption><p>화면에서 조작 후 </p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4) (1).png" alt="" width="515"><figcaption><p>화면에서 조작 후 </p></figcaption></figure>
 
 ### 3-3. `v-if` vs `v-show`
 
@@ -410,7 +410,7 @@ html event handler 는 v-on:속성에 on를 제거 하고 작성한다. 단축�
 
 버튼을 클릭 해도 초기값은 변경되지 않는다.
 
-<figure><img src="../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 7. 메모 (v-memo)
 
