@@ -156,7 +156,7 @@ _Vue를 사용하면 요소의 모든 속성에 데이터를 바인딩할 수 �
 </script>
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p>v-bind 를 사용한 단방향 바인딩</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption><p>v-bind 를 사용한 단방향 바인딩</p></figcaption></figure>
 
 #### -  양방향으로 변경
 

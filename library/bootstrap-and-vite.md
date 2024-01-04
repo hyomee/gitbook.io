@@ -67,22 +67,25 @@ npm install -D sass
 1.  **vscode 를 실행**하고 생성한 폴더를 오픈 합니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 2.  **Bootstrap's CSS 삽입**   : assets/scss/styles.scss 파일을 생성 하고.Bootstrap's CSS 삽입을 하기 위해서 다음과 같이 작성 해 주세요.
 
     * Bootstrap의 모든 소스 Sass를 가져오기 위해 다음을 작성 합니다
     * 원하는 경우 스타일시트를 개별적으로 가져올 수도 있는데.자세한 내용은 [Sass 불러오기 문서를 참조](https://getbootstrap.kr/docs/5.3/customize/sass/)하세요.
 
+    {% code title="assets/scss/styles.scss" lineNumbers="true" %}
     ```scss
     // Bootstrap's CSS 삽입
+    // scss css 직접 : @import "bootstrap/dist/css/bootstrap.css";
     @import "bootstrap/scss/bootstrap";
     ```
+    {% endcode %}
 3.  **CSS를 로드하고 Bootstrap의 JavaScript를 불러오기** 위해서 src/js/main.js 파일에 다음과 같이 작성 해 주세요.
 
     * CSS를 로드하고 Bootstrap의 모든 JS를 임포트  합니다.
     * Popper는 Bootstrap을 통해 자동으로 임포트됩니다.
 
-    {% code lineNumbers="true" %}
+    {% code title="src/js/main.js" lineNumbers="true" %}
     ```js
     import { createApp } from 'vue'
 
@@ -90,14 +93,18 @@ npm install -D sass
     import '../scss/styles.scss'
 
     // Bootstrap's JS 모두 Import 
+    // 직접 js : import "bootstrap/dist/js/bootstrap.js";
     import * as bootstrap from 'bootstrap'
 
     import App from './App.vue'
-    import router from './router'
+
+    // 라우터 설정 하지 않아서 주석 처리
+    // import router from './router'
 
     const app = createApp(App)
 
-    app.use(router)
+    // 라우터 설정 하지 않아서 주석 처리
+    // app.use(router)
 
     app.mount('#app')
     ```
@@ -108,7 +115,7 @@ npm install -D sass
     ```js
     import Alert from 'bootstrap/js/dist/alert';
 
-    // or, specify which plugins you need:
+    // 필요한 것 만 추가 
     import { Tooltip, Toast, Popover } from 'bootstrap';
     ```
 4.  **src/App.vue** 를 다음과 같은 코드를 작성 합니다.\
@@ -138,5 +145,7 @@ npm install -D sass
 설정 작업이 완료 되었습니다.&#x20;
 
 ```bash
-npm rund d
+npm run dev
 ```
+
+<figure><img src="../.gitbook/assets/image.png" alt="" width="550"><figcaption></figcaption></figure>
