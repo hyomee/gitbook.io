@@ -4,6 +4,8 @@
 
 [공식 문서는 여기를 참고해 주세요](https://getbootstrap.kr/docs/5.3/getting-started/vite/).
 
+[_Bootstrap 5 CheatSheet_](https://bootstrap-cheatsheet.themeselection.com/) _에서 확인 할 수 있습니다._&#x20;
+
 ## 1. 설정하기
 
 ### 1.  Vite를 사용해서 Vue3 설치
