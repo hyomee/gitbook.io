@@ -143,7 +143,7 @@ dan5.setMaxDan(4);
 dan5.calculate();
 ```
 
-<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
 
 ## 3. 반복문 에서 Closure 사용 하기
 
@@ -151,4 +151,4 @@ dan5.calculate();
 
 console.log가 호출되는 시점에서 for loop는 이미 끝난 상태기 때문에 i 값은 10이 된다
 
-<figure><img src="../../.gitbook/assets/image (127).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>

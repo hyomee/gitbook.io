@@ -4,11 +4,11 @@
 
 동기 처리는 아래 그림 처럼 fnA, fnB, fnC 처럼 순차적으로 실행 되는 것을 의미 합니다. 즉 fnB가 서버를 호출하여 응답을 받은 후에 fnC를 호출 합니다.
 
-<figure><img src="../../.gitbook/assets/image (103).png" alt=""><figcaption><p>동기 </p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (129).png" alt=""><figcaption><p>동기 </p></figcaption></figure>
 
 비동기 처리는 호출 순서는 아래 그림 처럼 fnA, fnB, fnC이지만 fnB 호출 후 응답을 받기 전에 바로 fnC를 호출 하는 것 입니다. 즉 fnB의 응답이 fnC 처리 후 올수 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (104).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (130).png" alt=""><figcaption></figcaption></figure>
 
 #### 동기 와 비동기 차이점
 
@@ -46,7 +46,7 @@ addCps(1,2, addCpsPrint);
 console.log("이후");
 ```
 
-<figure><img src="../../.gitbook/assets/image (139).png" alt=""><figcaption><p>결과</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (165).png" alt=""><figcaption><p>결과</p></figcaption></figure>
 
 #### 2-2-2. 비동기식 전달
 
@@ -73,7 +73,7 @@ console.log("이후"); // 4)
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (143).png" alt="" width="500"><figcaption><p>실행 순서</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (169).png" alt="" width="500"><figcaption><p>실행 순서</p></figcaption></figure>
 
 * 13 line : 이전 표시
 * 14 line : appCps 함수가 실행 되면 Queue 대기열에 넣고 1초 후에 실행
@@ -82,7 +82,7 @@ console.log("이후"); // 4)
 * 14 line 에 넣었던것 꺼내서 EventLoop 에서 실행
 * 15 line 에 넣었던것 꺼내서 EventLoop 에서 실행
 
-<figure><img src="../../.gitbook/assets/image (140).png" alt=""><figcaption><p>결과</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (166).png" alt=""><figcaption><p>결과</p></figcaption></figure>
 
 ### 2-2. 비 연속 전달(Non-CPS )
 

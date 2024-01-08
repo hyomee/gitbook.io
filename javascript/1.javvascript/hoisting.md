@@ -26,9 +26,9 @@
 
 웹 브라우저를 통해서 보면 "함수선언"만 화면에 표시 되고 "함수표현"은 표시가 되지 않았습니다.&#x20;
 
-| 실행화면                                                                         | 개발자 도구에서 오류                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (87).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (86).png" alt="" data-size="original"> |
+| 실행화면                                                                          | 개발자 도구에서 오류                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| <img src="../../.gitbook/assets/image (113).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (112).png" alt="" data-size="original"> |
 
 처리 순서는 되므로 에러에 의해서 "함수표현"이 화면에 표시 되지 않습니다.
 
@@ -51,7 +51,7 @@
 
 **호이스팅은 스코프를 단위로 일어납니다.**
 
-<figure><img src="../../.gitbook/assets/image (121).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (147).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. 변수 호이스팅
 
@@ -66,9 +66,9 @@
 
 
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
 
 ### 2-1. var 함수 스코프
 
@@ -172,7 +172,7 @@
   * var 키워드로 선언된 변수는 undefined로 초기화되고, 함수 선언문을 통해 암묵적으로 생성된 식별자는 함수 객체로 초기화됩니다.
 * 함수 표현식으로 함수를 정의하면 함수 호이스팅이 발생하는 것이 아니라 변수 호이스팅이 발생합니다.
 
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
 
 ```javascript
 // 함수 참조

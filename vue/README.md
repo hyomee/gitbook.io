@@ -12,11 +12,11 @@
 * 종속성을 사전 번들 :  [esbuild를](https://esbuild.github.io/) 사용하여 종속성 모듈을 사전 번들하여 속도 개선
 * 모든 소스 코드를 동시에 로드하지 않고 [Vite는 기본 ESM을](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) 통해 소스 코드를 제공하여 브라우저가 요청하는 대로 필요에 따라 소스코드를 변환하여 제공한다.
 
-<figure><img src="../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (94).png" alt=""><figcaption></figcaption></figure>
 
 번들러  기반 빌드는 모듈이 많아 질 수록 늦어진다.
 
-<figure><img src="../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (95).png" alt=""><figcaption></figcaption></figure>
 
 Vite가 기본적으로 다양한 [성능 최적화를 구현하는 사전 구성된 ](https://vitejs.dev/guide/features#build-optimizations)[빌드 명령을](https://vitejs.dev/guide/build) 제공한다.
 

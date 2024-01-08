@@ -9,7 +9,7 @@
 * 콜백은 함수 이며 호출 되는 시점에 제어권이 넘어 간다.
 * 콜백 지옥은 콜백 함수를 익명 함수로 전달 하는 과정에서 반복되어 코드가 복잡 해 지는 것을 의미 한다.
 
-<figure><img src="../../.gitbook/assets/image (105).png" alt="" width="351"><figcaption><p>calback 함수</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (131).png" alt="" width="351"><figcaption><p>calback 함수</p></figcaption></figure>
 
 {% code title="index.html" lineNumbers="true" %}
 ```html
@@ -59,7 +59,7 @@
 
 | 실행 결과                                                                         | 실행 콘솔                                                                         |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (108).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (109).png" alt="" data-size="original"> |
+| <img src="../../.gitbook/assets/image (134).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (135).png" alt="" data-size="original"> |
 
 **실행 순서**
 

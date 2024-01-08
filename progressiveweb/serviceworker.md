@@ -26,7 +26,7 @@
 *   서비스 워커가 준비될 때 캐시를 저장하는 것으로 프리캐시(pre-cache)라 하며 waitUtil() 함수는 installing상태에서 pre-cache가 완료될 떄 까지 대기합니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (159).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (185).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-2. activate
 
@@ -39,7 +39,7 @@
 * activate 이벤트는 활성 중 ( activating ) 과 활성 후 ( activate )로 나뉘어 진다.
   * 서비스 워커의 내용을 update하려면 캐시 제목과 프리 캐시 파일을 변경해 새로운 서비스 워커 ID로 새로운 캐시 내용이 설치되도록 해야 한다.
 
-<figure><img src="../.gitbook/assets/image (160).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (186).png" alt=""><figcaption></figcaption></figure>
 
 * 새 서비스 워커는 `skipWaiting()`을 호출하여 열려 있는 페이지가 닫힐 때까지 기다리지 않고 즉시 활성화되도록 요청한다.
 
@@ -50,7 +50,7 @@
 
 ### 1-4. 서비스 워커 라이프 사이클
 
-<figure><img src="../.gitbook/assets/image (161).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (187).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. 서비스 워커 이벤트
 
@@ -64,7 +64,7 @@ addEventListener("install", (event) => {});
 oninstall = (event) => {};
 ```
 
-<figure><img src="../.gitbook/assets/image (162).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (188).png" alt=""><figcaption></figcaption></figure>
 
 참고 : [ServiceWorkerGlobalScope: install event](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/install\_event)
 
@@ -78,7 +78,7 @@ ddEventListener("activate", (event) => {});
 onactivate = (event) => {};
 ```
 
-<figure><img src="../.gitbook/assets/image (163).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (189).png" alt=""><figcaption></figcaption></figure>
 
 참고 : [ServiceWorkerGlobalScope: activate event](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/activate\_event)
 
@@ -94,7 +94,7 @@ addEventListener("message", (event) => {});
 onmessage = (event) => {};
 ```
 
-<figure><img src="../.gitbook/assets/image (164).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (190).png" alt=""><figcaption></figcaption></figure>
 
 참고 : [ServiceWorkerGlobalScope: message event](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/message\_event)
 
@@ -160,9 +160,9 @@ const CACHE_LIST = [ // 캐시할 파일 선언
 ```
 
 * 1 line : 브라우저 Cache 에 저장 할 이름 \
-  ![](<../.gitbook/assets/image (154).png>)
+  ![](<../.gitbook/assets/image (180).png>)
 * 2 line : 캐시할 파일 목록\
-  ![](<../.gitbook/assets/image (155).png>)
+  ![](<../.gitbook/assets/image (181).png>)
 
 ### 3-2. 서비스 워커
 
@@ -335,4 +335,4 @@ self.addEventListener('fetch', event => {
 });
 ```
 
-<figure><img src="../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>

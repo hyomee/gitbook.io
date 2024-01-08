@@ -44,9 +44,9 @@ HTML과 자바스크립트로 페이지를 만들면서 PWA의 기본 개념을 
 #### 2-1-1. manifest.json 각 요소의 의미
 
 * name : 바로가기 아이콘 , 설치를 권장하는 팝업 배너와 스프래시 스크린에 표시되는 제목\
-  ![](<../.gitbook/assets/image (152).png>)
+  ![](<../.gitbook/assets/image (178).png>)
 * short\_name : 바탕화면 바로가기 아이콘 아래 표시되는 제목\
-  ![](<../.gitbook/assets/image (153).png>)
+  ![](<../.gitbook/assets/image (179).png>)
 * description : 애플리케이션의 소개로 웹 크롤러가 가져가는 정보
 * scope : 매니페스트에 정의된 내용이 적용될 수 있는 파일의 범위&#x20;
   * " . " : 현재 위치
@@ -218,9 +218,9 @@ self.addEventListener('fetch', event => {
 ```
 {% endcode %}
 
-<figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption><p>화면</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (43).png" alt=""><figcaption><p>화면</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (18).png" alt=""><figcaption><p>서비스워커</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (44).png" alt=""><figcaption><p>서비스워커</p></figcaption></figure>
 
 **소스** :  [https://github.com/hyomee/Javascript/tree/main/pwa](https://github.com/hyomee/Javascript/tree/main/pwa)
 

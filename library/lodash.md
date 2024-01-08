@@ -48,7 +48,7 @@ API 설명 : [https://lodash.com/docs/4.17.15](https://lodash.com/docs/4.17.15)
 ```
 {% endcode %}
 
-<figure><img src="../.gitbook/assets/image (192).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (218).png" alt=""><figcaption></figcaption></figure>
 
 ## Lodash 와 ES6 차이점
 
