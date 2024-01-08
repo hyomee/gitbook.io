@@ -490,7 +490,7 @@ props 로 통해서 받은 객체에 변경을 할려고 하면 오류가 발생
  } 
 ```
 
-### 3-2. emit통해서rops 로 전달 받은 객체 변경
+### 3-2. emit통해서 props로 전달 받은 객체 변경
 
 props 받은 객체를 반응형 변수에 직접 넣을 수 없어서 watch를 이용해서 우회 작업이 가능 합니다.
 
@@ -571,8 +571,16 @@ script setup>
         }
     }) 
 
-   
+    // 자식 -> 부모로 전달 
+    // const { emit } = getCurrentInstance();
+    const emit = defineEmits(['toggle-detail-visible'])   
 
+    // watch 로 props를 감시 하고 변경된 것이 있으면 반응형 변수를 수정한다.
+    watch(props, (newValue, oldValue) => { 
+        fnChangeDetailVisibleRef(newValue.isDetailVisible);
+    })
+    
+    // props에 있는 isDetailVisible를 반응형 변수로 생성
     const isDetailVisibleRef = ref(props.isDetailVisible); 
 
     const fnToggleDetail = function() {   
@@ -581,21 +589,11 @@ script setup>
 
     const fnChangeDetailVisibleRef = (value)=> {   
         isDetailVisibleRef.value = value
-    }; 
-   
-
-    // 자식 -> 부모로 전달 
-    // const { emit } = getCurrentInstance();
-    const emit = defineEmits(['toggle-detail-visible'])
-
+    };  
+    
     const fnEmit = ()=> {
         emit('toggle-detail-visible'); 
     }
-
-    watch(props, (newValue, oldValue) => { 
-        fnChangeDetailVisibleRef(newValue.isDetailVisible);
-    })
-        
 
 </script>
 <template>    
@@ -622,6 +620,6 @@ script setup>
 
 </details>
 
-| 부모 컴포넌트                                                                          | 자식 컴포넌                                                                           |
+| 부모 컴포넌트                                                                          | 자식 컴포넌트                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | <img src="../../../.gitbook/assets/image (241).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (243).png" alt="" data-size="original"> |
