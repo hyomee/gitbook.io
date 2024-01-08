@@ -623,3 +623,5 @@ script setup>
 | 부모 컴포넌트                                                                          | 자식 컴포넌트                                                                          |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | <img src="../../../.gitbook/assets/image (241).png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (243).png" alt="" data-size="original"> |
+
+### [컴포넌트 추가 예제는 여기를 참고하며 됩니다](https://hyomee.gitbook.io/develop/v/frontend/vue/vueexample/componentexp).
