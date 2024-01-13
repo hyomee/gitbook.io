@@ -219,9 +219,9 @@ public static void LineReadFile(String fileName, String charsetName) {
 
 </details>
 
-#### 2-2-2.  FileReader / BufferedReader 클래스 사용
-
 ### 2-3. Line 단위로 읽기 문자셋 변경
+
+#### 2-2-1.  InputStream /  Reader 클래스 사용&#x20;
 
 2-2. Line 단위로 읽기 코드에서 라인 단위로 읽은 데이터를 getBytes() 메서드를 사용해서 문자셋 변경을 하고 문자열로 바꾸면 됩니다.
 
@@ -275,6 +275,85 @@ public static void ConvertLineReadFile(String fileName,
       }
     }
 }
+```
+{% endcode %}
+
+</details>
+
+#### 2-2-2.  FileReader / BufferedReader 클래스 사용
+
+InputStream 클래스를 FileReader 클래스로 변경을 하면 됩니다. FileReader 샹성자로 두번째 파라메터가 Charset 타입을 전달 해야하며 내부적으로는 FileInputStream를 사용합니다.  다음은 FileReader 클래스생성자 입니다.
+
+```java
+public FileReader(String fileName, Charset charset) throws IOException {
+    super(new FileInputStream(fileName), charset);
+}
+
+// super 로 Charset 을 전달 하기 위해서는 Charset.forName(fromCharset)을 사용해야 한다.
+public InputStreamReader(InputStream in, Charset cs) {
+    super(in);
+    if (cs == null)
+        throw new NullPointerException("charset");
+    sd = StreamDecoder.forInputStreamReader(in, this, cs);
+}
+```
+
+* FileReader / BufferedReader 클래스 사용 소스
+
+{% code lineNumbers="true" %}
+```java
+BufferedReader  bufferedReader  = null;
+try {
+  bufferedReader = new BufferedReader(
+          new FileReader(fileName, Charset.forName("UTF-8")) );
+  String readLine;
+  while ((readLine = bufferedReader.readLine()) != null) {
+    byte[] utf8Bytes = readLine.getBytes(toCharset);
+    String utf8String = new String(utf8Bytes, toCharset);
+    System.out.println(utf8String);
+  }
+} catch ( ..... 
+```
+{% endcode %}
+
+* 3 - 4 line : InputStream  클래스 대신 FileReader 클래스로 변경하고 Charset.forName() 메서드를 사용하여 Charset 타입으로 변경합니다.
+* 나머지는 2-2-1과 동일 합니다.
+
+<details>
+
+<summary>Line 단위로 읽기 문자셋 변경 (FileReader / BufferedReader 클래스 사용) - 전체 소스</summary>
+
+{% code lineNumbers="true" %}
+```java
+public static void ConvertLineReaderFile(String fileName, 
+                String fromCharset , 
+                String toCharset) {
+    BufferedReader  bufferedReader  = null;
+    try {
+      bufferedReader = new BufferedReader(
+              new FileReader(fileName, Charset.forName(fromCharset)) );
+      String readLine;
+      while ((readLine = bufferedReader.readLine()) != null) {
+        byte[] utf8Bytes = readLine.getBytes(toCharset);
+        String utf8String = new String(utf8Bytes, toCharset);
+        System.out.println(utf8String);
+      }
+    } catch (UnsupportedEncodingException e) {
+      System.out.println("엔코딩에 문제가 있습니다.");
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      System.out.println("파일을 확인해 주세요");
+      throw new RuntimeException(e);
+    } finally {
+      if (bufferedReader != null  ) {
+        try {
+          bufferedReader.close();
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+  }
 ```
 {% endcode %}
 
