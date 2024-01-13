@@ -358,3 +358,155 @@ public static void ConvertLineReaderFile(String fileName,
 {% endcode %}
 
 </details>
+
+### 2-4. CSV 파일 읽기
+
+
+
+<details>
+
+<summary>공통 유틸</summary>
+
+{% code lineNumbers="true" %}
+```java
+public class FileReadUTIL {
+  public static <T> List<T> read(String file,
+                                 FileReadParameterVO frpVO)   {
+    List<T> results = new ArrayList<>();
+
+    BufferedReader br = null;
+    String row = null;
+    try {
+      if (frpVO.getCharset() != null) {
+        br = new BufferedReader(new InputStreamReader(
+                  new FileInputStream(file),
+                frpVO.getCharset()));
+      } else {
+        br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+      }
+
+      row = convertCharSet(br, frpVO.getToCharset());
+
+      while (row != null) {
+        if (frpVO.isHeader()) {
+          frpVO.setHeader(false);
+          results.add(getCols( frpVO.getDelimiter(),  row));
+          row = convertCharSet(br, frpVO.getToCharset());
+          System.out.println(row);
+          continue;
+        }
+
+        results.add(getCols( frpVO.getDelimiter(),  row));
+        row = convertCharSet(br, frpVO.getToCharset());
+        System.out.println(row);
+
+      }
+    } catch ( UnsupportedEncodingException e) {
+      System.out.println("문자셋을 확인해 주세요.");
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      System.out.println("파일을 확인해 주세요.");
+      throw new RuntimeException(e);
+    } finally {
+      if (br != null  ) {
+        try {
+          br.close();
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+    return results;
+  }
+
+
+  private static <T> T getCols(String delimiter, String row) {
+    if (delimiter != null) {
+      String[] columns = row.split(delimiter);
+      return (T) columns;
+    }
+
+    return (T) row;
+
+  }
+  private static String convertCharSet(BufferedReader br, String charset ) throws IOException {
+    String record = br.readLine();
+    if ( charset != null && record != null) {
+      byte[] utf8Bytes = record.getBytes(charset);
+      return new String(utf8Bytes, charset);
+    }
+
+    return record;
+  }
+
+}
+
+
+class FileReadParameterVO {
+  private boolean isHeader;
+  private final String delimiter;
+  private final String charset;
+  private final String toCharset;
+
+  FileReadParameterVO(boolean isHeader,
+                      String delimiter,
+                      String charset,
+                      String toCharset) {
+    this.isHeader = isHeader;
+    this.delimiter = delimiter;
+    this.charset = charset;
+    this.toCharset = toCharset;
+  }
+
+  public static FileReadParameterVO initFrpVO() {
+    return new FileReadParameterVO(true, null, null, null) ;
+  }
+
+  public static FileReadParameterVO initFrpVO(String charset) {
+    return new FileReadParameterVO(true, null, charset, null) ;
+  }
+
+  public static FileReadParameterVO initFrpVO(String charset, String toCharset) {
+    return new FileReadParameterVO(true, null, charset, toCharset) ;
+  }
+
+
+
+  public static FileReadParameterVO initFrpVO(boolean isHeader, String delimiter) {
+    return new FileReadParameterVO(isHeader, delimiter, null , null) ;
+  }
+
+  public static FileReadParameterVO initFrpVO(boolean isHeader, String charset, String toCharset) {
+    return new FileReadParameterVO(isHeader, null, charset, toCharset) ;
+  }
+  public static FileReadParameterVO initFrpVO(boolean isHeader,
+                                                            String delimiter,
+                                                            String charset,
+                                                            String toCharset) {
+    return new FileReadParameterVO(isHeader, delimiter, charset, toCharset) ;
+  }
+
+
+  public boolean isHeader() {
+    return isHeader;
+  }
+  public boolean setHeader(boolean isHeader) {
+    return this.isHeader = isHeader;
+  }
+
+  public String getDelimiter() {
+    return delimiter;
+  }
+
+  public String getCharset() {
+    return charset;
+  }
+
+  public String getToCharset() {
+    return toCharset;
+  }
+}
+```
+{% endcode %}
+
+</details>
