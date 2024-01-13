@@ -19,7 +19,9 @@ Java IO 패키지는Java에서 입출력을 다루기 위한 패키지로 하나
 <figure><img src="../../../.gitbook/assets/자바IO객체 (1).jpg" alt=""><figcaption><p>자바 IO 팩키지</p></figcaption></figure>
 
 * **Reader**: 문자 단위로 입력을 처리하는 클래스입니다.
-* **Writer**: 문자 단위로 출력을 처리하는 클래스입니다
+* **Writer**: 문자 단위로 출력을 처리하는 클래스입니다.
+
+<figure><img src="../../../.gitbook/assets/자바IO_READER.jpg" alt=""><figcaption></figcaption></figure>
 
 ## 2. 파일 읽기
 
@@ -40,7 +42,9 @@ Java IO 패키지는Java에서 입출력을 다루기 위한 패키지로 하나
 
 ### 2-1. Byte 단위로 읽기
 
-{% code title="예제 1." lineNumbers="true" %}
+InputStream은 Byte 단위로 읽어 들이는 것으로 InputStream  확장해서 만든  FileInputStream 클래스를 사용하여 파일에서 데이터를 읽게 합니다.
+
+{% code title="예제 1 :  Byte 단위로 읽기" lineNumbers="true" %}
 ```java
 FileInputStream fileInputStream = null;
 try {
@@ -85,23 +89,49 @@ try {
 
 #### 2-1-1. 예제 1의 문제점
 
-한글 파일인 경우 <mark style="color:red;">**한글이 깨지는 문제ㄷ**</mark> 입니다. 해당 문제를 해결하기 위해서는 문자셋을 지정해야 하로&#x20;
+한글 파일인 경우 <mark style="color:red;">**한글이 깨지는 문제**</mark> 입니다. 해당 문제를 해결하기 위해서는 문자셋을 지정해야 하므로 InputStreamReader 클래스를 사용하여 FileInputStream객체에서 읽어들인 데이터를 문자열로 변환합니다.
 
-<pre class="language-java" data-line-numbers data-full-width="false"><code class="lang-java">public static void CharReadFile(String fileName, 
+{% code lineNumbers="true" %}
+```java
+ InputStreamReader inputStreamReader = null;
+  try {
+    inputStreamReader = new InputStreamReader(
+             new FileInputStream(fileName),
+            "UTF-8");
+    int readChar = 0;
+    while ((readChar = inputStreamReader.read()) != -1) {
+      System.out.println((char)readChar);
+    }
+  } catch ....
+```
+{% endcode %}
+
+*   3 line :  InputStreamReader 메서드의 두번째 파라메터에 문자셋을 지정 하여 읽어야 합니다.
+
+    ```
+     public InputStreamReader(InputStream in, String charsetName)
+                    throws UnsupportedEncodingException {
+    ```
+
+    * 파일의 문자셋에 맞는 문자셋를 지정 합니다. ( "UTF-8", "EUC-KR" )
+
+<details>
+
+<summary>Byte 단위로 읽기 (문자셋전설정)  - 전체 소스</summary>
+
+{% code lineNumbers="true" %}
+```java
+public static void CharReadFile(String fileName, 
                                 String charsetName) {
-    
     InputStreamReader inputStreamReader = null;
-    
     try {
-<strong>      inputStreamReader = new InputStreamReader(
-</strong>               new FileInputStream(fileName),
-               charsetName);
-               
+      inputStreamReader = new InputStreamReader(
+               new FileInputStream(fileName),
+              charsetName);
       int readChar = 0;
       while ((readChar = inputStreamReader.read()) != -1) {
         System.out.println((char)readChar);
       }
-      
     } catch (UnsupportedEncodingException e) {
       System.out.println("엔코딩에 문제가 있습니다.");
       throw new RuntimeException(e);
@@ -117,18 +147,135 @@ try {
         }
       }
     }
-    
   }
-</code></pre>
+}
+```
+{% endcode %}
 
-* 6 Line : 파일 객체 생성
-  * FileInputStream 생성자의 인수로 파일을 넘겨주면 내부에서 File를 객체를 생성합니다.&#x20;
-  *   파일 읽기의 1, 2번 사항 입니다.
+</details>
 
-      ```java
-      public FileInputStream(String name) 
-                      throws FileNotFoundException {
-          this(name != null ? new File(name) : null);
+### 2-2. Line 단위로 읽기
+
+line 단위로 읽기 위해서는 reader 객체나 자바 8 이상에서는 Files 클래스를 이용하는 방법이 있습니다.
+
+#### 2-2-1.  InputStream /  Reader 클래스 사용&#x20;
+
+Reader 클래스를 상속 받은 BufferedReader를  Byte로 읽어 들이는 InputStream 클래스와 같이 사용해서 Line 단위로 읽게할 수  있습니다.
+
+{% code lineNumbers="true" %}
+```java
+BufferedReader  bufferedReader  = null;
+try {
+   bufferedReader = new BufferedReader(
+      new InputStreamReader(
+              new FileInputStream(fileName),
+              charsetName));
+   String readLine;
+   while ((readLine = bufferedReader.readLine()) != null) {
+       System.out.println(readLine);
+   } 
+} catch ( .....
+```
+{% endcode %}
+
+* 3 - 6 line : Byte 단위로 읽어 들이는 FileInputStream 클래스에 InputStreamReader 클래스를  이용하여 문자셋으로 적용하고 읽어 들인 것을 BufferReader를 사용하여 Line단위로 읽을수 있게 합니다.
+* 7 - 9 line : bufferedReader.readLine()은 읽을 데이터가 없으면 null로 반환하고 있으면 라인의 데이터를 돌려 주는 메서드여서 readLine 변수를 사용하고 데이터가 없으면 while문을 탈출 합니다.
+
+<details>
+
+<summary>Line 단위로 읽기 - 전체 소스</summary>
+
+{% code lineNumbers="true" %}
+```java
+public static void LineReadFile(String fileName, String charsetName) {
+    BufferedReader  bufferedReader  = null;
+    try {
+      bufferedReader = new BufferedReader(
+              new InputStreamReader(
+                      new FileInputStream(fileName),
+                      charsetName));
+      String readLine;
+      while ((readLine = bufferedReader.readLine()) != null) {
+        System.out.println(readLine);
       }
-      ```
-*
+    } catch (UnsupportedEncodingException e) {
+      System.out.println("엔코딩에 문제가 있습니다.");
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      System.out.println("파일을 확인해 주세요");
+      throw new RuntimeException(e);
+    } finally {
+      if (bufferedReader != null  ) {
+        try {
+          bufferedReader.close();
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+  }
+```
+{% endcode %}
+
+</details>
+
+#### 2-2-2.  FileReader / BufferedReader 클래스 사용
+
+### 2-3. Line 단위로 읽기 문자셋 변경
+
+2-2. Line 단위로 읽기 코드에서 라인 단위로 읽은 데이터를 getBytes() 메서드를 사용해서 문자셋 변경을 하고 문자열로 바꾸면 됩니다.
+
+{% code lineNumbers="true" %}
+```java
+while ((readLine = bufferedReader.readLine()) != null) {
+  byte[] utf8Bytes = readLine.getBytes("UTF-8");
+  String utf8String = new String(utf8Bytes, "UTF-8");
+  System.out.println(utf8String);
+}
+```
+{% endcode %}
+
+* 2 line : getBytes를 사용해서 문자셋 변환("UTF-8", "EUC-KR") 합니다.
+* 3 line : System.out으로 출력하기 위해 문자열로 변환합니다.
+
+<details>
+
+<summary>Line 단위로 읽기 문자셋 변경 - 전체 소스</summary>
+
+{% code lineNumbers="true" %}
+```java
+public static void ConvertLineReadFile(String fileName, 
+                      String fromCharset , 
+                      String toCharset) {
+    BufferedReader  bufferedReader  = null;
+    try {
+      bufferedReader = new BufferedReader(
+              new InputStreamReader(
+                      new FileInputStream(fileName),
+                      fromCharset));
+      String readLine;
+      while ((readLine = bufferedReader.readLine()) != null) {
+        byte[] utf8Bytes = readLine.getBytes(toCharset);
+        String utf8String = new String(utf8Bytes, toCharset);
+        System.out.println(utf8String);
+      }
+    } catch (UnsupportedEncodingException e) {
+      System.out.println("엔코딩에 문제가 있습니다.");
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      System.out.println("파일을 확인해 주세요");
+      throw new RuntimeException(e);
+    } finally {
+      if (bufferedReader != null  ) {
+        try {
+          bufferedReader.close();
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+}
+```
+{% endcode %}
+
+</details>
