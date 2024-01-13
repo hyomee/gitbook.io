@@ -1,4 +1,4 @@
-# 자바 비동기
+# 자바 동기/비동기
 
 일반적으로 데이터를 주고 받는 방식은 다음과 같은 방식이 있습니다.
 
@@ -10,7 +10,7 @@
 
 **비동기 시퀀스 다이어그래 예시**
 
-<table data-header-hidden><thead><tr><th width="402"></th><th></th></tr></thead><tbody><tr><td><p></p><p><img src="../../../.gitbook/assets/비동기동기.svg" alt="동기/비동기" data-size="original"></p></td><td><ol><li>작업1은 실행 후 바로 응답을 받는 동기작업입니다.</li><li><p>작업2는 JOB_01를 실행하고 응답을 받기전에 작업 3이  JOB_02를 실행합니다. </p><ol><li>작업2 : JOB_01 실행  요청 </li><li>작업3 : JOB_02 실행  요청 </li><li>작업 3에 대한 응답 받음</li><li>작업 2에 대한 응답 받음</li></ol></li></ol></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="402"></th><th></th></tr></thead><tbody><tr><td><p></p><p><img src="../../.gitbook/assets/비동기동기.svg" alt="동기/비동기" data-size="original"></p></td><td><ol><li>작업1은 실행 후 바로 응답을 받는 동기작업입니다.</li><li><p>작업2는 JOB_01를 실행하고 응답을 받기전에 작업 3이  JOB_02를 실행합니다. </p><ol><li>작업2 : JOB_01 실행  요청 </li><li>작업3 : JOB_02 실행  요청 </li><li>작업 3에 대한 응답 받음</li><li>작업 2에 대한 응답 받음</li></ol></li></ol></td></tr></tbody></table>
 
 시퀀스 다이어그램에서 확인했듯이 비동기 프로그램에서는 요청에 대한 응답이 작업2 처럼 바로 응답이 들어 오지않고 작업3을 바로 실행합니다. 또한 작업2, 작업3에 대한 응답도 작업2가 먼저 응답해 준다는 보장을 못합니다. 프로그램을 작성 할 때는 이점을 주의해서 작성해야 합니다.&#x20;
 
@@ -30,5 +30,3 @@
 * CompletionHandler ( 콜백 )
 * 함수형 인터페이스
 * Completable Future&#x20;
-
-##
