@@ -2,9 +2,9 @@
 
 비동기 프로그램은 하나의 작업이 완료될 때까지 기다리지 않고 다른 작업이 별도의 스레드로 분리하여 동시에 수행하는 방식으로 자바에서는 java.nio 패키지를 통해 비동기 io를 지원하고 있습니다.
 
-<table data-header-hidden><thead><tr><th width="402"></th><th></th></tr></thead><tbody><tr><td><p></p><p><img src="../../.gitbook/assets/비동기동기.svg" alt="동기/비동기" data-size="original"></p></td><td><ol><li>작업1은 실행 후 바로 응답을 받는 동기작업입니다.</li><li>작업2는 JOB_01를 실행하고 응답을 받기전에 작업 3이  JOB_02를 실행합 </li></ol></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="402"></th><th></th></tr></thead><tbody><tr><td><p></p><p><img src="../../.gitbook/assets/비동기동기.svg" alt="동기/비동기" data-size="original"></p></td><td><ol><li>작업1은 실행 후 바로 응답을 받는 동기작업입니다.</li><li><p>작업2는 JOB_01를 실행하고 응답을 받기전에 작업 3이  JOB_02를 실행합니다. </p><ol><li>작업2 : JOB_01 실행  요청 </li><li>작업3 : JOB_02 실행  요청 </li><li>작업 3에 대한 응답 받음</li><li>작업 2에 대한 응답 받음</li></ol></li></ol></td></tr></tbody></table>
 
-ㅇㅁㄴㄴ
+
 
 1. ㅇㄴㅁㅇㅁ
 
