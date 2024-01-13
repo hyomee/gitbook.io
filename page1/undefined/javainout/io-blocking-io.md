@@ -361,7 +361,7 @@ public static void ConvertLineReaderFile(String fileName,
 
 ### 2-4. CSV 파일 읽기
 
-
+List lists = FileReadUTIL.read("D:\문서\교육\txt\read\_EUCKR.txt", FileReadParameterVO.initFrpVO("EUC-KR", "UTF-8"));
 
 <details>
 
