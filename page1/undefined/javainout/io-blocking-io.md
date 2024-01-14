@@ -89,7 +89,7 @@ try {
 
 #### 2-1-1. 예제 1의 문제점
 
-한글 파일인 경우 <mark style="color:red;">**한글이 깨지는 문제**</mark> 입니다. 해당 문제를 해결하기 위해서는 문자셋을 지정해야 하므로 InputStreamReader 클래스를 사용하여 FileInputStream객체에서 읽어들인 데이터를 문자열로 변환합니다.
+한글 파일인 경우 <mark style="color:red;">**한글이 깨지는 문제**</mark> 입니다. 해당 문제를 해결하기 위해서는 문자셋을 지정해야 하므로 InputStreamReader 클래스를 사용하여 FileInputStream객체에서 읽어들인 데이터를 문자셋을 변환합니다.
 
 {% code lineNumbers="true" %}
 ```java
@@ -106,7 +106,7 @@ try {
 ```
 {% endcode %}
 
-*   3 line :  InputStreamReader 메서드의 두번째 파라메터에 문자셋을 지정 하여 읽어야 합니다.
+*   3 line :  InputStreamReader 메서드 시그니처로의  두번째 파라메터에 문자셋을 지정 하여 읽어야 합니다.
 
     ```
      public InputStreamReader(InputStream in, String charsetName)
@@ -117,10 +117,11 @@ try {
 
 <details>
 
-<summary>Byte 단위로 읽기 (문자셋전설정)  - 전체 소스</summary>
+<summary>Byte 단위로 읽기 (문자셋 설정)  - 전체 소스</summary>
 
 {% code lineNumbers="true" %}
 ```java
+// charset : UTF-8로 넘ㄷㅁ
 public static void CharReadFile(String fileName, 
                                 String charsetName) {
     InputStreamReader inputStreamReader = null;
