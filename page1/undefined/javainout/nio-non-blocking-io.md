@@ -229,4 +229,6 @@ buf.clear();
 
 
 
+## 3. Selector
+
 참고 : [https://jenkov.com/tutorials/java-nio/index.html](https://jenkov.com/tutorials/java-nio/index.html)
