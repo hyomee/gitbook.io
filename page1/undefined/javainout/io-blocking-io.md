@@ -113,7 +113,7 @@ try {
                     throws UnsupportedEncodingException {
     ```
 
-    * 파일의 문자셋에 맞는 문자셋를 지정 합니다. ( "UTF-8", "EUC-KR" )
+    * 파일의 문자셋에 맞는 문자셋를 지정 합니다. ( "UTF-8", "EUC-KR" )&#x20;
 
 <details>
 
@@ -121,7 +121,7 @@ try {
 
 {% code lineNumbers="true" %}
 ```java
-// charset : UTF-8로 넘ㄷㅁ
+// charsetName : "UTF-8"으로 넘김
 public static void CharReadFile(String fileName, 
                                 String charsetName) {
     InputStreamReader inputStreamReader = null;
@@ -170,7 +170,7 @@ try {
    bufferedReader = new BufferedReader(
       new InputStreamReader(
               new FileInputStream(fileName),
-              charsetName));
+              "UTF-8"));
    String readLine;
    while ((readLine = bufferedReader.readLine()) != null) {
        System.out.println(readLine);
@@ -400,7 +400,11 @@ private static <T> T getCols(String delimiter, String row) {
 ```
 {% endcode %}
 
-
+* 6-  11 line : 해더 포함 이면 결과에 해더 정보를 추가하고 해더 미포함 이면 해더 포함으로 설정을 변경합니다. 그래야 14 line 에서 읽은 데이터를 6 line조건이 만족하여 결과에 데이터가 포함됩니다.
+* 19 - 28 line : 구분자가 있는 경우 구분자를 기준으로 21  line 에서 구분자로 잘라서 배열에 넣어서 반환 하고 구분자가 없는 경우 파라터로 받은 ( row ) 데이터를 그냥 반환 합니다.
+  * <mark style="color:red;">**주의 사항 : 성능 및 트랜잭션애 대한 고려를 해야 합니다.**</mark>
+    * <mark style="color:purple;">**업무처리를 여기서 하는 경우 :  성능, DB 처리 갯수는 여러 사항에 대해서 고려 하여 동기적, 비동기적으로 설계 할지 결정을 해아합니다.**</mark>
+    * <mark style="color:purple;">**호출한 곳에서 하는 경우 :  성능, DB 처리 갯수등 여러 사항에 대해서 고려 해야 히지만 병렬, 분산 등을 선택의 폭이 넓을 것으로 생각이 됩니다. 업무처리를 여기서 하는 경우에서 병렬, 분산까지 고려 해서 코드를 작성하기는 난이도가 더 높습니다.**</mark>
 
 전체  소스는 다음과 같으며 소스에 대한 설명을 주석에 표시 하였습니다.
 
