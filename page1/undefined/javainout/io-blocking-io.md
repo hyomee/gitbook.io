@@ -361,22 +361,74 @@ public static void ConvertLineReaderFile(String fileName,
 
 ### 2-4. CSV 파일 읽기
 
-List lists = FileReadUTIL.read("D:\문서\교육\txt\read\_EUCKR.txt", FileReadParameterVO.initFrpVO("EUC-KR", "UTF-8"));
+CSV 파일은 쉼표(",")로 구분된 파일로 라인 단위로 읽고 쉼표(",") 하면 쉽게 만들수 있습니다.
+
+CSV 파일을 관련 부분은 다음과 같습니다.
+
+{% code lineNumbers="true" %}
+```java
+// 라인 단위 읽기
+row = convertCharSet(br, frpVO.getToCharset());
+      
+while (row != null) {
+    // CSV 헤더 포함 여부
+    if (frpVO.isHeader()) {
+      // 반환 값 List에 저장
+      results.add(getCols( frpVO.getDelimiter(),  row));
+    } else {
+      frpVO.setHeader(true);
+    }
+
+    // 다음 라인 단위 읽기
+    row = convertCharSet(br, frpVO.getToCharset());
+
+}
+
+// CSV 파일과 같이 구분자가 있는 것에 대한 처리
+private static <T> T getCols(String delimiter, String row) {
+    if (delimiter != null) {
+      String[] columns = row.split(delimiter);
+      // TODO 이관에서 비동기 처리 저장 System.out.println("String[] :" + columns);
+      return (T) columns;
+    } else {
+      // TODO 이관에서 비동기 처리 저장
+      System.out.println("String :" + row);
+    }
+    return (T) row;
+}
+```
+{% endcode %}
+
+
+
+전체  소스는 다음과 같으며 소스에 대한 설명을 주석에 표시 하였습니다.
 
 <details>
 
 <summary>공통 유틸</summary>
 
-{% code lineNumbers="true" %}
 ```java
+package com.hyomee;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 public class FileReadUTIL {
+
+  /**
+   * 파일을 읽고 List로 돌려줌
+   * @param file  파일 명이 포함된 파일 경로
+   * @param frpVO 파일을 읽고 해석 할 때 속성
+   * @return
+   * @param <T> List안에 있는 객체로 String or String[]
+   */
   public static <T> List<T> read(String file,
-                                 FileReadParameterVO frpVO)   {
+                                 FileReadParameterVO frpVO )   {
     List<T> results = new ArrayList<>();
 
     BufferedReader br = null;
     String row = null;
     try {
+      // 문자셋 포함 여부에 따른 문자셋 변환
       if (frpVO.getCharset() != null) {
         br = new BufferedReader(new InputStreamReader(
                   new FileInputStream(file),
@@ -385,21 +437,20 @@ public class FileReadUTIL {
         br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
       }
 
+      // 라인 단위 읽기
       row = convertCharSet(br, frpVO.getToCharset());
 
       while (row != null) {
+        // CSV 헤더 포함 여부
         if (frpVO.isHeader()) {
-          frpVO.setHeader(false);
+          // 반환 값 List에 저장
           results.add(getCols( frpVO.getDelimiter(),  row));
-          row = convertCharSet(br, frpVO.getToCharset());
-          System.out.println(row);
-          continue;
+        } else {
+          frpVO.setHeader(true);
         }
 
-        results.add(getCols( frpVO.getDelimiter(),  row));
+        // 다음 라인 단위 읽기
         row = convertCharSet(br, frpVO.getToCharset());
-        System.out.println(row);
-
       }
     } catch ( UnsupportedEncodingException e) {
       System.out.println("문자셋을 확인해 주세요.");
@@ -420,15 +471,36 @@ public class FileReadUTIL {
   }
 
 
+  /**
+   * CSV 파일과 같이 구분자가 있는 것에 대한 처리
+   * @param delimiter
+   * @param row
+   * @return
+   * @param <T>
+   */
   private static <T> T getCols(String delimiter, String row) {
     if (delimiter != null) {
       String[] columns = row.split(delimiter);
+      // TODO 이관에서 비동기 처리 저장 System.out.println("String[] :" + columns);
       return (T) columns;
+    } else {
+      // TODO 이관에서 비동기 처리 저장
+      System.out.println("String :" + row);
     }
 
     return (T) row;
 
   }
+
+  /**
+   * CSV 파일과 같이 구분자에 의해서 행/열로 되어 있는 데이터에
+   * 대해서 열을 String[]로 변환 후 반환
+   * - 문자셋 이 없으면 String 반환
+   * @param br
+   * @param charset
+   * @return
+   * @throws IOException
+   */
   private static String convertCharSet(BufferedReader br, String charset ) throws IOException {
     String record = br.readLine();
     if ( charset != null && record != null) {
@@ -443,10 +515,10 @@ public class FileReadUTIL {
 
 
 class FileReadParameterVO {
-  private boolean isHeader;
-  private final String delimiter;
-  private final String charset;
-  private final String toCharset;
+  private boolean isHeader;           // CSV 해더 포함 여부
+  private final String delimiter;     // CSV 열 구분자
+  private final String charset;       // 원본 파일의 문자셋
+  private final String toCharset;     // 변경할 문자셋
 
   FileReadParameterVO(boolean isHeader,
                       String delimiter,
@@ -458,27 +530,33 @@ class FileReadParameterVO {
     this.toCharset = toCharset;
   }
 
+  // 해더 포함 기본 파라메터 생성
   public static FileReadParameterVO initFrpVO() {
     return new FileReadParameterVO(true, null, null, null) ;
   }
 
+  // 해더 포함 문자셋 지정 생성
   public static FileReadParameterVO initFrpVO(String charset) {
     return new FileReadParameterVO(true, null, charset, null) ;
   }
 
+  // 해더 포함 문자셋을 다른 문자셋으로 변경
   public static FileReadParameterVO initFrpVO(String charset, String toCharset) {
     return new FileReadParameterVO(true, null, charset, toCharset) ;
   }
 
 
-
+  // 해더 포함 여부 설정 , CSV 파일 열 구분자 지정
   public static FileReadParameterVO initFrpVO(boolean isHeader, String delimiter) {
     return new FileReadParameterVO(isHeader, delimiter, null , null) ;
   }
 
+  // 해더 포함 여부 설정 , 문자셋을 다른 문자셋으로 변경
   public static FileReadParameterVO initFrpVO(boolean isHeader, String charset, String toCharset) {
     return new FileReadParameterVO(isHeader, null, charset, toCharset) ;
   }
+
+  // 해더 포함 여부 설정 , CSV 구분자, 문자셋을 다른 문자셋으로 변경
   public static FileReadParameterVO initFrpVO(boolean isHeader,
                                                             String delimiter,
                                                             String charset,
@@ -507,6 +585,24 @@ class FileReadParameterVO {
   }
 }
 ```
-{% endcode %}
 
 </details>
+
+
+
+#### 2-4-1. 구분자 "," 인 EUC-KR로 된 파일을 UTF-8로 변환
+
+```java
+List<T> lists = FileReadUTIL.read("D:\\문서\\교육\\txt\\CAS_DAS_이관대사기능_EUCKR.csv",
+            FileReadParameterVO.initFrpVO( true,",","EUC-KR", "UTF-8"));
+
+int row = 0;
+ 
+for ( T strings : lists) {
+    int j = 0;
+    for ( String str : (String[]) strings) {
+       System.out.println(String.format("[ %s : %s ] : %s", row, col, str));
+     }
+   row = row + 1;
+}
+```
