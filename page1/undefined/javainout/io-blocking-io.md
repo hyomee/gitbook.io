@@ -593,9 +593,9 @@ class FileReadParameterVO {
 
 </details>
 
-
-
 #### 2-4-1. 구분자 "," 인 EUC-KR로 된 파일을 UTF-8로 변환
+
+공통 유틸을 사용의 read() 메서드 호출시 해더포함, 구분자(","), EUC-KR을 UTF-8로 변경 하기 위한 소스 코트 입니다.
 
 ```java
 List<T> lists = FileReadUTIL.read("D:\\문서\\교육\\txt\\CAS_DAS_이관대사기능_EUCKR.csv",
@@ -611,3 +611,7 @@ for ( T strings : lists) {
    row = row + 1;
 }
 ```
+
+| 헤더 포함                                                                      | 해더 미포함                                                                         |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| <img src="../../../.gitbook/assets/image.png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (1).png" alt="" data-size="original"> |

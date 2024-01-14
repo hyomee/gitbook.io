@@ -22,7 +22,7 @@ VS Code는 프로그램 작성에 도움을 주는 다양한 확장팩이 있습
    \- Visual Studio IntelliCode\
    \- autoDocstring &#x20;
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 3. Python Extension Pack\
    Python  \
