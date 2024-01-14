@@ -176,7 +176,7 @@ public static void CharReadFileNio(String fileName,
 
 <figure><img src="../../../.gitbook/assets/자바NIO_이미지 (1).jpg" alt=""><figcaption></figcaption></figure>
 
-### 2-1. Channel&#x20;
+### 2-1. Channel 읽기
 
 * FileChannel : 파일에서 데이터를 읽습니다.
 * DatagramChannel : UDP를 통해 네트워크를 통해 데이터를 읽고 쓸 수 있습니다

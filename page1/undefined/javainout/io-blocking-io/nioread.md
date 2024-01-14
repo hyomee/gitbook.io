@@ -1,29 +1,4 @@
-# IO(Blocking IO)
-
-Java IO 패키지는Java에서 입출력을 다루기 위한 패키지로 하나의 Thread가 IO 작업에 의존적이기 때문에 하나의 Thread로 하나의 IO를 처리하는 **Blocking 방식  구현**으로 InputStream, OutputStream, Reader, Writer 클래스를 사용합니다.&#x20;
-
-* **바이트 단위** : IputStream, OutputStream\
-  \- 이미지, 비디오 및 직렬화 된 객체와 같은 이진 데이터\
-  \- InputStream.read() : 바이트 스트림의 원시 내용에 해당하는 0에서 255 사이의 바이트 값을 반환
-* **문자 단위** : Reader,  Writer \
-  \-  문자 스트림이므로 문자 데이터 \
-  \- Reader.read() : 0에서 65357 사이의 문자 값을 반환&#x20;
-
-&#x20;<mark style="color:red;">Java NIO와 달리 기존 IO 패키지는 JVM 내부 버퍼로 복사 시 발생하는 CPU 연산, GC 관리, IO 요청에 대한 스레드 블록이 발생하게 되는 현상 때문에 효율이 좋지 못한 점이 있습니다</mark>
-
-## 1. Java IO 패키지의 핵심 용어
-
-* **InputStream**: 바이트 단위로 입력을 처리하는 클래스입니다.
-* **OutputStream**: 바이트 단위로 출력을 처리하는 클래스입니다.
-
-<figure><img src="../../../.gitbook/assets/자바IO객체 (1).jpg" alt=""><figcaption><p>자바 IO 팩키지</p></figcaption></figure>
-
-* **Reader**: 문자 단위로 입력을 처리하는 클래스입니다.
-* **Writer**: 문자 단위로 출력을 처리하는 클래스입니다.
-
-<figure><img src="../../../.gitbook/assets/자바IO_READER.jpg" alt=""><figcaption></figcaption></figure>
-
-## 2. 파일 읽기
+# 읽기
 
 파일을 읽기 위해서는 다음 순서로 코드를 작성해야 합니다.
 
@@ -40,7 +15,7 @@ Java IO 패키지는Java에서 입출력을 다루기 위한 패키지로 하나
 6. **입력 스트림 닫기**: \
    \-`inputStream.close();`
 
-### 2-1. Byte 단위로 읽기
+## 1. Byte 단위로 읽기
 
 InputStream은 Byte 단위로 읽어 들이는 것으로 InputStream  확장해서 만든  FileInputStream 클래스를 사용하여 파일에서 데이터를 읽게 합니다.
 
@@ -82,7 +57,7 @@ try {
 * 5 line : Data를 한 Byte씩 읽어서 없으면 while문을 벗어납니다.
 * 6 line : 읽은 문자는 Char로 변환 해서 출력합니다.
 
-<figure><img src="../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 * 8 - 11 line : File에 관한 예외 처리 로직
 * 12 - 17 line : File을 열어서 작업을 했으므로 열려 있는 파일을 닫아야 합니다.
@@ -155,11 +130,11 @@ public static void CharReadFile(String fileName,
 
 </details>
 
-### 2-2. Line 단위로 읽기
+## 2. Line 단위로 읽기
 
 line 단위로 읽기 위해서는 reader 객체나 자바 8 이상에서는 Files 클래스를 이용하는 방법이 있습니다.
 
-#### 2-2-1.  InputStream /  Reader 클래스 사용&#x20;
+### 2-1.  InputStream /  Reader 클래스 사용&#x20;
 
 Reader 클래스를 상속 받은 BufferedReader를  Byte로 읽어 들이는 InputStream 클래스와 같이 사용해서 Line 단위로 읽게할 수  있습니다.
 
@@ -220,9 +195,9 @@ public static void LineReadFile(String fileName, String charsetName) {
 
 </details>
 
-### 2-3. Line 단위로 읽기 문자셋 변경
+## 3. Line 단위로 읽기 문자셋 변경
 
-#### 2-2-1.  InputStream /  Reader 클래스 사용&#x20;
+### 3-1.  InputStream /  Reader 클래스 사용&#x20;
 
 2-2. Line 단위로 읽기 코드에서 라인 단위로 읽은 데이터를 getBytes() 메서드를 사용해서 문자셋 변경을 하고 문자열로 바꾸면 됩니다.
 
@@ -281,7 +256,7 @@ public static void ConvertLineReadFile(String fileName,
 
 </details>
 
-#### 2-2-2.  FileReader / BufferedReader 클래스 사용
+### 3-2.  FileReader / BufferedReader 클래스 사용
 
 InputStream 클래스를 FileReader 클래스로 변경을 하면 됩니다. FileReader 샹성자로 두번째 파라메터가 Charset 타입을 전달 해야하며 내부적으로는 FileInputStream를 사용합니다.  다음은 FileReader 클래스생성자 입니다.
 
@@ -360,7 +335,7 @@ public static void ConvertLineReaderFile(String fileName,
 
 </details>
 
-### 2-4. CSV 파일 읽기
+## 4. CSV 파일 읽기
 
 CSV 파일은 쉼표(",")로 구분된 파일로 라인 단위로 읽고 쉼표(",") 하면 쉽게 만들수 있습니다.
 
@@ -593,7 +568,7 @@ class FileReadParameterVO {
 
 </details>
 
-#### 2-4-1. 구분자 "," 인 EUC-KR로 된 파일을 UTF-8로 변환
+### 4-1. 구분자 "," 인 EUC-KR로 된 파일을 UTF-8로 변환
 
 공통 유틸을 사용의 read() 메서드 호출시 해더포함, 구분자(","), EUC-KR을 UTF-8로 변경 하기 위한 소스 코트 입니다.
 
@@ -612,6 +587,7 @@ for ( T strings : lists) {
 }
 ```
 
-| 헤더 포함                                                                      | 해더 미포함                                                                         |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| <img src="../../../.gitbook/assets/image.png" alt="" data-size="original"> | <img src="../../../.gitbook/assets/image (1).png" alt="" data-size="original"> |
+| 헤더 포함                                                                         | 해더 미포함                                                                            |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| <img src="../../../../.gitbook/assets/image.png" alt="" data-size="original"> | <img src="../../../../.gitbook/assets/image (1).png" alt="" data-size="original"> |
+
