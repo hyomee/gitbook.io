@@ -94,15 +94,32 @@ public static void CharReadFileNioByte(String fileName,
 
 ### 2-3. 한글 깨짐 해결&#x20;
 
-2-2 코드를 실행 하면 한글이 정상 출력 되지  않는 문제가 있습니다, 이것은 파일이 생성되었을 떄 문자셋과 자바에서 읽어들였을떄 문자셋을 해석 하지 않아서 발생한 문제 입니다. 문자셋을 설정 하도록 다음을 수정 하면 됩닌다.
+2-2 코드를 실행 하면 한글이 정상 출력 되지  않는 문제가 있습니다, 이것은 파일이 생성되었을 떄 문자셋과 자바에서 읽어들였을떄 문자셋을 해석 하지 않아서 발생한 문제 입니다. 문자셋을 설정 하도록 다음을 수정 하면 됩니다.
 
-ㅇㄴㅁㅇ
+수정된 부분은 다음과 같습니다.
 
+{% code lineNumbers="true" %}
+```java
+Charset charset = pCharSet == null || pCharSet.length() == 0  ?
+    Charset.forName("UTF-8"):
+    Charset.forName(pCharSet);
+    
+while (bytesRead != -1) {
+    buf.flip();
+    CharBuffer charBuffer = charset.decode(buf);
+    System.out.println(String.format("Read :: %s => %s", bytesRead, charBuffer));
+    buf.clear();
+    bytesRead = inChannel.read(buf);
+}
+```
+{% endcode %}
 
+* 1  line : 문자셋 지정을 위해 파라메터로 문자셋을 받아 null 이면 기본으로 UTF-8로 지정합니다.
+* 7 line : 버퍼에서 있는 데이터를 지정한 문자셋으로 encode 합니다.
 
 <details>
 
-<summary>문자셋을 받아 처리하도록 수저ㅎ</summary>
+<summary>문자셋을 받아 처리하도록 수정 한 전체 소스</summary>
 
 {% code lineNumbers="true" %}
 ```java
@@ -151,15 +168,64 @@ public static void CharReadFileNio(String fileName,
 
 </details>
 
+## 2. 채널
 
+* 채널을 읽고 쓸 수 있습니다. 스트림은 일반적으로 단방향(읽기 또는 쓰기)입니다.
+* 채널은 비동기적으로 읽고 쓸 수 있습니다.
+* 채널은 항상 버퍼를 읽거나 씁니다.
 
-&#x20;문자셋에&#x20;
+<figure><img src="../../../.gitbook/assets/자바NIO_이미지 (1).jpg" alt=""><figcaption></figcaption></figure>
 
+### 2-1. Channel&#x20;
 
+* FileChannel : 파일에서 데이터를 읽습니다.
+* DatagramChannel : UDP를 통해 네트워크를 통해 데이터를 읽고 쓸 수 있습니다
+* SocketChannel : TCP를 통해 네트워크를 통해 데이터를 읽고 쓸 수 있습니다
+* ServerSocketChannel : 소겟 서버를 만들어 TCP를 수신 할 수 있습니다.
 
+**소스에서 아래 부분이 채널에 관계된 부분입니다.**
 
+```java
+RandomAccessFile aFile = new RandomAccessFile(fileName, rwMode);
+FileChannel inChannel = aFile.getChannel();
+```
 
+## 3.  Buffer
 
+데이터는 채널을 버퍼로, 버퍼에서 채널로 쓰는데  데이터를 쓸 수 있는 메모리 블록이 Buffer 입니다. Buffer는 4단계 프로세스를   통해  데이터를 읽고 씁니다.
+
+<figure><img src="../../../.gitbook/assets/Nio_버퍼.jpg" alt=""><figcaption><p>버퍼 쓰기/읽기</p></figcaption></figure>
+
+1. 버퍼에 데이터 쓰기
+2. buffer.flip()
+   * 데이터를 읽기 위해서는 buffer을 쓰기 모드에서 읽기 모드 변경해야 하는데 이것을 수헹하는 메소드 입니다.
+3. 버퍼에서 데이터 읽기
+4. buffer.clear() 또는 buffer.compact()
+   * 모든 데이터를 읽은 후에는 버퍼를 지워야 합니다.
+   * buffer.clear() : 모든 데이터를 읽은 후에는 버퍼를 지워야 합니다
+   * buffer.compact() : 이미 읽은 데이터 만 지웁니다.
+   * 읽지 않은 데이터는 시작 부분으로 이동하고. 데이터는 이제 읽지 않은 데이터 다음에 버퍼에 기록됩니다.
+
+**소스에서 아래 부분이 buffer에 관계된 부분입니다.**
+
+```java
+// byte 단위로 메모리 할당
+ByteBuffer buf =  ByteBuffer.allocate(allocate) ;
+
+// 할당된 크기 만큼 버퍼에 읽어 드
+int bytesRead = inChannel.read(buf)
+// 버퍼를 읽기 준비 상태로 변경
+buf.flip();
+
+// 버퍼에 있는 내용 읽기 
+(char) buf.get()
+CharBuffer charBuffer = charset.decode(buf);
+
+// 버퍼에 다시 쓰기 위해서 쓰기 모드로 변경 
+buf.clear();
+```
+
+### 2-1. 버퍼 용량, 위치 및 한계
 
 
 
