@@ -270,7 +270,7 @@ Channel에서 buffer로 쓰기 위해서는 다음과 같은 방법아 있습니
     buf.put(127);  
     ```
 
-### 3-5. 모드 전환
+### 3-5. 모드 전환 ( flip() )
 
 일기/쓰기 모드 전환은 통해서 데이터를 버퍼에 쓴 후 읽기를 하기 위해서는 읽기 모드로 변경 해야 하고 읽은 후에 다시 쓰기를 위해서는 쓰기 모드로 변경을 헤야 합니다.
 
@@ -282,9 +282,24 @@ buf.flip();
 
 버퍼에서 데이터를 읽기 위해서는 다음과 같은 두 가지 방법이 있습니다.
 
-* get() 메서드를 사용하여 데이터 읽기
-* 채널로 버퍼의 내용을 보
+*   get() 메서드를 사용하여 데이터 읽기   &#x20;
 
-## 기4. Selector
+    ```java
+    byte aByte = buf.get();
+    ```
+*   채널로 버퍼의 내용을 읽은 후 체널에 쓰기
+
+    <pre class="language-java"><code class="lang-java"><strong>int bytesWritten = inChannel.write(buf);
+    </strong></code></pre>
+
+### 3-7. 버퍼 읽기 ( rewind() )
+
+position을 0으로 설정하여 다시 읽을 수 있게 합니다.
+
+### 3-8. 버퍼 지우기 ( clear() and compact())
+
+
+
+## 4. Selector
 
 참고 : [https://jenkov.com/tutorials/java-nio/index.html](https://jenkov.com/tutorials/java-nio/index.html)
