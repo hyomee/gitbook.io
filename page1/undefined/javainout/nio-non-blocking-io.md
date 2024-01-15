@@ -225,10 +225,66 @@ CharBuffer charBuffer = charset.decode(buf);
 buf.clear();
 ```
 
-### 2-1. 버퍼 용량, 위치 및 한계
+### 3-1. 버퍼 용량, 위치 및 한계
 
+버퍼는 데이터를 쓸 수 있는 매모리 블럭으로 NIO Buffer 객체와 래핑되어 있어 메모리 블럭을 쉽게 작업할 수 있도록 하는 메서드로 다음과 같은 속성이 있습니다.
 
+* capacity : 한번에 쓰기 위한 메모리의 크기로 bytes, longs, chars 등만 사용할 수 있어고 데이터를  쓰기전에 비워야 합니다.
+* position : 메모리 블럭에 읽고 쓰는 위치를 의미하며 처음 위치는 0입니다. 쓰기 모드에서 읽기모드로 변경이 되면 0으로 재 설정 됩니다.
+* limit : 읽고 쑈기 위한 최대 값 입니다.&#x20;
 
-## 3. Selector
+### 3-2.  Buffer Types
+
+* ByteBuffer
+* MappedByteBuffer
+* CharBuffer
+* DoubleBuffer
+* FloatBuffer
+* IntBuffer
+* LongBuffer
+* ShortBuffer
+
+### 3-3.  버퍼 할당&#x20;
+
+개체를 가져오려면 먼저 개체를 할당해야 합니다.   48 Byte를 할당하며면 다음과 같이 작성하면 됩니다.
+
+```java
+ ByteBuffer buf =  ByteBuffer.allocate(48) ;
+ 
+ // 1024 문자를 할당 
+ CharBuffer buf = CharBuffer.allocate(1024)
+```
+
+### 3-4. 버퍼에 쓰기
+
+Channel에서 buffer로 쓰기 위해서는 다음과 같은 방법아 있습니다.
+
+*   생성 후 채널에 있는 데이터를 읽으면 버퍼에 쓰게 됩니다.  &#x20;
+
+    ```java
+     int bytesRead = inChannel.read(buf);
+    ```
+*   직접 버퍼에 쓰기
+
+    ```java
+    buf.put(127);  
+    ```
+
+### 3-5. 모드 전환
+
+일기/쓰기 모드 전환은 통해서 데이터를 버퍼에 쓴 후 읽기를 하기 위해서는 읽기 모드로 변경 해야 하고 읽은 후에 다시 쓰기를 위해서는 쓰기 모드로 변경을 헤야 합니다.
+
+```java
+buf.flip(); 
+```
+
+### 3-6. 버퍼 읽기
+
+버퍼에서 데이터를 읽기 위해서는 다음과 같은 두 가지 방법이 있습니다.
+
+* get() 메서드를 사용하여 데이터 읽기
+* 채널로 버퍼의 내용을 보
+
+## 기4. Selector
 
 참고 : [https://jenkov.com/tutorials/java-nio/index.html](https://jenkov.com/tutorials/java-nio/index.html)
