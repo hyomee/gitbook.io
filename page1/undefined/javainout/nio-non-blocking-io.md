@@ -45,10 +45,8 @@ Read :: 48 => ￬
 
 ### 2-2. 소스&#x20;
 
-{% code title="JavaNIO.java" lineNumbers="true" %}
-```java
-public static void CharReadFileNioByte(String fileName,
-                                         String rwMode,
+<pre class="language-java" data-title="JavaNIO.java" data-line-numbers><code class="lang-java"><strong>public static void CharReadFileNioByte(String fileName,
+</strong>                                         String rwMode,
                                          int allocate ) {
 
   rwMode = rwMode == null || rwMode.length() == 0 ? "r" : rwMode;
@@ -83,8 +81,7 @@ public static void CharReadFileNioByte(String fileName,
     }
   }
 }
-```
-{% endcode %}
+</code></pre>
 
 * 11 line : RandomAccessFile 클래스로 파일에 접근합니다.
 * 12 line : 파일에F대해서   FileChannel을 생성 합니다.&#x20;
@@ -305,11 +302,31 @@ position을 0으로 설정하여 다시 읽을 수 있게 합니다.
 
 ### 3-9. mark() 및 reset()
 
+* mark() : 현재 위치를 표시한다.
+* reset() : 표시한 마커 위치 지운다.
 
+```java
+buffer.mark();
 
-* buffer.clear() : 모든 데이터를 읽은 후에는 버퍼를 지워야 합니다
-* buffer.compact() : 이미 읽은 데이터 만 지웁니다. 즉 남아 있는 데이터를 덮어 쓰지는 않습니다.
+call buffer.get() // 읽어 들임 
+
+buffer.reset();  // set position back to mark.  
+```
 
 ## 4. Selector
+
+스레드는 운영 채제애 비용을 먾이 들이는 작업으로 하나의 스레드에서 여러 채널을 관리하며 비용 소모가 적게 들게 되니다. 이런 경우 Selector에 여러개의 스레드를 묶어서 하나의 스레드로 처리하게 됩니다.
+
+<figure><img src="../../../.gitbook/assets/image.png" alt="" width="306"><figcaption></figcaption></figure>
+
+
+
+### 4-1. selector 셍성&#x20;
+
+
+
+
+
+
 
 참고 : [https://jenkov.com/tutorials/java-nio/index.html](https://jenkov.com/tutorials/java-nio/index.html)
