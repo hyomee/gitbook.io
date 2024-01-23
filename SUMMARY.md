@@ -31,7 +31,7 @@
         * [읽기](page1/undefined/javainout/io-blocking-io/nioread.md)
         * [쓰기](page1/undefined/javainout/io-blocking-io/iowrite.md)
       * [NIO(Non-blocking IO)](page1/undefined/javainout/nio-non-blocking-io/README.md)
-        * [기본개념](page1/undefined/javainout/nio-non-blocking-io/nioattb.md)
+        * [Selector](page1/undefined/javainout/nio-non-blocking-io/nioattb.md)
         * [Page 1](page1/undefined/javainout/nio-non-blocking-io/page-1.md)
       * [Page](page1/undefined/javainout/page.md)
   * [Elasticsearch](page1/elasticsearch/README.md)
