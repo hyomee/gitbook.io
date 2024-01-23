@@ -32,7 +32,7 @@
         * [쓰기](page1/undefined/javainout/io-blocking-io/iowrite.md)
       * [NIO(Non-blocking IO)](page1/undefined/javainout/nio-non-blocking-io/README.md)
         * [Selector](page1/undefined/javainout/nio-non-blocking-io/nioattb.md)
-        * [Page 1](page1/undefined/javainout/nio-non-blocking-io/page-1.md)
+        * [FileChannel](page1/undefined/javainout/nio-non-blocking-io/filechannel.md)
       * [Page](page1/undefined/javainout/page.md)
   * [Elasticsearch](page1/elasticsearch/README.md)
     * [ElasticSearch Index settings 변경](page1/elasticsearch/elasticsearch-index-settings.md)
