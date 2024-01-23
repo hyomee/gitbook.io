@@ -157,3 +157,7 @@ buffer.reset();  // set position back to mark.
 
 
 ### 4-1. selector 셍성&#x20;
+
+```java
+Selector selector = Selector.open();
+```
