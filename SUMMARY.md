@@ -33,7 +33,7 @@
       * [NIO(Non-blocking IO)](page1/undefined/javainout/nio-non-blocking-io/README.md)
         * [Selector](page1/undefined/javainout/nio-non-blocking-io/nioattb.md)
         * [FileChannel](page1/undefined/javainout/nio-non-blocking-io/filechannel.md)
-        * [Path/Files](page1/undefined/javainout/nio-non-blocking-io/path-files.md)
+        * [Path/Files](page1/undefined/javainout/page.md)
   * [Elasticsearch](page1/elasticsearch/README.md)
     * [ElasticSearch Index settings 변경](page1/elasticsearch/elasticsearch-index-settings.md)
 * [설치](undefined/README.md)
