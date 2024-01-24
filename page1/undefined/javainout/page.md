@@ -5,17 +5,6 @@
 * 절대 경로 : 파일 시스템의 루트에서 파일 까지의 전체 경로
 * 상대 경로 : 다른 경로에 상대적인 파일 또는 디렉터리의 경로
 
-<table><thead><tr><th width="144">메서드</th><th>설명 및 예시</th></tr></thead><tbody><tr><td>Paths.get()</td><td><p>파일 또는 디렉토리의 경로를 가지고 온다,</p><pre class="language-java"><code class="lang-java">// 절대 경로
-Path path = Paths.get("c:\\data\\myfile.txt");
-
-// 상대 경로
-Path file = Paths.get("d:\\data", "projects\\a-project\\myfile.txt");
-</code></pre></td></tr><tr><td>Files.exists()</td><td><p>파일  또는 디렉토리 존재 여부 </p><pre class="language-java"><code class="lang-java">Path currentFilePath = Paths.get("D:\\Code\\niodata.txt");
-boolean isFile = Files.exists(currentFilePath);
-System.out.println(String.format("파일 존재 : %s", isFile));
-</code></pre><p><br>두번째 파라메터는 Link Option으로 심볼릭을 제외 하는 경우 사용합니다</p><pre class="language-java"><code class="lang-java">Files.exists(currentFilePath, new LinkOption[]{ LinkOption.NOFOLLOW_LINKS});
-</code></pre></td></tr><tr><td>Files.createDirectory</td><td>디렉토리 생성</td></tr><tr><td></td><td></td></tr></tbody></table>
-
 ## 1. Path 생성
 
 paths(java.nio.file.Paths) 클래스의 get() 메서드를 사용해서 Path 인스턴스를 생성 합니다.
