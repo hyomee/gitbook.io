@@ -34,6 +34,7 @@
         * [Selector](page1/undefined/javainout/nio-non-blocking-io/nioattb.md)
         * [FileChannel](page1/undefined/javainout/nio-non-blocking-io/filechannel.md)
         * [Path/Files](page1/undefined/javainout/page.md)
+      * [라인단위읽기(Stream 사용)](page1/undefined/javainout/bufferedreaderlinesstream.md)
   * [Elasticsearch](page1/elasticsearch/README.md)
     * [ElasticSearch Index settings 변경](page1/elasticsearch/elasticsearch-index-settings.md)
 * [설치](undefined/README.md)
