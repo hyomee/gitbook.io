@@ -37,7 +37,7 @@ Files.exists(currentFilePath, new LinkOption[]{ LinkOption.NOFOLLOW_LINKS});
 
 Files.createDirectory() 메서드를 통해서 생성 합니다. Files.create로 시작하는 메서드를 API를 통해서 확인 하면 다음과 같은 메서드가 있습니다,
 
-<figure><img src="../../../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
 {% code lineNumbers="true" %}
 ```java
