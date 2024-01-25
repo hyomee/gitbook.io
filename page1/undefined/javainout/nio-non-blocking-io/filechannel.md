@@ -103,13 +103,13 @@ public static void main(String[] args) {
 
 ### 2-1  힙 메모리 사용
 
-allocate는   System Memory를 사용 합니다.&#x20;
+allocate는   자바힙메모리를 사용하는 Non-Direct 버퍼 입니다.
 
 ```java
 ByteBuffer buf = ByteBuffer.allocate((int) inChannel.size());
 ```
 
-만약 자바의 힙메모리를 사용하기 위해서는 allocateDirect 메서드를  사용하여음과 같이 변경 하면 됩니다.
+만약 System Menory를 사용하기 위해서는 allocateDirect 메서드를  사용하여 음과 같이 변경 하면 됩니다.
 
 ```java
 ByteBuffer buf = ByteBuffer.allocateDirect((int) inChannel.size());
