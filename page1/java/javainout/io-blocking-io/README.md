@@ -16,9 +16,9 @@ Java IO 패키지는Java에서 입출력을 다루기 위한 패키지로 하나
 * **InputStream**: 바이트 단위로 입력을 처리하는 클래스입니다.
 * **OutputStream**: 바이트 단위로 출력을 처리하는 클래스입니다.
 
-<figure><img src="../../../.gitbook/assets/자바IO객체 (1).jpg" alt=""><figcaption><p>자바 IO 팩키지</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/자바IO객체 (1).jpg" alt=""><figcaption><p>자바 IO 팩키지</p></figcaption></figure>
 
 * **Reader**: 문자 단위로 입력을 처리하는 클래스입니다.
 * **Writer**: 문자 단위로 출력을 처리하는 클래스입니다.
 
-<figure><img src="../../../.gitbook/assets/자바IO_READER.jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/자바IO_READER.jpg" alt=""><figcaption></figcaption></figure>
