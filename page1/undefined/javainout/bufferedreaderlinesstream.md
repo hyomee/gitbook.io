@@ -82,3 +82,34 @@ java.io.BufferedReader 클래스는 텍스트 파일에서 데이터를 읽을 �
 try-with-resource 구문을 사용했기 때문에 BufferedReader의 close() 메서드를 수동으로 호출할 필요가 없으며 Java에서 자동으로 호출됩니다. catch 절은 close() 메서드에서 throw된 IOException을 catch하기 위한 것입니다.\
 
 
+## 3. InputStream ( JAVA IO )
+
+Java에서 InputStream사용 할 때는 다음 단계를 따라야 합니다.
+
+1. FileInputStream을 열어 파일의 내용을 InputStream으로 읽습니다.
+2. 바이트를 문자로 읽기 위해 문자 인코딩으로 InputStreamReader를 만듭니다.
+3. 파일을 한 줄씩 읽습니다.
+4. 스트링으로 변환 합니다.
+
+try-with-resources문을 사용하여 작성 한 예제 입니다.
+
+```java
+String readFile =  "D:\\Code\\niodata.txt";
+
+try (FileInputStream fileInputStream = new FileInputStream(readFile);
+     BufferedReader bufferedReader = new BufferedReader(
+        new InputStreamReader(fileInputStream, StandardCharsets.UTF_8)
+     )
+    ) {
+  String str = null;
+  while ( (str = bufferedReader.readLine() ) != null) {
+      System.out.println(str);
+  }
+
+} catch (FileNotFoundException e) {
+    throw new RuntimeException(e);
+} catch (IOException e) {
+    throw new RuntimeException(e);
+}
+```
+
