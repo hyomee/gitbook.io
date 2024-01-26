@@ -1,13 +1,16 @@
-# 라인단위읽기(Stream 사용)
+# 라인단위읽기
 
 자바를 이용해서 코드 작성 시 한 줄씩 파일을 읽는 방법은 다음과 같다.
 
-1. BufferReader 사용
+1. BufferedReader 사용
 2. Stream 사용
 3. Scanner 사용
 4.
 
-메모리에 전체를 읽을 수 없는 경우 BufferReader, Stream은 전체 파일을 메모리에 읽는 대신 한 줄씩 입력 파일을 읽어서 사용하므로 메모리에 완전히 읽을 수 없는 경우 적합니다.&#x20;
+메모리에 전체를 읽을 수 없는 경우 BufferReader, Stream은 전체 파일을 메모리에 읽는 대신 한 줄씩 입력 파일을 읽어서 사용하므로 메모리에 완전히 읽을 수 없는 경우 적합 합니다.
+
+* BufferedReader 클래스는 System.in으로 부터 데이터를 읽어 들이기 위해서 시스템 메모리를 사용합니다. 한 줄 단위로 읽기 위해서는 readline() 메서드를 사용해야 합니다.&#x20;
+* Buffer는 데이터를 한 곳에서 다른 곳으로 전송하는 동안 일시적으로 보관하는 임시 메모리 영역으로  BufferedReader 클래스는 Scanner 클래스 보다 효율적인 메모리 사용을 보장 합니다.
 
 ## 1. BufferReader 사용
 
@@ -103,3 +106,18 @@ try (FileInputStream fileInputStream = new FileInputStream(readFile);
 }
 ```
 
+## 2. Stream 사용
+
+Files 객체에 있는 lines를 사용
+
+```java
+final Path path = Paths.get("D:\\Code\\niodata.txt");
+try {
+    Stream<String> files = Files.lines(path);
+    files.forEach(System.out::println);
+} catch (IOException e) {
+    System.out.println("문제 발생");
+    e.printStackTrace();
+    throw new RuntimeException(e);
+}
+```
