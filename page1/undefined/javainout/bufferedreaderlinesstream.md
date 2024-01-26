@@ -2,56 +2,16 @@
 
 자바를 이용해서 코드 작성 시 한 줄씩 파일을 읽는 방법은 다음과 같다.
 
-## 1. NIO - Stream 사용
+1. BufferReader 사용
+2. Stream 사용
+3. Scanner 사용
+4.
 
-BufferedReader lines()과 Java 8 의 Stream을 이용한 방법으로 Stream을 사용하면 map, count, filter 등을 통해서 변환 할 수 있습니다.
+메모리에 전체를 읽을 수 없는 경우 BufferReader, Stream은 전체 파일을 메모리에 읽는 대신 한 줄씩 입력 파일을 읽어서 사용하므로 메모리에 완전히 읽을 수 없는 경우 적합니다.&#x20;
 
-{% code lineNumbers="true" %}
-```java
-public class BufferedReaderLinesStream {
-  public static void main(String[] args) {
+## 1. BufferReader 사용
 
-    try (ReadFileLines readFileLines = new ReadFileLines()) {
-      readFileLines.readLines();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-
-  }
-
-}
-
-// 자동 헤제 확인을 위한 AutoCloseable 상속 
-class ReadFileLines  implements AutoCloseable {
-  @Override
-  public void close()  {
-    System.out.println("close");
-  }
-  public void readLines() throws IOException {
-    // 원본 파일
-    Path sourceFile = Paths.get("D:\\Code\\niodata1.txt");
-
-    // try - with - resource를 통한 자동 해제 
-    try (
-      // newBufferedReader로 버퍼 할당 
-      BufferedReader bufferedReader = Files.newBufferedReader(sourceFile, 
-            Charset.forName("UTF-8"));
-    ) {
-      
-      // bufferedReader.lines().forEach(System.out::println);
-      // System.out.println("라인수 : " + bufferedReader.lines().count());
-      int maxLine = bufferedReader.lines()
-              .mapToInt(String::length)
-              .max()
-              .getAsInt();
-      System.out.println(String.format("가장긴라인 : %s" , maxLine));
-    }
-  }
-}
-```
-{% endcode %}
-
-## 2. FileReader + BufferedReader
+### 1-1. FileReader + BufferedReader
 
 java.io.BufferedReader 클래스는 텍스트 파일에서 데이터를 읽을 수 있는read()메소드의 4 가지 버전을 제공합니다.
 
@@ -82,7 +42,37 @@ java.io.BufferedReader 클래스는 텍스트 파일에서 데이터를 읽을 �
 try-with-resource 구문을 사용했기 때문에 BufferedReader의 close() 메서드를 수동으로 호출할 필요가 없으며 Java에서 자동으로 호출됩니다. catch 절은 close() 메서드에서 throw된 IOException을 catch하기 위한 것입니다.\
 
 
-## 3. InputStream ( JAVA IO )
+### 1-2. Files + newBufferedReader - Stream 사용
+
+BufferedReader lines()과 Java 8 의 Stream을 이용한 방법으로 Stream을 사용하면 map, count, filter 등을 통해서 변환 할 수 있습니다.
+
+{% code lineNumbers="true" %}
+```java
+public void readLines() throws IOException {
+  // 원본 파일
+  Path sourceFile = Paths.get("D:\\Code\\niodata1.txt");
+
+  // try - with - resource를 통한 자동 해제 
+  try (
+    // newBufferedReader로 버퍼 할당 
+    BufferedReader bufferedReader = Files.newBufferedReader(sourceFile, 
+          Charset.forName("UTF-8"));
+  ) {
+    
+    // bufferedReader.lines().forEach(System.out::println);
+    // System.out.println("라인수 : " + bufferedReader.lines().count());
+    int maxLine = bufferedReader.lines()
+            .mapToInt(String::length)
+            .max()
+            .getAsInt();
+    System.out.println(String.format("가장긴라인 : %s" , maxLine));
+  }
+}
+ 
+```
+{% endcode %}
+
+### 1-3. InputStream + BufferedReader  ( JAVA IO )
 
 Java에서 InputStream사용 할 때는 다음 단계를 따라야 합니다.
 
