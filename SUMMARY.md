@@ -22,3 +22,5 @@
     * [CleanCode](book/2023/cleancode.md)
     * [개발자의 하루를 바꾸는 코파일럿\&GPT](book/2023/and-gpt.md)
     * [핸즈온 머신러닝(3판)](book/2023/3.md)
+  * [2024](book/2024/README.md)
+    * [밑바닥부터 시작하는 딥러닝 4](book/2024/001.md)
