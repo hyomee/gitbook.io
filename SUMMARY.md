@@ -1,7 +1,7 @@
 # Table of contents
 
 * [화면이야기](https://hyomee.gitbook.io/develop/v/frontend)
-* [개발/설계관련](https://app.gitbook.com/o/e7QnYwVtmDLK6cQGxQIE/s/Re76TmqNTAKHCLU8VzfO/\~/changes/13/page)
+* [개발이야기](https://hyomee.gitbook.io/develop/)
 * [솔류션](https://hyomee.gitbook.io/develop/v/frontend/javascript)
 * [처음 시작하는 개발자에게](README.md)
   * [1. 어떻게 학습 할까](undefined/1..md)
