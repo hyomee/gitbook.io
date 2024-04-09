@@ -5,7 +5,6 @@
 1. BufferedReader 사용
 2. Stream 사용
 3. Scanner 사용
-4.
 
 메모리에 전체를 읽을 수 없는 경우 BufferReader, Stream은 전체 파일을 메모리에 읽는 대신 한 줄씩 입력 파일을 읽어서 사용하므로 메모리에 완전히 읽을 수 없는 경우 적합 합니다.
 
@@ -108,16 +107,31 @@ try (FileInputStream fileInputStream = new FileInputStream(readFile);
 
 ## 2. Stream 사용
 
-Files 객체에 있는 lines를 사용
+Files 객체에 있는 lines() 메서드는 자바 8에서 추가된 기능으로 내부적으로 BefferedReader 클래스를 이용하여 파필을 읽습니다.&#x20;
 
+{% code lineNumbers="true" %}
 ```java
-final Path path = Paths.get("D:\\Code\\niodata.txt");
-try {
-    Stream<String> files = Files.lines(path);
-    files.forEach(System.out::println);
-} catch (IOException e) {
-    System.out.println("문제 발생");
-    e.printStackTrace();
-    throw new RuntimeException(e);
+public static void main(String... args) {
+    final Path path = Paths.get("D:\\Code\\niodata_ansi.txt");
+    final Path pathWrite = Paths.get("D:\\Code\\niodata_ansi_utf8.txt");
+    try (Stream<String> files = Files.lines(path, Charset.forName("EUC-KR"))){
+        files.forEach(t-> {
+            String utf8String = new String(t.getBytes());
+            utf8String = utf8String + System.getProperty("line.separator");
+            byte[] bytes = utf8String.getBytes(StandardCharsets.UTF_8) ;
+            try {
+                Files.write(pathWrite, bytes, StandardOpenOption.CREATE, 
+                                              StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    } catch (IOException e) {
+        System.out.println("문제 발생");
+        e.printStackTrace();
+        throw new RuntimeException(e);
+    }
 }
 ```
+{% endcode %}
+
