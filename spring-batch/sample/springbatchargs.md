@@ -92,5 +92,21 @@ private Map<String, Object> argumentsToMap(ApplicationArguments args) {
 }
 ```
 
-arguments 객체를 받아서 Map으로 변경하는 코드로 key=value 구조로 받은 데이터를 split 메서드를 사용해서 String 배열로 변환 후 0번째 요소에 "--"이 포함 되어 있으먄 제외 후 Map에 저장 후 반환한다,
+arguments 객체를 받아서 Map으로 변경하는 코드로 key=value 구조로 받은 데이터를 split 메서드를 사용해서 String 배열로 변환 후 0번째 요소에 "--"이 포함 되어 있으먄 제외 후 Map에 저장 후 반환한다.
 
+run 메서드를 다음과 같이 변경 후 실행 합니다.
+
+```java
+public void run(ApplicationArguments args) throws Exception {
+    if (args.getSourceArgs().length == 0) {
+        log.debug("Arguments 는 없습니다.");
+        return;
+    }
+    Map<String, Object> argsMap = argumentsToMap( args);
+    argsMap.forEach( (pa, cnt)-> log.debug(pa + " = " + (String) argsMap.get(pa))) ;
+}
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### 3-3.    Map로 변환 메서드 작성
