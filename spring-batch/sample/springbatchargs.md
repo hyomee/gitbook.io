@@ -215,7 +215,7 @@ myTasklet, myStep01, myStep02, myJob이 bean으로 등록 된 것을 확인 할 
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-## 4.  전체 소스 코드드
+## 4.  전체 소스 코드
 
 
 
