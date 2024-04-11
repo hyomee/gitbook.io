@@ -26,7 +26,7 @@ csv 파일을 읽어서 다른 파일 csv로 데이터를 저장하는 기능으
      * 파일을 읽을 때 ClassLoader 객체르 사용해서 파일을 검사하여 있으면 해당 위치에서 파일을 읽고 그렇지 않으면 지정한 위치에서 읽게 한다.
   2. [읽을 파일과 쓰기 파일은 외부에서 받아서 차리해야 한다.](chunk.md#id-3-3.-file-read-write)
   3. chunk의 크기는 외부에서 받아서 동적으로 처리해아 한다.
-  4. 배치가 수행 되고 나면 촐 커밋 수, 오류 수등 집계를 제공해야 한다.
+  4. 배치가 수행 되고 나면 총 커밋 수, 오류 수등 집계를 제공해야 한다.
 
 ## 3.  코드작성
 
@@ -99,11 +99,11 @@ csv 파일을 읽어서 다른 파일 csv로 데이터를 저장하는 기능으
 
 ### 3-3. File Read/Write
 
-opencsv를 사용해서 파일을 읽고 쓰기 위해서 OpenCsvFileUtils 클래스 파일을 만들고 ItemReader/ItemWriter에서 사용하면 각 메서드는 다음과 같습니다.
+ItemReader/ItemWriter에서 사용할 수 있게 opencsv를 사용한  유틸리티  클래스를 만듭니다. 다음은  이 클래스에 작성할 기능들 입니다.
 
 * OpenCsvFileUtils(): 생성자로 파일이름을 받아서 파일이름 맴버 변수에 저장&#x20;
 * readLine(): 파일을 오픈 하고 파일을 읽는 기능&#x20;
-*   initReader(): 파일 객체를 생성하는 메서드로 요구사항 2를 만족하기 위해 ClassLoader 객체를 사용해서 해당 위치에 파일이 없으면 지정한 파일을 읽게 작성합니다.\
+*   initReader(): 파일 객체를 생성하는 메서드로 요구사항 2를 만족하기 위해 ClassLoader 객체를 사용해서 해당 위치에 파일이 없으면 지정한 파일을  File 객체로  생성 합니다.\
 
 
     {% code lineNumbers="true" %}
@@ -136,8 +136,28 @@ opencsv를 사용해서 파일을 읽고 쓰기 위해서 OpenCsvFileUtils 클�
       &#x20;   \- resource 폴더 파일 : file/in/TB\_DEPLOY.csv\
       &#x20;   \- 물리적 위치 파일 : D:/Code/Spring/abacus/acube-svc-batch/file/in/TB\_DEPLOY.csv
     * 13 Line: 파일 읽기 객체 생성으로 문자셋을 지정 할 수 있다,
-    * 14 Line: OpenCsv에서 제공하는 기능으로 CSVReader 객체 생성&#x20;
-* writeLine():&#x20;
+    * 14 Line: OpenCsv에서 제공하는 기능으로 CSVReader 객체 생성\
+      \- CSVReader:  OpenCSV 라이브러리를 사용하여 Java에서 CSV 파일을 읽기 위한 클래스
+* writeLine(): 파일을 오픈하고 String\[]을 인자로 받아서 CSVWriter 객체를 생성하고 writeNext 메서드를 사용하여 파일에 쓰는 기능
+*   initWriter(): File 객체를 생성하고 CSVWriter 객체를 반환 합니다.\
+
+
+    {% code lineNumbers="true" %}
+    ```java
+    private void initWriter() throws Exception {
+        if (file == null) {
+            file = new File(fileName);
+            file.createNewFile();
+        }
+        if (fileWriter == null) fileWriter = new FileWriter(file, true);
+        if (CSVWriter == null) CSVWriter = new CSVWriter(fileWriter);
+    }
+    ```
+    {% endcode %}
+
+
+* closeWriter():  오픈 된 쓰기 파일을 닫는 기능
+* closeReader(): 오픈 된 읽기 파일을 닫는 기능
 
 <details>
 
