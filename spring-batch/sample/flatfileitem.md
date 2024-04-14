@@ -373,4 +373,123 @@ public Step beanFlatFileStep(JobRepository jobRepository,
 ```
 {% endcode %}
 
-## 7. Liastener
+## 7. Listener
+
+다음은 리스너 코드 입니다.
+
+{% tabs %}
+{% tab title="BeanFlatFileItemReaderListener " %}
+```java
+@Slf4j
+public class BeanFlatFileItemReaderListener implements ItemReadListener<TbDeployVO> {
+
+    @Override
+    public void beforeRead() {        
+        log.info("신규 TbDeployVO 읽기");
+    }
+
+    @Override
+    public void afterRead(TbDeployVO input) {
+        
+        log.info("신규 TbDeployVO 읽은 정보 : " + input);
+    }
+
+    @Override
+    public void onReadError(Exception e) {        
+        log.error("오류  TbDeployVO  : " + e);
+    }
+
+}
+```
+{% endtab %}
+
+{% tab title="BeanFlatFileItemProcessorListener" %}
+```java
+@Slf4j
+public class BeanFlatFileItemProcessorListener
+        implements ItemProcessListener<TbDeployVO, TbDeployWriteVO> {
+
+    @Override
+    public void beforeProcess(TbDeployVO input) {
+        log.info("TbDeployVO 처리 전 " + input);
+    }
+
+    @Override
+    public void afterProcess(TbDeployVO input, TbDeployWriteVO result) {
+        log.info("TbDeployWriteVO 처리 후  : " + result);
+    }
+
+    @Override
+    public void onProcessError(TbDeployVO input, Exception e) {
+        log.error("오류 TbDeployVO  : " + input);
+        log.error("오류 메세지 : " + e);
+    }
+}
+```
+{% endtab %}
+
+{% tab title="BeanFlatFileItemWriterListener" %}
+```java
+@Slf4j
+public class BeanFlatFileItemWriterListener implements ItemWriteListener<TbDeployWriteVO> {
+
+    @Override
+    public void beforeWrite(Chunk<? extends TbDeployWriteVO> items) {
+        log.info("쓰기 전 TbDeployWriteVO 목록 : " + items);
+    }
+
+    @Override
+    public void afterWrite(Chunk<? extends TbDeployWriteVO> items) {
+        log.info("쓰기 완료 TbDeployWriteVO 목록 : " + items);
+        ;
+    }
+
+    @Override
+    public void onWriteError(Exception e, Chunk<? extends TbDeployWriteVO> items) {
+        log.error("쓰기 오류 : 목록 :" + items);
+        log.error("쓰기 오류 : 에러 : " + e);
+    }
+
+}
+```
+{% endtab %}
+
+{% tab title="JobCompletionNotificationListener " %}
+```java
+@Slf4j
+public class JobCompletionNotificationListener implements JobExecutionListener {
+
+    private ApplicationArguments args;
+
+    public JobCompletionNotificationListener(ApplicationArguments args) {
+        this.args = args;
+    }
+
+    @SneakyThrows
+    @Override
+    public void afterJob(JobExecution jobExecution) {
+        if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
+            log.info("JOB FINISHED !!");
+    }
+}
+```
+{% endtab %}
+
+{% tab title="StepComplateNotiListener" %}
+```java
+@Slf4j
+public class StepComplateNotiListener implements StepExecutionListener {
+
+    @Override
+    public void beforeStep(StepExecution stepExecution) {
+        log.debug("#### item -> StepFlatFileItemProcessor beforeStep." + stepExecution.getStepName());
+    }
+    @Override
+    public ExitStatus afterStep(StepExecution stepExecution) {
+        log.debug("#### item -> StepFlatFileItemProcessor afterStep " + stepExecution.getStepName());
+        return ExitStatus.COMPLETED;
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
