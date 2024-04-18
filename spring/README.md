@@ -2,17 +2,41 @@
 
 ## 1. Spring **Framework 이란**
 
-Java 애플리케이션을 빌드하기 위한 포괄적인 프로그래밍 및 구성 모델을 제공한 Java용 오픈 소스 애플리케이션 개발 프레임워크로  데이터 액세스 추상화, 트랜잭션 관리, 보안 등 프로그램 개발에서 공통으로 필요한 기능을 제공 합니다.
+Java 애플리케이션을 빌드하기 위한 포괄적인 프로그래밍 및 구성 모델을 제공한 Java용 오픈 소스 애플리케이션 개발 프레임워크로  데이터 액세스 추상화, 트랜잭션 관리, 보안 등 프로그램 개발에서 공통으로 필요한 기능을 제공한다..
+
+Spring 프레임 워크는 코어, 빈, 컨텍스트, 표현식 언어, AOP, Aspects, Instrumentation, JDBC, ORM, OXM, JMS, Transaction, Web, Servlet, Struts 등과 같은 많은 모듈은 다음 다이어그램과 같이 테스트, 코어 컨테이너, AOP, 측면, 계측, 데이터 액세스/통합, 웹(MVC/원격)으로 그룹화된다.
 
 <figure><img src="../.gitbook/assets/image (55).png" alt="" width="465"><figcaption><p>Spring Framework Runtime</p></figcaption></figure>
 
-Spring 프레임 워크는 코어, 빈, 컨텍스트, 표현식 언어, AOP, Aspects, Instrumentation, JDBC, ORM, OXM, JMS, Transaction, Web, Servlet, Struts 등과 같은 많은 모듈로 구성됩니다. 이러한 모듈은 다음 다이어그램과 같이 테스트, 코어 컨테이너, AOP, 측면, 계측, 데이터 액세스/통합, 웹(MVC/원격)으로 그룹화됩니다.
-
 ## 2. Spring **Framework** 디자인 철학
 
-Spring은 객체 지향 프로그래밍(OOP)을 기반으로 한 경량화된 자바 프레임워크로 어플리케이션을 보다 간결하게 작성할 수 있게 해주고(간결성),  쉽게 모듈화 개발을 할 수 있도록 해주며 외부 프레임워크 또는 라이브러리와 쉽게 통합할 수 있도록 한다.&#x20;
+Spring은 객체 지향 프로그래밍(OOP)을 기반으로 한 경량화된 자바 프레임워크로 어플리케이션을 보다 간결하게 코드를작성할 수 있게 해주고(간결성),  쉽게 모듈화 개발을 할 수 있도록 해주며 외부 프레임워크 또는 라이브러리와 쉽게 통합할 수 있도록 한다.&#x20;
 
-이를 위해 **IoC(Inversion of Control), DI(Dependency Injection), AOP(Aspect-Oriented Programming)** 등의 기술을 사용하여  구성 요소 간의 느슨한 결합을 촉진하여 코드를 보다 간결하게 작성되고 보다 모듈화되고 유연하며 유지 관리하기 쉽게 만든다.&#x20;
+이를 위해 **IoC(Inversion of Control), DI(Dependency Injection), AOP(Aspect-Oriented Programming)** 등의 기술을 사용하여  구성 요소 간의 느슨한 결합을 촉진하여 간결한 코드를 작성하게 되고 그로인해 모듈화가 되어 유지관리가 쉬워진다.
+
+{% hint style="info" %}
+종속성 주입(DI)
+
+* 클래스가 의존하는 구성 요소 또는 개체(종속성)가 클래스 자체 내에서 생성되지 않고 외부에서 제공되는 디자인 패턴&#x20;
+* Application Component에 의존(사용)하는 다른 빈의 생성과 관리를 별도의 Container가 해주며, Component를 필요로 하는 Bean에 주입한다.
+* **스프링에서 의존성 주입:** 개발자가 클래스와 종속성 간의 관계를 정의할 수 있도록 하여 종속성 주입을 용이하게 하여 런타임시점에 클래스에 삽입되어 느슨하게 결합된 코드를 만든다.
+{% endhint %}
+
+{% hint style="info" %}
+제어의 역전(IoC)
+
+* 시스템의 제어 흐름을 역전시키는 소프트웨어 설계 원칙으로 응용 프로그램이 프로그램의 흐름을 제어하는 대신 제어가 반전되거나 Spring과 같은 프레임워크 또는 컨테이너로 이동된 것
+* 스프링에서 제어 역전:&#x20;
+  * 전통적인 프로그래밍에서 클래스는 종종 종속성의 생성 및 관리를 제어하지만. Spring은 이러한 책임을 제어하기 때문에 IoC라 한다.
+  * Spring은 IoC를 통해 종속성의 생성, 구성 및 주입을 관리하여 개발자가 애플리케이션의 핵심 논리와 기능에 집중할 수 있도록 한다.
+  *   즉 프로그램의 실행 흐름이나 객체의 생명 주기를 개발자가 직접 제어 하는 것이 아니라 컨테이너로 제어권이 넘어가는 것입니다.\
+      \
+
+
+      <figure><img src="../.gitbook/assets/image (199).png" alt=""><figcaption></figcaption></figure>
+{% endhint %}
+
+
 
 **간결성,  모듈화, 유연성 및 확장성으로 다른 프레임워크와 쉽게 통합하는 할 수 있게 해주는 오픈소스 프레임워크**로  Spring Framework 6.0부터는 Java 17 이상이 필요하다.
 
@@ -46,8 +70,6 @@ Spring Framwork는 다음 요소를 포함 하고 있다.
 * 가파른 학습 곡선
 * 구성 복잡성
 * 런타임 오버 헤드
-
-
 
 ## **5. 참고 :** 학습 관련 사이트&#x20;
 

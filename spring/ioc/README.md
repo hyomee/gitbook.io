@@ -8,6 +8,8 @@ IoC(Inversion of Control)는 프로그램의 객체 또는 일부에 대한 제�
 
 Strategy design pattern, Service Locator pattern, Factory pattern, and Dependency Injection (DI)을와 같은 전략 패턴으로 IoC(Inversion of Control)를 구현 할 수 있다.
 
+<figure><img src="../../.gitbook/assets/image (200).png" alt="" width="544"><figcaption></figcaption></figure>
+
 ## 1. 장점&#x20;
 
 * 프로그램  실행과 구현을 분리 할 수 있다.
@@ -29,6 +31,20 @@ Strategy design pattern, Service Locator pattern, Factory pattern, and Dependenc
 ## 3. Spring IoC **Container 필수 단계**
 
 <figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption><p>IoC Container 단계</p></figcaption></figure>
+
+{% hint style="info" %}
+Bean이란&#x20;
+
+* Spring 컨테이너에서 관리하는 객체를 나타내는 Spring 프레임워크의 기본 구성 요소로 Spring에 의해 생성, 구성 및 관리되며 Spring 애플리케이션의 빌딩 블록 역할을 한다.
+* 즉. 런타임에 사용자 대신 Spring Framework에 의해 생성되고 유지 관리되는 Java 객체
+* 컨테이너가 관리 하는 객체를 의미 하며 기본적으로 싱클턴&#x20;
+* 스프링은 기본적으로 다음과너같은 어노테이션을 사용하여 Class를 자동으로 Bean으로 등록한다.
+  * @Controlle: Presentation Layer에서 Controller명시&#x20;
+  * @Service:      Business Layer에서 Service 명시&#x20;
+  * @Repository: Persistence Layer 에서 DAO 명시&#x20;
+  * @Component: 기타 자동 등록 하고 싶은 것&#x20;
+  * @Bean: 외부 라이브러리의 객체를 Bean으로 만들떄
+{% endhint %}
 
 ## 4. Spring IoC **Container** 종류
 

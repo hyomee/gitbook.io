@@ -33,6 +33,8 @@ Spring 컨테이너는 다음과 같은 기능을 제공한다.
 
 Spring 컨테이너는 XML 기반 구성, JavaConfig 어노테이션 또는 컴포넌트 스캔을 포함한 다양한 메커니즘을 통해   Bean 인스턴스를 생성한다.&#x20;
 
+<figure><img src="../../.gitbook/assets/image (201).png" alt="" width="560"><figcaption></figcaption></figure>
+
 * **XML 구성 :** XML 기반 구성을 통해 개발자는 XML 파일 내에서 Bean
 * **주석 기반 구성 :** @Component, @Service, @Repository 및 @Controller와 같은 주석을 클래스에 적용하여 Bean의 역활응 하게 한다.\
   \
