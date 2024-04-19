@@ -80,26 +80,9 @@ RDB에서 대부분 기본적으로 사용되고 있는 격리 수준으로 UNDO
 
 <figure><img src="../.gitbook/assets/image (6).png" alt="" width="563"><figcaption></figcaption></figure>
 
-### 2-6. Spring Framework 격리 레벨
-
-Transactional 애노테이션에서 isolation(격리수준)은 명시적으로 어떤 격리 수준도 설정하지 않고, 데이터베이스가 기본적으로 사용하는 격리 수준을 사용한다는 의미한다.
-
-```java
-public @interface Transactional {
-    Isolation isolation() default Isolation.DEFAULT;
-}
-```
-
-[참고 ](https://stackoverflow.com/questions/8490852/spring-transactional-isolation-propagation)[: java - Spring @Transactional - isolation, propagation - Stack Overflow](https://stackoverflow.com/questions/8490852/spring-transactional-isolation-propagation)
-
-* ISOLATION\_READ\_UNCOMMITTED: 더티 리드를 허용.
-* ISOLATION\_READ\_COMMITTED: 더티 리드를 허용하지 않음.&#x20;
-* ISOLATION\_REPEATABLE\_READ: 동일한 트랜잭션 내에서 두 번 이상 동일한 행을 읽으면 항상 동일한 결과를 반환&#x20;
-* ISOLATION\_SERIALIZABLE: 모든 트랜잭션을 순차적으로 실행.
 
 
-
-## 참고사이트&#x20;
+## 3. 참고사이트&#x20;
 
 [PostgreSQL triggers and isolation levels - Vlad ](https://vladmihalcea.com/postgresql-triggers-isolation-levels/)[Mihalcea](https://vladmihalcea.com/postgresql-triggers-isolation-levels/)
 
