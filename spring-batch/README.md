@@ -29,7 +29,7 @@
 
 ## 4. 주요 구성 요소
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 * Job Launcher: 배치 작업을 시작하고 실행
 * Job: 처음부터 끝까지 실행할 수 있는 완전한 일괄 처리 프로세스
@@ -52,11 +52,11 @@
 * JobExplorer : 이는 기본적으로 작업 인스턴스, 실행 및 관련 단계를 검사할 수 있는 쿼리 API.&#x20;
 * JobOperator : 작업 시작, 중지 및 쿼리와 같은 작업을 허용하는 더 높은 수준의 API.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Spring Batch Meta-Data Schema
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 5-1 Job 관련 테이블
 
