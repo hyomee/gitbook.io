@@ -29,7 +29,7 @@
 
 ## 4. 주요 구성 요소
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 * Job Launcher: 배치 작업을 시작하고 실행
 * Job: 처음부터 끝까지 실행할 수 있는 완전한 일괄 처리 프로세스

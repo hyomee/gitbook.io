@@ -3,11 +3,11 @@
 * Spring Application Context라는 Container가 Application Component을 생성하고 관리 한다.&#x20;
 * Dependency Injection(DI) 패턴을 기반으로 Bean의 상호 연결을 수행 한다. : Application Component에 의존(사용)하는 다른 빈의 생성과 관리를 별도의 Container가 해주며, Component를 필요로 하는 Bean에 주입 한다.
 
-<figure><img src="../.gitbook/assets/image (10).png" alt="" width="521"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10) (1).png" alt="" width="521"><figcaption></figcaption></figure>
 
 ## 1. Configuration Lifecycle
 
-<figure><img src="../.gitbook/assets/image (11).png" alt="" width="479"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (1).png" alt="" width="479"><figcaption></figcaption></figure>
 
 ## 2. Spring IoC(Inversion of Control) Container
 
@@ -15,7 +15,7 @@
 
 프로그램의 실행 흐름이나 객체의 생명 주기를 개발자가 직접 제어 하는 것이 아니라 컨테이너로 제어권이 넘어가는 것
 
-<figure><img src="../.gitbook/assets/image (13).png" alt="" width="456"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13) (1).png" alt="" width="456"><figcaption></figcaption></figure>
 
 ### 2-2. Bean&#x20;
 
