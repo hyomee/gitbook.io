@@ -193,7 +193,7 @@ public class MySpringConfig {
 
 ### 4-3. Spring 동작 방식 - CGlib & JDK Proxy
 
-프록시 작
+프록시로 작업됨
 
 <figure><img src="../.gitbook/assets/image (205).png" alt=""><figcaption></figcaption></figure>
 
