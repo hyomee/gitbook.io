@@ -65,7 +65,7 @@ spring:
       initialize-schema: never # always # never
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://1.217.139.30:14302/hong
+    url: jdbc:mariadb://x.x.x.x:14302/hong
     username: hong
     password: hong1234\
 mybatis:
