@@ -6,7 +6,7 @@
 
 플랫 파일 리소스의 종류로는 PathResource,  FileSystemResource, InputStreamResource, UrlResource, ByteArrayResource 등등이 될 수 있으며 ClassPathResource를 사용하는 경우 클래스 경로에 파일을 넣어야 하며 FileSystemResource를 사용하는 경우 절대 경로도 설정할 수 있습니다
 
-<figure><img src="../../../.gitbook/assets/image (197).png" alt=""><figcaption><p>Item Processor를 사용한 청크 지향 처리</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (197).png" alt=""><figcaption><p>Item Processor를 사용한 청크 지향 처리</p></figcaption></figure>
 
 ## 1. 배치 Config&#x20;
 
@@ -498,4 +498,4 @@ public class StepComplateNotiListener implements StepExecutionListener {
 
 ## 8. 결과&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (198).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (198).png" alt=""><figcaption></figcaption></figure>
