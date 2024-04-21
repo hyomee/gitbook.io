@@ -31,6 +31,18 @@ Spring Batch에서 ItemWriter는 다음과 같은 전략을 제공한다.
 
 ### 2-1. FlatFileItemWriter
 
+텍스트 파일(예: CSV, 고정 너비 파일)에 데이터를 쓰는 데 사용되며. 이 클래스는 **리소스**를 설정하여 파일의 위치를 지정하고, LineAggregator를 사용하여 객체를 문자열로 변환한 다음 파일에 쓰게 된다.
+
+FlatFileItemWriter의 주요 기능은 다음과 같다:
+
+* Resource를 통해 파일의 위치를 지정하고, Writable Resource를 나타내야 한다.
+* LineAggregator를 사용하여 객체를 문자열로 변환한다
+* FieldExtractor와 LineAggregator를 조합하여, 객체의 필드를 추출하고 이를 기반으로 문자열을 생성한다.
+* headerCallback과 footerCallback을 사용하여 파일의 시작과 끝에 헤더와 푸터를 추가할 수 있다.
+* append 옵션을 사용하여 파일에 데이터를 추가할지, 덮어쓸지를 결정할 수 있다.
+
+FlatFileItemWriter는 성능을 위해 BufferedWriter를 사용하며, 재시작 가능한 기능도 제공하여 대량의 데이터를 텍스트 파일 형식으로 쉽고 효율적으로 출력할 수 있다.
+
 ### 2-2. JdbcBatchItemWriter
 
 <table><thead><tr><th width="174">Property</th><th width="153">Parameter Type</th><th>설명</th></tr></thead><tbody><tr><td>assertUpdates</td><td>boolean</td><td>적어도 하나의 항목이 행을 업데이트하거나 삭제하지 않을 경우 예외를 throw할지 여부를 설정, 기본값은 <code>true</code>, Exception:<code>EmptyResultDataAccessException</code></td></tr><tr><td>columnMapped</td><td>void</td><td>Key,Value 기반으로 Insert SQL의 Values를 매핑 (ex: <code>Map&#x3C;String, Object></code>)</td></tr><tr><td>beanMapped</td><td>void</td><td>Pojo 기반으로 Insert SQL의 Values를 매핑</td></tr></tbody></table>
