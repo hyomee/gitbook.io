@@ -1,4 +1,4 @@
-# ItemWriter 이해
+# ItemWriter
 
 ItemWriter는 Spring Batch의 요소 중 하나로 데이터를 쓰는 기능을 담당한다. 즉 reader가 File, DB, Message Queue와 같은 것에서 데이터를 읽어들이는 것과 반대로  File, DB, Message Queue에 데이터를 쓰거나 출력하는 역활을 한다.
 
@@ -12,7 +12,7 @@ public interface ItemWriter<T> {
 
 Spring Batch의 ItemWriter는 item 하나를 처리 하는 것에서 출발 하여 현재 (Spring Batch v5.1.1)에서는 Chuck 단위로 처리한다.
 
-<figure><img src="../../.gitbook/assets/image (211).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (211).png" alt=""><figcaption></figcaption></figure>
 
 Reader와 Processor에서 처리된 Item을 지정된 Chunk 단위로 모아서 Writer에 보내서 처리한다.
 
