@@ -56,25 +56,25 @@
 
 각 트랜잭션에서의 변경 내용이 COMMIT이나 ROLLBACK 여부에 상관 없이 다른 트랜잭션에서 값을 읽을 수 있다
 
-<figure><img src="../.gitbook/assets/image (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ### 2-2. READ COMMITTED
 
 RDB에서 대부분 기본적으로 사용되고 있는 격리 수준으로 UNDO 영역의 값을 읽어 온다
 
-<figure><img src="../.gitbook/assets/image (2).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ### 2-3. REPEATABLE READ
 
 트랜잭션마다 트랜잭션 ID를 부여하여 트랜잭션 ID보다 작은 트랜잭션 번호에서 변경한 것만 읽게 된다
 
-<figure><img src="../.gitbook/assets/image (4).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ### 2-4. SERIALIZABLE
 
 가장 단순한 격리 수준이지만 가장 엄격한 격리 수준으로 쿼리는 트랜잭션이 시작된 시점의 데이터베이스를 확인하고, 커밋 시 이전에 읽은 행을 검사하여 그 동안 일부 동시 트랜잭션에 의해 수정되었는지 확인하여 종속성 발생으로 Rollback 발생한
 
-<figure><img src="../.gitbook/assets/image (5).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ### 2-5. DB 제조사 별 기본 격리레벨
 
