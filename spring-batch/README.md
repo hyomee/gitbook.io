@@ -92,7 +92,7 @@
 
 * 작업 시작, 중지 및 쿼리와 같은 작업을 허용하는 더 높은 수준의 API.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Spring Batch Meta-Data Schema
 
