@@ -32,7 +32,7 @@ public class FutureCommandLineRunner implements CommandLineRunner {
 *   실행 결과 \
 
 
-    <figure><img src="../.gitbook/assets/image (214).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (214).png" alt=""><figcaption></figcaption></figure>
 
 작업 A(taskA()) , 작업 B(tackB())가 순차적으로 실행되는 것을 확인 할 수 있다.
 
@@ -93,7 +93,7 @@ public class FutureCommandLineRunner implements CommandLineRunner {
 ```
 {% endcode %}
 
-<figure><img src="../.gitbook/assets/image (215).png" alt=""><figcaption><p>Thread 실행 결과</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (215).png" alt=""><figcaption><p>Thread 실행 결과</p></figcaption></figure>
 
 * 7 \~ 21 Line: Thread 생성&#x20;
 * 39, 44 Line: TaskA, TaskB 작업 선언&#x20;

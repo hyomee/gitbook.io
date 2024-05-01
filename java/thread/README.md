@@ -1,10 +1,10 @@
-# 자바 Thread
+# Thread
 
 자바에서 쓰레드는 프로세스 내에서 실행되는 작업 단위로 JVM(Java Virtual Machine)에 의헤 스케줄되며 코드 블록으로 구성된다. 자바는 Main Thread가 main() 메소드를 실행하면서 시작된다, 즉 Main Thread안에서 Multi Thread는 필요에 작업 Thread를 만들어 병렬로 코드를 실행할 수 있다.
 
 ## 1. 자바 스레드 라이프 사이클
 
-<figure><img src="../.gitbook/assets/image (217).png" alt=""><figcaption><p>Java Thread LifreCycle</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (217).png" alt=""><figcaption><p>Java Thread LifreCycle</p></figcaption></figure>
 
 *   New Thread: 클래스를 인스턴스화하거나 인터페이스를 구현하고 인스턴스에 전달하여 새 스레드 생성\
 
