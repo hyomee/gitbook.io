@@ -109,7 +109,7 @@
   * [변수와 자료형](java/java\_0003.md)
   * [Stream](java/stream.md)
 * [자바 Thread](javasyncasync/thread.md)
-  * [자바 스레드 안전성](thread/undefined.md)
+  * [자바 스레드 안전성](javasyncasync/thread-safety.md)
   * [자바 동기/비동기](javasyncasync/README.md)
     * [Future](javasyncasync/future.md)
     * [ExecutorService](javasyncasync/executorservice.md)
