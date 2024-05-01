@@ -1,14 +1,14 @@
-# Future
+# Future, Callable
 
 **동시성(Concurrency)**은 하나의 쓰레드에서 여러 Task를 관리하므로 동시에 처리하는 것처림 보이게 하는 것이다.
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 **멀티태스팅(Multitasking**)은 하나의 시스템이 여러 작업을 동시에 처리하는 것처럼 동작하는 하는 것으로 동시성과 개념이 비슷하지만 멀티태스팅은 주로 운영 체계에서 제공된다.&#x20;
 
 **병렬성(Parallelism)**은 여러 작업을 실제로 동시에 처리하는 것이다.
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <table><thead><tr><th width="145">구분</th><th>동시성</th><th>병렬성</th></tr></thead><tbody><tr><td>개념</td><td>동시에 처리하는 것처럼 보이게 하는 것</td><td>여러 작업을 실제로 동시에 처리하는 것</td></tr><tr><td>사용 코어 수</td><td>싱글 코어</td><td>멀티 코어</td></tr><tr><td>동작 방식</td><td>싱글 코어에서 멀티 쓰레드(Multi thread)를 동작 시키는 방식</td><td>멀티 코어에서 멀티 쓰레드(Multi thread)를 동작시키는 방식</td></tr><tr><td>개념적 차이</td><td>논리적인 개념</td><td>물리적인 개념</td></tr></tbody></table>
 
@@ -18,13 +18,25 @@
 
 ## 1. Java Future, Callable
 
-**Future**:  java.util.concurrent.Future는 비동기 계산의 결과를 나타내는 인터페이스 이다. 즉 비동기 작업으로 아직 되지 않았지만 나중에 완료될 수 있는 작업의 결과를 나타내는 유형으로 다음과 같은 주요 메서드가 있다.
+**Future**:  java.util.concurrent.Future는 **비동기 계산의 결과를 나타내는 인터페이스** 이다. 즉 비동기 작업으로 아직 되지 않았지만 나중에 완료될 수 있는 작업의 결과를 나타내는 유형으로 다음과 같은 주요 메서드가 있다.
 
 * get() : 결과를 얻는 것으로 결과를 얻을 수 없는 경우 블록(block)된다.
 * isDone() : 호출자가 완료되었는지 여부 확인 . 논 블러킹(Non Blocking)
 * cancel() : 완료되기 전에 취소 한다.
 
-**Callable**:  java.util.concurrent.Callable는 동시에 실행 할 수 있는 작업을 나타내고 결과를 반환하는인터페이스.이다. java.lang.Runnable 인터페이스와 유사하지만 값을 반환하고 확인된 예외를 발생시킬 수 있다.
+**Callable**:  java.util.concurrent.Callable는 **동시에 실행 할 수 있는 작업을 나타내고 결과를 반환**하는인터페이스이다. java.lang.Runnable 인터페이스와 유사하지만 값을 반환하고 확인된 예외를 발생시킬 수 있다.
+
+* _call():_ 재정의할 이라는 인수가 없는 단일 메서드
+*   값을 반환하고 확인된 예외를 throw할 수 있다는 점을 제외하고는 _Runnable_ 인터페이스의 _run()_ 메서드와 유사\
+
+
+    | Java 1.5 이후 _java.util.concurrent_ 패키지의 일부                       | Java 1.0 이후 _java.lang_ 패키지의 일부    |
+    | ---------------------------------------------------------------- | ---------------------------------- |
+    | _Callable\<V_와 같은 매개 변수가 있는 인터페이스                                | 매개 변수화되지 않은 인터페이스                  |
+    | 확인 된 예외 throw                                                    | 체크된 예외 Throw                       |
+    | 정의된 인터페이스 매개 변수 Type과 동일한 반환 Type _V_가 있는 _call()_이라는 단일 메서드를 포함 | _void_를 반환하는 _run()_이라는 단일 메서드를 포함 |
+
+
 
 Future 또는 Callable를 사용하기 위해서는 동시에 작업을 실행하는 역할을 담당하는 Executor 또는 ExecutorService가 필요한데  java.util.concurrent 팩키지에 ThreadPoolExcutor, ForkJoinPool과 같은 인퍼페이스의 구현체를 제공하고 있다.
 
@@ -63,14 +75,5 @@ public class FutureCommandLineRunner implements CommandLineRunner {
 * 19 Line: 비동기 작업 결과 값을 출력 한다.
 * 20 Line: 비동기 작업을 종료 한다.
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>실행 결과</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>실행 결과</p></figcaption></figure>
 
-
-
-## 2. Future
-
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
-
-
-
-* cancel:&#x20;

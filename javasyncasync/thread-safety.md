@@ -99,3 +99,122 @@ Thread 2 : 13
 Thread 2 : 14
 Thread 2 : 15
 ```
+
+## 2. 원자 변수 사용 (**Atomicxxx**)
+
+원자 변수는 동기화를 최소화하고 메모리 일관성 오류를 방지하는 개발자가 변수에 대해 원자성 연산을 수행헐 수 있다.
+
+원자 변수: **AtomicInteger**, **AtomicLong**, **AtomicBoolean** , **AtomicReference**
+
+```java
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Counter {
+  AtomicInteger counter = new AtomicInteger();
+  
+  public void increment() {
+    counter.incrementAndGet();
+  }
+}
+
+
+public class DemoAPP{
+  public static void main(String[] args) throws Exception {
+  
+    Counter c = new Counter();
+    
+    Thread t1 = new Thread(new Runnable() {
+      public void run() {
+        for (int i = 1; i <= 1000; i++) {
+          c.increment();
+        }
+      }
+    });
+    
+    Thread t2 = new Thread(new Runnable() {
+        public void run() {
+          for (int i = 1; i <= 1000; i++) {
+            c.increment();
+          }
+        }
+    });
+    
+    t1.start();
+    t2.start();
+    
+    t1.join();
+    t2.join();
+    
+    System.out.println(c.counter);
+  }
+}
+```
+
+결과 : 2000
+
+## 3. volatile 키워드 사용
+
+**volatile** 키워드: 동시에 여러 스레드에서 개체를 사용할 수 있도록 하는 필드 수정자
+
+```java
+
+public class DemoApp{
+  static volatile int int1 = 0, int2 = 0;
+  
+  static void methodOne() {
+    int1++;
+    int2++;
+  }
+  
+  static void methodTwo() {
+    System.out.println("int1=" + int1 + " int2=" + int2);
+  }
+  
+  public static void main(String[] args) {
+  
+    Thread t1 = new Thread() {
+      public void run() {
+        for (int i = 0; i < 5; i++) {
+          methodOne();
+        }
+      }
+    };
+    
+    Thread t2 = new Thread() {
+      public void run() {
+        for (int i = 0; i < 5; i++) {
+          methodTwo();
+        }
+      }
+    };
+    
+    t1.start();
+    t2.start();
+  }
+}
+```
+
+결과: 두 변수는 두 번째 스레드가 값을 출력하기 전에 첫 번째 스레드에 의해 완전히 증가한다.
+
+```
+int1=5 int2=5
+int1=5 int2=5
+int1=5 int2=5
+int1=5 int2=5
+int1=5 int2=5
+```
+
+## 4. final 키워드를 사용
+
+_Final 변수는_  일단 할당되면 객체에 대한 참조가 다른 객체를 가리킬 수 없는 특성을 사용한 코드는 Java에서 항상 스레드로부터 안전하며 에디터에서 오류 발생한다.
+
+```java
+public class DemoApp{
+    final String aString = new String("즉시");
+
+    void someMethod() {
+        aString = "new value"; // 에로 표시 됨 
+    }
+}
+```
