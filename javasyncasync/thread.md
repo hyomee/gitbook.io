@@ -16,12 +16,19 @@
     ```
 
 
-*   Runnable/Running: start() 메서드를  통해 시작하며  Runnable 상태의 스레드는 다른 스레드와 동시에 실행될 수 있고 Runnable 상태의 스레드는 스케줄러가 프로세서 시간을 할당할 때 Running 상태로 전환된다.\
+*   Runnable/Running: start() 메서드를  통해 시작하며  Runnable 상태의 스레드는 다른 스레드와 동시에 실행될 수 있고 Runnable 상태의 스레드는 스케줄러가 프로세서 시간을 할당할 때 Running 상태로 전환된다. ( run() )\
 
 
     ```java
     runnableThread.start();
     System.out.println("스레드 상테   :" + runnableThread.getState());
+
+    ================================================================================
+    public class HelloWorldRunnableExample implements Runnable {
+        public void run() {
+            System.out.println("Hello from a thread!");
+        }
+    }
     ```
 
 
