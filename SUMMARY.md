@@ -115,6 +115,7 @@
     * [자바 Thread Pool](thread/thread-pool.md)
     * [자바 동기/비동기](thread/javasyncasync.md)
   * [I/O](java/i-o/README.md)
-    * [IO(Blocking IO)](java/i-o/io-blocking-io.md)
+    * [IO(Blocking IO)](java/i-o/io-blocking-io/README.md)
+      * [읽기](java/i-o/io-blocking-io/undefined.md)
 * [DB 관련](db/README.md)
   * [Redis](db/redis.md)
