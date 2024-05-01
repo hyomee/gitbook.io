@@ -1,4 +1,4 @@
-# Future, Callable
+# Runnable, Callable, Future
 
 **동시성(Concurrency)**은 하나의 쓰레드에서 여러 Task를 관리하므로 동시에 처리하는 것처림 보이게 하는 것이다.
 
@@ -16,7 +16,11 @@
 
 <table><thead><tr><th width="142">버전</th><th>사용 방법</th></tr></thead><tbody><tr><td>Java 5 이전</td><td>Runnable과 Thread를 이용하여 구현</td></tr><tr><td>Java 5</td><td>ExecutorService, Callable&#x3C;T>, Future&#x3C;T></td></tr><tr><td>Java 7</td><td>Fork/Join 그리고 RecursiveTask</td></tr><tr><td>Java 8</td><td>Stream, CompletableFuture</td></tr><tr><td>Java 9</td><td>분산 비동기 프로그래밍은 명시적으로 지원 (발행 구독 프로토콜 지원 Flow AP)</td></tr></tbody></table>
 
-## 1. Java Future, Callable
+## 1. Runnable
+
+스레드에서 실행하려는 클래스를 지정하는 데 사용하는 것으로 run() 메서드를 재정의 해야 한다.
+
+## 2. Java Future, Callable
 
 **Future**:  java.util.concurrent.Future는 **비동기 계산의 결과를 나타내는 인터페이스** 이다. 즉 비동기 작업으로 아직 되지 않았지만 나중에 완료될 수 있는 작업의 결과를 나타내는 유형으로 다음과 같은 주요 메서드가 있다.
 

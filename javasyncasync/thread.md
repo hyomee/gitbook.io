@@ -74,6 +74,8 @@
 
 ### 1-1.  Thread 클래스 사용
 
+서브 클래스(상속)으로 실행하려는 클래스를 지정하고 run() 메서드를 구현해야 한다.
+
 ```java
 public class DemoThread extends Thread{
     public DemoThread() {
@@ -88,6 +90,8 @@ public class DemoThread extends Thread{
 ```
 
 ### 1-2. Runnable  인터페이스를 사용
+
+스레드에서 실행하려는 클래스를 지정하는데 사용되며 run() 메서드를 제정의 해야 한다.&#x20;
 
 ```java
 public class DemoRunnable implements Runnable {

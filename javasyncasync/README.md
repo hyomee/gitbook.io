@@ -38,6 +38,8 @@ public class FutureCommandLineRunner implements CommandLineRunner {
 
 ## 2. Thread로 변경 ( Runnable )
 
+
+
 {% code lineNumbers="true" %}
 ```java
 @Component
@@ -115,7 +117,7 @@ public void futureApi() throws ExecutionException, InterruptedException {
 }
 ```
 
-## 4. Future API 적용
+## 4. FutureTask API 적용
 
 FutureTask는 Runnable과 Future를 합친 RunnableFuture를 상속한 클래스의 객체인데, 둘을 모두 상속한 덕분에 Runnable과 Future의 역할을 객체 하나로 한 번에 수행할 수 있다.&#x20;
 
