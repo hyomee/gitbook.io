@@ -111,7 +111,7 @@
 * [자바 Thread](javasyncasync/thread.md)
   * [자바 스레드 안전성](javasyncasync/thread-safety.md)
   * [자바 동기/비동기](javasyncasync/README.md)
-    * [Runnable, Callable, Future](thread/javasyncasync/runnable-callable-future.md)
+    * [Callable, Future](thread/javasyncasync/callable-future.md)
     * [ExecutorService](javasyncasync/executorservice.md)
     * [ThreadPoolTaskExecutor](javasyncasync/threadpooltaskexecutor.md)
 * [Page](page.md)
