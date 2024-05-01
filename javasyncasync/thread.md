@@ -1,10 +1,71 @@
 # 자바 Thread
 
-자바에서 Thread를 생성하는 방법에는 다음과 같이 2가지 방법이 있다,.
+자바에서 쓰레드는 프로세스 내에서 실행되는 작업 단위로 JVM(Java Virtual Machine)에 의헤 스케줄되며 코드 블록으로 구성된다. 자바는 Main Thread가 main() 메소드를 실행하면서 시작된다, 즉 Main Thread안에서 Multi Thread는 필요에 작업 Thread를 만들어 병렬로 코드를 실행할 수 있다.
+
+## 1. 자바 스레드 라이프 사이클
+
+<figure><img src="../.gitbook/assets/image (217).png" alt=""><figcaption><p>Java Thread LifreCycle</p></figcaption></figure>
+
+*   New Thread: 클래스를 인스턴스화하거나 인터페이스를 구현하고 인스턴스에 전달하여 새 스레드 생성\
+
+
+    ```java
+    Thread newThread = new Thread(() -> {
+          System.out.println("새로운 스레드 생성);
+    });
+    ```
+
+
+*   Runnable/Running: start() 메서드를  통해 시작하며  Runnable 상태의 스레드는 다른 스레드와 동시에 실행될 수 있고 Runnable 상태의 스레드는 스케줄러가 프로세서 시간을 할당할 때 Running 상태로 전환된다.\
+
+
+    ```java
+    runnableThread.start();
+    System.out.println("스레드 상테   :" + runnableThread.getState());
+    ```
+
+
+*   Waiting: 여러 가지 이유로 차단되거나 대기 상태로 전환 될 수 있으며 매소드를 사용하여 스레드를 명지적으로 일시중지 할 수 있다 (Thread.sleep(), Object.wait()) \
+
+
+    ```java
+     Thread.sleep(3000);
+    ```
+
+
+*   Dead: 스레드는 메서드 실행이 완료되거나 처리되지 않은 예외가 발생할 때 **Terminated** 상태로 전환된다.\
+    \
+
+
+    ```java
+    Thread newThread = new Thread(() -> {
+      System.out.println("새로운 스레드 생성"); // Thread is executing.
+    });
+     
+    newThread .start();
+        
+    try {
+      terminatedThread.join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+        
+    System.out.println("Is thread newThread ? " + !newThread .isAlive());
+
+    /* 결과 
+    새로운 스레드 생성
+    thread terminated? true
+    */
+    ```
 
 
 
-## 1.  Thread 클래스 사용
+자바에서 Thread를 생성하는 방법에는 다음과 같이 2가지 방법이 있다.
+
+* Thread 클래스로부터 직접 생성: Thread 클래스 객체를 생성한 후 start() 메서드를 통해 다른 스레드에서 할 작업을 할당한다.&#x20;
+* Runnable 인터페이스를 구현한 클래스 객체로 생성: 익명 구현 객체를 만들어 간단하게 실행할 수 있다.
+
+### 1-1.  Thread 클래스 사용
 
 ```java
 public class DemoThread extends Thread{
@@ -19,7 +80,7 @@ public class DemoThread extends Thread{
 // run : new DemoThread().start()
 ```
 
-## 2. Runnable  인터페이스를 사용
+### 1-2. Runnable  인터페이스를 사용
 
 ```java
 public class DemoRunnable implements Runnable {
@@ -32,7 +93,7 @@ public class DemoRunnable implements Runnable {
 // run : new Thread(new DemoRunnable()).start();
 ```
 
-## 3. 람다 표현식&#x20;
+### 1-3. 람다 표현식&#x20;
 
 ```java
 Runnable subTask = () ->
@@ -43,7 +104,7 @@ Runnable subTask = () ->
 //  run  new Thread(subTask).start();
 ```
 
-## 4. Thread 시작
+## 2. Thread 시작
 
 ### 4-1. _Thread.start()_
 
