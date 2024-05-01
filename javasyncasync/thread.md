@@ -4,7 +4,7 @@
 
 ## 1. 자바 스레드 라이프 사이클
 
-<figure><img src="../../.gitbook/assets/image (217).png" alt=""><figcaption><p>Java Thread LifreCycle</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (217).png" alt=""><figcaption><p>Java Thread LifreCycle</p></figcaption></figure>
 
 *   New Thread: 클래스를 인스턴스화하거나 인터페이스를 구현하고 인스턴스에 전달하여 새 스레드 생성\
 

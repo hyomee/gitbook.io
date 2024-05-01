@@ -15,7 +15,7 @@ Thread Pool은 미리 할당된 스레드 집합에서 스레드를 가지고 �
 
 ## Thread Pool 이란
 
-<figure><img src="../../.gitbook/assets/image (216).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (216).png" alt=""><figcaption></figcaption></figure>
 
 동시에 여러 작업을 효율적으로 실행 및 관리하기 위해 서버에서 만드는 스레드의 모음으로 새로운 Thread를 만들지 않고 미리 생성된 Thread를 Thread Pool에서 가지고와 재사용하는것으로 성능과 리소스 관리에 도움이 된다
 
@@ -142,12 +142,12 @@ public void excutorServiceSample() throws InterruptedException {
 * 8\~12 Line: 3초 대기&#x20;
 * 결과: 작업이 모두 완료 될 때까지 2초 대기 후 초과하면 조건식이 만족하지 않아 모든 Task를 종료한다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 *   8\~12 Line: 1초 대기로 변경 하면 다음과 같은 결과를 얻는다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 
 *   32 \~ 38 Line: 다음과 같이 여러 가지 상황을 만들어서 확인해 보자\
