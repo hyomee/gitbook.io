@@ -141,7 +141,52 @@ public class StepItemWriter implements ItemWriter<TbDeployWriteVO>, StepExecutio
 }
 ```
 
+## 3.  Job Config
 
+```
+@Configuration
+@Slf4j
+public class DataSharingConfig {
+
+    @Bean
+    public Job dataSharingJob(JobRepository jobRepository,
+                              Step firstStep,
+                              Step secondStep,
+                              Step case01Step) {
+        log.debug("####->  dataSharingJob!");
+        return new JobBuilder("dataSharingJob", jobRepository)
+                .incrementer(new RunIdIncrementer())
+                .start(firstStep)
+                .next(secondStep)
+                .next(case01Step)
+                .build();
+    }
+
+    @Bean
+    public Step firstStep(JobRepository jobRepository,
+                          PlatformTransactionManager transactionManager,
+                          DataSharingFirstTasklet dataSharingFirstTasklet) {
+        return new StepBuilder("firstStep", jobRepository)
+                .tasklet(dataSharingFirstTasklet, transactionManager)
+                .build();
+    }
+
+
+
+    @Bean
+    public Step secondStep(JobRepository jobRepository,
+                           PlatformTransactionManager transactionManager,
+                           DataSharingSecondTasklet dataSharingSecondTasklet) {
+        return new StepBuilder("secondStep", jobRepository)
+                .tasklet(dataSharingSecondTasklet, transactionManager)
+                .build();
+    }
+
+
+}
+```
+
+## 4.  결과
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
