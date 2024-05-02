@@ -55,7 +55,7 @@
     * [Redis EnableCaching](spring-data/spring-data-redis/redis-enablecaching.md)
 * [Spring Batch](spring-batch/README.md)
   * [Spring Batch 의존성 구성](spring-batch/spring-batch.md)
-  * [Hello World](spring-batch/hello-world.md)
+  * [Hello World](spring-batch/sample/hello-world.md)
   * [Job 실행](spring-batch/job.md)
   * [ItemReader](spring-batch/itemreader.md)
   * [ItemWriter](spring-batch/itemwriter.md)
