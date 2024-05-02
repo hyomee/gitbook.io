@@ -15,8 +15,6 @@
 
 즉,  Job ExecutionContext에 데이터를 저장하면 해당 Job의 모든 Step에서 접근 가능하며, Step 간의 강한 결합을 피할 수 있다.
 
-
-
 ## 1.  Tasklet  예제
 
 ```java
@@ -26,10 +24,14 @@ public class DataSharingFirstTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution contribution,
                                 ChunkContext chunkContext) throws Exception {
 
+        // ExecutionContext 설정 
         ExecutionContext stepExecutionContext = getSetpExecutionContext(chunkContext);
         ExecutionContext jobExecutionContext = getJobExecutionContext(chunkContext);
 
+        // Step ExecutionContext 설정 
         stepExecutionContext.put("FIRST_STEP_EXECUTION_CONTEXT", "DataSharingFirstTasklet Step Value1");
+        
+        // Job ExecutionContext 설정 
         jobExecutionContext.put("FIRST_JOB_EXECUTION_CONTEXT", "DataSharingFirstTasklet Job Value1");
 
         return RepeatStatus.FINISHED;
@@ -59,8 +61,11 @@ public class DataSharingSecondTasklet implements Tasklet {
 
         String FIRST_STEP_EXECUTION_CONTEXT = (String) stepExecutionContext.get("FIRST_STEP_EXECUTION_CONTEXT");
         String FIRST_JOB_EXECUTION_CONTEXT = (String) jobExecutionContext.get("FIRST_JOB_EXECUTION_CONTEXT");
-
+        
+        // Step ExecutionContext 출력
         log.debug("FIRST_STEP_EXECUTION_CONTEXT :: " + FIRST_STEP_EXECUTION_CONTEXT);
+        
+        // Job ExecutionContext 출력
         log.debug("FIRST_JOB_EXECUTION_CONTEXT :: " + FIRST_JOB_EXECUTION_CONTEXT);
         return RepeatStatus.FINISHED;
     }
@@ -90,6 +95,8 @@ public class StepItemReader implements ItemReader<TbDeployVO>, StepExecutionList
     public void beforeStep(StepExecution stepExecution) {
         String file = stepExecution.getJobExecution().getJobParameters().getString("file");
         openCsvFileUtils = new OpenCsvFileUtils(file);
+        
+        // Step ExecutionContext 설정 
         stepExecution.getExecutionContext().put("READER_STEP", "StepItemReader beforeStep");
     }
     
@@ -101,6 +108,7 @@ public class StepItemReader implements ItemReader<TbDeployVO>, StepExecutionList
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
         openCsvFileUtils.closeReader();
+        // Step ExecutionContext 출력
         log.debug("StepItemReader :: READER_STEP :: " + stepExecution.getExecutionContext().get("READER_STEP"));
         return ExitStatus.COMPLETED;
     }
@@ -117,6 +125,8 @@ public class StepItemWriter implements ItemWriter<TbDeployWriteVO>, StepExecutio
     public void beforeStep(StepExecution stepExecution) {
         String file = stepExecution.getJobExecution().getJobParameters().getString("outfile");
         openCsvFileUtils = new OpenCsvFileUtils(file);
+        
+         // Step ExecutionContext 설정 
         stepExecution.getExecutionContext().put("WRITER_STEP", "StepItemWriter beforeStep");
     }
 
@@ -129,11 +139,13 @@ public class StepItemWriter implements ItemWriter<TbDeployWriteVO>, StepExecutio
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
         openCsvFileUtils.closeWriter();
+        
+        // Step ExecutionContext 출력        
         log.debug("StepItemWriter :: READER_STEP :: " + stepExecution.getExecutionContext().get("READER_STEP"));
         log.debug("StepItemWriter :: PROCESSOR_STEP :: " + stepExecution.getExecutionContext().get("PROCESSOR_STEP"));
         log.debug("StepItemWriter :: WRITER_STEP :: " + stepExecution.getExecutionContext().get("WRITER_STEP"));
 
-
+        // Job ExecutionContext 출력
         log.debug("StepItemWriter :: FIRST_JOB_EXECUTION_CONTEXT :: " + stepExecution.getJobExecution().getExecutionContext().get("FIRST_JOB_EXECUTION_CONTEXT"));
         return ExitStatus.COMPLETED;
     }
@@ -188,7 +200,14 @@ public class DataSharingConfig {
 
 ## 4.  결과
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (218).png" alt=""><figcaption><p>Tasklet </p></figcaption></figure>
 
+* Job ExecutionContext 출력: firstStep에서 설정하고 secondStep에서 출력 됨&#x20;
+* Step ExecutionContext 출력 되지 않음:  firstStep에서 설정하고 secondStep에서 출력 되지 않음 \
+  Step은 자신의 Step에서만 유효하다.
 
+<figure><img src="../../.gitbook/assets/image (219).png" alt=""><figcaption><p>Chunk</p></figcaption></figure>
+
+* Job ExecutionContext 출력: firstStep에서 설정하고 case01Step에서 출력 됨&#x20;
+* Step ExecutionContext 출력 :  case01Step의  StepItemReader , StepItemProcessor, StepItemWriter 에서 설정한 Step는 모두 출력됨
 
