@@ -60,7 +60,7 @@
     * [JobParameters](spring-batch/job/jobparameters.md)
     * [자원공유(ExecutionContext)](spring-batch/job/executioncontext.md)
     * [에러처리](spring-batch/job/undefined.md)
-      * [Tasklet Error](spring-batch/job/undefined/tasklet-error.md)
+      * [Job Listener 오류처리](spring-batch/job/undefined/job-listener.md)
   * [ItemReader](spring-batch/itemreader.md)
   * [ItemWriter](spring-batch/itemwriter.md)
   * [기본 예제](spring-batch/sample/README.md)
