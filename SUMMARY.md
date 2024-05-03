@@ -59,7 +59,7 @@
   * [Job 실행](spring-batch/job/README.md)
     * [JobParameters](spring-batch/job/jobparameters.md)
     * [자원공유(ExecutionContext)](spring-batch/job/executioncontext.md)
-    * [에러처리](spring-batch/job/undefined/README.md)
+    * [에러처리](spring-batch/job/undefined.md)
       * [Tasklet Error](spring-batch/job/undefined/tasklet-error.md)
   * [ItemReader](spring-batch/itemreader.md)
   * [ItemWriter](spring-batch/itemwriter.md)
