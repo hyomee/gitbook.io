@@ -1,4 +1,4 @@
-# ExecutionContext
+# 자원공유(ExecutionContext)
 
 배치 작업을 실행하는 동안 필요한 데이터를 지속 가능한 상태로 저장할 수 있도록 Key/Value 데이터 컨테이너이다. 즉 **상태 정보를 저장**하는 데 사용된다.
 
@@ -17,6 +17,9 @@
 
 ## 1.  Tasklet  예제
 
+Job ExecutionContext, Step ExecutionContext의 범위를 알아보기 위해 Tasklet의 execute() 메서드에 사용자 정의 값을 설정한다.
+
+{% code lineNumbers="true" %}
 ```java
 @Component
 public class DataSharingFirstTasklet implements Tasklet {
@@ -47,7 +50,16 @@ public class DataSharingFirstTasklet implements Tasklet {
     }
 }
 ```
+{% endcode %}
 
+* 8 Line: Step ExecutionContext를 얻어오기 위해 ChunkContext에 있는 StepExecutionContext의 ExecutionContext를 가지고 온다&#x20;
+* 9 Line: Job ExecutionContext를 얻어오기 위해 ChunkContext에 있는 StepExecutionContext의 JobExecution에서 ExecutionContext를 가지고 온다&#x20;
+* 12 Line: Step ExecutionContext에 "FIRST\_STEP\_EXECUTION\_CONTEXT"에 값을 설정 하다.
+* 15 Line: Job ExecutionContext에 "FIRST\_JOB\_EXECUTION\_CONTEXT"에 값을 설정 하다.
+
+DataSharingFirstTasklet에서 Job ExecutionContext, Step ExecutionContext에 설정한 값을 출력하기 위해 DataSharingSecondTasklet를 작성한다.
+
+{% code lineNumbers="true" %}
 ```java
 @Component
 @Slf4j
@@ -80,9 +92,16 @@ public class DataSharingSecondTasklet implements Tasklet {
     }
 }
 ```
+{% endcode %}
+
+* 8 \~ 9 Line: Job ExecutionContext, Step ExecutionContext 객체를 선언한다.
+* 11 \~ 18 Line: Step ExecutionContext( "FIRST\_STEP\_EXECUTION\_CONTEXT"), Job ExecutionContext( "FIRST\_JOB\_EXECUTION\_CONTEXT") 값을 출력한다.
 
 ## 2.  Chunk예제
 
+Chunk 예제로 ItemReader, ItemProcessor, ItemWriter에서 Step ExecutionContext의 범위를 보기 위해서 아래와 같이 작성한다.
+
+{% code lineNumbers="true" %}
 ```java
 @Component
 @Slf4j
@@ -114,7 +133,11 @@ public class StepItemReader implements ItemReader<TbDeployVO>, StepExecutionList
     }
 }
 ```
+{% endcode %}
 
+* 14, 26 Line:  Step ExecutionContext애 갑 설정 및 출력
+
+{% code lineNumbers="true" %}
 ```java
 @Component
 @Slf4j
@@ -152,20 +175,30 @@ public class StepItemWriter implements ItemWriter<TbDeployWriteVO>, StepExecutio
 
 }
 ```
+{% endcode %}
+
+* 14, 26\~31 Line:  Step ExecutionContext애 갑 설정 및 출력
 
 ## 3.  Job Config
 
-```
+Tasklet, Chunk 를 실행하기 위해 Job을 설정 한다.
+
+```java
 @Configuration
+@RequiredArgsConstructor
 @Slf4j
 public class DataSharingConfig {
 
+    private final StepItemReader stepItemReader;
+    private final StepItemProcessor stepItemProcessor;
+    private final StepItemWriter stepItemWriter;
+
+    // Job 설정 
     @Bean
     public Job dataSharingJob(JobRepository jobRepository,
                               Step firstStep,
                               Step secondStep,
                               Step case01Step) {
-        log.debug("####->  dataSharingJob!");
         return new JobBuilder("dataSharingJob", jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .start(firstStep)
@@ -174,6 +207,7 @@ public class DataSharingConfig {
                 .build();
     }
 
+    // Step 설정 : DataSharingFirstTasklet 
     @Bean
     public Step firstStep(JobRepository jobRepository,
                           PlatformTransactionManager transactionManager,
@@ -184,7 +218,7 @@ public class DataSharingConfig {
     }
 
 
-
+    // Step 설정 : dataSharingSecondTasklet
     @Bean
     public Step secondStep(JobRepository jobRepository,
                            PlatformTransactionManager transactionManager,
@@ -194,7 +228,19 @@ public class DataSharingConfig {
                 .build();
     }
 
-
+    // Step 설정 : Chunk 설정정
+    @Bean
+    public Step case01Step(JobRepository jobRepository,
+                           PlatformTransactionManager transactionManager
+                           ) {
+        return  new StepBuilder("CASE01_STEP", jobRepository)
+                .<TbDeployVO, TbDeployWriteVO>chunk(2, transactionManager)
+                .reader(stepItemReader)
+                .processor(stepItemProcessor)
+                .writer(stepItemWriter)
+                .startLimit(1)
+                .build();
+    }
 }
 ```
 
