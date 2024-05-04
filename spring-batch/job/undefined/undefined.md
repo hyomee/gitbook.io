@@ -1,4 +1,4 @@
-# Page
+# 재시작설정
 
 ErrorJob은 에러 테스트를 위한 Job으로 TaskletErrorStep, ChunkErrorStep 두개의 Step를 가지고 있다.
 
@@ -223,3 +223,44 @@ public class JobErrorConfig {
 
     <figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
+## 3.  재시작 속성 (preventRestart)
+
+
+
+```java
+@Bean
+public Job errorJob(JobRepository jobRepository,
+                    Step taskletErrorStep,
+                    Step chunkErrorStep ) {
+    return new JobBuilder("JOB_ERR_RESTART_TRUE", jobRepository)
+            .start(taskletErrorStep)
+            .next(chunkErrorStep)
+            .listener(jobUserListener)
+            .build();
+}
+```
+
+*   재시작 옵션 - 지정하지 않음 \
+
+
+    <figure><img src="../../../.gitbook/assets/image (225).png" alt=""><figcaption></figcaption></figure>
+
+    <figure><img src="../../../.gitbook/assets/image (226).png" alt=""><figcaption></figcaption></figure>
+*   다시 시작 \
+
+
+    <figure><img src="../../../.gitbook/assets/image (227).png" alt=""><figcaption></figcaption></figure>
+
+
+
+    <figure><img src="../../../.gitbook/assets/image (228).png" alt=""><figcaption></figcaption></figure>
+*   재시작 옵션 - 지정하지 않음\
+
+
+    <figure><img src="../../../.gitbook/assets/image (229).png" alt=""><figcaption></figcaption></figure>
+
+    <figure><img src="../../../.gitbook/assets/image (230).png" alt=""><figcaption></figcaption></figure>
+*   다시 시\
+
+
+    <figure><img src="../../../.gitbook/assets/image (231).png" alt=""><figcaption></figcaption></figure>
