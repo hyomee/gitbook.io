@@ -123,7 +123,7 @@ public void run(ApplicationArguments args) throws Exception {
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 3-3. Map To JobParametersBuilder
 

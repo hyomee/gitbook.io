@@ -15,7 +15,7 @@ csv 파일을 읽어서 다른 파일 csv로 데이터를 저장하는 기능으
 
 스프링 배치에서 Chunk는 아래 그림처럼 처리 됩니다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Step 지정시 Chunk의 수을 지정 하면 ItemReader이 지정한 수 만큼 읽어서 Processor에 전달 합니다.
 * Processor에서는 Chunk에 지정한 수 만큼 처리 하고 Writer로 전달 합니다.
