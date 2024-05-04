@@ -160,10 +160,12 @@ public class JobErrorConfig {
                     @Override
                     public void write(Chunk<? extends String> items) throws Exception {
                         log.debug("CHUNK_STEP_00 :: Writer 실행 ....");
-                        if (true) {
-                            throw new RuntimeException("Chunk_Step_Error .... Error....");
-                        }
-                        items.forEach(item -> log.info(item));
+                        items.forEach(item -> {
+                            if ("item3".equals(item)) {
+                                throw new RuntimeException("CHUNK_STEP_00 :: ERROR :: item ::" + item);
+                            }
+                            log.info(item);
+                        });
                     }
                 })
                 .listener(stepUserListenter)
@@ -204,10 +206,12 @@ public class JobErrorConfig {
     @Override
     public void write(Chunk<? extends String> items) throws Exception {
         log.debug("CHUNK_STEP_00 :: Writer 실행 ....");
-        if (true) {
-            throw new RuntimeException("Chunk_Step_Error .... Error....");
-        }
-        items.forEach(item -> log.info(item));
+        items.forEach(item -> {
+            if ("item3".equals(item)) {
+                throw new RuntimeException("CHUNK_STEP_00 :: ERROR :: item ::" + item);
+            }
+            log.info(item);
+        });
     }
 })
 ```
