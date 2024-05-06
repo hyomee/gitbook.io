@@ -55,3 +55,110 @@
   * Step의 실행 정보가 저장되며 생성, 시작, 종료 시간, 실행 상태, 메시지 등을 관리&#x20;
 * BATCH\_STEP\_EXECUTION\_CONTEXT&#x20;
   * Step의 실행동안 여러가지 상태 정보, 공유 데이터를 직렬화(Json 형식) 해서 저장 Step 별로 저장되며 Step 간 서로 공유할 수 없음
+
+## 6. 의존성
+
+### 6-1. pom.xml
+
+```yaml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-batch</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>3.3.3</version>
+    <scope>runtime</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.batch</groupId>
+    <artifactId>spring-batch-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+### 6-2. jpa
+
+```yaml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+```
+
+```yaml
+spring:
+    application:
+        name: base_springboot_bacth
+    datasource:
+        driver-class-name: org.mariadb.jdbc.Driver
+        url: jdbc:mariadb://x.x.x.x:14302/hong
+        username: hong
+        password: hong1234
+    jpa: open-in-view: false
+        show-sql: true
+        hibernate:
+            dialect: org.hibernate.dialect.MariaDB102Dialect
+```
+
+### 6-3. mybatis
+
+```yaml
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>3.0.3</version>
+</dependency>
+```
+
+```yaml
+spring:
+  application:
+    name: base_springboot_bacth
+  batch:
+    jdbc:
+      initialize-schema: never # always # never
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://x.x.x.x:14302/hong
+    username: hong
+    password: hong1234\
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: : kr.co.abacus.batch.**.dto
+```
+
+### 6-4. Jpa + mybatis
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency><dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>3.0.3</version>
+</dependency>
+```
+
+```yaml
+spring:
+  application:
+    name: base_springboot_bacth
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://x.x.x.x:14302/hong
+    username: hong
+    password: hong1234
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.MariaDB102Dialect
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: : kr.co.abacus.batch.**.dto
+```
