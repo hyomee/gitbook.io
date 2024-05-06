@@ -112,4 +112,10 @@ Tasklet가실행이 되지 않는 이유는 이전 실행에서 정상 실행 �
 
 <figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-## 2. ㄱ
+### 1-2. 2. Retry
+
+* **Retry 기능**은 배치 작업이 실패했을 때 지정된 횟수만큼 재시도하는 기능이다.
+* `ItemProcessor`와 `ItemWriter`에 적용 가능합니다.
+* 예외가 발생하면 지정된 횟수만큼 재시도하고, 재시도 대상 예외를 지정할 수 있습니다.
+* Retry 기능을 구성하려면 `RetryTemplate`을 사용하거나, Spring Batch에서 제공하는 `retry()`메서드를 활용할 수 있다.
+
