@@ -223,9 +223,13 @@ public class JobErrorConfig {
 
     <figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-## 3.  재시작 속성 (preventRestart)
+## 3.  Job - preventRestart
 
+기본적으로 스프링 배치는  같은 Job 파라미터를 가진 작업이 성공 하였으면 재시작 하여도 실행이 되지 않는다.  이 기능을 제어하기 위해 제공된 속성으로 기본값은 선언 하지 않았을 때 이고 true이다. false로 설정 하기 위해서는 `preventRestart를 설정하면 된다.`
 
+### 3-1. 기본값 (preventRestart:true)
+
+정상 종료이면 다시 시작을 해도 실행이 되지 않지만 오류 실행시 다시 시작하면 실행이 된다.
 
 ```java
 @Bean
@@ -240,13 +244,13 @@ public Job errorJob(JobRepository jobRepository,
 }
 ```
 
-*   재시작 옵션 - 지정하지 않음 \
-
+*   **실행 시 실패**\
+    (
 
     <figure><img src="../../../.gitbook/assets/image (225).png" alt=""><figcaption></figcaption></figure>
 
     <figure><img src="../../../.gitbook/assets/image (226).png" alt=""><figcaption></figcaption></figure>
-*   다시 시작 \
+*   **재 실행 - 다시 시작 - 실패로 실행됨**\
 
 
     <figure><img src="../../../.gitbook/assets/image (227).png" alt=""><figcaption></figcaption></figure>
@@ -254,13 +258,32 @@ public Job errorJob(JobRepository jobRepository,
 
 
     <figure><img src="../../../.gitbook/assets/image (228).png" alt=""><figcaption></figcaption></figure>
-*   재시작 옵션 - 지정하지 않음\
+
+### 3-2.   preventRestart 지정(preventRestart:false)
+
+preventRestart를 선언하면 false값으로 되고 오류가 나도 다시 시작시 실행이 되지 않는다
+
+```java
+@Bean
+public Job errorJob(JobRepository jobRepository,
+                    Step taskletErrorStep,
+                    Step chunkErrorStep ) {
+    return new JobBuilder("JOB_ERR_RESTART_FALSE", jobRepository)
+            .start(taskletErrorStep)
+            .next(chunkErrorStep)
+            .listener(jobUserListener)
+            .preventRestart()
+            .build();
+}
+```
+
+*   **실행 시 실패**\
 
 
     <figure><img src="../../../.gitbook/assets/image (229).png" alt=""><figcaption></figcaption></figure>
 
     <figure><img src="../../../.gitbook/assets/image (230).png" alt=""><figcaption></figcaption></figure>
-*   다시 시\
+*   **다시   작 시 실헹되지 않음**\
 
 
     <figure><img src="../../../.gitbook/assets/image (231).png" alt=""><figcaption></figcaption></figure>
