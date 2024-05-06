@@ -287,3 +287,56 @@ public Job errorJob(JobRepository jobRepository,
 
 
     <figure><img src="../../../.gitbook/assets/image (231).png" alt=""><figcaption></figcaption></figure>
+
+## 4.  Step
+
+### 4-1. **Start Limit**&#x20;
+
+기본값은 `Integer.MAX_VALUE`로, 무제한으로 실행되는 것으로 특정 스텝이 한 번만 실행되도록 설정하거나, 특정 리소스를 한 번만 처리해야 하는 경우에 사용할 때 사용된다.
+
+```java
+public Step taskletErrorStep(JobRepository jobRepository,
+                             PlatformTransactionManager transactionManager ) {
+    return new StepBuilder("TASKLET_STEP_004", jobRepository)
+            .tasklet((contribution, chunkContext)-> {
+                log.debug("TASKLET_STEP_00 :: 실행....");
+                if (true) {
+                    throw new RuntimeException("Tasklet_Error_Step .... Error....");
+                }
+                return RepeatStatus.FINISHED;
+             }, transactionManager)
+            .startLimit(2)
+            .build();
+
+}
+```
+
+<figure><img src="../../../.gitbook/assets/image (232).png" alt=""><figcaption></figcaption></figure>
+
+2번 실패 후 다시 수행 하면 다음과 같은 오류가 난다.
+
+<figure><img src="../../../.gitbook/assets/image (233).png" alt=""><figcaption></figcaption></figure>
+
+### 4-2. **allow-start-if-complete**&#x20;
+
+기본적으로 재시작된 작업에서는 COMPLETED 상태인 스텝은 건너뛰게 되어있는데 `true`로 변경하면 항상 실행되도록 할 수 있다.
+
+```java
+public Step taskletErrorStep(JobRepository jobRepository,
+                                 PlatformTransactionManager transactionManager ) {
+        return new StepBuilder("TASKLET_STEP_005", jobRepository)
+                .tasklet((contribution, chunkContext)-> {
+                    log.debug("TASKLET_STEP_00 :: 실행....");
+                    return RepeatStatus.FINISHED;
+                 }, transactionManager)
+                .startLimit(2)
+                .allowStartIfComplete(true)
+                .build();
+
+    }
+```
+
+<figure><img src="../../../.gitbook/assets/image (234).png" alt=""><figcaption></figcaption></figure>
+
+성공을 하여도 다시 실행하는 기능으로 2번 실행이 되고 startLimit(2)에 의해 다시 실행하면 실행이 되지 않는다.
+
