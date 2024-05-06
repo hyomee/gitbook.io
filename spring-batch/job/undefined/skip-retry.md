@@ -112,10 +112,87 @@ Tasklet가실행이 되지 않는 이유는 이전 실행에서 정상 실행 �
 
 <figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-### 1-2. 2. Retry
+### 1-2. skipPolicy
+
+특정 에러가 발생 하였을 때 Skip를 하기 위해 에러 정책을 설정 하여 skip하는 경우 사용 한다.
+
+```java
+.faultTolerant() 
+.skipPolicy(new CustomSkipPolicy())
+```
+
+{% code title="CustomSkipPolicy.java" lineNumbers="true" %}
+```java
+@Slf4j
+public class CustomSkipPolicy implements SkipPolicy {
+    @Override
+    public boolean shouldSkip(Throwable throwable, long skipCount) throws SkipLimitExceededException {
+        if (throwable instanceof CustomItem3Exception)  {
+            log.debug("CustomItem3Exception :: Skipping " + skipCount  );
+            return true;
+        }
+
+        if (throwable instanceof CustomItemException ex  ) {
+            log.debug("CustomItemException :: Skipping " + skipCount  );
+            return ex.getItem().equals("item2");
+        }
+
+        return false;
+    }
+}
+```
+{% endcode %}
+
+* 사용자 정의 Exception
+
+```java
+public class CustomItem3Exception  extends RuntimeException {
+
+    private String item;
+
+    public CustomItem3Exception(String item){
+        this.item = item;
+    }
+
+    public String getItem() {
+        return item;
+    }
+}
+
+
+public class CustomItemException  extends RuntimeException {
+ 
+}
+
+```
+
+<figure><img src="../../../.gitbook/assets/image (235).png" alt=""><figcaption></figcaption></figure>
+
+## 2. Retry
 
 * **Retry 기능**은 배치 작업이 실패했을 때 지정된 횟수만큼 재시도하는 기능이다.
 * `ItemProcessor`와 `ItemWriter`에 적용 가능합니다.
 * 예외가 발생하면 지정된 횟수만큼 재시도하고, 재시도 대상 예외를 지정할 수 있습니다.
 * Retry 기능을 구성하려면 `RetryTemplate`을 사용하거나, Spring Batch에서 제공하는 `retry()`메서드를 활용할 수 있다.
 
+```java
+.faultTolerant()
+.retryLimit(1) //retry 횟수, retry 사용시 필수 설정, 해당 Retry 이후 Exception시 Fail 처리
+.retry(SQLException.class) // SQLException에 대해선 Retry 수행
+.noRetry(NullPointerException.class) // NullPointerException에 no Retry
+//.retryPolicy(new CustomRetryPolicy().retryPolicy()) // 사용자가 커스텀하며 Retry Policy 설정 가능
+```
+
+
+
+## 3. noRollback
+
+* `StepBuilder`의 `noRollback()` 메서드를 호출하여 롤백을 일으키지 않을 예외를 지정할 수 있다.
+* 예를 들어, 아래 코드에서 `ValidationException`이 발생하면 롤백을 일으키지 않도록 설정했습니다:
+
+```java
+.faultTolerant()
+.noRollback(ValidationException.class)
+.noRollback(NullPointerException.class) // NullPointerException 발생  rollback이 되지 않게 설정
+.build();
+```
