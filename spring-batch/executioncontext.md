@@ -19,6 +19,8 @@
 
 Job ExecutionContext, Step ExecutionContext의 범위를 알아보기 위해 Tasklet의 execute() 메서드에 사용자 정의 값을 설정한다.
 
+<figure><img src="../.gitbook/assets/image (258).png" alt=""><figcaption></figcaption></figure>
+
 {% code lineNumbers="true" %}
 ```java
 @Component
@@ -100,6 +102,8 @@ public class DataSharingSecondTasklet implements Tasklet {
 ## 2.  Chunk예제
 
 Chunk 예제로 ItemReader, ItemProcessor, ItemWriter에서 Step ExecutionContext의 범위를 보기 위해서 아래와 같이 작성한다.
+
+<figure><img src="../.gitbook/assets/image (257).png" alt=""><figcaption></figcaption></figure>
 
 {% code lineNumbers="true" %}
 ```java
@@ -246,13 +250,13 @@ public class DataSharingConfig {
 
 ## 4.  결과
 
-<figure><img src="../../.gitbook/assets/image (218).png" alt=""><figcaption><p>Tasklet </p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (218).png" alt=""><figcaption><p>Tasklet </p></figcaption></figure>
 
 * Job ExecutionContext 출력: firstStep에서 설정하고 secondStep에서 출력 됨&#x20;
 * Step ExecutionContext 출력 되지 않음:  firstStep에서 설정하고 secondStep에서 출력 되지 않음 \
   Step은 자신의 Step에서만 유효하다.
 
-<figure><img src="../../.gitbook/assets/image (219).png" alt=""><figcaption><p>Chunk</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (219).png" alt=""><figcaption><p>Chunk</p></figcaption></figure>
 
 * Job ExecutionContext 출력: firstStep에서 설정하고 case01Step에서 출력 됨&#x20;
 * Step ExecutionContext 출력 :  case01Step의  StepItemReader , StepItemProcessor, StepItemWriter 에서 설정한 Step는 모두 출력됨
