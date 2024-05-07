@@ -34,7 +34,7 @@ public Job JobFlowJob(JobRepository jobRepository,
 
 선행 Step의 결과에 따라서 다른 Step을 진행 하는 것으로 선행 Step의 결과는 **Step의 ExitStatus를 참조** 한다,
 
-<figure><img src="../.gitbook/assets/image (236).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (237).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ## 3. **Configuring for Stop**
 
