@@ -8,7 +8,7 @@
 
 * Job 실행에 따른 상태를 이용하여 오류(예외) 처리를 하기 위해 Job Listener를 등록하고 JobExecution 객체의 JobStatus속성을 사용하여 오류에 대한 후 처리 작업을 한다.
 
-<figure><img src="../../../.gitbook/assets/image (221).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (221).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ## 1. Job Listener
 
@@ -94,7 +94,7 @@ public class TasklerErrorConfig {
 *   **결과** : \
 
 
-    <figure><img src="../../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 3. Chunk Step
 
@@ -157,4 +157,4 @@ public class JobErrorConfig {
 
 
 
-    <figure><img src="../../../.gitbook/assets/image (223).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (223).png" alt=""><figcaption></figcaption></figure>
