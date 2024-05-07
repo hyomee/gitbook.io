@@ -1,6 +1,52 @@
-# 스템 흐름 제어
+# Controlling Step Flow
 
-Step의 결과에 따라 조건으로 다른 Step 실행&#x20;
+스프링 배치에서   Job은 Step로 구성이 되는데 Step의 처리 순서를 결정할 수 있다.
+
+## 1.  **Sequential Flow**
+
+Step를 순차적으로 싫행한다.
+
+<figure><img src="../.gitbook/assets/image.png" alt="" width="563"><figcaption></figcaption></figure>
+
+{% code lineNumbers="true" %}
+```java
+@Bean
+public Job JobFlowJob(JobRepository jobRepository,
+                      Step startStep,
+                      Step failedStep,
+                      Step completedStep,
+                      Step finishStep){
+
+    return new JobBuilder("JOB_" + CNT, jobRepository)
+            .start(startStep)
+            .next(completedStep)
+            .next(finishStep)
+            .build();
+}
+```
+{% endcode %}
+
+* 결과:&#x20;
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+## 2.  **Conditional Flow**
+
+선행 Step의 결과에 따라서 다른 Step을 진행 하는 것으로 선행 Step의 결과는 **Step의 ExitStatus를 참조** 한다,
+
+<figure><img src="../.gitbook/assets/image (236).png" alt="" width="563"><figcaption></figcaption></figure>
+
+## 3. **Configuring for Stop**
+
+## 4. **Programmatic Flow Decisions**
+
+## 5. **Split Flows**
+
+## 6. **Externalizing Flow Definitions and Dependencies Between Jobs**
+
+
+
+
 
 
 

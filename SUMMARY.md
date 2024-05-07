@@ -63,7 +63,7 @@
     * [Step Listener](spring-batch/undefined/step-listener.md)
     * [재시작설정](spring-batch/undefined/undefined.md)
     * [Skip/Retry](spring-batch/undefined/skip-retry.md)
-  * [스템 흐름 제어](spring-batch/undefined-1.md)
+  * [Controlling Step Flow](spring-batch/controlling-step-flow.md)
   * [ItemReader](spring-batch/itemreader.md)
   * [ItemWriter](spring-batch/itemwriter.md)
   * [기본 예제](spring-batch/sample/README.md)

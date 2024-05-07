@@ -75,7 +75,7 @@ public class JobErrorConfig {
 
 * **정상 수행 결과**
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -99,7 +99,7 @@ public class JobErrorConfig {
 
 </details>
 
-<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 ## 2.  오류   수정 소스및 결과
 
@@ -108,7 +108,7 @@ public class JobErrorConfig {
 * TaskletErrorStep: 강제 오류 발생&#x20;
 * ChunkErrorStep: ItemWriter에서 강제 오류 발생
 
-<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -219,9 +219,9 @@ public class JobErrorConfig {
 *   실행 결과: TaskletErrorJob에서 오류가 발생 하여 Job이 종료된다.\
 
 
-    <figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 3.  Job - preventRestart
 
@@ -247,17 +247,17 @@ public Job errorJob(JobRepository jobRepository,
 *   **실행 시 실패**\
     (
 
-    <figure><img src="../../../.gitbook/assets/image (225).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (225).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../../../.gitbook/assets/image (226).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (226).png" alt=""><figcaption></figcaption></figure>
 *   **재 실행 - 다시 시작 - 실패로 실행됨**\
 
 
-    <figure><img src="../../../.gitbook/assets/image (227).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (227).png" alt=""><figcaption></figcaption></figure>
 
 
 
-    <figure><img src="../../../.gitbook/assets/image (228).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (228).png" alt=""><figcaption></figcaption></figure>
 
 ### 3-2.   preventRestart 지정(preventRestart:false)
 
@@ -280,13 +280,13 @@ public Job errorJob(JobRepository jobRepository,
 *   **실행 시 실패**\
 
 
-    <figure><img src="../../../.gitbook/assets/image (229).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (229).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../../../.gitbook/assets/image (230).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (230).png" alt=""><figcaption></figcaption></figure>
 *   **다시   작 시 실헹되지 않음**\
 
 
-    <figure><img src="../../../.gitbook/assets/image (231).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (231).png" alt=""><figcaption></figcaption></figure>
 
 ## 4.  Step
 
@@ -311,11 +311,11 @@ public Step taskletErrorStep(JobRepository jobRepository,
 }
 ```
 
-<figure><img src="../../../.gitbook/assets/image (232).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (232).png" alt=""><figcaption></figcaption></figure>
 
 2번 실패 후 다시 수행 하면 다음과 같은 오류가 난다.
 
-<figure><img src="../../../.gitbook/assets/image (233).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (233).png" alt=""><figcaption></figcaption></figure>
 
 ### 4-2. **allow-start-if-complete**&#x20;
 
@@ -336,7 +336,7 @@ public Step taskletErrorStep(JobRepository jobRepository,
     }
 ```
 
-<figure><img src="../../../.gitbook/assets/image (234).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (234).png" alt=""><figcaption></figcaption></figure>
 
 성공을 하여도 다시 실행하는 기능으로 2번 실행이 되고 startLimit(2)에 의해 다시 실행하면 실행이 되지 않는다.
 

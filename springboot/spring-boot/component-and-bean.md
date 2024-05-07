@@ -54,7 +54,7 @@
 
 #### 4-1.  @Component 선언을 하지 않아서 오류 발생 &#x20;
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Spring Bean 등록 오류</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Spring Bean 등록 오류</p></figcaption></figure>
 
 * 원인 :  Spring Bean 을 등록 하지 않아서 에러 발생&#x20;
 
