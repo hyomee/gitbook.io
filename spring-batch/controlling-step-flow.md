@@ -194,7 +194,11 @@ public Job JobFlowJob(JobRepository jobRepository,
 
 </details>
 
-### 2-3. 실패 시 중지
+## 3. **Configuring for Stop**
+
+<figure><img src="../.gitbook/assets/image (256).png" alt="" width="563"><figcaption></figcaption></figure>
+
+### 3-1. end ( Job: COMPLETED)
 
 ```java
 return new JobBuilder("JOB_" + CNT, jobRepository)
@@ -216,10 +220,10 @@ return new JobBuilder("JOB_" + CNT, jobRepository)
 private final ExitStatus EXIT_STATUS =  ExitStatus.FAILED;
 ```
 
-*   ExitStatus.FAILED: 결과\
+* ExitStatus.FAILED:   결과 : 중지
 
+<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 *   ExitStatus.COMPLETED: 결과\
 
 
@@ -231,15 +235,271 @@ private final ExitStatus EXIT_STATUS =  ExitStatus.FAILED;
 
     <figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-## 3. **Configuring for Stop**
+### 3-2.  fail ( Job: FAILED)&#x20;
 
+```java
+return new JobBuilder("JOB_" + CNT, jobRepository)
+        .start(startStep)
+        .next(nextStep)
+        .on("FAILED").fail()
+        .from(nextStep).on("COMPLETED").to(completedStep).on("*").to(finishStep)
+        .from(nextStep).on("*").to(finishStep)
+        .end()
+        .build();
+```
 
+nextStep에 따라서 실행 Step가 결정 되는데 **fail() 함수 적용시 Job은 실패로 됨**
+
+<figure><img src="../.gitbook/assets/image (238).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (239).png" alt=""><figcaption></figcaption></figure>
+
+### 3-3.  stopAndRestart  (Job: STOPPED -> COMPLETED)
+
+조건이 만족 하면 해당 Step는 COMPLETED 되고 Job은 STOPPED 상태로 종료되어 다시 실행 하면 nextStep만 실행한다.
+
+```java
+return new JobBuilder("JOB_" + CNT, jobRepository)
+        .start(startStep)
+            .on("COMPLETED")
+            .stopAndRestart(nextStep)
+        .end()
+        .build();
+```
+
+<figure><img src="../.gitbook/assets/image (240).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (241).png" alt=""><figcaption></figcaption></figure>
+
+* 다시 시작: nextStep 만 실행 됨&#x20;
+
+<figure><img src="../.gitbook/assets/image (242).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (243).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. **Programmatic Flow Decisions**
 
+다음 단계에 대한 실행을 동적으로 작성하기 위해 Decider를 작성해서 제어한다.
+
+다음 코드는 사용자 정의 Decider 코드 이다.
+
+```java
+@Component
+@Slf4j
+public class UserDecider implements JobExecutionDecider {
+    @Override
+    public FlowExecutionStatus decide(JobExecution jobExecution, StepExecution stepExecution) {
+
+        String status;
+        if (true) { // 조건식
+            status = "USER1";
+        }
+        else {
+            status = "USER2";
+        }
+        log.debug("decide : staus :  " + status);
+        return new FlowExecutionStatus(status);
+    }
+}
+```
+
+```java
+@Bean
+public Job JobFlowJob(JobRepository jobRepository,
+    Step startStep,
+    Step failedStep,
+    Step completedStep,
+    UserDecider userDecider){
+
+
+    // Programmatic  Flow
+    return new JobBuilder("JOB_" + CNT, jobRepository)
+    .start(startStep)
+    .next(userDecider).on("USER1").to(failedStep)
+    .from(userDecider).on("USER2").to(completedStep)
+    .end()
+    .build();
+}
+```
+
+* 결과: userDecider에서 "USER1"을 리턴 하여 failedStep 가 실행된다.
+
+<figure><img src="../.gitbook/assets/image (245).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (246).png" alt=""><figcaption></figcaption></figure>
+
 ## 5. **Split Flows**
 
-## 6. **Externalizing Flow Definitions and Dependencies Between Jobs**
+Step를 group로 묶어서 실행하는 방법으로 비동기 실행을 할 수 있다.
+
+* flow1: startStep, nextStep
+* flow2: next3Step
+* step: finishStep
+* split: SimpleAsyncTaskExecutor를 사용해서 flow2를 비동기로 실행
+
+<figure><img src="../.gitbook/assets/image (255).png" alt="" width="563"><figcaption></figcaption></figure>
+
+```java
+@Configuration
+@RequiredArgsConstructor
+@Slf4j
+public class JobFlowConfig {
+
+    private final String CNT = "SPLIT_003";
+    private final ExitStatus EXIT_STATUS =  ExitStatus.COMPLETED;
+
+    @Bean
+    public Job JobFlowJob(JobRepository jobRepository,
+                          Flow flow1,
+                          Flow flow2,
+                          Step finishStep){
+ 
+
+        return new JobBuilder("JOB_FLOW_" + CNT, jobRepository)
+                .start(flow1)
+                .split(new SimpleAsyncTaskExecutor())
+                .add(flow2)
+                .next(finishStep)
+                .end()
+                .build();
+    }
 
 
+    @Bean
+    public Flow flow1(Step startStep,
+                      Step nextStep) {
+        return new FlowBuilder<SimpleFlow>("FLOW_01_"+ CNT)
+                .start(startStep)
+                .next(nextStep)
+                .build();
+    }
 
+    @Bean
+    public Flow flow2(Step next3Step) {
+        return new FlowBuilder<SimpleFlow>("FLOW_02_"+ CNT)
+                .start(next3Step)
+                .build();
+    }
+    @Bean
+    public Step startStep(JobRepository jobRepository,
+                          PlatformTransactionManager transactionManager ) {
+        return new StepBuilder("START_STEP_" + CNT, jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("START STEP!");
+                    return RepeatStatus.FINISHED;
+                }, transactionManager)
+                .build();
+    }
+
+    @Bean
+    public Step nextStep(JobRepository jobRepository,
+                          PlatformTransactionManager transactionManager ) {
+        return new StepBuilder("NEXT_STEP_" + CNT, jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("NEXT STEP!");
+                    return RepeatStatus.FINISHED;
+                }, transactionManager)
+                .build();
+    }
+
+    @Bean
+    public Step next3Step(JobRepository jobRepository,
+                         PlatformTransactionManager transactionManager ) {
+        return new StepBuilder("NEXT3_STEP_" + CNT, jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("NEXT3 STEP!");
+                    return RepeatStatus.FINISHED;
+                }, transactionManager)
+                .build();
+    }
+
+    @Bean
+    public Step finishStep(JobRepository jobRepository,
+                          PlatformTransactionManager transactionManager){
+        return new StepBuilder("FINISHED_STEP" + CNT, jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("FINISHED STEP!");
+                    return RepeatStatus.FINISHED;
+                }, transactionManager)
+                .build();
+    }
+
+}
+
+```
+
+* 결과: flow1, flow2 가 비동기로 실행되어 startStep. next3Step, nextStep 로 같이 실행이 되고 마직막으로 finishStep가 실행 된다.
+
+<figure><img src="../.gitbook/assets/image (248).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (249).png" alt=""><figcaption></figcaption></figure>
+
+## 6. Job에서 Job 실행
+
+Job에서 다른 Job를 살행 할 수 있다.
+
+<figure><img src="../.gitbook/assets/image (254).png" alt=""><figcaption></figcaption></figure>
+
+```java
+@Configuration
+@RequiredArgsConstructor
+@Slf4j
+public class JobFlowConfig {
+
+    private final String CNT = "EXP_JOB_005";
+
+    @Bean
+    public Job JobFlowJob(JobRepository jobRepository,
+                          Step  jobStepJobStep1){       
+
+        return new JobBuilder("JOB_FLOW_" + CNT, jobRepository)
+                .start(jobStepJobStep1)
+                .build();
+     
+    }
+
+    @Bean
+    public Step jobStepJobStep1(JobRepository jobRepository,
+                                JobLauncher jobLauncher,
+                                JobParametersExtractor jobParametersExtractor,
+                                Job job) {
+        return new StepBuilder("JOB_STEP_jobStepJobStep1_" + CNT, jobRepository)
+                .job(job) 
+                .build();
+    }
+
+    @Bean
+    public Job job(JobRepository jobRepository,
+                   Step startStep) {
+        return new JobBuilder("JOB_FLOW_RUN_JOB_" + CNT, jobRepository)
+                .start(startStep)
+                .build();
+    }
+    
+    @Bean
+    public Step startStep(JobRepository jobRepository,
+                          PlatformTransactionManager transactionManager ) {
+        return new StepBuilder("START_STEP_" + CNT, jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("START STEP!");
+                    Map<String, Object> param = chunkContext.getStepContext().getJobParameters();
+                    Iterator var2 = chunkContext.getStepContext().getJobParameters().entrySet().iterator();
+
+                    while(var2.hasNext()) {
+                        Map.Entry entry = (Map.Entry) var2.next();
+                        log.debug("Key: " + (String)entry.getKey() + ", Value:" + entry.getValue());
+
+                    }
+                    return RepeatStatus.FINISHED;
+                }, transactionManager)
+                .build();
+    }
+
+}
+```
+
+* 결과:&#x20;
+
+<figure><img src="../.gitbook/assets/image (252).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (253).png" alt=""><figcaption></figcaption></figure>
