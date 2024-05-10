@@ -62,6 +62,7 @@ Spring Batch가 Chunk 지향 처리를 하는데 중요한 역할을 하는것�
 *   9 \~ 12 Line: 주석을  풀면 오류가 발생한다.
 
     <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+* 쿼리: SELECT BATCH\_SEQ, MEMBER\_NO, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, ITEM7, ITEM8, ITEM9, ITEM10, ITEM11, ITEM12 FROM TB\_BATCH\_LIST ORDER BY BATCH\_SEQ ASC LIMIT 20
 *   결과: SELECT 쿼리가  한번 수행 됨
 
 
@@ -117,6 +118,7 @@ List<TbBatchListDTO> findByBatchSeq(int batchSeq, PagingDTO pagingDTO);
 {% endcode %}
 
 * 25 \~ 28 Line: 주석을  풀어도 오류 발생하지 않는다.
+* 쿼리: SELECT BATCH\_SEQ, MEMBER\_NO, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, ITEM7, ITEM8, ITEM9, ITEM10, ITEM11, ITEM12 FROM TB\_BATCH\_LIST WHERE BATCH\_SEQ >= 89797 ORDER BY BATCH\_SEQ ASC LIMIT 0 , 5
 *   결과: PageSize 만큼  쿼리 실행 후 결과 리턴 한다.\
 
 
