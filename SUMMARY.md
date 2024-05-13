@@ -67,7 +67,7 @@
   * [Controlling Step Flow](spring-batch/controlling-step-flow.md)
   * [ItemReader](spring-batch/itemreader/README.md)
     * [Chunk](spring-batch/itemreader/chunk.md)
-    * [FlatFileItem](spring-batch/itemreader/flatfileitem.md)
+    * [FlatFileItemReader](spring-batch/itemreader/flatfileitemreader.md)
   * [ItemWriter](spring-batch/itemwriter/README.md)
     * [FlatFileItemWriter](spring-batch/itemwriter/flatfileitemwriter.md)
     * [JdbcBatchItemWriter](spring-batch/itemwriter/jdbcbatchitemwriter.md)
