@@ -12,7 +12,7 @@ public interface ItemWriter<T> {
 
 Spring Batch의 ItemWriter는 item 하나를 처리 하는 것에서 출발 하여 현재 (Spring Batch v5.1.1)에서는 Chuck 단위로 처리한다.
 
-<figure><img src="../.gitbook/assets/image (211).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (211).png" alt=""><figcaption></figcaption></figure>
 
 Reader와 Processor에서 처리된 Item을 지정된 Chunk 단위로 모아서 Writer에 보내서 처리한다.
 
