@@ -19,7 +19,7 @@ Spring Batch에서 Cursor기반의 JDBC 구현채로 데이터베이스에서 �
 
 <table><thead><tr><th width="206">메서드</th><th>설명</th></tr></thead><tbody><tr><td>name</td><td>ItemReader 이름</td></tr><tr><td>dataSource</td><td>연결할 DB의 dataSource</td></tr><tr><td>queryArguments</td><td>sql 쿼리에 사용될 쿼리 파라미터 설정</td></tr><tr><td>sql</td><td>실행할 쿼리</td></tr><tr><td>beanRowMapper</td><td>객체와 자동으로 매핑해주는 Mapper<br><strong>new BeanPropertyRowMapper&#x3C;>(TbBatchListDTO.class)</strong></td></tr><tr><td>rowMapper</td><td>ResultSet을 객체에 매핑해주는 Mapper로 RowMapper를  상속받아 구현해야 한다.</td></tr><tr><td>maxRows</td><td>ResultSet이 포함할 수 있는 최대 row 수</td></tr><tr><td>fetchSize</td><td>한번에 읽어올 데이터 갯수로 commit단위로 보면 chunk size와 동일 하게 설정하는 것을 좋다.</td></tr><tr><td>maxItemCount</td><td>조회할 최대 아이템 갯수 ( 처리할 최대 수 )</td></tr><tr><td>currentItemCount</td><td>조회 Item의 시작 시점<br>- 현재 ItemCount 갯수를 센다. MaxItemCount와 연동되어 사용되는데 만약 MaxItemCount이 20이고, CurrentItemCount가 20이면 더이상 읽어올 데이터가 없다.</td></tr></tbody></table>
 
-### 1-2. 예제제
+### 1-2. 예제
 
 ```java
 @Bean
@@ -83,7 +83,7 @@ public class TbBatchListDTOResultMapper implements RowMapper<TbBatchListDTO> {
 
 ### 2-2. 예제
 
-<figure><img src="../../.gitbook/assets/image (259).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ```java
 @Configuration
@@ -91,22 +91,22 @@ public class TbBatchListDTOResultMapper implements RowMapper<TbBatchListDTO> {
 @Slf4j
 public class JdbcItemReader {
 
-    // Job 정의 
+    // Job 정의
     @Bean
-    public Job JdbcCursorJob(JobRepository jobRepository, Step JdbcCursorItemReader ) {
+    public Job jdbcCursorJob(JobRepository jobRepository, Step jdbcItemReaderStep) {
         return new JobBuilder("JDBC_CURSOR_JOB1", jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .start(JdbcItemReader)
+                .start(jdbcItemReaderStep)
                 .build();
     }
 
     // Step 정의
     @Bean
-    public Step JdbcItemReader(JobRepository jobRepository,
-                                     PlatformTransactionManager transactionManager,
-                                     JdbcPagingItemReader itemReader,
-                                     ItemProcessor itemProcessor,
-                                     ItemWriter fileWriter) {
+    public Step jdbcItemReaderStep(JobRepository jobRepository,
+                               PlatformTransactionManager transactionManager,
+                               JdbcPagingItemReader itemReader,
+                               ItemProcessor itemProcessor,
+                               ItemWriter fileWriter) {
         return new StepBuilder("JDBC_CURSOR_ITEMREADER", jobRepository)
                 .chunk(5, transactionManager)
                 .reader(itemReader)
@@ -123,16 +123,16 @@ public class JdbcItemReader {
 
         return new JdbcPagingItemReaderBuilder<TbBatchListDTO>()
                 .name("JDBC_PAGING_ITEMREADER")
+                .queryProvider(createQueryProvider)
+                .dataSource(dataSource)
                 .pageSize(5)
                 .fetchSize(5)
                 .maxItemCount(3)
-                .dataSource(dataSource)
-                .rowMapper(new BeanPropertyRowMapper<>(TbBatchListDTO.class))
-                .queryProvider(createQueryProvider)
+                .rowMapper(new BeanPropertyRowMapper<>(TbBatchListDTO.class))                
                 .build();
     }
 
-    // 쿼리 생성 
+    // 쿼리 생성
     @Bean
     public PagingQueryProvider createQueryProvider(DataSource dataSource) throws Exception {
         SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
@@ -140,7 +140,7 @@ public class JdbcItemReader {
         queryProvider.setSelectClause("BATCH_SEQ,MEMBER_NO,ITEM1,ITEM2,ITEM3,ITEM4,ITEM5,ITEM6,ITEM7,ITEM8,ITEM9,ITEM10,ITEM11,ITEM12");
         queryProvider.setFromClause("FROM TB_BATCH_LIST");
         queryProvider.setWhereClause(" BATCH_SEQ < 89807 ");
-    
+
         Map<String, Order> sortKeys = new HashMap<>(1);
         sortKeys.put("BATCH_SEQ", Order.ASCENDING);
         queryProvider.setSortKeys(sortKeys);
@@ -166,11 +166,11 @@ public class JdbcItemReader {
         };
     }
 
-    // CSV 파일 생성 
+    // CSV 파일 생성
     @Bean
     public FlatFileItemWriter<TbBatchListDTO> fileWriter() {
         FlatFileItemWriter<TbBatchListDTO> writer = new FlatFileItemWriter<>();
-        writer.setResource(new FileSystemResource("D:\\Code\\Spring\\abacus\\acube-svc-batch\\file\\out\\TbBatchListDTO.csv"));
+        writer.setResource(new FileSystemResource("D:\\ABACUS_PRJ\\abacus\\acube-svc-batch\\file\\out\\TbBatchListDTO.csv"));
         writer.setLineAggregator(getDelimitedLineAggregator());
         return writer;
     }
