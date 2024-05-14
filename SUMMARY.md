@@ -67,7 +67,7 @@
   * [Controlling Step Flow](spring-batch/controlling-step-flow.md)
   * [Chunk](spring-batch/itemreader/chunk.md)
   * [Reader/Writer](spring-batch/reader-writer.md)
-  * [FlatFileItemReader](spring-batch/flatfileitemreader.md)
+  * [FlatFile](spring-batch/flatfile.md)
   * [Jdbc](spring-batch/itemreader/jdbc-itemreader.md)
   * [MyBatis](spring-batch/mybatis.md)
 * [JPA & Query-DSL](jpa-and-query-dsl/README.md)
