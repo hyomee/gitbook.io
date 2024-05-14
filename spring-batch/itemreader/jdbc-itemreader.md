@@ -17,7 +17,7 @@ Spring Batch에서 Cursor기반의 JDBC 구현채로 데이터베이스에서 �
 
 ### 1-1. 속성
 
-<table><thead><tr><th width="206">메서드</th><th>설명</th></tr></thead><tbody><tr><td>name</td><td>ItemReader 이름</td></tr><tr><td>fetchSize</td><td>한번에 읽어올 데이터 갯수<br>- chunk size와 동일하게 설정하는 것을 추천한다. 모두 5라고 가정했을때, 5개의 데이터를 한번에 가져와서 5개씩 Commit을 수행하게된다.</td></tr><tr><td>sql</td><td>실행할 쿼리</td></tr><tr><td>beanRowMapper</td><td>객체와 자동으로 매핑해주는 Mapper</td></tr><tr><td>queryArguments</td><td>sql 쿼리에 사용될 쿼리 파라미터 설정</td></tr><tr><td>maxItemCount</td><td>조회할 최대 아이템 갯수</td></tr><tr><td>currentItemCount</td><td>조회 Item의 시작 시점<br>- 현재 ItemCount 갯수를 센다. MaxItemCount와 연동되어 사용되는데 만약 MaxItemCount이 20이고, CurrentItemCount가 20이면 더이상 읽어올 데이터가 없다.</td></tr><tr><td>maxRows</td><td>ResultSet이 포함할 수 있는 최대 row 수</td></tr><tr><td>dataSource</td><td>연결할 DB의 dataSource</td></tr></tbody></table>
+<table><thead><tr><th width="206">메서드</th><th>설명</th></tr></thead><tbody><tr><td>name</td><td>ItemReader 이름</td></tr><tr><td>dataSource</td><td>연결할 DB의 dataSource</td></tr><tr><td>queryArguments</td><td>sql 쿼리에 사용될 쿼리 파라미터 설정</td></tr><tr><td>sql</td><td>실행할 쿼리</td></tr><tr><td>beanRowMapper</td><td>객체와 자동으로 매핑해주는 Mapper<br><strong>new BeanPropertyRowMapper&#x3C;>(TbBatchListDTO.class)</strong></td></tr><tr><td>rowMapper</td><td>ResultSet을 객체에 매핑해주는 Mapper로 RowMapper를  상속받아 구현해야 한다.</td></tr><tr><td>maxRows</td><td>ResultSet이 포함할 수 있는 최대 row 수</td></tr><tr><td>fetchSize</td><td>한번에 읽어올 데이터 갯수로 commit단위로 보면 chunk size와 동일 하게 설정하는 것을 좋다.</td></tr><tr><td>maxItemCount</td><td>조회할 최대 아이템 갯수 ( 처리할 최대 수 )</td></tr><tr><td>currentItemCount</td><td>조회 Item의 시작 시점<br>- 현재 ItemCount 갯수를 센다. MaxItemCount와 연동되어 사용되는데 만약 MaxItemCount이 20이고, CurrentItemCount가 20이면 더이상 읽어올 데이터가 없다.</td></tr></tbody></table>
 
 ```java
 @Bean
@@ -67,6 +67,128 @@ public class TbBatchListDTOResultMapper implements RowMapper<TbBatchListDTO> {
     public String cursorQueryFindAll(int limit) {
         TbBatchListProvider query = new TbBatchListProvider();
         return query.findAll(limit);
+    }
+}
+```
+
+## 2. **JdbcPagingItemReader**
+
+**페이징 기반의 JDBC 구현체로** 데이터베이스에서 페이징 단위로 데이터를 조회하는 방식으로 동작한다.  즉  여러 페이지를 읽을 때마다 새로운 쿼리를 실행하므로 결과 데이터의 순서가 보장될 수 있도록 `order by` 구문이 작성하여야 한다. 또한 **멀티스레드 환경에서 Thread 안정성을 보장**하므로 별도의 동기화가 필요하지 않는다.
+
+```java
+@Configuration
+@RequiredArgsConstructor
+@Slf4j
+public class JdbcItemReader {
+
+    // Job 정의 
+    @Bean
+    public Job JdbcCursorJob(JobRepository jobRepository, Step JdbcCursorItemReader ) {
+        return new JobBuilder("JDBC_CURSOR_JOB1", jobRepository)
+                .incrementer(new RunIdIncrementer())
+                .start(JdbcCursorItemReader)
+                .build();
+    }
+
+    // Step 정의
+    @Bean
+    public Step JdbcCursorItemReader(JobRepository jobRepository,
+                                     PlatformTransactionManager transactionManager,
+                                     JdbcPagingItemReader itemReader,
+                                     ItemProcessor itemProcessor,
+                                     ItemWriter fileWriter) {
+        return new StepBuilder("JDBC_CURSOR_ITEMREADER", jobRepository)
+                .chunk(5, transactionManager)
+                .reader(itemReader)
+                .processor(itemProcessor)
+                .writer(fileWriter)
+                .build();
+
+    }
+
+    // 페이지 READER
+    @Bean
+    public JdbcPagingItemReader<TbBatchListDTO> jdbcPagingTbBatchListItemReader(DataSource dataSource,
+                                                                                PagingQueryProvider createQueryProvider) throws Exception {
+
+        return new JdbcPagingItemReaderBuilder<TbBatchListDTO>()
+                .name("JDBC_PAGING_ITEMREADER")
+                .pageSize(5)
+                .fetchSize(5)
+                .maxItemCount(3)
+                .dataSource(dataSource)
+                .rowMapper(new BeanPropertyRowMapper<>(TbBatchListDTO.class))
+                .queryProvider(createQueryProvider)
+                .build();
+    }
+
+    // 쿼리 생성 
+    @Bean
+    public PagingQueryProvider createQueryProvider(DataSource dataSource) throws Exception {
+        SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
+        queryProvider.setDataSource(dataSource);
+        queryProvider.setSelectClause("BATCH_SEQ,MEMBER_NO,ITEM1,ITEM2,ITEM3,ITEM4,ITEM5,ITEM6,ITEM7,ITEM8,ITEM9,ITEM10,ITEM11,ITEM12");
+        queryProvider.setFromClause("FROM TB_BATCH_LIST");
+        queryProvider.setWhereClause(" BATCH_SEQ < 89807 ");
+    
+        Map<String, Order> sortKeys = new HashMap<>(1);
+        sortKeys.put("BATCH_SEQ", Order.ASCENDING);
+        queryProvider.setSortKeys(sortKeys);
+
+        return queryProvider.getObject();
+    }
+
+    @Bean
+    public ItemProcessor<TbBatchListDTO, TbBatchListDTO> itemProcessor() {
+        return (tbBatchListDTO) -> {
+            tbBatchListDTO.setItem1(tbBatchListDTO.getItem1() + "Test ... ");
+            return tbBatchListDTO;
+        };
+    }
+
+
+    @Bean
+    public ItemWriter<TbBatchListDTO> itemWriter() {
+        return items -> {
+            for (TbBatchListDTO item : items) {
+                System.out.println(item.toString());
+            }
+        };
+    }
+
+    // CSV 파일 생성 
+    @Bean
+    public FlatFileItemWriter<TbBatchListDTO> fileWriter() {
+        FlatFileItemWriter<TbBatchListDTO> writer = new FlatFileItemWriter<>();
+        writer.setResource(new FileSystemResource("D:\\Code\\Spring\\abacus\\acube-svc-batch\\file\\out\\TbBatchListDTO.csv"));
+        writer.setLineAggregator(getDelimitedLineAggregator());
+        return writer;
+    }
+
+
+    // CSV 파일 포맷
+    private DelimitedLineAggregator<TbBatchListDTO> getDelimitedLineAggregator() {
+        BeanWrapperFieldExtractor<TbBatchListDTO> beanWrapperFieldExtractor = new BeanWrapperFieldExtractor<>();
+        beanWrapperFieldExtractor.setNames(new String[]{"batchSeq",
+                "memberNo",
+                "item1",
+                "item2",
+                "item3",
+                "item4",
+                "item5",
+                "item6",
+                "item7",
+                "item8",
+                "item9",
+                "item10",
+                "item11",
+                "item12" });
+
+        DelimitedLineAggregator<TbBatchListDTO> aggregator = new DelimitedLineAggregator<>();
+        aggregator.setDelimiter(",");
+        aggregator.setFieldExtractor(beanWrapperFieldExtractor);
+        return aggregator;
+
     }
 }
 ```
