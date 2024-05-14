@@ -1,4 +1,4 @@
-# Jdbc ItemReader
+# Jdbc
 
 JdbcCursorItemReader, JdbcPagingItemReader를 사용하며 두 클래스 모두 객체에 beanMapper, rowMapper 설정이 가능하다.
 
