@@ -68,6 +68,7 @@
   * [ItemReader](spring-batch/itemreader/README.md)
     * [Chunk](spring-batch/itemreader/chunk.md)
     * [FlatFileItemReader](spring-batch/itemreader/flatfileitemreader.md)
+    * [Jdbc ItemReader](spring-batch/itemreader/jdbc-itemreader.md)
   * [ItemWriter](spring-batch/itemwriter/README.md)
     * [FlatFileItemWriter](spring-batch/itemwriter/flatfileitemwriter.md)
     * [JdbcBatchItemWriter](spring-batch/itemwriter/jdbcbatchitemwriter.md)
