@@ -30,3 +30,9 @@ Spring Batch에서 병렬처리 옵션은 다음과 같다.
   * **Partitioner**를 사용하여 분할된 범위를 각 Step에 전달하여 병렬처리하는 방식으로  Reader 자원을 공유하지 않으므로 synchronized에 영향을 받지 않**고** 처리할 수 있다.&#x20;
   * Partitioner을 어떻게 나누어야 할지에 대해서 고민을 해야 한다. 즉 데이터의 분포와 작업량에 따라 적절한 **GridSize**를 설정해야 한다.
 
+
+
+<figure><img src="../.gitbook/assets/image (263).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (262).png" alt=""><figcaption></figcaption></figure>
+
