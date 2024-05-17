@@ -73,6 +73,7 @@
   * [Jpa](spring-batch/jpa.md)
   * [병렬수행](spring-batch/undefined-1/README.md)
     * [Thread Safe한 PagingItemReader](spring-batch/undefined-1/thread-safe-pagingitemreader.md)
+    * [Partitioning](spring-batch/undefined-1/partitioning.md)
 * [JPA & Query-DSL](jpa-and-query-dsl/README.md)
   * [JPA](jpa-and-query-dsl/jpa/README.md)
     * [JPA 기본](jpa-and-query-dsl/jpa/jpa.md)

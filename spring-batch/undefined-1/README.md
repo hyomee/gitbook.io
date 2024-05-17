@@ -32,7 +32,3 @@ Spring Batch에서 병렬처리 옵션은 다음과 같다.
 
 
 
-<figure><img src="../../.gitbook/assets/image (263).png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../../.gitbook/assets/image (262).png" alt=""><figcaption></figcaption></figure>
-
