@@ -70,6 +70,8 @@
   * [FlatFile](spring-batch/flatfile.md)
   * [Jdbc](spring-batch/itemreader/jdbc-itemreader.md)
   * [MyBatis](spring-batch/mybatis.md)
+  * [Jpa](spring-batch/jpa.md)
+  * [병렬수행](spring-batch/undefined-1.md)
 * [JPA & Query-DSL](jpa-and-query-dsl/README.md)
   * [JPA](jpa-and-query-dsl/jpa/README.md)
     * [JPA 기본](jpa-and-query-dsl/jpa/jpa.md)
