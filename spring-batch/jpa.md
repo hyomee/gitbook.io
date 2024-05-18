@@ -161,3 +161,6 @@ WHERE BATCH_SEQ >= 89787 AND BATCH_SEQ < 89812  ORDER BY BATCH_SEQ ASC limit 5,5
 2024-05-18 00:43:09,334 DEBUG [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
 .....
 ```
+
+[JpaPagingItemReader](https://docs.spring.io/spring-batch/docs/current/api/org/springframework/batch/item/database/JpaPagingItemReader.html)를 사용하여 데이터베이스에서 레코드를 읽는 JPQL을 작성하여실행하는 것으로JJpaNativeQueryProvider를 사용하여 쿼리를 정의한다.
+
