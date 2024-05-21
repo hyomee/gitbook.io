@@ -44,5 +44,6 @@
   * [윈도우에 curl 설치](undefined/curl.md)
   * [MariaDB 설치](undefined/mariadb.md)
   * [Redis 설치](undefined/redis.md)
+  * [Kafka 설치](undefined/kafka.md)
 * [패턴](undefined-1/README.md)
   * [Flyweigt Pattern](undefined-1/flyweigt-pattern.md)
