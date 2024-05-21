@@ -26,7 +26,7 @@ annotationProcessor 'jakarta.persistence:jakarta.persistence-api:3.1.0'
     driverClassName: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/hyomeedb     
     username: hyomee
-    password: sang0237!
+    password: dddddd!
     type: com.zaxxer.hikari.HikariDataSource  # 결 풀이 HikariDataSource의 전용 구현을 사용하고 반환하도록 강제
     hikari:                             # DB Connection Pool
       auto-commit: true                 # 자동커밋 여부. (default: true)
