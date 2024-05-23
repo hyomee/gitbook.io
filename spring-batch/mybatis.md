@@ -217,6 +217,6 @@ public ItemReader  myBatisCursorItemReader(SqlSessionFactory sqlSessionFactory) 
 * 36 Line: Cursor 쿼리 사용 변경
 * 결과 : 쿼리는 한번 실행 되고 Chunk  Size만큼 읽어서 처리 한다.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
 <figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>

@@ -142,12 +142,12 @@ public void excutorServiceSample() throws InterruptedException {
 * 8\~12 Line: 3초 대기&#x20;
 * 결과: 작업이 모두 완료 될 때까지 2초 대기 후 초과하면 조건식이 만족하지 않아 모든 Task를 종료한다.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 *   8\~12 Line: 1초 대기로 변경 하면 다음과 같은 결과를 얻는다.\
 
 
-    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 *   32 \~ 38 Line: 다음과 같이 여러 가지 상황을 만들어서 확인해 보자\

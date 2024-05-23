@@ -13,7 +13,7 @@ description: >-
 
 ## 2. Kafka 구성 요소
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
 
 
 
@@ -21,7 +21,7 @@ description: >-
 * Message: 데이터의 최소 단위, key/value 구조, 전송 시 Partition 이용&#x20;
 * Producer: 데이터 생산자, broker에 Message 전달&#x20;
   * 레코드를 프로듀스할 때 어느 토픽의 어느 파티션에 할당할 지를 결정한다&#x20;
-* Consumer: 메시지 얻음&#x20;
+* Consumer: 메시지 가지고 온다.
 * Topic: 메시지 종류별로 Broker에서 관리&#x20;
   * 카프카 안에는 여러 레코드 스트림이 있을 수 있다.&#x20;
   * 하나의 토픽에 대해 여러 Subscriber가 붙을 수 있음
@@ -36,7 +36,7 @@ description: >-
 
 * **API**: Producer, Consumer개발을 위한 API&#x20;
 * **ZooKeeper**: 분산 처리를 위한 관리 도구&#x20;
-  * 분산 메시징의 메타 데이터 ( Topic, Partition .. )를 관리&#x20;
+  * 분산 메시징의 메타 데이터 (Topic, Partition .. )를 관리&#x20;
   * 카프카 클러스터의 리더(Leader)를 발탁하는 방식도 주키퍼가 제공하는 기능&#x20;
 * **Kafka Admin**: Kafka 관리&#x20;
 * **Kafka Cluster 구성 방법**
@@ -50,19 +50,28 @@ description: >-
 
 ## 4. 분산 메세징 구조
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+### 4-1. 논리적 구조
 
-* **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있음.&#x20;
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+
+* **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
+  * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
 * **Partition**: 각 토픽 당 데이터를 분산 처리하는 단위&#x20;
   * Offset: 파티션 단위로 메시지 위치를 나타냄&#x20;
     * Log-End-Offset(LEO): 파티션 데이터의 끝&#x20;
     * Current Offset: 컨슈머가 어디까지 메시지를 읽은 위치 (Consumer Group별)&#x20;
-    * Commit Offset : 컨슈머가 어디까지 커밋 했는지를 나타냄 (Consumer Group 별)
+    * Commit Offset: 컨슈머가 어디까지 커밋 했는지를 나타냄 (Consumer Group 별)
 * **Consumer Group**: 단일 애플리케이션 안에서 여러 컨슈머가 단일 토픽이나 여러 파티션에서 메시지를 취득 하는 방법&#x20;
   * 컨슈머 그룹 마다 독립적인 컨슘 오프셋을 가진다.&#x20;
   * 컨슈머 그룹 내에서 처리해야할 파티션이 분배된다. 즉 하나의 파티션은 하나의 서버가 처리하고. 그룹에 서버가 추가되면 카프카 프로토콜에 의해 동적으로 파티션이 재분배 된다.&#x20;
   * 하나의 토픽 레코드를 분산 처리하는 구조라면 동일 컨슈머 그룹을 가지게 해야 한다.&#x20;
   * 하나의 토픽 레코드에 각각 별도의 처리를 하는 다른 파이프라인이라면 서로 다른 컨슈머 그룹을 가지게 해야 한다.
+
+### 4-2. 물리적 구조
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
+
+카프카 클러스터는 다중 브로커로 구성이 되며 클러스터에 대한 쓰기/읽기 작업의 부하 분산을 도와주고 있으며 각 브로커의 상태는 주키퍼를 사용 합니다.
 
 ## 5. Kafka 활용 사례
 
