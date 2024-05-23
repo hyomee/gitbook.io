@@ -25,7 +25,7 @@ Kafka는 대량의 데이터를 높은 처리량과 실시간 처리를 위한 �
 
 ## 2. Kafka 구성 요소
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
 
 
 
@@ -40,7 +40,7 @@ Kafka는 대량의 데이터를 높은 처리량과 실시간 처리를 위한 �
 
 ## 3. Kafka 시스템 구성
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
 
 
 
@@ -60,7 +60,23 @@ Kafka는 대량의 데이터를 높은 처리량과 실시간 처리를 위한 �
   2. **Docker Compose를 사용한 설치**:
      * Docker Compose를 사용하면 간편하게 Kafka Cluster를 구성할 수 있으며. Docker Compose 파일에 Zookeeper와 Kafka 노드를 정의하고 실행하면 됩니다
 
-## 4. 5. Kafka 활용 사례
+## 4. 분산 메세징 구조
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+
+* **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있음.&#x20;
+* **Partition**: 각 토픽 당 데이터를 분산 처리하는 단위&#x20;
+  * Offset: 파티션 단위로 메시지 위치를 나타냄&#x20;
+    * Log-End-Offset(LEO): 파티션 데이터의 끝&#x20;
+    * Current Offset: 컨슈머가 어디까지 메시지를 읽은 위치 (Consumer Group별)&#x20;
+    * Commit Offset : 컨슈머가 어디까지 커밋 했는지를 나타냄 (Consumer Group 별)
+* **Consumer Group**: 단일 애플리케이션 안에서 여러 컨슈머가 단일 토픽이나 여러 파티션에서 메시지를 취득 하는 방법&#x20;
+  * 컨슈머 그룹 마다 독립적인 컨슘 오프셋을 가진다.&#x20;
+  * 컨슈머 그룹 내에서 처리해야할 파티션이 분배된다. 즉 하나의 파티션은 하나의 서버가 처리하고. 그룹에 서버가 추가되면 카프카 프로토콜에 의해 동적으로 파티션이 재분배 된다.&#x20;
+  * 하나의 토픽 레코드를 분산 처리하는 구조라면 동일 컨슈머 그룹을 가지게 해야 한다.&#x20;
+  * 하나의 토픽 레코드에 각각 별도의 처리를 하는 다른 파이프라인이라면 서로 다른 컨슈머 그룹을 가지게 해야 한다.
+
+## 5. Kafka 활용 사례
 
 * **IoT (사물 인터넷)**: 초당 수백만 개의 데이터 포인트를 처리할 수 있어 대규모 데이터를 다루는 IoT 환경에 적합합니다.
 * **전자상거래**: 웹 사이트 활동 트래킹, 주문, 장바구니, 재고 등 다양한 데이터를 처리할 수 있습니다.

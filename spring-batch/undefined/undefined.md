@@ -108,7 +108,7 @@ public class JobErrorConfig {
 * TaskletErrorStep: 강제 오류 발생&#x20;
 * ChunkErrorStep: ItemWriter에서 강제 오류 발생
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
