@@ -13,7 +13,7 @@
   * [4+1 뷰 모델](design/4+1.md)
   * [마이크로서비스 아키텍처](design/msa.md)
   * [디자인 패턴](design/undefined/README.md)
-    * [GoF](design/undefined/gof.md)
+    * [GoF(Gang of Four)](design/undefined/gof-gang-of-four.md)
     * [Core J2EE 패턴](design/undefined/core-j2ee.md)
 * [Spring](spring/README.md)
   * [Spring 기본 개념](spring/spring.md)
