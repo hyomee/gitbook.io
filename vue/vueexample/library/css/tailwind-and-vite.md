@@ -90,7 +90,7 @@ export default {
 ## 2. 코드 작성
 
 1. **vscode 를 실행**하고 생성한 폴더를 오픈 합니다.\
-   ![](<../../.gitbook/assets/image (232).png>)
+   ![](<../../../../.gitbook/assets/image (232).png>)
 2. **CSS를 로드하기 위해**  tailwind**의 JavaScript를 불러오기** 위해서 src/js/main.js 파일에 다음과 같이 작성 해 주세요.
 
 {% code title="src/js/main.js" lineNumbers="true" %}
@@ -138,4 +138,4 @@ app.mount('#app')
 npm run dev
 ```
 
-<figure><img src="../../.gitbook/assets/image (233).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (233).png" alt=""><figcaption></figcaption></figure>

@@ -69,7 +69,7 @@ npm install -D sass
 1.  **vscode 를 실행**하고 생성한 폴더를 오픈 합니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 2.  **Bootstrap's CSS 삽입**   : assets/scss/styles.scss 파일을 생성 하고.Bootstrap's CSS 삽입을 하기 위해서 다음과 같이 작성 해 주세요.
 
     * Bootstrap의 모든 소스 Sass를 가져오기 위해 다음을 작성 합니다
@@ -150,4 +150,4 @@ npm install -D sass
 npm run dev
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt="" width="550"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (19).png" alt="" width="550"><figcaption></figcaption></figure>

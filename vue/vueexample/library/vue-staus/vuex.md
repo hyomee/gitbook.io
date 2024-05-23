@@ -10,7 +10,7 @@
 
 vue는 State, View, Actions라는 단방향 패턴으로 데이터를 관리 합니다.
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (8).png" alt="" width="375"><figcaption></figcaption></figure>
 
 * **state** : 컴포넌트 간 공유하는 데이터 속성 &#x20;
 * **View** : 데이터를 표시하는 화면
@@ -33,10 +33,10 @@ vue는 State, View, Actions라는 단방향 패턴으로 데이터를 관리 합
 
 Vuex는  상태 관리 패턴(state management pattern) + 라이브러리로  애플리케이션의 모든 컴포넌트에 대한 중앙 집중식 저장소(store)를 제공하여 어느 위치에서 있는 컴포넌트라도 쉽게 접근하고 사용할 수 있게 합니다.
 
-| Props 통한 전달                                                                 | Vuex 를 사용한 전달                                                                |
-| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| <img src="../../.gitbook/assets/image (9).png" alt="" data-size="original"> | <img src="../../.gitbook/assets/image (10).png" alt="" data-size="original"> |
-| 다른 컴포넌트로 데이터를 보내려면 부모 컴포넌트를 계속 찾아 이벤트를 바인딩 시키고 다시 props로 내려주어야 합니다.         | s tore 이라는 일종의 중앙 저장소에서 관리 합니다.                                              |
+| Props 통한 전달                                                                       | Vuex 를 사용한 전달                                                                      |
+| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| <img src="../../../../.gitbook/assets/image (9).png" alt="" data-size="original"> | <img src="../../../../.gitbook/assets/image (10).png" alt="" data-size="original"> |
+| 다른 컴포넌트로 데이터를 보내려면 부모 컴포넌트를 계속 찾아 이벤트를 바인딩 시키고 다시 props로 내려주어야 합니다.               | s tore 이라는 일종의 중앙 저장소에서 관리 합니다.                                                    |
 
 Vue3의 ComponentAPI를 사용하면 Vuex와 같은 상태 관리 모듈을 만들어서 사용하면 Vuex는 필요 없습니다.
 
@@ -46,7 +46,7 @@ Vuex에 대한 자세한 사항은 [공식사이트를 참고하세요](https://
 
 **state, getters, mutations, actions** 총 4개의 속성을 가지고 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt="" width="526"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (7).png" alt="" width="526"><figcaption></figcaption></figure>
 
 ```javascript
 import Vuex from 'vuex';

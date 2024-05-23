@@ -19,7 +19,7 @@ npm init vue@latest
 
 vite 초기 설정시 Vue Router를 Yes로 하면 자동으로 설치 됩니다.
 
-<figure><img src="../.gitbook/assets/image (236).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (236).png" alt=""><figcaption></figcaption></figure>
 
 #### 1-1. 별도 설치&#x20;
 
