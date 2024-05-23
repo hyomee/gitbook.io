@@ -10,7 +10,7 @@
     \
 
 
-    <figure><img src="../../.gitbook/assets/image (273).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (273).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. 생성패턴 (Creational Patterns)
 
@@ -41,4 +41,4 @@
 
 
 
-{% file src="../../.gitbook/assets/JavaDesignPattern_20240228 (1).pdf" %}
+{% file src="../.gitbook/assets/JavaDesignPattern_20240228 (1).pdf" %}
