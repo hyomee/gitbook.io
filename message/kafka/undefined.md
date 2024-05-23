@@ -13,7 +13,7 @@ description: >-
 
 ## 2. Kafka 구성 요소
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
 
 
 
@@ -52,7 +52,7 @@ description: >-
 
 ### 4-1. 논리적 구조
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
 
 * **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
   * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
@@ -71,7 +71,7 @@ description: >-
 
 ### 4-2. 물리적 구조
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
 
 카프카 클러스터는 다중 브로커로 구성이 되며 클러스터에 대한 쓰기/읽기 작업의 부하 분산을 도와주고 있으며 각 브로커의 상태는 주키퍼를 사용 합니다.
 

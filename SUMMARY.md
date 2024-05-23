@@ -12,6 +12,7 @@
   * [확장 큐브 모델](design/scalemodel.md)
   * [4+1 뷰 모델](design/4+1.md)
   * [마이크로서비스 아키텍처](design/msa.md)
+  * [디자인 패턴](design/undefined.md)
 * [Spring](spring/README.md)
   * [Spring 기본 개념](spring/spring.md)
   * [IoC](spring/ioc/README.md)

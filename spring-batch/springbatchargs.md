@@ -4,7 +4,7 @@
 
 ## 1. 요구사항
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. 배치 실행시 받은 파라메터를 JobParameter로 설정하여 배치 프로그램에서 사용할 수 있어여 한다.
 2. 베치 실행시 현재 일자가 자동 설정 되어야 한다.
@@ -209,7 +209,7 @@ public void run(ApplicationArguments args) throws Exception {
 
 다음과 같이 로그를 확인 할 수 있습니다.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 myTasklet, myStep01, myStep02, myJob이 bean으로 등록 된 것을 확인 할 수 있으며 step에 정의된 Tasklet의 실행 로그를 확인 할 수 있습니다.
 
