@@ -19,10 +19,6 @@
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p><strong>Core J2EE Pattern Catalog</strong></p></figcaption></figure>
 
-: 자바성능튜닝이야기 -출판사:인사이트
+* **출처**: [http://www.corej2eepatterns.com/](http://www.corej2eepatterns.com/)
+* **출처**: 자바성능튜닝이야기 -출판사:인사이트
 
-#### &#x20;<a href="#undefined" id="undefined"></a>
-
-* 제목:자바 성능 튜닝 이야기
-* 저자:이상민
-*
