@@ -7,7 +7,7 @@ JpaItemWriter는 JPA를 사용하여 데이터베이스에 영속화하는데 �
 
 
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (262).png" alt=""><figcaption></figcaption></figure>
 
 <pre class="language-java" data-line-numbers><code class="lang-java">@Configuration
 @RequiredArgsConstructor
