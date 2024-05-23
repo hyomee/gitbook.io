@@ -129,3 +129,6 @@
     * [라인단위읽기](java/i-o/undefined.md)
 * [DB 관련](db/README.md)
   * [Redis](db/redis.md)
+* [Message](message/README.md)
+  * [Kafka](message/kafka/README.md)
+    * [개요](message/kafka/undefined.md)
