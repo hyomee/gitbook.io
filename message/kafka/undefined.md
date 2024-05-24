@@ -51,7 +51,7 @@ description: >-
 
 ### 3-2. Kafka Consumer API
 
-
+Kafka 클러스터에서 데이터를 읽는 역할로이 API를 사용하여 애플리케이션은 하나 이상의 토픽을 구독하고 해당 토픽에 저장된 스트림(메세지)을 가져와 애플리케이션에 필요한 처리를 수행합니다. 즉 실시간으로 데이터를 처리하거나 과거의 레코드를 입수하여 처리할 수 있습니다.
 
 참고: [https://kafka.apache.org/documentation/#consumerapi](https://kafka.apache.org/documentation/#consumerapi)
 
@@ -81,11 +81,16 @@ Apache Kafka 개발 프로젝트에서 공식적으로 제공되는 스트림 �
 
 참고: [https://kafka.apache.org/37/documentation/streams/](https://kafka.apache.org/37/documentation/streams/)
 
-
-
 ### 3-4. Kafka Admin API
 
+Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 이 API를 통해 개발자는 프로그래밍 방식으로 Kafka 리소스를 생성, 삭제, 설명 및 수정할 수 있습니다. 주요 작업은 다음과 같습니다:
 
+1. **토픽 관리**: 토픽 생성, 삭제, 설명, 수정 등을 수행합니다.
+2. **브로커 관리**: 브로커 정보를 조회하고 수정합니다.
+3. **구성 관리**: Kafka 구성 항목을 관리합니다.
+4. **ACL(접근 제어 목록) 관리**: 접근 권한을 설정하고 관리합니다.
+
+**Admin API**를 사용하면 Kafka 클러스터를 프로그래밍 방식으로 효율적으로 관리할 수 있습니다
 
 참고: [https://kafka.apache.org/documentation/#adminapi](https://kafka.apache.org/documentation/#adminapi)
 
