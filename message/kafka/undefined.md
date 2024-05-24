@@ -31,9 +31,67 @@ description: >-
 * 여러 컨슈머다 분산 처리 하는 모델 (**Queuing Model**)&#x20;
 * 토픽기반으로 여러 서비스클라이버가 동일한 매세지를 받는 모델 (**Pub/Sub Model**)
 
+## 3. Kafka API
+
+다양한 제품과 연동을 위해 제공하는 API로 Connect API와 Stream API 을 제공하고 있으며 각각 다음과 같은 역활을 합니다.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### 3-1. Kafka Producer API
+
+&#x20;Java 클라이언트는 Kafka 클러스터에 데이터 스트림을 게시하는 데 사용됩니다. 이 API를 사용하여 애플리케이션은 하나 이상의 Kafka 토픽으로 레코드 스트림을 전송할 수 있습니다. 이제 몇 가지 주요 기능을 살펴보겠습니다.:
+
+1. 스레드 안전한 프로듀서 인스턴스: 단일 프로듀서 인스턴스를 여러 스레드와 공유하는 것은 일반적으로 속도를 높입니다.&#x20;
+2. &#x20;비동기 send() 메서드: 호출하면 레코드를 보류 중인 전송 버퍼에 추가하고 바로 반환합니다, 이는 효율적인 레코드 배치를 가능하게 합니다.&#x20;
+3. &#x20;acks 설정: 요청 완료 기준을 제어합니다. "all" 설정은 레코드의 완전한 커밋을 기다리는 느린 방식이지만 가장 안정적입니다.&#x20;
+4. &#x20;버퍼 관리: 각 파티션에는 미전송 레코드를 위한 버퍼가 있으며, 이의 크기는 batch.size 설정에 따라 결정됩니다.&#x20;
+5. Idempotent 프로듀서 모드: 최소 한 번 이상 정확히 한 번까지의 전송을 보장하며, 중복 전송을 방지합니다.​
+
+참고: [https://kafka.apache.org/documentation/#producerapi](https://kafka.apache.org/documentation/#producerapi)
+
+### 3-2. Kafka Consumer API
+
+
+
+참고: [https://kafka.apache.org/documentation/#consumerapi](https://kafka.apache.org/documentation/#consumerapi)
+
+### 3-3. Kafka Consumer API
+
+Apache Kafka의 구성 요소로서 데이터 파이프라인을 간소화하는 역할로 다른 데이터 시스템 간의 테이터 가져오기/내보내기를 쉽게 해주는 API로 Kafka와 통합되는 외부 시스템 및 응용 프로그램에서 이벤트 스트림을 소비(읽기)하거나 생성(쓰기)할 수 있습니다.
+
+1. **Source Connectors**:
+   * Source 커넥터는 외부 시스템에서 Kafka 토픽으로 데이터를 가져오는 역할을 합니다.
+   * 예를 들어, **JDBC Source Connector**는 관계형 데이터베이스에서 데이터를 읽어 Kafka 토픽으로 전송할 수 있습니다.
+2. **Sink Connectors**:
+   * Sink 커넥터는 Kafka 토픽에서 데이터를 가져와 외부 시스템으로 전송하는 역할을 합니다.
+   * 예를 들어, **Elasticsearch Sink Connector**는 Kafka 토픽에서 데이터를 읽어 Elasticsearch 클러스터로 색인할 수 있습니다.
+3. 그외 Transform Connectors, Custom Connectors가 있습니다.
+
+참고: [https://kafka.apache.org/documentation.html#connect](https://kafka.apache.org/documentation.html#connect)
+
+### 3-4. Kafka Stream API
+
+Apache Kafka 개발 프로젝트에서 공식적으로 제공되는 스트림 프로세싱 프레임워크입니다. 이 Java로 구현되어 있으며, 카프카 클러스터 내의 토픽에 저장된 데이터를 실시간으로 처리, 변환 및 분석할 수 있도록 도와주는 것으로 스트림 프로세싱을 간편하게 구현하고, 카프카의 서버 사이드 클러스터 기술과 결합하여 확장성, 탄력성, 분산 처리, 고가용성 등을 제공하여 실시간 데이터 처리를 위한 강력한 도구로 활용할 수 있습니다 다음과 같은 특징이 있습니다.
+
+1. 간단하고 가벼운 클라이언트 라이브러리: 기존 자바 애플리케이션에서 쉽게 사용할 수 있습니다.
+2. 시스템이나 카프카에 대한 의존성 없음: Kafka Streams는 카프카 클러스터 내의 데이터를 처리하므로 별도의 시스템이나 카프카에 대한 의존성이 없습니다.
+3. 이중화된 로컬 상태 저장소 지원: Stateful한 어플리케이션을 구현할 때 RocksDB와 같은 로컬 데이터 스토어를 사용하여 낮은 대기 시간을 유지합니다[2](https://www.devkuma.com/docs/apache-kafka/strems/).
+4. 1번만 처리되는 보장: 카프카 브로커나 클라이언트에 장애가 생기더라도 스트림에 대해선 1번만 처리되는 것을 보장합니다.
+5. 토폴로지 기반 API: 스트림 처리를 하는 프로세스들이 서로 연결되어 있는 토폴로지를 만들어서 처리할 수 있습니다
+
+참고: [https://kafka.apache.org/37/documentation/streams/](https://kafka.apache.org/37/documentation/streams/)
+
+
+
+### 3-4. Kafka Admin API
+
+
+
+참고: [https://kafka.apache.org/documentation/#adminapi](https://kafka.apache.org/documentation/#adminapi)
+
 ## 2. Kafka 구성 요소
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
 
 
 
@@ -72,7 +130,7 @@ description: >-
 
 ### 4-1. 논리적 구조
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
 
 * **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
   * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
@@ -91,7 +149,7 @@ description: >-
 
 ### 4-2. 물리적 구조
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
 
 카프카 클러스터는 다중 브로커로 구성이 되며 클러스터에 대한 쓰기/읽기 작업의 부하 분산을 도와주고 있으며 각 브로커의 상태는 주키퍼를 사용 합니다.
 
