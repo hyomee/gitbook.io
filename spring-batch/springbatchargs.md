@@ -213,7 +213,7 @@ public void run(ApplicationArguments args) throws Exception {
 
 myTasklet, myStep01, myStep02, myJob이 bean으로 등록 된 것을 확인 할 수 있으며 step에 정의된 Tasklet의 실행 로그를 확인 할 수 있습니다.
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 4.  전체 소스 코드
 

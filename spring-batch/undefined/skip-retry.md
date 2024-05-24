@@ -99,7 +99,7 @@ Caused by: java.lang.RuntimeException:
 2024-05-06 20:18:00,336 INFO [kr.co.abacus.batch.AcubeBatchCommandLineRunner] BatchMagDTO(isRun=true, msg=errorJob이 수행 되었습니다., summary=StepExecution: id=307, version=3, name=TASKLET_STEP_016, status=COMPLETED, exitStatus=COMPLETED, readCount=0, filterCount=0, writeCount=0 readSkipCount=0, writeSkipCount=0, processSkipCount=0, commitCount=1, rollbackCount=0 StepExecution: id=308, version=4, name=CHUNK_STEP_SKIP_TEST_016, status=FAILED, exitStatus=FAILED, readCount=4, filterCount=0, writeCount=1 readSkipCount=0, writeSkipCount=1, processSkipCount=0, commitCount=2, rollbackCount=4 )
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 동일 소스에 에러 스킵을 3으로 올리면 Job과 Step이 모두 정상 처리 된다.\
 Tasklet가실행이 되지 않는 이유는 이전 실행에서 정상 실행 되어서 이다.

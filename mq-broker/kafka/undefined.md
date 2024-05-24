@@ -51,7 +51,7 @@ description: >-
 
 ## 4. Kafka 시스템 구성
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
 
 
 
