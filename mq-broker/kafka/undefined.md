@@ -18,7 +18,7 @@ description: >-
 
 여러 Subscriber에 동일한 메시지를 전달 하고, Topic 기반으로 전달 내용을 변경하는 모델로 다음과 같은 특징이 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 * 퍼블리서에서 발행한 메세지는 브로커의 토픽에 보관되며 발행한 메세지의 소비는 퍼블리서에서 관심이 없습니다.
 * 서브스크라이버는 여러개의 토픽 중에 하나를 선택하여 받아 소비합니다.&#x20;
@@ -75,7 +75,7 @@ description: >-
 
 다양한 제품과 연동을 위해 제공하는 API로 Connect API와 Stream API 을 제공하고 있으며 각각 다음과 같은 역활을 합니다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (274).png" alt=""><figcaption></figcaption></figure>
 
 #### 4-1-1. Kafka Producer API
 

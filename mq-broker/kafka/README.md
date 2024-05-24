@@ -6,7 +6,7 @@ description: >-
 
 # Kafka
 
-<figure><img src="../../.gitbook/assets/image (274).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (274) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 1. 이벤트 스트리밍&#x20;
 
@@ -63,4 +63,10 @@ At Most Once는메시지를 **최대 한 번만 전송**합니다. 보내는 쪽
 * **소비자의 확인 관리**: 소비자는 메시지를 정확히 한 번만 처리하기 위해 확인(acknowledgement)을 적절히 관리합니다.
 
 <figure><img src="../../.gitbook/assets/image (277).png" alt=""><figcaption></figcaption></figure>
+
+
+
+참고: [https://kafka.apache.org/](https://kafka.apache.org/)
+
+참고 도서: 실천 아파치 카프카 - 한빛미디어
 
