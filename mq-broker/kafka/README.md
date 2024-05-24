@@ -70,5 +70,5 @@ At Most Once는메시지를 **최대 한 번만 전송**합니다. 보내는 쪽
 
 참고: [https://kafka.apache.org/](https://kafka.apache.org/)
 
-참고 도서: 실천 아파치 카프카 - 한빛미디어
+&#x20;
 
