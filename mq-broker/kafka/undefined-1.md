@@ -122,3 +122,6 @@ Loader는 Producer와 Consumer와의 데이터 교환 역할을 담당 하고 Fo
 * 컨슈머는 High Watermark까지 기록된 메시지를 수신 할 수 있음
 
 <figure><img src="../../.gitbook/assets/image (289).png" alt=""><figcaption></figcaption></figure>
+
+## 6.&#x20;
+
