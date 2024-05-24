@@ -16,7 +16,7 @@ description: >-
 
 스트리밍 데이터를 처리하기 위한 소프트웨어로는 Amazon Kinesis, Apache Flink, Apache Kafka 등이 있습니다. 이들은 실시간 스트리밍 데이터를 수집, 처리, 분석하는 데 사용됩니다,
 
-## 1. Kafka 주요 기능
+## 2. Kafka 주요 기능
 
 * 다른 시스탬으로 부터 데이터를 지속적으로 가져오기/내보내기를 위해 이벤트 스트림을 **읽기(subscribe )/쓰기(publish) 합니다.**
 * 이벤트 스트림을 원하는 기간 동안 지속적이고 안정적으로 **저장합니다**.
@@ -24,7 +24,7 @@ description: >-
 
 <figure><img src="../../.gitbook/assets/image (290).png" alt=""><figcaption><p>카프카 부 구조</p></figcaption></figure>
 
-## 2. Kafka 특징
+## 3. Kafka 특징
 
 Kafka는 대량의 데이터를 높은 처리량과 실시간 처리를 위한 오픈 소스로 다음과 특징이 있이 있습니다.
 
@@ -35,15 +35,15 @@ Kafka는 대량의 데이터를 높은 처리량과 실시간 처리를 위한 �
   * Streams API -> Kafka Streams 제공&#x20;
 * **신뢰성**: 메시지 전달 보증으로 데이터 상실은 허용 하지 않습니다.
 
-## 3. 메시지 전달 보증
+## 4. 메시지 전달 보증
 
 <table data-header-hidden><thead><tr><th></th><th width="168"></th><th width="74"></th><th width="69"></th><th></th></tr></thead><tbody><tr><td>종류</td><td>개요</td><td>재전송</td><td>중복삭제</td><td>비고</td></tr><tr><td>At Most Once</td><td>1회는 전달 시도</td><td>X</td><td>X</td><td>메시지 중복 없음, 상실 있음</td></tr><tr><td>At Least Once</td><td>적어도 1회는 전달</td><td>O</td><td>X</td><td><p>메시지 중복 가능성 존재, 상실 없음</p><p>Ack, Offset Commit</p></td></tr><tr><td>Exactly Once</td><td>1회만 전달</td><td>O</td><td>O</td><td><p>메시지 중복 없음, 상실 없음, 성능 저하</p><p>Ack, Offset Commit</p><p>트랜잭션 Abort/Timeout</p></td></tr></tbody></table>
 
-### 3-1. At Most Once
+### 4-1. At Most Once
 
 At Most Once는메시지를 **최대 한 번만 전송**합니다. 보내는 쪽에서 메시지를 보낸 후 받는 사람이 받았는지 안 받았는지는 확인하지 않습니다.
 
-### 3-2. At Least Once
+### 4-2. At Least Once
 
 메시지가 **최소한 한 번은 성공**적으로 전달되도록 보장하는 메세지 전달 방식으로 메시지가 중복되지 않고 한 번 이상 전달되도록 보장하는 것으로 중복없이 최소한 한 번은 전달됩니다.
 
@@ -57,7 +57,7 @@ At Most Once는메시지를 **최대 한 번만 전송**합니다. 보내는 쪽
 * **중복 메시지 처리**: 메시지가 중복되어 전달될 수 있으므로 소비자는 중복 메시지를 처리할 수 있어야 합니다.
 * **성능 및 처리량**: 메시지를 두 번 이상 전달해야 하므로 처리량이 높아질 수 있습니다. 그러나 이는 메시지 전달 보장을 위한 대가입니다.
 
-### 3-3. Exactly Once
+### 4-3. Exactly Once
 
 각 메시지가 생산자(producer)에 의해 정확히 한 번만 전달되도록 보장하는 방식으로 다음과 같은 방법을 사용합니다:
 
