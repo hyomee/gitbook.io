@@ -34,17 +34,33 @@ Kafka는 대량의 데이터를 높은 처리량과 실시간 처리를 위한 �
 *   **신뢰성**: 메시지 전달 보증으로 데이터 상실은 허용 하지 않습니다.\
 
 
-    <table data-header-hidden><thead><tr><th width="166"></th><th width="168"></th><th width="74"></th><th width="69"></th><th></th></tr></thead><tbody><tr><td>종류</td><td>개요</td><td>재전송</td><td>중복삭제</td><td>비고</td></tr><tr><td>At Most Once</td><td>1회는 전달 시도</td><td>X</td><td>X</td><td>메시지 중복 없음, 상실 있음</td></tr><tr><td>At Least Once</td><td>적어도 1회는 전달</td><td>O</td><td>X</td><td><p>메시지 중복 가능, 상실 없음</p><p>Ack, Offset Commit</p></td></tr><tr><td>Exactly Once</td><td>1회만 전달</td><td>O</td><td>O</td><td><p>메시지 중복 없음, 상실 없음, 성능 저하</p><p>Ack, Offset Commit</p><p>트랜잭션 Abort/Timeout</p></td></tr></tbody></table>
+    <table data-header-hidden><thead><tr><th></th><th width="168"></th><th width="74"></th><th width="69"></th><th></th></tr></thead><tbody><tr><td>종류</td><td>개요</td><td>재전송</td><td>중복삭제</td><td>비고</td></tr><tr><td>At Most Once</td><td>1회는 전달 시도</td><td>X</td><td>X</td><td>메시지 중복 없음, 상실 있음</td></tr><tr><td>At Least Once</td><td>적어도 1회는 전달</td><td>O</td><td>X</td><td><p>메시지 중복 가능성 존재, 상실 없음</p><p>Ack, Offset Commit</p></td></tr><tr><td>Exactly Once</td><td>1회만 전달</td><td>O</td><td>O</td><td><p>메시지 중복 없음, 상실 없음, 성능 저하</p><p>Ack, Offset Commit</p><p>트랜잭션 Abort/Timeout</p></td></tr></tbody></table>
 
-## 5. Kafka 활용 사례
+## 1. At Most Once
 
-* **IoT (사물 인터넷)**: 초당 수백만 개의 데이터 포인트를 처리할 수 있어 대규모 데이터를 다루는 IoT 환경에 적합합니다.
-* **전자상거래**: 웹 사이트 활동 트래킹, 주문, 장바구니, 재고 등 다양한 데이터를 처리할 수 있습니다.
-* **IT 운영**: 모니터링, 로그 관리, 데이터 수집 등 IT 운영팀의 업무에 활용됩니다.
+At Most Once는메시지를 **최대 한 번만 전송**합니다. 보내는 쪽에서 메시지를 보낸 후 받는 사람이 받았는지 안 받았는지는 확인하지 않습니다.
 
+## 2. At Least Once
 
+메시지가 **최소한 한 번은 성공**적으로 전달되도록 보장하는 메세지 전달 방식으로 메시지가 중복되지 않고 한 번 이상 전달되도록 보장하는 것으로 중복없이 최소한 한 번은 전달됩니다.
 
+카프카는 Ack와 Offset Commit라는 개념을 도입하여 프로듀서가 메세지를 브로커에 보내면 브로커가 메세지를 수신 후 Ack를 프로듀서에 수신 완료했다고 응답 하고 컨슈머는 브로커로부터 메세지를 받을 때 컨슈머가 메세지를 어디까지 받았는기 관리 하기 위해 Offset을 사용하며 전달 완료를 브로커에 알리기 위해 Offset Commit를 합니다. Ack와 Offset Commit은 재전송여부를 판단할 때 사용합니다.
 
+<figure><img src="../../.gitbook/assets/image (276).png" alt=""><figcaption></figcaption></figure>
 
+**Kafka At Least Once** 방식은 다음과 같은 특징을 가집니다:
 
+* **메시지 전달 보장**: 메시지가 소비자에게 최소한 한 번은 전달됩니다.
+* **중복 메시지 처리**: 메시지가 중복되어 전달될 수 있으므로 소비자는 중복 메시지를 처리할 수 있어야 합니다.
+* **성능 및 처리량**: 메시지를 두 번 이상 전달해야 하므로 처리량이 높아질 수 있습니다. 그러나 이는 메시지 전달 보장을 위한 대가입니다.
+
+## 3. Exactly Once
+
+각 메시지가 생산자(producer)에 의해 정확히 한 번만 전달되도록 보장하는 방식으로 다음과 같은 방법을 사용합니다:
+
+* **Transactional Producers**:  여러 메시지를 하나의 트랜잭션으로 묶어 전송하는 기능을 제공하고 이를 통해 메시지가 정확히 한 번만 전달되도록 보장할 수 있습니다.
+* **Idempotent Producers**: 동일한 메시지를 중복해서 보내더라도 결과가 동일하게 처리되도록 하여 메시지 중복을 방지하고 정확한 전달을 보장합니다.
+* **소비자의 확인 관리**: 소비자는 메시지를 정확히 한 번만 처리하기 위해 확인(acknowledgement)을 적절히 관리합니다.
+
+<figure><img src="../../.gitbook/assets/image (277).png" alt=""><figcaption></figcaption></figure>
 
