@@ -31,13 +31,53 @@ description: >-
 * 여러 컨슈머다 분산 처리 하는 모델 (**Queuing Model**)&#x20;
 * 토픽기반으로 여러 서비스클라이버가 동일한 매세지를 받는 모델 (**Pub/Sub Model**)
 
-## 3. Kafka API
+## 3. Kafka 구성 요소
+
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+
+
+
+* **Broker**: 데이터를 수신/전달하는  기능으로 하나의 서버(인스턴스) 당 하나의 데몬으로 동작하며 클러스터로 구성하여 처리량을 향상 시킬수 있습니다. 또한 받은 테이터는 파일로 저장됩니다.
+* **Message**: 데이터의 최소 단위, key/value 구조, 전송 시 Partition 이용&#x20;
+* **Producer**:   Producer API를 이용하여 데이터 생산자를 만드는 기능으로 브로커에 메세지를 송신하는 애플리케이션입니다. &#x20;
+  * 레코드를 프로듀스할 때 어느 토픽의 어느 파티션에 할당할 지를 결정합니다.
+  * 프로듀서에서 브로커로 메세지 송신은 PUSH로 이루어 진다
+* **Consumer**: Consumer API를 이용하여 메세지를 구독하는 기능으로 브로커에 있는 메세지를 수신하는 애플리케이션 입니다.
+  * 구독(송신)할 토픽/파티션 결정하여 브로커에서 메세지를 취득합니다.
+  * 컨슈머에서 브로커의 데이터를 PULL로 받아서 처리합니다.
+* **Topic**: 메시지 종류별로 Broker에서 관리&#x20;
+  * 카프카 안에는 여러 레코드 스트림이 있을 수 있다.&#x20;
+  * 하나의 토픽에 대해 여러 Subscriber가 붙을 수 있음
+
+## 4. Kafka 시스템 구성
+
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
+
+
+
+
+
+* **API**: Producer, Consumer개발을 위한 API&#x20;
+* **ZooKeeper**: 분산 처리를 위한 관리 도구로 필요하며 산 메시징의 메타 데이터 (Topic, Partition )를 관리하기 위한 기능입니다.
+  * 카프카 클러스터의 리더(Leader)를 발탁하는 방식도 주키퍼가 제공하는 기능&#x20;
+* **Kafka Admin**: Kafka 관리&#x20;
+* **Kafka Cluster:** 분산 스트리밍 플랫폼으로 여러 대의 브로커를 구성한 클러스터를 의미하며.데이터를 생성하는 어플리케이션과 데이터를 소비하는 어플리케이션 간의 중재자 역할을 하고, 데이터의 전송 제어, 처리, 관리 역할을 합니다. 카프카 시스템은 여러 요소(노드)와 함께 구성될 수 있어 카프카 클러스터라고도 합니다
+  * &#x20;**구성 방법**
+    1. **수동 설치 및 설정**:
+       * **Zookeeper 설치**: Kafka는 Zookeeper와 함께 실행되므로 먼저 Zookeeper를 설치해야 합니다. Zookeeper는 Kafka의 메타데이터와 상태 정보를 관리합니다.
+       * **Kafka 설치**: Kafka를 다운로드하고 각 노드에 설치합니다. 설치된 Kafka 노드는 Zookeeper와 연결됩니다.
+       * **Kafka Broker 설정**: 각 Kafka 브로커의 `server.properties` 파일을 수정하여 브로커 ID, 포트, 로그 디렉토리, Zookeeper 연결 정보 등을 설정합니다.
+       * **Kafka 브로커 실행**: Zookeeper와 Kafka 브로커를 실행합니다.
+    2. **Docker Compose를 사용한 설치**:
+       * Docker Compose를 사용하면 간편하게 Kafka Cluster를 구성할 수 있으며. Docker Compose 파일에 Zookeeper와 Kafka 노드를 정의하고 실행하면 됩니다
+
+### 4-1. Kafka API
 
 다양한 제품과 연동을 위해 제공하는 API로 Connect API와 Stream API 을 제공하고 있으며 각각 다음과 같은 역활을 합니다.
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-### 3-1. Kafka Producer API
+#### 4-1-1. Kafka Producer API
 
 &#x20;Java 클라이언트는 Kafka 클러스터에 데이터 스트림을 게시하는 데 사용됩니다. 이 API를 사용하여 애플리케이션은 하나 이상의 Kafka 토픽으로 레코드 스트림을 전송할 수 있습니다. 이제 몇 가지 주요 기능을 살펴보겠습니다.:
 
@@ -49,13 +89,13 @@ description: >-
 
 참고: [https://kafka.apache.org/documentation/#producerapi](https://kafka.apache.org/documentation/#producerapi)
 
-### 3-2. Kafka Consumer API
+#### 4-1-2. Kafka Consumer API
 
 Kafka 클러스터에서 데이터를 읽는 역할로이 API를 사용하여 애플리케이션은 하나 이상의 토픽을 구독하고 해당 토픽에 저장된 스트림(메세지)을 가져와 애플리케이션에 필요한 처리를 수행합니다. 즉 실시간으로 데이터를 처리하거나 과거의 레코드를 입수하여 처리할 수 있습니다.
 
 참고: [https://kafka.apache.org/documentation/#consumerapi](https://kafka.apache.org/documentation/#consumerapi)
 
-### 3-3. Kafka Consumer API
+#### 4-1-3. Kafka Consumer API
 
 Apache Kafka의 구성 요소로서 데이터 파이프라인을 간소화하는 역할로 다른 데이터 시스템 간의 테이터 가져오기/내보내기를 쉽게 해주는 API로 Kafka와 통합되는 외부 시스템 및 응용 프로그램에서 이벤트 스트림을 소비(읽기)하거나 생성(쓰기)할 수 있습니다.
 
@@ -69,7 +109,7 @@ Apache Kafka의 구성 요소로서 데이터 파이프라인을 간소화하는
 
 참고: [https://kafka.apache.org/documentation.html#connect](https://kafka.apache.org/documentation.html#connect)
 
-### 3-4. Kafka Stream API
+#### 4-1-4. Kafka Stream API
 
 Apache Kafka 개발 프로젝트에서 공식적으로 제공되는 스트림 프로세싱 프레임워크입니다. 이 Java로 구현되어 있으며, 카프카 클러스터 내의 토픽에 저장된 데이터를 실시간으로 처리, 변환 및 분석할 수 있도록 도와주는 것으로 스트림 프로세싱을 간편하게 구현하고, 카프카의 서버 사이드 클러스터 기술과 결합하여 확장성, 탄력성, 분산 처리, 고가용성 등을 제공하여 실시간 데이터 처리를 위한 강력한 도구로 활용할 수 있습니다 다음과 같은 특징이 있습니다.
 
@@ -81,7 +121,7 @@ Apache Kafka 개발 프로젝트에서 공식적으로 제공되는 스트림 �
 
 참고: [https://kafka.apache.org/37/documentation/streams/](https://kafka.apache.org/37/documentation/streams/)
 
-### 3-4. Kafka Admin API
+#### 4-1-4. Kafka Admin API
 
 Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 이 API를 통해 개발자는 프로그래밍 방식으로 Kafka 리소스를 생성, 삭제, 설명 및 수정할 수 있습니다. 주요 작업은 다음과 같습니다:
 
@@ -94,43 +134,6 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 참고: [https://kafka.apache.org/documentation/#adminapi](https://kafka.apache.org/documentation/#adminapi)
 
-## 2. Kafka 구성 요소
-
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
-
-
-
-* Broker: 데이터를 수신, 전달(Consumer의 요구에 따라 응답)&#x20;
-* Message: 데이터의 최소 단위, key/value 구조, 전송 시 Partition 이용&#x20;
-* Producer: 데이터 생산자, broker에 Message 전달&#x20;
-  * 레코드를 프로듀스할 때 어느 토픽의 어느 파티션에 할당할 지를 결정한다&#x20;
-* Consumer: 메시지 가지고 온다.
-* Topic: 메시지 종류별로 Broker에서 관리&#x20;
-  * 카프카 안에는 여러 레코드 스트림이 있을 수 있다.&#x20;
-  * 하나의 토픽에 대해 여러 Subscriber가 붙을 수 있음
-
-## 3. Kafka 시스템 구성
-
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
-
-
-
-
-
-* **API**: Producer, Consumer개발을 위한 API&#x20;
-* **ZooKeeper**: 분산 처리를 위한 관리 도구&#x20;
-  * 분산 메시징의 메타 데이터 (Topic, Partition .. )를 관리&#x20;
-  * 카프카 클러스터의 리더(Leader)를 발탁하는 방식도 주키퍼가 제공하는 기능&#x20;
-* **Kafka Admin**: Kafka 관리&#x20;
-* **Kafka Cluster 구성 방법**
-  1. **수동 설치 및 설정**:
-     * **Zookeeper 설치**: Kafka는 Zookeeper와 함께 실행되므로 먼저 Zookeeper를 설치해야 합니다. Zookeeper는 Kafka의 메타데이터와 상태 정보를 관리합니다.
-     * **Kafka 설치**: Kafka를 다운로드하고 각 노드에 설치합니다. 설치된 Kafka 노드는 Zookeeper와 연결됩니다.
-     * **Kafka Broker 설정**: 각 Kafka 브로커의 `server.properties` 파일을 수정하여 브로커 ID, 포트, 로그 디렉토리, Zookeeper 연결 정보 등을 설정합니다.
-     * **Kafka 브로커 실행**: Zookeeper와 Kafka 브로커를 실행합니다.
-  2. **Docker Compose를 사용한 설치**:
-     * Docker Compose를 사용하면 간편하게 Kafka Cluster를 구성할 수 있으며. Docker Compose 파일에 Zookeeper와 Kafka 노드를 정의하고 실행하면 됩니다
-
 ## 4. 분산 메세징 구조
 
 ### 4-1. 논리적 구조
@@ -139,7 +142,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 * **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
   * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
-* **Partition**: 각 토픽 당 데이터를 분산 처리하는 단위&#x20;
+* **Partition**: 카프카 토픽 내에서 데이터를 논리적으로 분할하는 메커니즘으로 각 파티션은 독립적으로 관리되며, 데이터를 저장하고 처리하는 단위입니다.
   * Offset: 파티션 단위로 메시지 위치를 나타냄&#x20;
     * Log-End-Offset(LEO): 파티션 데이터의 끝&#x20;
     * Current Offset: 컨슈머가 어디까지 메시지를 읽은 위치 (Consumer Group별)&#x20;
