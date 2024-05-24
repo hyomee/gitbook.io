@@ -8,7 +8,7 @@
 
 **병렬성(Parallelism)**은 여러 작업을 실제로 동시에 처리하는 것이다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <table><thead><tr><th width="145">구분</th><th>동시성</th><th>병렬성</th></tr></thead><tbody><tr><td>개념</td><td>동시에 처리하는 것처럼 보이게 하는 것</td><td>여러 작업을 실제로 동시에 처리하는 것</td></tr><tr><td>사용 코어 수</td><td>싱글 코어</td><td>멀티 코어</td></tr><tr><td>동작 방식</td><td>싱글 코어에서 멀티 쓰레드(Multi thread)를 동작 시키는 방식</td><td>멀티 코어에서 멀티 쓰레드(Multi thread)를 동작시키는 방식</td></tr><tr><td>개념적 차이</td><td>논리적인 개념</td><td>물리적인 개념</td></tr></tbody></table>
 

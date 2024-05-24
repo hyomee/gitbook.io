@@ -33,9 +33,7 @@ description: >-
 
 ## 3. Kafka 구성 요소
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
-
-
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
 
 * **Broker**: 데이터를 수신/전달하는  기능으로 하나의 서버(인스턴스) 당 하나의 데몬으로 동작하며 클러스터로 구성하여 처리량을 향상 시킬수 있습니다. 또한 받은 테이터는 파일로 저장됩니다.
 * **Message**: 데이터의 최소 단위, key/value 구조, 전송 시 Partition 이용&#x20;
@@ -53,23 +51,26 @@ description: >-
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
 
-
-
-
-
 * **API**: Producer, Consumer개발을 위한 API&#x20;
 * **ZooKeeper**: 분산 처리를 위한 관리 도구로 필요하며 산 메시징의 메타 데이터 (Topic, Partition )를 관리하기 위한 기능입니다.
   * 카프카 클러스터의 리더(Leader)를 발탁하는 방식도 주키퍼가 제공하는 기능&#x20;
 * **Kafka Admin**: Kafka 관리&#x20;
-* **Kafka Cluster:** 분산 스트리밍 플랫폼으로 여러 대의 브로커를 구성한 클러스터를 의미하며.데이터를 생성하는 어플리케이션과 데이터를 소비하는 어플리케이션 간의 중재자 역할을 하고, 데이터의 전송 제어, 처리, 관리 역할을 합니다. 카프카 시스템은 여러 요소(노드)와 함께 구성될 수 있어 카프카 클러스터라고도 합니다
+* **Kafka Cluster:** 분산 스트리밍 플랫폼으로 여러 대의 브로커를 구성한 클러스터를 의미하며.데이터를 생성하는 어플리케이션과 데이터를 소비하는 어플리케이션 간의 중재자 역할을 하고, 데이터의 전송 제어, 처리, 관리 역할을 합니다. 카프카 시스템은 여러 요소(노드)와 함께 구성될 수 있어 카프카 클러스터라고도 합니다.
   * &#x20;**구성 방법**
     1. **수동 설치 및 설정**:
        * **Zookeeper 설치**: Kafka는 Zookeeper와 함께 실행되므로 먼저 Zookeeper를 설치해야 합니다. Zookeeper는 Kafka의 메타데이터와 상태 정보를 관리합니다.
        * **Kafka 설치**: Kafka를 다운로드하고 각 노드에 설치합니다. 설치된 Kafka 노드는 Zookeeper와 연결됩니다.
        * **Kafka Broker 설정**: 각 Kafka 브로커의 `server.properties` 파일을 수정하여 브로커 ID, 포트, 로그 디렉토리, Zookeeper 연결 정보 등을 설정합니다.
        * **Kafka 브로커 실행**: Zookeeper와 Kafka 브로커를 실행합니다.
-    2. **Docker Compose를 사용한 설치**:
-       * Docker Compose를 사용하면 간편하게 Kafka Cluster를 구성할 수 있으며. Docker Compose 파일에 Zookeeper와 Kafka 노드를 정의하고 실행하면 됩니다
+       * **Docker Compose를 사용한 설치**:
+         * Docker Compose를 사용하면 간편하게 Kafka Cluster를 구성할 수 있으며. Docker Compose 파일에 Zookeeper와 Kafka 노드를 정의하고 실행하면 됩니다
+  *   **클러스터 구성**\
+
+
+      <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+      * 브로커, 프로듀서, 컨슈머, 카프카 클라이언트는 각각의 서버에서 담당
+      * Zookeeper는 데이터 쓰기가 과반수 서버에 성공했을 떄 성공으로 간주하므로 홀수 노드 수가 바람직하며, Kafka와 동일 서버에 설치 여부는 시스템 요구 사항에 따라서 달라진다.
 
 ### 4-1. Kafka API
 
@@ -138,7 +139,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 ### 4-1. 논리적 구조
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
 
 * **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
   * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
@@ -157,7 +158,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 ### 4-2. 물리적 구조
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
 
 카프카 클러스터는 다중 브로커로 구성이 되며 클러스터에 대한 쓰기/읽기 작업의 부하 분산을 도와주고 있으며 각 브로커의 상태는 주키퍼를 사용 합니다.
 
