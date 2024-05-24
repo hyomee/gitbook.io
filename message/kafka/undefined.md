@@ -6,10 +6,19 @@ description: >-
 
 # 개요
 
-## 1. Kafka 메세지 모델
+## 1. 메세지 모델
 
-* **Queuing Model**:  여러 Consumer가 분산 처리로 메시지를 소비하는 Queuing Model&#x20;
-* **Pub/Sub Model**: 여러 Subscriber에 동일한 메시지를 전달 하고, Topic 기반으로 전달 내용을 변경하는 Pub/Sub Model -> Consumer Group 개념 도입
+카프카 메세지 모텔은 프로듀서(Producer), 브로커(Broker), 컨슈머(Consumer)로 구성이 되면 두가지 모델이 있으며 Consumer Group을 도입하여 컨슈머를 확장할 수 있습니다.
+
+### **1-1. Queuing Model**
+
+여러 Consumer가 분산 처리로 메시지를 소비하는 모델로  프로듀서에서 메세지가 큐에 담기고 컨슈머가 큐에서 메세지를 추출하는 방법으로 추출한 메세지는 컨슈머 중 하나가 처리합니다. &#x20;
+
+<figure><img src="../../.gitbook/assets/image (275).png" alt="" width="563"><figcaption></figcaption></figure>
+
+### **1-2. Pub/Sub Model**
+
+여러 Subscriber에 동일한 메시지를 전달 하고, Topic 기반으로 전달 내용을 변경하는 모델&#x20;
 
 ## 2. Kafka 구성 요소
 
