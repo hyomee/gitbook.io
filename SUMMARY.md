@@ -137,5 +137,5 @@
     * [개요](mq-broker/kafka/undefined.md)
     * [메세지 송수신](mq-broker/kafka/undefined-1.md)
     * [설치](mq-broker/kafka/undefined-2.md)
-  * [RabbitMQ](mq-broker/rabbitmq/README.md)
+  * [RabbitMQ](mq-broker/rabbitmq.md)
     * [Page](mq-broker/rabbitmq/page.md)

@@ -6,7 +6,7 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 
 ## 1. RabbitMQ의 주요 개념
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 * **Producer**: 메시지를 보내는 주체로, 보내고자 하는 메시지를 Exchange에 publish합니다.
 * **Consumer**: Producer로부터 메시지를 받아 처리하는 주체입니다.
@@ -19,7 +19,7 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 
 게시자가 메시지를 게시하면 먼저 교환에서 메시지를 받습니다. 그런 다음 교환은 교환 유형에 따라 메시지를 큐로 전달합니다.
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 * **Fan-out Exchange:** Exchange에 연결되 모든 queue에 메세지를 전달 합니다.
 * **Direct Exchange:** Binding Key가 게시자가 지정한 Routing Key와 정확히 동일한 Exchange에 연결된 Queue로 전달합니다.
