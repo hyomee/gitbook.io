@@ -75,7 +75,7 @@ public class JobErrorConfig {
 
 * **정상 수행 결과**
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -99,7 +99,7 @@ public class JobErrorConfig {
 
 </details>
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2.  오류   수정 소스및 결과
 
@@ -108,7 +108,7 @@ public class JobErrorConfig {
 * TaskletErrorStep: 강제 오류 발생&#x20;
 * ChunkErrorStep: ItemWriter에서 강제 오류 발생
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -219,9 +219,9 @@ public class JobErrorConfig {
 *   실행 결과: TaskletErrorJob에서 오류가 발생 하여 Job이 종료된다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 3.  Job - preventRestart
 
