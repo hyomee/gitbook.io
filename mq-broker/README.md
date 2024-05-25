@@ -1,10 +1,12 @@
 # MQ/Broker
 
-
-
 * **Kafka 기본 자료**
 
 {% file src="../.gitbook/assets/KAFKA 기본 자료_20201012_v0.1.pdf" %}
+
+* RabbitMQ: [https://www.rabbitmq.com/](https://www.rabbitmq.com/)
+
+
 
 *   **참고 사이트:**
 
