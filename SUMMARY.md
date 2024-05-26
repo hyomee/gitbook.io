@@ -138,4 +138,5 @@
     * [메세지 송수신](mq-broker/kafka/undefined-1.md)
     * [설치](mq-broker/kafka/undefined-2.md)
   * [RabbitMQ](mq-broker/rabbitmq.md)
-    * [Page](mq-broker/rabbitmq/page.md)
+    * [Binding](mq-broker/rabbitmq/binding.md)
+    * [RabbitMQ의 동작](mq-broker/rabbitmq/rabbitmq.md)
