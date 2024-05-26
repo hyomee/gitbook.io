@@ -1,4 +1,4 @@
-# RabbitMQ의 동작
+# AMQP 송수신 확인 모델
 
 <figure><img src="../../.gitbook/assets/image (296).png" alt=""><figcaption></figcaption></figure>
 

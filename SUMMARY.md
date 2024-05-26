@@ -138,5 +138,5 @@
     * [메세지 송수신](mq-broker/kafka/undefined-1.md)
     * [설치](mq-broker/kafka/undefined-2.md)
   * [RabbitMQ](mq-broker/rabbitmq.md)
-    * [Binding](mq-broker/rabbitmq/binding.md)
-    * [RabbitMQ의 동작](mq-broker/rabbitmq/rabbitmq.md)
+    * [Binding](mq-broker/rabbitmq/page.md)
+    * [AMQP 송수신 확인 모델](mq-broker/rabbitmq/amqp.md)
