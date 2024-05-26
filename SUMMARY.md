@@ -27,3 +27,4 @@
     * [밑바닥부터 시작하는 딥러닝 4](book/2024/001.md)
     * [쉽고 빠르게 익히는 실전 LLM](book/2024/llm.md)
     * [챗 GPT API를 활용한 챗봇 만들기](book/2024/creategpt.md)
+    * [겐트 벡의 Tidy First](book/2024/tidy-first.md)

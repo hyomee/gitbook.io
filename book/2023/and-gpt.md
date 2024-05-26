@@ -4,7 +4,7 @@
 
 가까운 미래에 개발자는 없어 진다고 하는 이야기하는 개발자 친구들 있지만 개인적인 생각으로  No Coding으로 개발자는 없어질 것 이라고 하는데 2023년 현재도 개발자는 부족한 것이 현실로 개인적인 의견은 개발자는 없어지지 않고 AI와 페어 프로그램으로 상호 보안 하면서 나아갈 것으로 예상이 됩니다.  실제 6개월 정도 GPT에 질의 하여 답을 찾고 작성한 코드에 대한 인스펙션을 요청하여 좋은 코드가 작성이 된 경험이 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 본 도서는 개발자 입장에서 GPT를 활용하는 방법에 대해서 소개 하는 도서로 GitHub 기반의 코파일럿 활용 방안 및 일반 GPT활용 방법 까지 프롬프트를 어떻게 작성해야 원하는 결과를 얻을 수 있도록 소개해 주는 도서 입니다,
 
