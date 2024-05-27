@@ -139,4 +139,4 @@
     * [설치](mq-broker/kafka/undefined-2.md)
   * [RabbitMQ](mq-broker/rabbitmq.md)
     * [Binding](mq-broker/rabbitmq/page.md)
-  * [송수신 확인 모델](mq-broker/undefined.md)
+  * [송수신 확인](mq-broker/amqp.md)
