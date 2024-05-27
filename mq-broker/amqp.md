@@ -42,24 +42,29 @@ RabbitMQ의  메시지를 성공적으로 받았음을 확인하는 메커니즘
 
 ### **2-1. Publisher Acknowledgment Model (발행자 확인 모델)**:
 
-Producer가 메시지를 브로커로 성공적으로 전송했음을 확인하기 위해 사용되는.것으로 Producer가 메시지를 브로커로 전송한 후 브로커로부터 확인을 받으면 메시지가 안전하게 전달되었다고 판단합니다.
+**Publisher**가 메시지를 브로커로 성공적으로 전송했음을 확인하기 위해 사용되는.것으로 **Publisher**가 메시지를 브로커로 전송한 후 브로커로부터 확인을 받으면 메시지가 안전하게 전달되었다고 판단합니다.
 
-* **Publisher Confirms:** RabbitMQ에서 신뢰성 있는 메시지 발행을 구현하기 위한 확장 기능으로 퍼블리셔가 메시지를 발행한 후 브로커에서 비동기적으로 확인을 받습니다. 이는 서버 측에서 메시지 처리가 완료되었음을 의미합니다
-  * Producer가 메시지를 발행한 후 브로커로부터 확인 응답을 받아야 합니다.
-  * 브로커는 메시지를 받았을 때 발행자에게 확인 응답을 보냅니다.
-  * 발행자는 브로커로부터 확인 응답을 받으면 해당 메시지를 안전하게 처리했다고 판단하고 다음 메시지를 발행합니다.
-  * 이 모델은 메시지 발행 시 손실을 최소화하고, 발행자가 메시지를 안전하게 전송할 수 있도록 합니다.
-  * 활성화 방법:
-    * Publisher confirms를 사용하려면 채널에서 confirm.select 메서드를 호출해야 합니다.
-    * 브로커는 confirm.select-ok 응답을 반환하며, 이후 해당 채널은 confirm 모드로 설정됩니다 ([https://stackoverflow.com/questions/58902366/how-does-rabbitmq-publisher-confirms-work](https://stackoverflow.com/questions/58902366/how-does-rabbitmq-publisher-confirms-work))
-  * 참고: [https://www.rabbitmq.com/tutorials/tutorial-seven-php](https://www.rabbitmq.com/tutorials/tutorial-seven-php),&#x20;
-* **Publisher Returns:**
-  * 브로커가 메시지를 라우팅할 수 없을 때 발생합니다.
-  * Producer가 메시지를 브로커로 전송한 후 브로커가 메시지를 라우팅할 수 없으면 Producer는 해당 메시지를 처리하고 실패한 메시지를 다른 곳으로 보낼 수 있습니다
+#### **2-1-1. Publisher Confirms:**
+
+&#x20;RabbitMQ에서 신뢰성 있는 메시지 발행을 구현하기 위한 확장 기능으로 퍼블리셔가 메시지를 발행한 후 브로커에서 비동기적으로 확인을 받습니다. 이는 서버 측에서 메시지 처리가 완료되었음을 의미합니다
+
+* Publisher가 메시지를 발행한 후 브로커로부터 확인 응답을 받아야 합니다.
+* 브로커는 메시지를 받았을 때 발행자에게 확인 응답을 보냅니다.
+* 발행자는 브로커로부터 확인 응답을 받으면 해당 메시지를 안전하게 처리했다고 판단하고 다음 메시지를 발행합니다.
+* 이 모델은 메시지 발행 시 손실을 최소화하고, 발행자가 메시지를 안전하게 전송할 수 있도록 합니다.
+* 활성화 방법:
+  * Publisher confirms를 사용하려면 채널에서 confirm.select 메서드를 호출해야 합니다.
+  * 브로커는 confirm.select-ok 응답을 반환하며, 이후 해당 채널은 confirm 모드로 설정됩니다 ([https://stackoverflow.com/questions/58902366/how-does-rabbitmq-publisher-confirms-work](https://stackoverflow.com/questions/58902366/how-does-rabbitmq-publisher-confirms-work))
+* 참고: [https://www.rabbitmq.com/tutorials/tutorial-seven-php](https://www.rabbitmq.com/tutorials/tutorial-seven-php),&#x20;
+
+**2-1-2. Publisher Returns:**
+
+* 브로커가 메시지를 라우팅할 수 없을 때 발생합니다.
+* **Publisher** 가 메시지를 브로커로 전송한 후 브로커가 메시지를 라우팅할 수 없으면 **Publisher** 는 해당 메시지를 처리하고 실패한 메시지를 다른 곳으로 보낼 수 있습니다
 
 ### **2-2. Consumer Acknowledgment Model (소비자 확인 모델)**
 
-메시지를 처리한 컨슈머가 해당 메시지를 성공적으로 받았음을 확인하는 메커니즘으로  RabbitMQ에서 데이터 안전성과 신뢰성을 보장하기 위해 중요한 역할을 합니다. Consumer가 메시지를 처리했음을 명시적으로 확인하기 위해 사용되며 Consumer가 처리한 메시지를 표시하고, Consumer가 처리 중에 실패하더라도 메시지가 손실되지 않도록 보장합니다.
+메시지를 처리한 컨슈머가 해당 메시지를 성공적으로 받았음을 확인하는 메커니즘으로 데이터 안전성과 신뢰성을 보장하기 위해 중요한 역할로Consumer가 메시지를 처리했음을 명시적으로 확인하기 위해 사용되며 Consumer가 처리한 메시지를 표시하고, Consumer가 처리 중에 실패하더라도 메시지가 손실되지 않도록 보장합니다.
 
 * 이 모델에서는 Consumer가 메시지를 받으면 브로커에게 통지합니다.
 * 브로커는 해당 메시지를 Queue에서 삭제하기 전에 Consumer로부터 통지를 받아야 합니다.
@@ -67,18 +72,36 @@ Producer가 메시지를 브로커로 성공적으로 전송했음을 확인하�
 * 이 모델은 메시지 손실을 최소화하고, Consumer가 메시지를 안전하게 처리할 수 있도록 합니다.
 * 참고: [https://www.rabbitmq.com/docs/confirms](https://www.rabbitmq.com/docs/confirms)
 
-1. **Consumer Acknowledgements (소비자 확인)**:
-   * 컨슈머가 메시지를 처리했음을 명시적으로 확인하기 위해 사용됩니다.
-   * RabbitMQ에서는 다음과 같은 세 가지 유형의 Consumer Acknowledgements을 지원합니다.
-     * basic.ack: 메시지를 성공적으로 처리한 경우에 사용.
-     * basic.nack: 메시지 처리를 실패했거나 다시 처리해야 하는 경우에 사용
-     * basic.reject: 특정 메시지를 처리하지 않고 다시 큐로 되돌리는 경우에 사용
-   * **수동 커밋 (Manual Acknowledgement):** 컨슈머는 메시지 처리 상태를 브로커에 알리고, 처리 완료된 메시지를 미래에 삭제할 수 있도록 합니다
-   * 참고:  [https://stackoverflow.com/questions/44417191/spring-cloud-stream-rabbit-delivery-acknowledgment](https://stackoverflow.com/questions/44417191/spring-cloud-stream-rabbit-delivery-acknowledgment)
-2. **자동 커밋 (Automatic Acknowledgement)**:
-   * 기본적으로 RabbitMQ Consumer는 자동 커밋 모드로 동작합니다.
-   * autoAck: true로 설정하면, 컨슈머가 메시지를 처리한 후 일정 시간(기본값은 5초)마다 자동으로 오프셋을 커밋합니다.&#x20;
-   * 이 방식은 간편하지만, 메시지 처리 중에 장애가 발생하면 메시지가 중복으로 처리될 수 있습니다
+**2-2-1. Consumer Acknowledgements (소비자 확인)**:
 
+* 컨슈머가 메시지를 처리했음을 명시적으로 확인하기 위해 사용됩니다.
+* RabbitMQ에서는 다음과 같은 세 가지 유형의 Consumer Acknowledgements을 지원합니다.
+  * basic.ack: 메시지를 성공적으로 처리한 경우에 사용.
+  * basic.nack: 메시지 처리를 실패했거나 다시 처리해야 하는 경우에 사용
+  * basic.reject: 특정 메시지를 처리하지 않고 다시 큐로 되돌리는 경우에 사용
+* 참고:  [https://stackoverflow.com/questions/44417191/spring-cloud-stream-rabbit-delivery-acknowledgment](https://stackoverflow.com/questions/44417191/spring-cloud-stream-rabbit-delivery-acknowledgment)
 
+**2-2-2. 자동 커밋 (Automatic Acknowledgement)**:
+
+* 기본적으로 RabbitMQ Consumer는 자동 커밋 모드로 동작합니다.
+* autoAck: true로 설정하면&#x20;
+  * 메시지가 자동으로 확인되고 삭제되며, 예외 발생 시 메시지가 완전히 손실될 수 있습니다. 또한 확인은 동일한 채널에서 수행되어야 합니다.
+  * 메시지를 한 번 읽고 나서는 다시 읽을 수 없게 됩니다. 즉, 메시지를 처리한 후에 RabbitMQ가 해당 메시지를 삭제합니다.&#x20;
+
+이 방식은 간편하지만, 메시지 처리 중에 장애가 발생하면 메시지가 중복으로 처리될 수 있습니다
+
+**2-2-3. 수동 커밋 (Manual Acknowledgement)**
+
+컨슈머는 메시지 처리 상태를 브로커에 알리고, 처리 완료된 메시지를 미래에 삭제할 수 있도록 합니다.
+
+* autoAck:  false 로 설정하면&#x20;
+  * 메시지는 수신되지만 수동으로 확인되어야 하며, 메시지 손실을 방지할 수 있습니다.  또한 확인은 동일한 채널에서 수행되어야 합니다
+  * 메시지를 읽되 남겨 놓게 됩니다. 이 경우 메시지를 처리한 후에도 RabbitMQ에서 해당 메시지를 삭제하지 않습니다
+
+#### 2-2-4. autoAck 설정에 따른 예시
+
+여러 개의 Consumer가 하나의 Queue를 바라보고 있고, 메시지를 Round-Robin 방식으로 분배받는 상황이면
+
+* **autoAck: true로 설정**: . 메시지를 처리한 후에 RabbitMQ가 해당 메시지를 삭제하므로 다른 Consumer가 해당 메시지를 다시 읽을 수 없습니다.
+* **autoAck: false로 설정:** 메시지를 처리한 후에도 RabbitMQ에서 해당 메시지를 유지하게 되므로, 예기치 않은 종료나 예외 상황에서 메시지가 손실되지 않도록 할 수 있습니다.
 
