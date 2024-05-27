@@ -72,6 +72,8 @@ RabbitMQ의  메시지를 성공적으로 받았음을 확인하는 메커니즘
 * 이 모델은 메시지 손실을 최소화하고, Consumer가 메시지를 안전하게 처리할 수 있도록 합니다.
 * 참고: [https://www.rabbitmq.com/docs/confirms](https://www.rabbitmq.com/docs/confirms)
 
+<figure><img src="../.gitbook/assets/image (298).png" alt=""><figcaption></figcaption></figure>
+
 **2-2-1. Consumer Acknowledgements (소비자 확인)**:
 
 * 컨슈머가 메시지를 처리했음을 명시적으로 확인하기 위해 사용됩니다.
