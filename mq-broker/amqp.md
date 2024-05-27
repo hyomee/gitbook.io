@@ -36,9 +36,9 @@ Consumer 측에서는 **Consumer Group** 개념을 사용하여 각 Consumer Gro
 
 ## 2. RabbitMQ
 
+RabbitMQ의  메시지를 성공적으로 받았음을 확인하는 메커니즘으로 데이터 안전성과 신뢰성을 보장하기 위해 중요한 역할을 합니다.
 
-
-참고: [https://www.rabbitmq.com/docs/confirms](https://www.rabbitmq.com/docs/confirms)
+참고: [Consumer Acknowledgements and Publisher Confirms ](https://www.rabbitmq.com/docs/confirms)
 
 ### **2-1. Publisher Acknowledgment Model (발행자 확인 모델)**:
 
