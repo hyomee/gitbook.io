@@ -123,7 +123,7 @@ public Job JobFlowJob(JobRepository jobRepository,
 
     <figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 2-2. "COMPLETED" 인 경우
 
@@ -150,7 +150,7 @@ public Job JobFlowJob(JobRepository jobRepository,
 *   결과:  시작 Step 결과가  COMPLETED이고 "COMPLETED"일 떄 실행되는 Step은 COMPLETED 이다. Job은 정상 수행이 되어 COMPLETED가 된다  \
 
 
-    <figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     <figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

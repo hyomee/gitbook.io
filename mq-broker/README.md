@@ -2,7 +2,7 @@
 
 **Kafka**와 **RabbitMQ**는 모두 메시지 대기열 시스템이지만, 각각 다른 강점과 약점을 가지고 있습니다.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>참고: <a href="https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/">https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/</a></p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption><p>참고: <a href="https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/">https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/</a></p></figcaption></figure>
 
 1. **Kafka**:
    * **분산 로그**로 설계되어 있어 높은 메시지 처리량, 내결함성 및 확장성을 제공합니다.

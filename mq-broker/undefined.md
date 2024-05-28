@@ -42,7 +42,7 @@
 *   **메세지(Data P**acket**)**: 네트워크 통신에서 데이터 전송의 기본 단위는 패킷이며, 이는 데이터를 작은 조각으로 나누어 이동시킵니다. 패킷은 제어 정보와 사용자 데이터, 즉 페이로드로 구성됩니다. 보통 패킷은 헤더, 데이터, 트레일러로 구성되어 있습니다.\
 
 
-    <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -57,9 +57,56 @@
 
 <details>
 
-<summary></summary>
+<summary>메세지 큐와 메세지 브로커의 차이점 </summary>
 
-네트워크 통신에서 데이터를 전송하는 단위를 의미합니다. 네트워크에서 데이터는 작은 조각으로 나누어져 전송되며, 이러한 작은 조각을 패킷이라고 합니다. 패킷은 송신자에서 수신자로 전달되는 동안 여러 노드를 거쳐 전송되며, 각 노드에서는 패킷을 검사하고 라우팅하여 최종 목적지까지 전달됩니다. 패킷은 헤더와 데이터로 구성되며, 헤더에는 출발지, 목적지, 길이, 제어 정보 등이 포함됩니다. 이렇게 작은 단위로 데이터를 나누어 전송함으로써 효율적이고 신속한 통신이 가능해집니다. 패킷은 인터넷과 같은 네트워크에서 중요한 역할을 하며, 데이터를 안정적으로 전달하는 데 필수적입니다
+메시지 큐는 개별 메시지를 전달하는 P2P 방식의 1:1 메시지 중계를 제공하고, 메시지 브로커는 중앙 집중식 아키텍처를 통해 1:N, N:1의 브로드 캐스트 스타일의 메시지 중계를 지원합니다
+
+1. **메시지 큐 (Message Queue)**:
+   * **메시지 큐**는 컴퓨터 시스템에서 다른 프로세스나 컴포넌트 간의 메시지를 안전하고 효율적으로 전달하기 위한 소프트웨어나 서비스입니다.
+   * 큐 자체는 선입 선출의 구조를 가진 자료구조로, 메시지를 전달하는 Producer(송신자) 부분(입구)과 메시지를 받아 이를 소비하는 Consumer(수신자) 부분(출구) 사이에서 메시지를 전달하는 매개체입니다.
+   * 메시지 큐는 비동기 프로세스 제어, 낮은 결합도 유지, 시스템 신뢰성 및 안정성 보장, 확장성 등의 장점을 활용하여 현대적인 소프트웨어 아키텍처에서 필수적인 요소로 활용됩니다[1](https://velog.io/@beberiche/Architecture-%EB%A9%94%EC%8B%9C%EC%A7%80-%ED%81%90%EC%99%80-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B8%8C%EB%A1%9C%EC%BB%A4-MSA%EC%9D%98-%ED%95%B5%EC%8B%AC%EC%9A%94%EC%86%8C).
+2. **메시지 브로커 (Message Broker)**:
+   * 메시지 브로커는 메시지 큐를 대규모 트래픽을 감당해야하는 어플리케이션의 장점에 맞게 확장한 기술입니다.
+   * 기존 메시지 큐는 전달하는 쪽에서 전달 받는 쪽으로 메시지를 전달하는 매개체로서의 의미를 가지고 있습니다. 반면, 메시지 브로커는 더 광범위한 전송과 라우팅을 허용하며, 중앙 집중식 아키텍처를 채택하여 1:N, N:1의 브로드 캐스트 스타일의 메시지 중계를 제공합니다[2](https://bing.com/search?q=%EB%A9%94%EC%8B%9C%EC%A7%80+%ED%81%90%EC%99%80+%EB%A9%94%EC%8B%9C%EC%A7%80+%EB%B8%8C%EB%A1%9C%EC%BB%A4%EC%9D%98+%EC%B0%A8%EC%9D%B4).
 
 </details>
 
+* **Protocol:** 시스템(또는 어플리케이션) 간에 메세지 교환에 대한 규칙으로 데이터 전송 프로토콜에는 다음과 같은 것들이 있습니다.
+  * **AMQP(Advanced Messing Queueing Protocol)**:  메시지 지향 미들웨어(MOM) 시스템 간에 통신하기 위한 개방형 네트워크 프로토콜입니다[1](https://velog.io/@black\_han26/AMQPAdvanced-Message-Queuing-Protocol). 간단히 말해서,   송신자(Producer)와 **수신자(Consumer)** 사이에서 메시지를 안전하게 교환하는 표준 프로토콜입니다
+  * **STOMP(Streaming Text Oriented Message Protocol):** 웹소켓 위에서 동작하는 문자 기반 메시징 프로토콜입니다.(Pub/Sub 구조)
+  * **MQTT(Message Queue Telemetry Transport):** 경량 및 효율적인 대역폭을 사용하여 멀티 레벨의 QoS(Quality of Service)를 지원하며, 현재는 IoT 또는 M2M (machine to machine communications) 통신에 많이 사용됩니다(Broker/Publisher/Subscriber 구조)
+  * **HTTP(Hypertext Transfer Protocol)/HTTPS (Hypertext Transfer Protocol Secure**):  클라이언트와 서버 사이에 이루어지는 요청/응답 (request/response) 프로토콜로 HTTPS  보안이 강화된 것 입니다,
+  * **FTP(File Transfer Protocol)**: TCP/IP 프로토콜을 사용하여 서버와 클라이언트 사이의 파일 전송을 위한 프로토콜입니다
+  * SMTP (Simple Mail Transfer Protocol), POP3 (Post Office Protocol version 3), IMAP (Internet Message Access Protocol), TCP (Transmission Control Protocol), UDP (User Datagram Protocol), DNS (Domain Name System) 등이 있습니다.
+
+## 2. 메세징 시스템 모델
+
+### **2-1. Point-to-Point (P2P) 모델**:
+
+* &#x20;메시지를 발신하는 Producer와 메시지를 수신하는 Consumer가 직접적으로 연결됩니다.
+* 메시지는 큐를 통해 전달되며, Consumer는 큐에서 메시지를 하나씩 꺼내 읽습니다.
+* P2P 모델은 1:1 통신을 지원하며, 메시지의 안정성과 순서를 보장합니다.
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>P2P  모델</p></figcaption></figure>
+
+#### 2-1-1. PTP 메세징 모델은 다음의 두가지 유형
+
+1. **Fire-and-forget Model:**&#x20;
+   * 메시지를 발신하는 측은 메시지를 보낸 후 응답을 기다리지 않고 다른 작업을 수행할 수 있습니다.&#x20;
+   * 메시지는 수신자에게 전달되며, 수신자는 메시지를 처리하고 응답을 보내지 않습니다.&#x20;
+   *   이러한 상태 없는(stateless) 메시지 교환은 확장성 있는 메시징 시스템에서 효과적으로 사용됩니다. 즉, 메시지를 보낸 후 추가적인 처리나 응답을 기다리지 않고 다음 작업을 수행하는 방식입니다.\
+
+
+       <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+2. **Request/reply Model:**
+   * **요청(Request)**: 메시지를 발신하는 측이 메시지를 보내고, 응답을 기다립니다.
+   * **응답(Reply)**: 메시지를 수신하는 측은 요청을 처리하고, 응답 메시지를 발신자에게 보냅니다.
+   *   1:1 통신을 지원하며, 메시지의 안정성과 순서를 보장합니다. 요청과 응답이 짝지어져 있으므로, 특정 작업을 수행하고 그 결과를 돌려받아야 할 때 유용하게 사용됩니다
+
+       <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+### **2-2. Publish-Subscribe (Pub/Sub) 모델**:
+
+* 이 모델에서는 메시지를 발행하는 Publisher가 특정 주제(topic)에 메시지를 보냅니다.
+* 해당 주제를 구독(subscribe)해놓은 모든 Subscriber가 메시지를 받습니다.
+* Pub/Sub 모델은 1:N 통신을 지원하며, 메시지의 브로드캐스팅과 유연한 확장성을 제공합니다.

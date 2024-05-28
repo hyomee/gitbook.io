@@ -71,14 +71,14 @@ Spring Batch가 Chunk 지향 처리를 하는데 중요한 역할을 하는것�
 
 
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### 1-2-2.  Paging
 
 * `LIMIT`, `OFFSET` 쿼리를 사용하여 페이지 단위로 데이터를 구분하여 요청/응답하는 방식이다.
 * JVM 메모리에 한 번에 모든 결과를 올리는 것으로 크기를 계산 하여야 한다.
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 {% code lineNumbers="true" %}
 ```java
