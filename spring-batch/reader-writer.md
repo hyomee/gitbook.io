@@ -32,7 +32,7 @@ Spring Batch가 Chunk 지향 처리를 하는데 중요한 역할을 하는것�
 * Cursor를 사용하면 JVM 메모리에 한 번에 모든 결과를 올려둘 필요가 없으므로, 대량 데이터를 효율적으로 처리할 수 있다.
 * Cursor의 크기를 직접 가져오는 기능은 없으므로, Cursor를 사용할 때는 전체 데이터를 순회하며 처리해야한다.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 **fetchSize:** 데이터베이스에서 한 번에 가져올 데이터의 행 수를 설정하는 속성으로 최적화하여 데이터를 가져오는 횟수를 줄임으로써 성능을 향상시킬 수 있다.
 
@@ -65,7 +65,7 @@ Spring Batch가 Chunk 지향 처리를 하는데 중요한 역할을 하는것�
 
 *   9 \~ 12 Line: 주석을  풀면 오류가 발생한다.
 
-    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * 쿼리: SELECT BATCH\_SEQ, MEMBER\_NO, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, ITEM7, ITEM8, ITEM9, ITEM10, ITEM11, ITEM12 FROM TB\_BATCH\_LIST ORDER BY BATCH\_SEQ ASC LIMIT 20
 *   결과: SELECT 쿼리가  한번 수행 됨
 
