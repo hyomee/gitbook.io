@@ -107,6 +107,25 @@
 
 ### **2-2. Publish-Subscribe (Pub/Sub) 모델**:
 
-* 이 모델에서는 메시지를 발행하는 Publisher가 특정 주제(topic)에 메시지를 보냅니다.
+* 메시지를 발행하는 Publisher가 특정 주제(topic)에 메시지를 보냅니다.
 * 해당 주제를 구독(subscribe)해놓은 모든 Subscriber가 메시지를 받습니다.
 * Pub/Sub 모델은 1:N 통신을 지원하며, 메시지의 브로드캐스팅과 유연한 확장성을 제공합니다.
+
+<figure><img src="../.gitbook/assets/image (299).png" alt=""><figcaption></figcaption></figure>
+
+#### 2-2-1.   Event Channel
+
+객체 (Subscriber)와 이벤트 발생 객체 (Publisher) 사이에 위치하는 Event Channel이 있어 다음과 같이 동작합니다.
+
+* Publisher는 Subscriber를 모른체로 이벤트 발생 시 Event Channel에게 메시지를 넘겨주고 (push),&#x20;
+* 중간 컴포넌트는 이벤트들을 필터링해서 받아야 할 수신자들에게 보내줍니다.&#x20;
+* &#x20;Subscriber는 Publisher에 대한 정보 없이 자신의 Interest에 맞는 메시지만을 전송 받는 것을 말합니다.&#x20;
+* Pub/Sub 모델은 응답과 상관없이 중간 객체를 건너가기 때문에 비동기 방식으로 동작합니다
+* Pub/Sub 모델은 대용량 데이터 처리 배치 작업, 채팅, 알림 등에 활용됩니다.
+
+#### 2-2-1.  Pub/Sub 모델의 장점
+
+* **비동기**: 동기식 요청-응답 방식이면, 끊임없이 메시지를 주고받는 채팅 시스템과 같은 상황에서 유연하게 대처할 수 없습니다.
+* **Decoupling (결합도 감소)**: 어플리케이션과 분리되어 있기 때문에 코드 관리, 재사용성, 안정성이 높아집니다.
+* **Scalable (확장성)**: 다수의 프로세스들이 큐에 메시지를 보낼 수 있습니다.
+
