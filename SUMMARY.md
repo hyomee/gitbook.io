@@ -133,7 +133,7 @@
 * [DB 관련](db/README.md)
   * [Redis](db/redis.md)
 * [Message Service](message-service/README.md)
-  * [메세징 시스템](message-service/undefined.md)
+  * [메시징 시스템](message-service/undefined.md)
   * [Kafka](message-service/kafka/README.md)
     * [개요](message-service/kafka/undefined.md)
     * [메세지 송수신](message-service/kafka/undefined-1.md)
