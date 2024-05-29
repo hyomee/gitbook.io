@@ -1,238 +1,217 @@
----
-description: >-
-  Apache Kafka는 고성능 데이터 파이프 라인, 스트리밍 분석, 데이터 통합 ​​및 미션 크리티컬 애플리케이션을 위해 사용하는 오픈
-  소스 분산 이벤트 스트리밍 플랫폼
----
+# 설치
 
-# 개요
+아파치 카프카는 아파치 소프트웨어 재단에서 배포하고 있는 [아파치 카프카](https://kafka.apache.org/) 통해서 배포판을 다운로드 받아서 설치하면 됩니다.&#x20;
 
-## 1. 일반적인 메세지 모델
+참고: [https://kafka.apache.org/quickstart](https://kafka.apache.org/quickstart)
 
-### **1-1. Queuing Model**
+우분투에서 설치하는 방법에 대해서 살펴보겠습니다.
 
-여러 Consumer가 분산 처리로 메시지를 소비하는 모델로  프로듀서에서 메세지가 큐에 담기고 컨슈머가 큐에서 메세지를 추출하는 방법으로 추출한 메세지는 컨슈머 중 하나가 처리합니다. &#x20;
+자바가 설치 되어 있지 않으면 자바를 먼저 설치 합니다.
 
-<figure><img src="../../.gitbook/assets/image (275).png" alt=""><figcaption></figcaption></figure>
+```sh
+sudo apt update
+sudo apt upgrades
+udo apt install default-jdk // 1.8 버전 이상 설치
+```
 
-### **1-2. Pub/Sub Model**
+## 1. Kafka 설치
 
-여러 Subscriber에 동일한 메시지를 전달 하고, Topic 기반으로 전달 내용을 변경하는 모델로 다음과 같은 특징이 있습니다.
+카프카는 카프카 배포판을 다운받은 후 압축을 풀고 원하는 폴더에 넣은 후 실행되므로 wget를 사용한 다운로드는 다음과 같습니다.
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+### 1-1. 다운로드
 
-* 퍼블리서에서 발행한 메세지는 브로커의 토픽에 보관되며 발행한 메세지의 소비는 퍼블리서에서 관심이 없습니다.
-* 서브스크라이버는 여러개의 토픽 중에 하나를 선택하여 받아 소비합니다.&#x20;
-* 서비스크라이버는 관심이 있는 토픽만 구독 할 수 있어 여러 서비스크라이버는 동일한 토픽을 구독하여 동일한 메세지를 소비 할 수 있습니다.
+```sh
+wget https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.7.0.tgz
+```
 
-## 2. Kafka 메세지 모델&#x20;
+* 파일 다운 로드 위치: [https://kafka.apache.org/downloads](https://kafka.apache.org/downloads)
 
-카프카 메세지 모텔은 프로듀서(Producer), 브로커(Broker), 컨슈머(Consumer)로 구성이 되면 두가지 모델이 있으며 Consumer Group을 도입하여 컨슈머를 확장할 수 있습니다.
+### 1-2. 압축 해제 및 폴더 지정
 
-* 여러 컨슈머다 분산 처리 하는 모델 (**Queuing Model**)&#x20;
-* 토픽기반으로 여러 서비스클라이버가 동일한 매세지를 받는 모델 (**Pub/Sub Model**)
+<pre class="language-bash"><code class="lang-bash">$ tar -xzf kafka_2.13-3.7.0.tgz
 
-## 3. Kafka 구성 요소
+// 압축 해제 후 원하는 폴더로 이동 
+<strong>$ sudo mv kafka_2.13-3.2.0 /usr/local/kafka
+</strong>$ cd kafka_2.13-3.7.0
+</code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+## 2. Kafka 시작
 
-* **Broker**: 데이터를 수신/전달하는  기능으로 하나의 서버(인스턴스) 당 하나의 데몬으로 동작하며 클러스터로 구성하여 처리량을 향상 시킬수 있습니다. 또한 받은 테이터는 파일로 저장됩니다.
-* **Message**: 데이터의 최소 단위, key/value 구조, 전송 시 Partition 이용&#x20;
-* **Producer**:   Producer API를 이용하여 데이터 생산자를 만드는 기능으로 브로커에 메세지를 송신하는 애플리케이션입니다. &#x20;
-  * 레코드를 프로듀스할 때 어느 토픽의 어느 파티션에 할당할 지를 결정합니다.
-  * 프로듀서에서 브로커로 메세지 송신은 PUSH로 이루어 진다
-* **Consumer**: Consumer API를 이용하여 메세지를 구독하는 기능으로 브로커에 있는 메세지를 수신하는 애플리케이션 입니다.
-  * 구독(송신)할 토픽/파티션 결정하여 브로커에서 메세지를 취득합니다.
-  * 컨슈머에서 브로커의 데이터를 PULL로 받아서 처리합니다.
-* **Topic**: 메시지 종류별로 Broker에서 관리&#x20;
-  * 카프카 안에는 여러 레코드 스트림이 있을 수 있다.&#x20;
-  * 하나의 토픽에 대해 여러 Subscriber가 붙을 수 있음
+카프카는 주키퍼 또는 KRaft와 함께 시작을 해야 합니다. 여기서는 주키퍼와 함꼐 시작합니다.
 
-## 4. Kafka 시스템 구성
+```sh
+// 주키퍼 시작
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
+// 카프카 시작 
+$ bin/kafka-server-start.sh config/server.properties
+```
 
-* **API**: Producer, Consumer개발을 위한 API&#x20;
-* **ZooKeeper**: 분산 처리를 위한 관리 도구로 필요하며 산 메시징의 메타 데이터 (Topic, Partition )를 관리하기 위한 기능입니다.
-  * 카프카 클러스터의 리더(Leader)를 발탁하는 방식도 주키퍼가 제공하는 기능&#x20;
-* **Kafka Admin**: Kafka 관리&#x20;
-* **Kafka Cluster:** 분산 스트리밍 플랫폼으로 여러 대의 브로커를 구성한 클러스터를 의미하며.데이터를 생성하는 어플리케이션과 데이터를 소비하는 어플리케이션 간의 중재자 역할을 하고, 데이터의 전송 제어, 처리, 관리 역할을 합니다. 카프카 시스템은 여러 요소(노드)와 함께 구성될 수 있어 카프카 클러스터라고도 합니다.
-  * &#x20;**구성 방법**
-    1. **수동 설치 및 설정**:
-       * **Zookeeper 설치**: Kafka는 Zookeeper와 함께 실행되므로 먼저 Zookeeper를 설치해야 합니다. Zookeeper는 Kafka의 메타데이터와 상태 정보를 관리합니다.
-       * **Kafka 설치**: Kafka를 다운로드하고 각 노드에 설치합니다. 설치된 Kafka 노드는 Zookeeper와 연결됩니다.
-       * **Kafka Broker 설정**: 각 Kafka 브로커의 `server.properties` 파일을 수정하여 브로커 ID, 포트, 로그 디렉토리, Zookeeper 연결 정보 등을 설정합니다.
-       * **Kafka 브로커 실행**: Zookeeper와 Kafka 브로커를 실행합니다.
-       * **Docker Compose를 사용한 설치**:
-         * Docker Compose를 사용하면 간편하게 Kafka Cluster를 구성할 수 있으며. Docker Compose 파일에 Zookeeper와 Kafka 노드를 정의하고 실행하면 됩니다
-  *   **클러스터 구성**\
+### 2-1.  properties
 
+주키퍼와 카프카 옵션을 조정 하기 위해 zookeeper.properties. server.properties 을 수정하여 사용해야 합니다.
 
-      <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+* **파일위치**: 카프카 설치 폴더/config
 
-      * 브로커, 프로듀서, 컨슈머, 카프카 클라이언트는 각각의 서버에서 담당
-      * Zookeeper는 데이터 쓰기가 과반수 서버에 성공했을 떄 성공으로 간주하므로 홀수 노드 수가 바람직하며, Kafka와 동일 서버에 설치 여부는 시스템 요구 사항에 따라서 달라진다.
+{% code title="zookeeper.properties" lineNumbers="true" %}
+```sh
+# the directory where the snapshot is stored.
+dataDir=/tmp/zookeeper
+# the port at which the clients will connect
+clientPort=2181
+# disable the per-ip limit on the number of connections since this is a non-production config
+maxClientCnxns=0
+# Disable the adminserver by default to avoid port conflicts.
+# Set the port to something non-conflicting if choosing to enable this
+admin.enableServer=false
+# admin.serverPort=8080
 
-### 4-1. Kafka API
+```
+{% endcode %}
 
-다양한 제품과 연동을 위해 제공하는 API로 Connect API와 Stream API 을 제공하고 있으며 각각 다음과 같은 역활을 합니다.
+{% code title="server.properties" lineNumbers="true" %}
+```sh
+# The id of the broker. This must be set to a unique integer for each broker.
+broker.id=0
 
-<figure><img src="../../.gitbook/assets/image (274).png" alt=""><figcaption></figcaption></figure>
+############################# Socket Server Settings #############################
 
-#### 4-1-1. Kafka Producer API
+# The address the socket server listens on. If not configured, the host name will be equal to the value of
+# java.net.InetAddress.getCanonicalHostName(), with PLAINTEXT listener name, and port 9092.
+#   FORMAT:
+#     listeners = listener_name://host_name:port
+#   EXAMPLE:
+#     listeners = PLAINTEXT://your.host.name:9092
+listeners=PLAINTEXT://:9092
 
-&#x20;Java 클라이언트는 Kafka 클러스터에 데이터 스트림을 게시하는 데 사용됩니다. 이 API를 사용하여 애플리케이션은 하나 이상의 Kafka 토픽으로 레코드 스트림을 전송할 수 있습니다. 이제 몇 가지 주요 기능을 살펴보겠습니다.:
+# Listener name, hostname and port the broker will advertise to clients.
+# If not set, it uses the value for "listeners".
+advertised.listeners=PLAINTEXT://x.x.x.x:9092
 
-1. 스레드 안전한 프로듀서 인스턴스: 단일 프로듀서 인스턴스를 여러 스레드와 공유하는 것은 일반적으로 속도를 높입니다.&#x20;
-2. &#x20;비동기 send() 메서드: 호출하면 레코드를 보류 중인 전송 버퍼에 추가하고 바로 반환합니다, 이는 효율적인 레코드 배치를 가능하게 합니다.&#x20;
-3. &#x20;acks 설정: 요청 완료 기준을 제어합니다. "all" 설정은 레코드의 완전한 커밋을 기다리는 느린 방식이지만 가장 안정적입니다.&#x20;
-4. &#x20;버퍼 관리: 각 파티션에는 미전송 레코드를 위한 버퍼가 있으며, 이의 크기는 batch.size 설정에 따라 결정됩니다.&#x20;
-5. Idempotent 프로듀서 모드: 최소 한 번 이상 정확히 한 번까지의 전송을 보장하며, 중복 전송을 방지합니다.​
+......
+```
+{% endcode %}
 
-참고: [https://kafka.apache.org/documentation/#producerapi](https://kafka.apache.org/documentation/#producerapi)
+### 2-2. 우분트 서비스  대몬
 
-#### 4-1-2. Kafka Consumer API
+서비스 대몬에 등록하기 위해서는 서비스 파일을 만들어서 시비스 등록을 해야 합니다.
 
-Kafka 클러스터에서 데이터를 읽는 역할로이 API를 사용하여 애플리케이션은 하나 이상의 토픽을 구독하고 해당 토픽에 저장된 스트림(메세지)을 가져와 애플리케이션에 필요한 처리를 수행합니다. 즉 실시간으로 데이터를 처리하거나 과거의 레코드를 입수하여 처리할 수 있습니다.
+#### 2-1-1.  주키퍼 서비스 파일 생성
 
-참고: [https://kafka.apache.org/documentation/#consumerapi](https://kafka.apache.org/documentation/#consumerapi)
+vi 또는 nano와 같은 에디터를 통해 서비스 파일을 생성 합니다.
+
+* sudo nano /etc/systemd/system/zookeeper.service
 
-#### 4-1-3. Kafka Consumer API
+{% code lineNumbers="true" %}
+```sh
+[Unit]
+Description=Apache Zookeeper server
+Documentation=http://zookeeper.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
 
-Apache Kafka의 구성 요소로서 데이터 파이프라인을 간소화하는 역할로 다른 데이터 시스템 간의 테이터 가져오기/내보내기를 쉽게 해주는 API로 Kafka와 통합되는 외부 시스템 및 응용 프로그램에서 이벤트 스트림을 소비(읽기)하거나 생성(쓰기)할 수 있습니다.
+[Service]
+Type=simple
+ExecStart=/usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.>
+ExecStop=/usr/local/kafka/bin/zookeeper-server-stop.sh
+Restart=on-abnormal
 
-1. **Source Connectors**:
-   * Source 커넥터는 외부 시스템에서 Kafka 토픽으로 데이터를 가져오는 역할을 합니다.
-   * 예를 들어, **JDBC Source Connector**는 관계형 데이터베이스에서 데이터를 읽어 Kafka 토픽으로 전송할 수 있습니다.
-2. **Sink Connectors**:
-   * Sink 커넥터는 Kafka 토픽에서 데이터를 가져와 외부 시스템으로 전송하는 역할을 합니다.
-   * 예를 들어, **Elasticsearch Sink Connector**는 Kafka 토픽에서 데이터를 읽어 Elasticsearch 클러스터로 색인할 수 있습니다.
-3. 그외 Transform Connectors, Custom Connectors가 있습니다.
+[Install]
+WantedBy=multi-user.target
 
-참고: [https://kafka.apache.org/documentation.html#connect](https://kafka.apache.org/documentation.html#connect)
+```
+{% endcode %}
 
-#### 4-1-4. Kafka Stream API
+* 9 Line: 주키퍼 시작&#x20;
+* 10 Line:  주키퍼 종료
+* 11 Line: 프로세스가 비정상 종료되었을 때 서비스가 다시 시작 합니다.
 
-Apache Kafka 개발 프로젝트에서 공식적으로 제공되는 스트림 프로세싱 프레임워크입니다. 이 Java로 구현되어 있으며, 카프카 클러스터 내의 토픽에 저장된 데이터를 실시간으로 처리, 변환 및 분석할 수 있도록 도와주는 것으로 스트림 프로세싱을 간편하게 구현하고, 카프카의 서버 사이드 클러스터 기술과 결합하여 확장성, 탄력성, 분산 처리, 고가용성 등을 제공하여 실시간 데이터 처리를 위한 강력한 도구로 활용할 수 있습니다 다음과 같은 특징이 있습니다.
+#### 2-1-2.  카프카서비스 파일 생성
 
-1. 간단하고 가벼운 클라이언트 라이브러리: 기존 자바 애플리케이션에서 쉽게 사용할 수 있습니다.
-2. 시스템이나 카프카에 대한 의존성 없음: Kafka Streams는 카프카 클러스터 내의 데이터를 처리하므로 별도의 시스템이나 카프카에 대한 의존성이 없습니다.
-3. 이중화된 로컬 상태 저장소 지원: Stateful한 어플리케이션을 구현할 때 RocksDB와 같은 로컬 데이터 스토어를 사용하여 낮은 대기 시간을 유지합니다[2](https://www.devkuma.com/docs/apache-kafka/strems/).
-4. 1번만 처리되는 보장: 카프카 브로커나 클라이언트에 장애가 생기더라도 스트림에 대해선 1번만 처리되는 것을 보장합니다.
-5. 토폴로지 기반 API: 스트림 처리를 하는 프로세스들이 서로 연결되어 있는 토폴로지를 만들어서 처리할 수 있습니다
+* sudo nano /etc/systemd/system/kafka.service
 
-참고: [https://kafka.apache.org/37/documentation/streams/](https://kafka.apache.org/37/documentation/streams/)
+{% code lineNumbers="true" %}
+```sh
+[Unit]
+Description=Apache Kafka Server
+Documentation=http://kafka.apache.org/documentation.html
+Requires=zookeeper.service
 
-#### 4-1-4. Kafka Admin API
+[Service]
+Type=simple
+Environment="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64"
+ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.propert>
+ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
 
-Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 이 API를 통해 개발자는 프로그래밍 방식으로 Kafka 리소스를 생성, 삭제, 설명 및 수정할 수 있습니다. 주요 작업은 다음과 같습니다:
+[Install]
+WantedBy=multi-user.target
 
-1. **토픽 관리**: 토픽 생성, 삭제, 설명, 수정 등을 수행합니다.
-2. **브로커 관리**: 브로커 정보를 조회하고 수정합니다.
-3. **구성 관리**: Kafka 구성 항목을 관리합니다.
-4. **ACL(접근 제어 목록) 관리**: 접근 권한을 설정하고 관리합니다.
+```
+{% endcode %}
 
-**Admin API**를 사용하면 Kafka 클러스터를 프로그래밍 방식으로 효율적으로 관리할 수 있습니다
+* 8 Line: 카프카 시작
+* 9 Line:  카프카 종료
 
-참고: [https://kafka.apache.org/documentation/#adminapi](https://kafka.apache.org/documentation/#adminapi)
+#### 2-1-3.  서비스 시작&#x20;
 
-## 4. 분산 메세징 구조
+```sh
+$ sudo systemctl daemon-reload
+$ sudo systemctl start zookeeper 
+$ sudo systemctl start kafka
+```
 
-### 4-1. 논리적 구조
+## 3. Kafka Topic 생성&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+```sh
+$ bin/kafka-topics.sh --create 
+                      --bootstrap-server localhost:9092 
+                      --replication-factor 1 
+                      --partitions 1 
+                      --topic iabacus-test
+```
 
-* **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
-  * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
-* **Partition**: 카프카 토픽 내에서 데이터를 논리적으로 분할하는 메커니즘으로 각 파티션은 독립적으로 관리되며, 데이터를 저장하고 처리하는 단위입니다.
-  * Offset: 파티션 단위로 메시지 위치를 나타냄&#x20;
-    * Log-End-Offset(LEO): 파티션 데이터의 끝&#x20;
-    * Current Offset: 컨슈머가 어디까지 메시지를 읽은 위치 (Consumer Group별)&#x20;
-    * Commit Offset: 컨슈머가 어디까지 커밋 했는지를 나타냄 (Consumer Group 별)
-* **Consumer Group**: 단일 애플리케이션 안에서 여러 컨슈머가 단일 토픽이나 여러 파티션에서 메시지를 취득 하는 방법&#x20;
-  * 컨슈머 그룹 마다 독립적인 컨슘 오프셋을 가진다.&#x20;
-  * 컨슈머 그룹 내에서 처리해야할 파티션이 분배된다. 즉 하나의 파티션은 하나의 서버가 처리하고. 그룹에 서버가 추가되면 카프카 프로토콜에 의해 동적으로 파티션이 재분배 된다.&#x20;
-  * 하나의 토픽 레코드를 분산 처리하는 구조라면 동일 컨슈머 그룹을 가지게 해야 한다.&#x20;
-  * 하나의 토픽 레코드에 각각 별도의 처리를 하는 다른 파이프라인이라면 서로 다른 컨슈머 그룹을 가지게 해야 한다.
+* Topic 확인 :&#x20;
 
+```sh
+$ bin/kafka-topics.sh --describe 
+                      --topic iabacus-test 
+                      --bootstrap-server localhost:9092
+```
 
+* 속성&#x20;
+  * topic: 토픽 이름
+  * partitions: 파티션 수
+  * replication-factor: 복제 수
+  * create: 토픽 생성
+  * list: 토픽 목록 확인
+  * describe: 토픽 상세 확인
+* 토픽 리스트:  bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 
-### 4-2. 물리적 구조
+<figure><img src="../../.gitbook/assets/image (293).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
+참고: [https://kafka.apache.org/documentation/#intro\_concepts\_and\_terms](https://kafka.apache.org/documentation/#intro\_concepts\_and\_terms)
 
-카프카 클러스터는 다중 브로커로 구성이 되며 클러스터에 대한 쓰기/읽기 작업의 부하 분산을 도와주고 있으며 각 브로커의 상태는 주키퍼를 사용 합니다.
+## 4. Topic 쓰기/읽기
 
-* 각 브로커는 상태를 저장하지 않지만(stateless) 주키퍼를 사용해 상태 정보(state)를 유지 합니다.
-* 각각의 리더(Leader)로 할동하는 브러커가 하나씩 있고 0개 이상의 팔로워(Follower)가 있으며 리더의 선정은 주키퍼에 의해서 수행이 됩니다. 이러한 방식을 **채택하는 이유는 서버에 대한 부하를 동등하게 분산**하기 위합입니다.
+* 프로규서를 메세지 송신
 
-## 5. 구성 요소 역할
+```sh
+$ bin/kafka-console-producer.sh --broker-list localhost:9092 
+                                --topic iabacus-test
+```
 
-### 5-1. 토픽
+* 컨슈머로 메세지 수신
 
-메세지를 저장하는 장소로 프로듀서는 토픽에 메세지를 보내고 컨슈머가 토픽에서 메세지를 읽어 옵니다. 토픽은 분류(카데고리)로 가입정보, 영업정보 등이 각각의 토픽으로 만들어 지며 컨슈머는 필요한 정보를 구독하게 됩니다. 토픽에 사용되는 기본 용어는 다음과 같습니다.
+```sh
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 
+                              --topic iabacus-test 
+```
 
-* **보유기간(Retention)**: 메세지의기보관기간으로 기본값은 7일 이며 원하는 기간으로 설정 할 수 있습니다.
-* **공간 유지 정책(Space Retention Policy)**: 메세지의 크기가 설정된 임계값으로 임계값에 도달하면 메세지는 삭제 됩니다.
-* **오프셋(offset)**: 토픽은 여러 파티션으로 구성돼 있으먀 각 파티션은 도착한 순서에 따라 메세지를 저장하고 있는데 컨슈머는 오프셋으로 메세지를 인식하여 오프셋 값으로 컨슈머가 수신 했는지 확인합니다.
-* **파티션(Partition)**: 메세지 처리율을 높이기 위해 토픽을 파티션 수를 설정 합니다. ( 데이터를 논리적으로 분할 )
-*   **압축(Compaction)**: 메세지가 전송되는 동안 메세지를 압측하여 네트워크 대역폭 사용량을 줄이고&#x20;
+<figure><img src="../../.gitbook/assets/image (292).png" alt=""><figcaption></figcaption></figure>
 
-    Kafka 브로커의 디스크 공간 절약이 위해서 사용하지만 CPU 사용률이 약간 높아 집니다. 압축 유형으로는 Gzip, Snappy, Lz4, Zstd를 지원합니다.
-* **리더(Leader)**: 파티션은 지정된 복제 팩터에 따라 카프카 클러스터 전역에 걸쳐 복제하는데 읽기/쓰기는 하나만 가능한데 이것을 리더라 합니다. 리더가 장애 발생시 복제된 팔로워 중 하나가 리더로 됩니다.
-* **버퍼링(Buffering)**: 처리 속도를 높이고 입출력 빈도를 줄이기 위해 프로듀서와 컨수머 양쪽에 버퍼를 사용합니다.
+*   처음 부터 메세지 수신 (--from-beginning)\
 
-### 5-2. 파티션
 
-카프카 토픽 내에서 데이터를 논리적으로 분할하는 메커니즘으로 각 파티션은 독립적으로 관리하여 높은 처리량과 빠른 처리 속도를 지원하기 위해 제공되는 것으로 병렬 처리을 위한 단위로 두 가지 유형이 있습니다.
+    <figure><img src="../../.gitbook/assets/image (295).png" alt=""><figcaption></figcaption></figure>
 
-* **Hash Key:** 메세지 Key가 있는 방식으로 메세지 키를 해시값으로 산출하여 해당 파티션에 메세지를 하는 방식으로 메세지 번호가 서로 다르며 키에 따라 들어온 순서로 메세지를 적재 합니다.
-* **Round Robin**: 메세지 키가 없는 경우( null) 에 메세지가 들어면 파티서너가 메세지 키를 확인하고 순차적으로 한번에 하나씩 파티션에 할당하여 처리하는 방식입니다.
-* 기본적으로 Kafka는 키가 부여되면 Round Robin으로 파티션을 분배합니다.
-* **파티션에 수에 따른 장단점**
-  1. **장점:**
-     * **확장성**: 파티션을 사용하여 카프카 토픽은 여러 브로커에 분산되어 처리할 수 있으므로높은 처리량을 달성할 수 있습니다.
-     * **내구성**: 카프카의 메시지는 디스크에 영구적으로 저장되므로 데이터 손실 없이 안전하게 보관됩니다.
-     * **분산 아키텍처**: 여러 브로커로 구성된 카프카 클러스터는 확장성과 내결함성을 제공합니다.
-  2. **단점:**
-     * **파티션 키 분산 문제**: 파티션 키를 지정할 경우 특정 브로커만 메시지를 받을 수 있습니다. 키가 제대로 분산되지 않으면 이 문제가 발생할 수 있습니다.
-     * **파티션 키 미지정 시 순서 보장 문제**: 파티션 키를 사용하지 않으면 레코드들의 순서가 보장되지 않습니다.
-     * 파티션 수에 따른 메모리 증가
-
-### 5-3. 복제
-
-복제는 카프카 시스템에서 신뢰성에 대한 것으로 중요한 요소로 각 토픽 파티션에 대한 메세지 로그의 복제본은 카프카 클러스터 내의 여러 서버에 걸쳐서 관리되며 개별 토픽에 대해서 설정 가능합니다.
-
-* 기본적으로 하나의 토픽에 대해 복제 백터는 3으로 설정하고 다른 토픽은 5, 7 등으로 설정 가능 합니다.
-
-#### 5-3-1. **리더와 팔로워**
-
-카프카는 장애 대응을 위해 메인 브로커가 다운되더라도 리플리케이션되고 있는 브로커가 메인 허브로서의 역할을 수행하는데 이것을 리더와 팔로워라 합니다. 즉 각각의 토픽 파티션에는 리더(leader)로 할동하는 브로커가 하나씩 있고, 0개 이상의 팔로워(flower)를 갖는다. \
-
-
-<figure><img src="../../.gitbook/assets/image (269).png" alt=""><figcaption><p>카프카 복제(리더와 팔로워)</p></figcaption></figure>
-
-#### 5-3-2. 리더 선정 방식
-
-* **쿼럼(quorum) 방식**: 쿼럼은 다수의 브로커로 구성된 그룹을 의미하며, 리더 선출에 필요한 최소한의 브로커 수를 나타내고 일반적으로 쿼럼 크기는 replication factor의 절반 이상이어야 합니다.
-  * 다수 또는 과반수의 복제본이 메세지를 수신했다는 ACK를 받는 경우에만 메세지를 커밋된 것으로 표시 하는 방식 입니다.
-  * **장점:** 내결함성 (Fault Tolerance: 브로커의 장애에도 안정적으로 동작),  데이터 정합성 (Data Consistency)에 대한 장점이 있습니다.
-  * **단점:** 쿼럼 크기를 충족하는 브로커들이 모두 ACK 응답을 보내야 리더가 선출되므로 리더 선출에 시간이 걸리고 네트워크 부하가 발생 할 수 있습니다.
-* **주 백업(Primary backup)**: 리더만 모든 읽기와 쓰기는 리더를 통해서만 수행하고 팔로워는 리더의 복제본만 가지고 있응 방식으로 리더를 담당하는 브로커에 장애가 발생하더라도 복제되고 있는 팔로워들이 언제든 리더로 대체될 하여 내결함성 (Fault Tolerance: 브로커의 장애에도 안정적으로 동작)을 보장 합니다.
-* **어떤 방식을 선택:** 선택은 클러스터의 요구사항과 운영 환경에 따라 틀리지만 다음 사항을 고려 할 수 있습니다.
-  * 주 백업 방식은 내결함성을 강조하고자 할 때 적합합니다.
-  * 쿼럼 방식은 성능을 우선 고려할 때 적합합니다.
-
-### **5-3.주키퍼 역할**
-
-카프카 클러스터의 중요한 요소로 카프카 브로커와 컨슈머를 관리하고 조정하는 역할을 하며 다음은 주요 주키퍼의 역할 입니다.
-
-* **컨트롤러 선정**: 컨트롤러는 파티션 관리를 책임지는 브로커 중에 하나입니다,
-  * 퍼티션 관리:  리 더 선정, 토픽 생성, 피티션 생성, 복제본 관리 등을 포함 합니다.
-  * 리더 선정: 노드  또는 서버에 문제 발생시 카프카 컨트롤러는 팔로워 중 하나를 메타데이터 정보를 활용하여 파티션 리더를 선정하여 어떤 브로커가 어떤 토픽 파티션에 대해서 리더인지 기록하고 이 정보를 프로듀서나 컨슈머가 메세지를 읽고 쓸 수 있게 제공합니다.
-  * 컨트롤러 선정: 현재의 컨트롤러에 장애 발생 시 새로운 컨트롤러가 선정되는 것을 보장합니다.
-* **브로커 메타데이터**: 카프카 클러스터의 각 브로커의 모든 메타 데이터를 기록합니다.
-* **토픽 메타데이터**: 파티션 수, 설정 파라메터 등을 토픽 메타데이터로 기록합니다.
-* **클라이언트 할당 정보**: 카프카 토픽의 메세지를 읽고 쓰는 클라이언트에 대한 바이트 비율의 임계치 값을으로 메세지 크기를 제한하며, 모든 정보와 상태는 주키퍼가 관리합니다.
-* **카프카 토픽 ACLs(Access Control Lists)**: 카프카에 내장된 인증 목록(접근 제어 목록)으로 사용자 역할과 관련된 토픽에 대해 읽기와 쓰기 권한 종류를 결정하는데 사용하는 ACLs를 저장하는데 주키퍼를 사용합니다.
-* 컨슈머의 오프셋 값은 주키퍼에 의해 유지 됩니다
-
+그외 카프카의 기능을 학습하기 위해서는 [https://kafka.apache.org/quickstart](https://kafka.apache.org/quickstart) 확인 해 보시기 바랍니다.
