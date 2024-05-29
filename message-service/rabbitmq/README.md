@@ -1,10 +1,35 @@
 # RabbitMQ
 
-RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 메시지 브로커로 생산자(Producer)가 메시지를 보내면 소비자(Consumer)에게 전달해주는 역할을 합니다.
+RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 메시지 브로커로 생산자(Producer)가 메시지를 보내면 소비자(Consumer)에게 전달해주는 역할을 하는 메시지 큐로 MPL 1.1에 따라 라이선스가 부여된 오픈 소스 메시지 브로커입니다. Pivotal software Inc(현재 VMware 소유)의 일부로  거의 99.999%의 가동 시간을 제공하는 분산되고 내결함성이 있는 소프트 실시간 시스템을 위해 설계된 Erlang으로 작성되었습니다.
 
-참고: [https://www.rabbitmq.com/](https://www.rabbitmq.com/), [https://www.rabbitmq.com/tutorials](https://www.rabbitmq.com/tutorials)
+## 1. RabbitMQ 장점
 
-## 1. RabbitMQ의 주요 개념
+1. **신뢰할 수 있는 메시징(Reliable Messaging)**: 시스템의 일부가 실패하더라도 메시지가 손실 없이 전달되도록 합니다.
+2. **유연한 라우팅(Flexible Routing)**: 다양한 방식으로 메시지를 라우팅할 수 있으므로 다양한 요구 사항에 맞게 조정할 수 있습니다.
+3. **확장성(Scalable)**: 많은 리소스를 추가하여 증가하는 메시지 및 사용자 수를 처리할 수 있습니다.
+4. **여러 프로토콜 지원**:  AMQP, STOMP, MQTT, HTTP, 웹소켓, SMTP와 같은 다양한 메시징 프로토콜지원 합니다.
+   * **AMQP (Advanced Message Queuing Protocol):** RabbitMQ에서 사용하는 기본 프로토콜로 신뢰할 수 있는 배달, 라우팅 및 보안과 같은 강력한 메시징 기능을 제공합니다
+   * **AMQP 1.0:** 서로 다른 시스템에서 상호 운용이 가능한 다른 버전의 AMQP로 다양한 AMQP 1.0 클라이언트와의 호환성을 보장합니다.
+   * **STOMP (Simple (or Streaming) Text Oriented Messaging Protocol):** 간단하고 구현하기 쉬운 텍스트 기반 프로토콜로 웹 기반 메시징 시스템 및 응용 프로그램과의 통합에 자주 사용됩니다.
+   * **MQTT (Message Queuing Telemetry Transport):** 경량 메시징 프로토콜로 IoT(사물 인터넷) 장치 및 모바일 애플리케이션과 같은 제한된 환경에 이상적입니다
+   * **HTTP:** 메시징을 위한 RESTful HTTP API를 지원하기 위해 플러그인을 사용할 수 있습니다
+   * **WebSockets:** 수명이 긴 단일 TCP 연결을 통해 전이중 통신 채널을 제공하여 실시간 웹 응용 프로그램에 유용하며 웹 브라우저에서 메시지를 보내고 받을 수 있습니다.
+   * **SMTP (Simple Mail Transfer Protocol):** 플러그인 또는 사용자 지정 통합을 통해 이메일 시스템과 상호 작용할 수 있습니다
+5. **사용하기 쉬움**: 사용자 친화적인 인터페이스와 다양한 기술문서가 있어 개발자가 쉽게 코드를 작성할 수 있습니다.
+
+## 2. RabbitMQ 기능 및 이점
+
+* **오픈 소스** – Mozilla Public License 1.1에 따라 출시되었습니다.
+* **다중 메시지 프로토콜** – AMQP, MQTT, STOMP, HTTP.
+* **경량–** 단일 인스턴스는 40MB 미만의 RAM에서 실행할 수 있습니다.
+* **클라이언트 라이브러리 지원** – Java, Python, JavaScript, Erlang 등과 같은 모든 최신 프로그래밍 언어에는 RabbitMQ 클라이언트 라이브러리가 있습니다.
+* **타사 플러그인 지원** – 타사 플러그인을 위한 유연한 플러그인 시스템을 제공합니다. &#x20;
+* **확장성이 뛰어난 아키텍처** – RabbitMQ의 클러스터를 쉽게 배포할 수 있습니다.
+* **엔터프라이즈 및 클라우드 지원** – 온프레미스 인프라 또는 클라우드 인프라에 배포할 수 있습니다.
+* **관리 및 모니터링** – HTTP-API, 명령줄 도구 및 관리 및 모니터링을 위한 UI.
+* **도구 지원** – 주요 CI/CD 도구와 함께 작동하며 BOSH, Chef, Docker 및 Puppet과 함께 배포할 수 있습니다.
+
+## 3. RabbitMQ의 주요 개념
 
 <figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -15,7 +40,7 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 * **Binding Key**: Exchange와 Queue의 관계를 정의하며, 특정 Exchange가 특정 Queue를 binding하도록 설정합니다.
 * **Routing Key:** 게시자는 메시지를 게시할 때마다 메시지와 함께 라우팅 키도 지정합니다.
 
-## 2. RabbitMQ 동작 원리
+## 4. RabbitMQ 동작 원리
 
 게시자가 메시지를 게시하면 먼저 교환에서 메시지를 받습니다. 그런 다음 교환은 교환 유형에 따라 메시지를 큐로 전달합니다.
 
@@ -37,4 +62,8 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 * **Binding (바인딩)**: Exchange와 Queue의 관계를 정의합니다. 보통 사용자가 특정 Exchange가 특정 Queue를 binding하도록 설정합니다. (단, fanout 타입은 예외입니다.)
 * **Queue (큐)**: Consumer가 메시지를 consume하기 전까지 보관하는 장소입니다. Queue는 반드시 미리 정의되어야 하며, 이름, 내구성, 자동 삭제 여부 등의 속성을 갖습니다.
 * **Consumer (소비자)**: Producer로부터 메시지를 받아 처리하는 주체입니다. Consumer는 Queue를 통해 메시지를 가져갑니다.
+
+참고: [https://www.rabbitmq.com/](https://www.rabbitmq.com/), [https://www.rabbitmq.com/tutorials](https://www.rabbitmq.com/tutorials)
+
+참고: [https://jstobigdata.com/rabbitmq/complete-rabbitmq-tutorial-in-java/](https://jstobigdata.com/rabbitmq/complete-rabbitmq-tutorial-in-java/)
 
