@@ -2,7 +2,7 @@
 
 AMQP(Advanced Message Queuing Protocol)는 메시지 지향 미들웨어를 위한 개방형 표준 응용 계층 프로토콜입니다. 이 프로토콜은 메시지 지향, 큐잉, 라우팅(P2P 및 발행-구독), 신뢰성, 보안 기능을 제공하며 대표적인 소프트웨어로 RabbitMQ, SwiftMQ 등이 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (306).png" alt=""><figcaption><p>AMQP 개념</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (306).png" alt=""><figcaption><p>AMQP 개념</p></figcaption></figure>
 
 생산자/게시자(Publish/Producer)는 메시지를 만들어 브로커에보내고  브로커는  컨슈머에게 순차적으로 전달합니다. 여기서 보로커는 메세지를 하나 이상의 큐로 라우팅하는 역할을 하는 Exchange(교환기) 를 가지고 있습니다. AMQP는생산자, 메시지 브로커 및 소비자 간의 상호 운용성을 만들어&#x20;
 
