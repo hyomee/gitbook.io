@@ -132,4 +132,11 @@ connection, exchange, queue, binding, user, policy 들을 **virtual hosts** 를 
 * 로그 파일 로테이션을 위해 `logrotate` 를 사용해서 변경 할 수 있습니다.
 * 설정: `/etc/logrotate.d/rabbitmq-server` 에서 확인하고 변경할 수 있습니다.
 
+
+
+## 11. 관리
+
+* rabbitmq 상태:  sudo rabbitmq-diagnostics status
+* rabbitmq  환경 구성: [https://www.rabbitmq.com/docs/configure](https://www.rabbitmq.com/docs/configure)
+
 참고: [rabbitmqctl](https://www.rabbitmq.com/rabbitmqctl.8.html)
