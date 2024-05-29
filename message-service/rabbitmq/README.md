@@ -65,5 +65,5 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 
 참고: [https://www.rabbitmq.com/](https://www.rabbitmq.com/), [https://www.rabbitmq.com/tutorials](https://www.rabbitmq.com/tutorials)
 
-참고: [https://jstobigdata.com/rabbitmq/complete-rabbitmq-tutorial-in-java/](https://jstobigdata.com/rabbitmq/complete-rabbitmq-tutorial-in-java/)
+참고: [www.rabbitmq.com/getstarted.html](http://www.rabbitmq.com/getstarted.html)
 
