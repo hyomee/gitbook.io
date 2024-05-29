@@ -42,7 +42,7 @@
 *   **메세지(Data P**acket**)**: 네트워크 통신에서 데이터 전송의 기본 단위는 패킷이며, 이는 데이터를 작은 조각으로 나누어 이동시킵니다. 패킷은 제어 정보와 사용자 데이터, 즉 페이로드로 구성됩니다. 보통 패킷은 헤더, 데이터, 트레일러로 구성되어 있습니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -88,7 +88,7 @@
 *   P2P 모델은 1:1 통신을 지원하며, 메시지의 안정성과 순서를 보장합니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (304).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (304).png" alt=""><figcaption></figcaption></figure>
 
 #### 2-1-1. PTP 메시징 모델은 다음의 두가지 유형
 
@@ -98,13 +98,13 @@
    *   이러한 상태 없는(stateless) 메시지 교환은 확장성 있는 메시징 시스템에서 효과적으로 사용됩니다. 즉, 메시지를 보낸 후 추가적인 처리나 응답을 기다리지 않고 다음 작업을 수행하는 방식입니다.\
 
 
-       <figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 2. **Request/reply Model:**
    * **요청(Request)**: 메시지를 발신하는 측이 메시지를 보내고, 응답을 기다립니다.
    * **응답(Reply)**: 메시지를 수신하는 측은 요청을 처리하고, 응답 메시지를 발신자에게 보냅니다.
    *   1:1 통신을 지원하며, 메시지의 안정성과 순서를 보장합니다. 요청과 응답이 짝지어져 있으므로, 특정 작업을 수행하고 그 결과를 돌려받아야 할 때 유용하게 사용됩니다
 
-       <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ### **2-2. Publish-Subscribe (Pub/Sub) 모델**:
 
@@ -112,7 +112,7 @@
 * 해당 주제를 구독(subscribe)해놓은 모든 Subscriber가 메시지를 받습니다.
 * Pub/Sub 모델은 1:N 통신을 지원하며, 메시지의 브로드캐스팅과 유연한 확장성을 제공합니다.
 
-<figure><img src="../.gitbook/assets/image (299).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (299).png" alt=""><figcaption></figcaption></figure>
 
 #### 2-2-1.   Event Channel
 
@@ -130,13 +130,11 @@
 * **Decoupling (결합도 감소)**: 어플리케이션과 분리되어 있기 때문에 코드 관리, 재사용성, 안정성이 높아집니다.
 * **Scalable (확장성)**: 다수의 프로세스들이 큐에 메시지를 보낼 수 있습니다.
 
-
-
 ## 3. 비동기 메시징
 
 비동기 메시징은 대규모 데이터 처리, 이벤트 기반 아키텍처, 이미지 프로세싱과 같이 무거운 작업을 요청하거나 이벤트 발생을 알리는 용도로 많이 사용됩니다
 
-<figure><img src="../.gitbook/assets/image (305).png" alt=""><figcaption><p>동기/비동기 </p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (305).png" alt=""><figcaption><p>동기/비동기 </p></figcaption></figure>
 
 <mark style="color:purple;">**= 비동기 메시징 장점 =**</mark>
 
@@ -146,4 +144,23 @@
 * **과잉 (Redundancy)**: 실패할 경우 재실행이 가능하며, 메시지가 유실되지 않습니다.
 * **보증 (Guarantees)**: 작업 완료를 확인할 수 있어메시지가 정확하게 전달되었는지 확인할 수 있습니다.
 * **확장성 (Scalable)**: 다수의 프로세스가 큐에 메시지를 보낼 수 있어 시스템의 확장성을 높입니다.
+
+
+
+## 4. 사용 애플리케이션
+
+빅 테이터 및 실시간 처리에 있어 메시지 애프리케이션을 다음과 같이 다양하게 사용됩니다.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+* 빅 데이터 스트리밍 애플리케이션:  IOT 수집기, 로그 수집기
+* 알림 서비스
+* 뉴스피드 서비스
+* 채팅 서비스
+* 마이크로 서비스 간 통신
+* 실시간 데이터 파이프라인: 스트리밍 데이터를 수집하고 저장하며, 데이터 파이프라인을 구동하는 애플리케이션에 읽기 서비스
+* 데이터 스트리밍:  실시간 데이터 피드를 관리하고 데이터 지연 시간을 낮추며 원하는 곳으로 데이터를 전달하는 용도로 활용됩니다
+* 백그라운드에서 실행되는 장기 프로세스 및 백그라운드 작업: 웹 서버에 어떤 요청을 받고 시간이 오래 걸리는 작업
+
+
 
