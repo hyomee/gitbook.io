@@ -61,7 +61,7 @@ public Step finishStep(JobRepository jobRepository,
 
 Step를 순차적으로 싫행한다.
 
-<figure><img src="../.gitbook/assets/image (9).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 {% code lineNumbers="true" %}
 ```java
@@ -84,7 +84,7 @@ public Job JobFlowJob(JobRepository jobRepository,
 *   결과:  \
 
 
-    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2.  **Conditional Flow**
 
@@ -121,9 +121,9 @@ public Job JobFlowJob(JobRepository jobRepository,
 *   결과:  시작 Step 결과가  FAILED 이고 "FAILED"일 떄 실행되는 Step은은 COMPLETED 이다. Job은 정상 수행이 되어 COMPLETED가 된다\
 
 
-    <figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 2-2. "COMPLETED" 인 경우
 
@@ -150,9 +150,9 @@ public Job JobFlowJob(JobRepository jobRepository,
 *   결과:  시작 Step 결과가  COMPLETED이고 "COMPLETED"일 떄 실행되는 Step은 COMPLETED 이다. Job은 정상 수행이 되어 COMPLETED가 된다  \
 
 
-    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -222,18 +222,18 @@ private final ExitStatus EXIT_STATUS =  ExitStatus.FAILED;
 
 * ExitStatus.FAILED:   결과 : 중지
 
-<figure><img src="../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 *   ExitStatus.COMPLETED: 결과\
 
 
-    <figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 *   ExitStatus.UNKNOWN: 결과\
 
 
-    <figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 3-2.  fail ( Job: FAILED)&#x20;
 

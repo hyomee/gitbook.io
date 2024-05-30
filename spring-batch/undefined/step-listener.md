@@ -9,7 +9,7 @@ Step에서 발생하는 에러(예외)를Listener를 등록하여 예외에 대�
     <table><thead><tr><th width="204">속성</th><th>설명</th></tr></thead><tbody><tr><td><strong>Step</strong></td><td>StepExecution이 속한 배치 스텝(Step)을 나타내며. 하나의 Step은 동일한 Job 내에서 여러 StepExecution을 가질 수 있다.</td></tr><tr><td><strong>JobExecution</strong></td><td>StepExecution이 속한 JobExecution을 나타낸다.</td></tr><tr><td><strong>StepName</strong></td><td>Step의 이름</td></tr><tr><td><strong>ExitStatus</strong></td><td>배치 작업이 완료된 후의 상태를 나타내며  성공적으로 완료되었는지, 실패했는지 등을 확인할 수 있다.</td></tr><tr><td><strong>ExecutionContext</strong></td><td>StepExecution이 실행되는 동안 사용자 정의 데이터를 저장하는 데 사용되며 StepExecution간에 데이터를 공유할 때 유용하다.</td></tr></tbody></table>
 * Step 실행에 따른 상태를 이용하여 오류(예외) 처리를 하기 위해 Step Listener를 등록하고 Step Execution 객체의 Status속성, ExitStatus속성을 사용하여 오류에 대한 후 처리 작업을 한다.
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ## 1. **Step Listener**
 
@@ -127,5 +127,5 @@ public class JobErrorConfig {
 *   결과: @AfterStep으로 작성한 오류 메세지를 확인할 수 있다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

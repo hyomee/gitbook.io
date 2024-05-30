@@ -17,7 +17,7 @@
 * Service Activator 패턴: 비동기적 호출을 처리하기 위한 패턴이다.\
 
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption><p><strong>Core J2EE Pattern Catalog</strong></p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption><p><strong>Core J2EE Pattern Catalog</strong></p></figcaption></figure>
 
 * **출처**: [http://www.corej2eepatterns.com/](http://www.corej2eepatterns.com/)
 * **출처**: 자바성능튜닝이야기 -출판사:인사이트
