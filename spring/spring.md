@@ -7,7 +7,7 @@
 
 ## 1. Configuration Lifecycle
 
-<figure><img src="../.gitbook/assets/image (11) (1).png" alt="" width="479"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (1) (1).png" alt="" width="479"><figcaption></figcaption></figure>
 
 ## 2. Spring IoC(Inversion of Control) Container
 

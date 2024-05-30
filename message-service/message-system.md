@@ -151,7 +151,7 @@
 
 빅 테이터 및 실시간 처리에 있어 메시지 애프리케이션을 다음과 같이 다양하게 사용됩니다.
 
-<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 * 빅 데이터 스트리밍 애플리케이션:  IOT 수집기, 로그 수집기
 * 알림 서비스

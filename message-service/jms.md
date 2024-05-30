@@ -35,47 +35,92 @@ JMS는 PTP(Point-To-Point)와 Pub/Sub 모델을 제공하며, JMS 응용 프로�
     다운로드: [Eclipse GlassFish 7.0.14, Jakarta EE Platform, 10](https://www.eclipse.org/downloads/download.php?file=/ee4j/glassfish/glassfish-7.0.14.zip)\
 
 
-    <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 
 2.  **압축해제:** 다운로드한 파일을 압축을 풉니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 
 3.  **서버   실행**:  assfish7/bin 폴더에 있는 startserv.bat를 실행 합니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 4.  **Admin Console 열기**: [http://localhost:4848](http://localhost:4848/) 에서 관리 콘솔을 오픈 합니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 5.  JMS 자원 : Resource/JMS Resources/Connection Factories에 Glassfish가 만든 기본 JMS 팩토리를 볼 수 있습니다. ( jms/\_\_defaultConnectionFactory )\
 
 
-    <figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 6.  JMS 자원 생성: JMS 리소스가 있어서 메세지를 보내고 받을수 있으므로 리소스를 생성 합니다.
 
-    <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
     *   **jms/PTPQueue 생성**: JNDI 리소스를 생성 하기 위해 New 를 선택하여 다음과  같이 생성합니다. \
 
 
-        <figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 
     *   jms/ReplyQueue **생성**: JNDI 리소스를 생성 하기 위해 New 를 선택하여 다음과  같이 생성합니다. \
 
 
-        <figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
     *   jms/Topic **성**: JNDI 리소스를 생성 하기 위해 New 를 선택하여 다음과  같이 생성합니다. \
 
 
-        <figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
-    * ㅇㅁㄴㅇ
-    *
-7. ㄹㅇㄴㅁㄹ
-8. ㄻㄴㅇㄹ
+        <figure><img src="../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+    *   생성되 최종 모습 입니다.\
+
+
+        <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+## 4. 예제 코드&#x20;
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+```java
+import jakarta.jms.*;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+public class JmsPtpQueue {
+    public static void main(String[] args)  {
+        ConnectionFactory connectionFactory = null;
+        Queue queue = null;
+
+        try {
+            InitialContext initialContext = new InitialContext();
+
+            //Step-1 Create ConnectionFactory
+            connectionFactory
+                    = (ConnectionFactory) initialContext.lookup("jms/__defaultConnectionFactory");
+
+            //Step-2
+            queue = (Queue) initialContext.lookup("jms/PTPQueue");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+
+        //Step-3
+        try (JMSContext jmsContext = connectionFactory.createContext()) {
+
+            //Step-4a
+            TextMessage textMessage = jmsContext.createTextMessage("Message using JMS 2.0");
+            JMSProducer jmsProducer = jmsContext.createProducer().send(queue, textMessage);
+
+            //Step-4b
+            TextMessage message = (TextMessage) jmsContext.createConsumer(queue).receive();
+            System.out.println(message.getText());
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
