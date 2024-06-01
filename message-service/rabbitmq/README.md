@@ -99,6 +99,29 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 * **Queue (큐)**: Consumer가 메시지를 consume하기 전까지 보관하는 장소입니다. Queue는 반드시 미리 정의되어야 하며, 이름, 내구성, 자동 삭제 여부 등의 속성을 갖습니다.
 * **Consumer (소비자)**: Producer로부터 메시지를 받아 처리하는 주체입니다. Consumer는 Queue를 통해 메시지를 가져갑니다.
 
+## 5. RabbitMQ에서RPC&#x20;
+
+**RabbitMQ는 AMQP 메시지 브로커로서, 코어 서버 통신의 거의 모든 부분에서 RPC 패턴을 사용하여 통신합니다**. 따라서 RPC에 대해 알아보는 것이 중요합니다.
+
+RPC (원격 프로시저 호출)는 프로세스 간 통신을 위한 방법 중 하나입니다. 이 기술은 별도의 원격 제어 코딩 없이도 다른 주소 공간에 있는 함수나 프로시저를 실행할 수 있게 해줍니다. 분산 컴퓨팅 환경에서 자원을 효율적으로 사용하기 위해 개발되었으며, 프로세스는 원칙적으로 자신의 주소 공간 내에 있는 함수만을 호출하여 실행할 수 있습니다.
+
+<figure><img src="../../.gitbook/assets/image (312).png" alt="" width="563"><figcaption><p>RPC</p></figcaption></figure>
+
+* RPC의 장점
+  * 고유 프로세스 개발 집중 가능 (하부 네트워크 프로토콜에 신경쓰지 않아도 되기 때문)
+  * 프로세스간 통신 기능을 비교적 쉽게 구현하고 정교한 제어가 가능
+* RPC의 단점
+  * 호출 실행과 반환 시간이 보장되지 않음 (네트워크 구간을 통하여 RPC 통신을 하는 경우, 네트워크가 끊겼을 때 치명적 문제 발생)
+  * 보안이 보장되지 않음
+* RPC의 대표적인 구현체는?
+  * [`ProtocolBuffer` by `Google`](https://developers.google.com/protocol-buffers/)
+  * [`Thrift` by `Facebook`](https://thrift.apache.org/)
+  * [`Finalge` by `Twitter`](https://twitter.github.io/finagle/)
+
+## 5. RabbitMQ 흐름
+
+<figure><img src="../../.gitbook/assets/image (313).png" alt=""><figcaption></figcaption></figure>
+
 참고: [https://www.rabbitmq.com/](https://www.rabbitmq.com/), [https://www.rabbitmq.com/tutorials](https://www.rabbitmq.com/tutorials)
 
 참고: [www.rabbitmq.com/getstarted.html](http://www.rabbitmq.com/getstarted.html)
