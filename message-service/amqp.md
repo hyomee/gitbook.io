@@ -4,7 +4,17 @@ AMQP(Advanced Message Queuing Protocol)는 메시지 지향 미들웨어를 위�
 
 **AMQP스펙**은 네트워크 프로코콜의 정의와 서비스의 동작 방식을 정의하고 있습니다. 여기서 서비스의 동작방식을 **AMQ 모델**이라 합니다.
 
+## 1. **AMQ 모델**
 
+**AMQ (**Advanced Message Queuing) **모델**은 메시지 라우팅 동작을 정의하는 메세지 브로커의 새가지 추상 컴포넌트를 다음과 같습니다.
+
+<figure><img src="../.gitbook/assets/image (310).png" alt="" width="563"><figcaption><p>AMQ Model</p></figcaption></figure>
+
+* **익스체인지(Exchange)**: 클라이언트에서 받은 메세지를 큐로 전달하는 컴포넌트
+* **큐(Queue)**: 메시지를 저장하는 디스크상의 자료 구조
+* **바인딩(Binding)**: 익스체인지에서 전달된 메세지를 어떤 큐에 저장해야 하는지 정의하는 컴포넌트
+
+## 2. **AMQP**
 
 <figure><img src="../.gitbook/assets/image (306).png" alt=""><figcaption><p>AMQP 개념</p></figcaption></figure>
 
@@ -16,7 +26,7 @@ AMQP(Advanced Message Queuing Protocol)는 메시지 지향 미들웨어를 위�
 
 기능을 재공합니다.
 
-
+## 3. 메세지 교환 방식
 
 AMQP 모델에서 메세지 교환은 다음 방법으로 진행 합니다.
 
