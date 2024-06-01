@@ -54,4 +54,23 @@ AMQP 모델에서 메세지 교환은 다음 방법으로 진행 합니다.
 
 </details>
 
+## 4. RPC&#x20;
+
+RPC (Remote Procedure Call) 프로세스 간 통신을 위한 방법 중 하나로 별도의 원격 제어를 위한 코딩 없이 다른 주소 공간에서 함수나 프로시저를 실행할 수 있게 해주는 프로세스 간 통신 기술로 다른 주소 공간에서 동작하는 프로세스의 함수를 실행할 수 있게 하는 기술로 분산 컴퓨팅 환경에서 자원의 효율적인 사용을 하기 위해 발전된 기술입니다. (프로세스는 자신의 주소 공간 안에 존재하는 함수만 호출하여 실행할 수 있다.)
+
+<figure><img src="../.gitbook/assets/image (312).png" alt="" width="563"><figcaption><p>RPC</p></figcaption></figure>
+
+* RPC의 장점
+  * 고유 프로세스 개발 집중 가능 (하부 네트워크 프로토콜에 신경쓰지 않아도 되기 때문)
+  * 프로세스간 통신 기능을 비교적 쉽게 구현하고 정교한 제어가 가능
+* RPC의 단점
+  * 호출 실행과 반환 시간이 보장되지 않음 (네트워크 구간을 통하여 RPC 통신을 하는 경우, 네트워크가 끊겼을 때 치명적 문제 발생)
+  * 보안이 보장되지 않음
+* RPC의 대표적인 구현체는?
+  * [`ProtocolBuffer` by `Google`](https://developers.google.com/protocol-buffers/)
+  * [`Thrift` by `Facebook`](https://thrift.apache.org/)
+  * [`Finalge` by `Twitter`](https://twitter.github.io/finagle/)
+
+
+
 참고: [위키백과\_AMQP](https://ko.wikipedia.org/wiki/AMQP)
