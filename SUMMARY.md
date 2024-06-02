@@ -143,4 +143,5 @@
   * [RabbitMQ](message-service/rabbitmq/README.md)
     * [Binding](message-service/rabbitmq/binding.md)
     * [설치](message-service/rabbitmq/undefined.md)
+    * [Page](message-service/rabbitmq/page.md)
   * [송수신 확인](message-service/amqpack.md)
