@@ -108,7 +108,7 @@
    *   이러한 상태 없는(stateless) 메시지 교환은 확장성 있는 메시징 시스템에서 효과적으로 사용됩니다. 즉, 메시지를 보낸 후 추가적인 처리나 응답을 기다리지 않고 다음 작업을 수행하는 방식입니다.\
 
 
-       <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 2. **Request/reply Model:**
    * **요청(Request)**: 메시지를 발신하는 측이 메시지를 보내고, 응답을 기다립니다.
    * **응답(Reply)**: 메시지를 수신하는 측은 요청을 처리하고, 응답 메시지를 발신자에게 보냅니다.
