@@ -69,8 +69,21 @@ TCP/IP를 알아보기 전에 간략하게  OSI 7계층에 대해서 먼저 알�
 * **TTL (Time to Live)**: 패킷이 네트워크 상에서 살아 있을 수 있는 시간을 제한합니다.
 * **프로토콜 (Protocol)**: 상위 프로토콜을 나타냅니다.
 * **헤더 체크섬 (Header Checksum)**: IP 헤더의 오류 검사 값입니다
+* **데이터 예제**
 
+<figure><img src="../.gitbook/assets/image (315).png" alt=""><figcaption></figcaption></figure>
 
+### 2-3. TCP/IP 프로토콜의 실제 예제
+
+1. **HTTP (Hypertext Transfer Protocol)**:
+   * 웹 브라우저와 웹 서버 간에 웹 페이지를 전송하는 데 사용됩니다.
+   * 예를 들어, 웹 브라우저에서 `http://www.example.com`을 입력하면 해당 웹 페이지의 데이터가 HTTP를 통해 전송됩니다
+2. **FTP (File Transfer Protocol)**:
+   * 파일을 컴퓨터 간에 전송하는 데 사용됩니다.
+   * 예를 들어, 파일 서버에서 클라이언트로 파일을 업로드하거나 다운로드할 때 FTP를 사용합니다
+3. **SMTP (Simple Mail Transfer Protocol)**:
+   * 이메일을 보내고 받는 데 사용됩니다.
+   * 예를 들어, 이메일 클라이언트가 이메일 서버로 이메일을 보낼 때 SMTP를 사용합니다
 
 ## 3. 일반적인 메시징 프로토콜
 
