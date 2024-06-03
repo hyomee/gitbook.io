@@ -54,7 +54,7 @@
 
 #### 4-1.  @Component 선언을 하지 않아서 오류 발생 &#x20;
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Spring Bean 등록 오류</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Spring Bean 등록 오류</p></figcaption></figure>
 
 * 원인 :  Spring Bean 을 등록 하지 않아서 에러 발생&#x20;
 
@@ -101,7 +101,7 @@ public class UserService {
 
 * Service, RestController 는 다음과 같은 구조를 가집니다.
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 * @Service는 @Component를 @RestController는 @Controller, @Component를 가지고 있어서 @SpringBootApplication는 @ComponentScan을 가지고 있어서 SpringBoot가 시작 될 때 자동으로 Bean으로등록되어 ApplicationContext에 할당 됩니다. ( Spring에서 Bean 생명 주기를 관리 하게 됩니다.)&#x20;
 
