@@ -70,3 +70,26 @@ TCP/IP를 알아보기 전에 간략하게  OSI 7계층에 대해서 먼저 알�
 * **프로토콜 (Protocol)**: 상위 프로토콜을 나타냅니다.
 * **헤더 체크섬 (Header Checksum)**: IP 헤더의 오류 검사 값입니다
 
+
+
+## 3. 일반적인 메시징 프로토콜
+
+1. **MQTT (Message Queuing Telemetry Transport)**:
+   * MQTT는 매우 가벼운 발행/구독 메시징 전송 프로토콜로, 네트워크 계층에서 작동합니다.
+   * 제한된 대역폭이나 기타 제약 사항이 있는 장치에서 사용하기에 이상적입니다.
+   * 작은 코드 크기를 가지며, 저전력 애플리케이션에 적합합니다.
+   * 메시지 전달의 신뢰성이 높고, 유연한 QoS(품질 서비스) 옵션을 제공합니다[1](https://getstream.io/blog/messaging-protocols/).
+2. **XMPP (Extensible Messaging and Presence Protocol)**:
+   * XMPP는 실시간 통신을 위한 프로토콜로, 주로 채팅, VoIP, 온라인 게임 등에 사용됩니다.
+   * 확장 가능하며, 다양한 기능을 지원합니다.
+   * Jabber, Google Talk 등에서 사용되었습니다.
+3. **WebSocket**:
+   * WebSocket은 양방향 통신을 위한 프로토콜로, 웹 브라우저와 서버 간의 실시간 통신에 사용됩니다.
+   * HTTP와 달리 연결을 유지하고, 실시간 데이터를 전송할 수 있습니다.
+4. **STOMP (Simple Text Oriented Messaging Protocol)**:
+   * STOMP는 메시지 큐와 클라이언트 간의 상호 작용을 위한 간단한 텍스트 기반 프로토콜입니다.
+   * AMQP와 같은 메시징 브로커와 통신하는 데 사용됩니다.
+5. **WebRTC (Web Real-Time Communication)**:
+   * WebRTC는 웹 브라우저 간의 실시간 통신을 위한 프레임워크입니다.
+   * 비디오, 오디오, 데이터를 전송할 수 있으며, P2P 및 다중 참가자 통신을 지원합니다.
+
