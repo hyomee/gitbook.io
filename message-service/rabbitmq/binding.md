@@ -568,3 +568,134 @@ public class CommonConfigs {
 * 실행 결과
 
 <figure><img src="../../.gitbook/assets/image (329).png" alt=""><figcaption></figcaption></figure>
+
+## 6. Type:Direct
+
+
+
+<details>
+
+<summary>람다로 변환 전체소스</summary>
+
+```java
+public class DiectExchange {
+
+    private static Logger logger =  LoggerFactory.getLogger(DiectExchange.class);
+
+    public static final String DIRECT_EXCHANGE = "My-Direct-Exchange";
+    public static final String DIRECT_QUEUE_EMAIL = "My-Direct-Email-Q";
+    public static final String DIRECT_QUEUE_SMS = "My-Direct-Sms-Q";
+    public static final String DIRECT_QUEUE_SNS = "My-Direct-Sns-Q";
+
+    public static void run() throws IOException, TimeoutException {
+
+        exchangeDeclare();
+        queueDeclare();
+        queueBind();
+
+        Thread consumer = new Thread(() -> {
+            try {
+                consumMessage();
+            } catch (IOException | TimeoutException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+
+        Thread publisher = new Thread(() -> {
+            try {
+                publishMessage();
+            } catch (IOException | TimeoutException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        publisher.start();
+        consumer.start();
+    }
+
+
+
+    private static void exchangeDeclare() throws IOException, TimeoutException {
+        Channel channel =  RabbitMqQConnectionManager.getConnection().createChannel();
+        channel.exchangeDeclare(DIRECT_EXCHANGE, BuiltinExchangeType.DIRECT, true);
+        channel.close();
+    }
+
+    private static void queueDeclare() throws IOException, TimeoutException {
+        Channel channel =  RabbitMqQConnectionManager.getConnection().createChannel();
+        channel.queueDeclare(DIRECT_QUEUE_EMAIL, true, false, false, null);
+        channel.queueDeclare(DIRECT_QUEUE_SMS, true, false, false, null);
+        channel.queueDeclare("My-Direct-Sns-Q", true, false, false, null);
+        channel.close();
+    }
+
+    private static void queueBind() throws IOException, TimeoutException {
+        Channel channel = RabbitMqQConnectionManager.getConnection().createChannel();
+
+        channel.queueBind(DIRECT_QUEUE_EMAIL, DIRECT_EXCHANGE, "email");
+        channel.queueBind(DIRECT_QUEUE_SMS, DIRECT_EXCHANGE, "sms");
+        channel.queueBind(DIRECT_QUEUE_SNS, DIRECT_EXCHANGE, "sns");
+
+        channel.close();
+    }
+
+    private static void publishMessage() throws IOException, TimeoutException, InterruptedException {
+        Channel channel = RabbitMqQConnectionManager.getConnection().createChannel();
+
+        // 3. 전송 메세지
+        String emai = "이메일 전송 ......";
+        String sms = "sms 전송 ......";
+        String sns = "sns 전송 ......";
+
+        // 4. publish  (exchange, routingKey, properties, messageBody)
+        channel.basicPublish(DIRECT_EXCHANGE, "email", null, emai.getBytes());
+        Thread.sleep(1000);
+        channel.basicPublish(DIRECT_EXCHANGE, "sms", null, sms.getBytes());
+        Thread.sleep(1000);
+        channel.basicPublish(DIRECT_EXCHANGE, "sns", null, sns.getBytes());
+
+        channel.close();
+    }
+
+    private static void consumMessage() throws IOException, TimeoutException, InterruptedException {
+        Channel channel = RabbitMqQConnectionManager.getConnection().createChannel();
+
+        channel.basicConsume(DIRECT_QUEUE_EMAIL,
+                true,
+                ((consumerTag, message) -> {
+                    logger.info("consumerTag : " + consumerTag);
+                    logger.info(DIRECT_QUEUE_EMAIL + " : " + new String(message.getBody(), "UTF-8"));
+                }),
+                consumerTag -> {
+                    logger.info(consumerTag);
+                });
+
+        channel.basicConsume(DIRECT_QUEUE_SMS,
+                true,
+                ((consumerTag, message) -> {
+                    logger.info("consumerTag : " + consumerTag);
+                    logger.info(DIRECT_QUEUE_SMS + " : " + new String(message.getBody(), "UTF-8"));
+                }),
+                consumerTag -> {
+                    logger.info(consumerTag);
+                });
+
+        channel.basicConsume(DIRECT_QUEUE_SNS,
+                true,
+                ((consumerTag, message) -> {
+                    logger.info("consumerTag : " + consumerTag);
+                    logger.info(DIRECT_QUEUE_SNS + " : " + new String(message.getBody(),"UTF-8"));
+                }),
+                consumerTag -> {
+                    logger.info(consumerTag);
+                });
+    }
+}
+```
+
+</details>
+
+* 결과&#x20;
+
+<figure><img src="../../.gitbook/assets/image (331).png" alt=""><figcaption></figcaption></figure>
