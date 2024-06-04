@@ -10,10 +10,6 @@ Exchange와 Queue를 연결하는 관계로 Exchange 타입과 binding 규칙에
 
 * API 참고: [https://www.rabbitmq.com/client-libraries/java-client](https://www.rabbitmq.com/client-libraries/java-client)
 
-아래 이미지와 같은 서비스 코드를 작성 하면서 Binding에 대한 이해를 하고자 합니다.
-
-<figure><img src="../../.gitbook/assets/image (330).png" alt=""><figcaption></figcaption></figure>
-
 ## 1. Exchange&#x20;
 
 메세지를 받고 받은 매새지를 큐로 전달하는 요소로 Exchange가 어떤 Queue로 메시지를 전달하는지 결정하는 라우팅 알고리즘은 Exchange Type과 Binding 규칙에 의해 결정됩니다 즉 Exchange와 Queue를 적절하게 설정하여 메시지를 효율적으로 라우팅할 수 있습니다.
