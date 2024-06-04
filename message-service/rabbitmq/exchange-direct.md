@@ -556,11 +556,38 @@ public class CommonConfigs {
 
 ## 6. Type:Direct
 
+ConnectionFactory를 한번 생성 하기 위해 싱글톤 패턴으로 변경 소스&#x20;
 
+```java
+public class RabbitMqQConnectionManager {
+    private final static Logger logger = LoggerFactory.getLogger(RabbitMqQConnectionManager.class);
+
+    private static Connection connection = null;
+
+    public static Connection getConnection()   {
+
+        if (connection == null) {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.setHost(RabbitMQConstant.RABBITMQ_HOST);
+            factory.setPort(RabbitMQConstant.RABBITMQ_PORT);
+            factory.setUsername(RabbitMQConstant.RABBITMQ_ID);
+            factory.setPassword(RabbitMQConstant.RABBITMQ_PWD);
+            try {
+                connection = factory.newConnection();
+            } catch (IOException | TimeoutException e) {
+                logger.error("RabbitMQ Connection Failed :: " +  e.fillInStackTrace());
+                throw new RuntimeException(e);
+            }
+        }
+
+        return connection;
+    }
+}
+```
 
 <details>
 
-<summary>람다로 변환 전체소스</summary>
+<summary>한번에 실행으로 변경 소스</summary>
 
 ```java
 public class DiectExchange {
