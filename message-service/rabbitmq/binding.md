@@ -4,6 +4,8 @@ Exchange와 Queue를 연결하는 관계로 Exchange 타입과 binding 규칙에
 
 <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
+* API 참고: [https://www.rabbitmq.com/client-libraries/java-client](https://www.rabbitmq.com/client-libraries/java-client)
+
 ## 1. Exchange&#x20;
 
 메세지를 받고 받은 매새지를 큐로 전달하는 요소로 Exchange가 어떤 Queue로 메시지를 전달하는지 결정하는 라우팅 알고리즘은 Exchange Type과 Binding 규칙에 의해 결정됩니다 즉 Exchange와 Queue를 적절하게 설정하여 메시지를 효율적으로 라우팅할 수 있습니다.
@@ -19,7 +21,51 @@ Exchange와 Queue를 연결하는 관계로 Exchange 타입과 binding 규칙에
   * **Transient**: 브로커가 재시작되면 삭제됩니다.
 * **Auto-delete**: 마지막 Queue 연결이 해제되면 삭제됩니다.
 
-Exchange는 Producer에서 발행한 메시지를 받아서 적절한 Queue로 전달하며, Consumer는 Queue를 통해 메시지를 가져갑니다. Queue는 반드시 미리 정의되어야 하며, 이름, 내구성, 자동 삭제 여부 등의 속성을 갖습니다
+Exchange는 Producer에서 발행한 메시지를 받아서 적절한 Queue로 전달하며, Consumer는 Queue를 통해 메시지를 가져갑니다. Queue는 반드시 미리 정의되어야 하며, 이름, 내구성, 자동 삭제 여부 등의 속성을 갖습니다.
+
+### 1-1. 생성 방법
+
+Exchage는 관리 UI 또는 프로그램 방식을 통해서 만들 수 있습니다.&#x20;
+
+#### 1-1-1. 프로그램 방식으로 Exchange 설정&#x20;
+
+Exchange를 만드는 동안 Name, Durable, Auto-delete 및 Exchange 유형의 3가지 속성을 처리해야 합니다. 기본적으로 생성된 교환은 지속적이며 자동 삭제는 false로 **channel.exchangeDeclare** 메서드를 사용해서 만듭니다. 다음은 기본적인 파라메터 입니다.
+
+* exchange (교환기 이름): 교환기의 이름을 지정합니다. 이 이름은 메시지를 어떤 큐로 라우팅할지 결정하는 데 사용됩니다.&#x20;
+* type (교환기 유형): 교환기의 유형을 지정합니다. 일반적으로 다음과 같은 유형이 있습니다:&#x20;
+  * fanout: 모든 바인딩된 큐에 메시지를 브로드캐스트합니다.&#x20;
+  * direct: 라우팅 키와 일치하는 큐로 메시지를 라우팅합니다.&#x20;
+  * topic: 라우팅 패턴을 사용하여 메시지를 큐로 라우팅합니다.&#x20;
+  * headers: 헤더 속성을 기반으로 메시지를 큐로 라우팅합니다.&#x20;
+* durable (지속성 설정): 교환기를 지속성 있게 만들지 여부를 결정합니다. 지속성이 설정되면 교환기가 서버 재시작 시에도 유지됩니다. (true 또는 false)
+
+아래는RabbitMQ 관리자 UI 에서 Exchange 생성 전 화면입니다.
+
+<figure><img src="../../.gitbook/assets/image (316).png" alt=""><figcaption><p>관리 Tool</p></figcaption></figure>
+
+```java
+public class CreateExchange {
+    private final static Logger logger = LoggerFactory.getLogger(CreateExchange.class);
+
+    public static void main(String[] args) throws IOException, TimeoutException {
+        logger.info("RabbitMQ Create CreateExchange Start [" + CommonConfigs.DEFAULT_QUEUE + "]");
+
+        // 1. Connection 생성
+        Connection connection = CommonConfigs.getRabittMQConnection();
+
+        // 2. 채널 생성
+        Channel channel = connection.createChannel();
+
+        // 3. Exchange 생성
+        channel.exchangeDeclare("My-Direct-Exchange", BuiltinExchangeType.DIRECT, true);
+
+        channel.close();
+        connection.close();
+    }
+}
+```
+
+<figure><img src="../../.gitbook/assets/image (317).png" alt=""><figcaption></figcaption></figure>
 
 ## &#x20;2. Queue
 
