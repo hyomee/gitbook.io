@@ -1,3 +1,7 @@
+---
+description: 'Exchange Type: Direct'
+---
+
 # Binding
 
 Exchange와 Queue를 연결하는 관계로 Exchange 타입과 binding 규칙에 따라 적절한 Queue로 전달됩니다.
