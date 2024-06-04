@@ -6,6 +6,10 @@ Exchange와 Queue를 연결하는 관계로 Exchange 타입과 binding 규칙에
 
 * API 참고: [https://www.rabbitmq.com/client-libraries/java-client](https://www.rabbitmq.com/client-libraries/java-client)
 
+아래 이미지와 같은 서비스 코드를 작성 하면서 Binding에 대한 이해를 하고자 합니다.
+
+<figure><img src="../../.gitbook/assets/image (330).png" alt=""><figcaption></figcaption></figure>
+
 ## 1. Exchange&#x20;
 
 메세지를 받고 받은 매새지를 큐로 전달하는 요소로 Exchange가 어떤 Queue로 메시지를 전달하는지 결정하는 라우팅 알고리즘은 Exchange Type과 Binding 규칙에 의해 결정됩니다 즉 Exchange와 Queue를 적절하게 설정하여 메시지를 효율적으로 라우팅할 수 있습니다.
@@ -389,6 +393,178 @@ Consumer를 먼저 실행 하고 Publisher 를 실행하여 결과를 확인합�
 
 <figure><img src="../../.gitbook/assets/image (326).png" alt=""><figcaption></figcaption></figure>
 
-**ㅊ**
+## 5. 전체 소스
+
+{% tabs %}
+{% tab title="CreateExchange" %}
+```java
+public class CreateExchange {
+    private final static Logger logger = LoggerFactory.getLogger(CreateExchange.class);
+
+    public static void main(String[] args) throws IOException, TimeoutException {
+        logger.info("RabbitMQ Create CreateExchange Start ");
+
+        // 1. Connection 생성
+        Connection connection = CommonConfigs.getRabittMQConnection();
+
+        // 2. 채널 생성
+        Channel channel = connection.createChannel();
+
+        // 3. Exchange 생성
+        channel.exchangeDeclare("My-Direct-Exchange", BuiltinExchangeType.DIRECT, true);
+
+        // 4  Queue 생성
+        channel.queueDeclare("My-Direct-Email-Q", true, false, false, null);
+        channel.queueDeclare("My-Direct-Sms-Q", true, false, false, null);
+        channel.queueDeclare("My-Direct-Sns-Q", true, false, false, null);
+
+        // 5 bindings 생성  - (queue, exchange, routingKey)
+        channel.queueBind("My-Direct-Email-Q", "My-Direct-Exchange", "email");
+        channel.queueBind("My-Direct-Sms-Q", "My-Direct-Exchange", "sms");
+        channel.queueBind("My-Direct-Sns-Q", "My-Direct-Exchange", "sns");
+
+        channel.close();
+        connection.close();
+    }
+}
+```
+{% endtab %}
+
+{% tab title="ExchangePublisher " %}
+```java
+public class ExchangePublisher {
+    private final static Logger logger = LoggerFactory.getLogger(ExchangePublisher.class);
+
+    public static void main(String[] args) throws IOException, TimeoutException {
+        logger.info("RabbitMQ Publisher Start ");
+
+        // 1. Connection 생성
+        Connection connection = CommonConfigs.getRabittMQConnection();
+
+        // 2. 채널 생성
+        Channel channel = connection.createChannel();
+
+        // 3. 전송 메세지
+        String emai = "이메일 전송 ......";
+        String sms = "sms 전송 ......";
+        String sns = "sns 전송 ......";
+
+        // 4. publish  (exchange, routingKey, properties, messageBody)
+        channel.basicPublish("My-Direct-Exchange", "email", null, emai.getBytes());
+        channel.basicPublish("My-Direct-Exchange", "sms", null, sms.getBytes());
+        channel.basicPublish("My-Direct-Exchange", "sns", null, sns.getBytes());
+
+        channel.close();
+        connection.close();
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Consumer" %}
+```java
+public class ExchangeEmailConsumer {
+    private final static Logger logger = LoggerFactory.getLogger(ExchangeEmailConsumer.class);
+
+    public static void main(String[] args) throws IOException, TimeoutException {
+        logger.info("RabbitMQ Consumer :: My-Direct-Email-Q  Start ");
+
+        // 1. Connection 생성
+        Connection connection = CommonConfigs.getRabittMQConnection();
+
+        // 2. 채널 생성
+        Channel channel = connection.createChannel();
+
+        DeliverCallback deliverCallback = (consumerTag, message) -> {
+            System.out.println(consumerTag);
+            System.out.println(new String(message.getBody(), "UTF-8"));
+        };
+
+        CancelCallback cancelCallback = consumerTag -> {
+            System.out.println(consumerTag);
+        };
+
+        channel.basicConsume("My-Direct-Email-Q", true, deliverCallback, cancelCallback);
+
+    }
+}
+
+public class ExchangeSmsConsumer {
+    private final static Logger logger = LoggerFactory.getLogger(ExchangeSmsConsumer.class);
+
+    public static void main(String[] args) throws IOException, TimeoutException {
+        logger.info("RabbitMQ Consumer :: My-Direct-Sms-Q  Start ");
+
+        // 1. Connection 생성
+        Connection connection = CommonConfigs.getRabittMQConnection();
+
+        // 2. 채널 생성
+        Channel channel = connection.createChannel();
+
+        DeliverCallback deliverCallback = (consumerTag, message) -> {
+            System.out.println(consumerTag);
+            System.out.println(new String(message.getBody(), "UTF-8"));
+        };
+
+        CancelCallback cancelCallback = consumerTag -> {
+            System.out.println(consumerTag);
+        };
+
+        channel.basicConsume("My-Direct-Sms-Q", true, deliverCallback, cancelCallback);
+
+    }
+}
+
+public class ExchangeSnsConsumer {
+    private final static Logger logger = LoggerFactory.getLogger(ExchangeSnsConsumer.class);
+
+    public static void main(String[] args) throws IOException, TimeoutException {
+        logger.info("RabbitMQ Consumer :: My-Direct-Sns-Q  Start ");
+
+        // 1. Connection 생성
+        Connection connection = CommonConfigs.getRabittMQConnection();
+
+        // 2. 채널 생성
+        Channel channel = connection.createChannel();
+
+        DeliverCallback deliverCallback = (consumerTag, message) -> {
+            System.out.println(consumerTag);
+            System.out.println(new String(message.getBody(), "UTF-8"));
+        };
+
+        CancelCallback cancelCallback = consumerTag -> {
+            System.out.println(consumerTag);
+        };
+
+        channel.basicConsume("My-Direct-Sns-Q", true, deliverCallback, cancelCallback);
+
+    }
+}
+```
+{% endtab %}
+
+{% tab title="CommonConfigs " %}
+```java
+public class CommonConfigs {
+    
+
+    public static Connection getRabittMQConnection() throws IOException, TimeoutException {
+        ConnectionFactory factory = new ConnectionFactory();
+
+
+        factory.setHost("x.x.x.x");
+        factory.setPort(9999);
+        factory.setUsername("id");
+        factory.setPassword("pwd");
+        Connection connection = factory.newConnection();
+        
+        return connection;
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+* 실행 결과
 
 <figure><img src="../../.gitbook/assets/image (329).png" alt=""><figcaption></figcaption></figure>
