@@ -67,7 +67,7 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 
 ## 3. RabbitMQ의 주요 개념
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Producer**: 메시지를 보내는 주체로, 보내고자 하는 메시지를 Exchange에 publish합니다.
 * **Consumer**: Producer로부터 메시지를 받아 처리하는 주체입니다.
@@ -80,12 +80,12 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 
 게시자가 메시지를 게시하면 먼저 교환에서 메시지를 받습니다. 그런 다음 교환은 교환 유형에 따라 메시지를 큐로 전달합니다.
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Producer (생산자 or Publisher)**: 메시지를 발행하는 주체로. Producer는 보내고자 하는 메시지를 Exchange에 publish합니다.
 *   **Exchange (교환기)**: Producer로부터 전달받은 메시지를 어떤 Queue로 보낼지 결정하는 장소로  RabbitMQ에서는 다음과 같은 Exchange Type을 지원합니다.
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     * **Direct Exchange**: 메시지에 포함된 라우팅 키(routing key)를 기반으로 Queue로 메시지를 전달합니다. 각 Queue는 특정 라우팅 키와 연결됩니다.&#x20;
       * Binding Key가 게시자가 지정한 Routing Key와 정확히 동일한 Exchange에 연결된 Queue로 전달

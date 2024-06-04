@@ -35,19 +35,19 @@ JMS는 PTP(Point-To-Point)와 Pub/Sub 모델을 제공하며, JMS 응용 프로�
     다운로드: [Eclipse GlassFish 7.0.14, Jakarta EE Platform, 10](https://www.eclipse.org/downloads/download.php?file=/ee4j/glassfish/glassfish-7.0.14.zip)\
 
 
-    <figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 2.  **압축해제:** 다운로드한 파일을 압축을 풉니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 3.  **서버   실행**:  assfish7/bin 폴더에 있는 startserv.bat를 실행 합니다.\
 
 
-    <figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 4.  **Admin Console 열기**: [http://localhost:4848](http://localhost:4848/) 에서 관리 콘솔을 오픈 합니다.\
 
 
@@ -77,11 +77,11 @@ JMS는 PTP(Point-To-Point)와 Pub/Sub 모델을 제공하며, JMS 응용 프로�
     *   생성되 최종 모습 입니다.\
 
 
-        <figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. 예제 코드&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```java
 import jakarta.jms.*;
