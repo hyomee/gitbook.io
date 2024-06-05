@@ -56,7 +56,7 @@ Offset Commit의 구조를 이용해 컨슈머 처리 실패, 고장 시 롤백 
 *   **라운드 로빈에 의한 송신**: 메시지 Key를 지정 하지 않고 null로 하면 여러 파티션에 라운드 로빈 방식으로 송신 됩니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     1. DefaultPartitioner Class이용해서 구현합니다.
     2. Producer API에서 제공 하는 Partitioner 인터페이스를 구현함으로써 Key,Value 값에 따라서 송신 로직을 커스텀으로 구현합니다.
@@ -127,9 +127,9 @@ Loader는 Producer와 Consumer와의 데이터 교환 역할을 담당 하고 Fo
 
 *   min.insync.replicas = 3, Ack = all , Replica = 3
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   min.insync.replicas = 2, Ack = all , Replica = 3\
 
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

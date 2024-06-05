@@ -61,7 +61,7 @@ public Step chunkErrorStep( JobRepository jobRepository,
 *   결과: 6개 item을  Chunk 2로 6개를 읽는 동안 2회 에러가 발생하여 모두 스킵되어 작업은 성공적으로 종료 한다. 몰론 에러 2개는 처리 되지는 않는다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><br></p></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><br></p></figcaption></figure>
 
     <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
