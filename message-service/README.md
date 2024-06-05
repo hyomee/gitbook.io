@@ -56,7 +56,7 @@ RabbitMQ는 AMQP (Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 
 **Kafka**와 **RabbitMQ**는 모두 메시지 대기열 시스템이지만, 각각 다른 강점과 약점을 가지고 있습니다.
 
-<figure><img src="../.gitbook/assets/image (4) (1) (1) (1).png" alt="" width="563"><figcaption><p>참고: <a href="https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/">https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/</a></p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt="" width="563"><figcaption><p>참고: <a href="https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/">https://www.confluent.io/learn/rabbitmq-vs-apache-kafka/</a></p></figcaption></figure>
 
 ### 1. **RabbitMQ**
 

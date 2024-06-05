@@ -1,28 +1,28 @@
-# Fanout
+# Exchange-Fanout
 
 라우팅 키와 관계없이 연결된 모든 Queue에 동일한 메시지를 전달합니다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 * 모든 Queue가 Publisher이 발행한 메시지를 Consumer에서 받습니다.
 * Routing Key를 지정해도 발행한 메시지를 Consumer에서 받습니다.
 
 ## 1. 관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Exchange 이름:** My-Fanout-Exchange:&#x20;
 * Binding Queue
   *   My-Fanout-Email-Q: Routing Key (email)로 지정\
 
 
-      <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Fanout-Sms-Q: Routing Key 지정 하지 않음&#x20;
 
-      <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Fanout-Sns-Q: Routing Key 지정 하지 않음
 
-      <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. 소스 코드
 
