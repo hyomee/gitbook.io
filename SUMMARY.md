@@ -142,6 +142,7 @@
     * [Binding](message-service/rabbitmq/binding.md)
     * [Exchange-Direct](message-service/rabbitmq/exchange-direct.md)
     * [Exchange-Fanout](message-service/rabbitmq/exchange-fanout.md)
+    * [Exchange-Topic](message-service/rabbitmq/exchange-topic.md)
   * [Kafka](message-service/kafka/README.md)
     * [개요](message-service/kafka/outline.md)
     * [프로듀서/컨슈머](message-service/kafka/undefined-1.md)
