@@ -138,7 +138,7 @@
   * [JMS](message-service/jms.md)
   * [AMQP](message-service/amqp.md)
   * [RabbitMQ](message-service/rabbitmq/README.md)
-    * [설치 및 예제](message-service/rabbitmq/undefined.md)
+    * [설치 및 Default Exchange](message-service/rabbitmq/default-exchange.md)
     * [Binding](message-service/rabbitmq/binding.md)
     * [Exchange-Direct](message-service/rabbitmq/exchange-direct.md)
     * [Exchange-Fanout](message-service/rabbitmq/exchange-fanout.md)
