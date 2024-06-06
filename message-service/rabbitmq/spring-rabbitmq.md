@@ -87,8 +87,8 @@ Spring Boot에서 Exchange, Queue, Binding을 API로 생성하는 두 가지 방
 
 #### 1-3-1. Bean 주입
 
-1. **Exchange 생성**&#x20;
-   *   **Exchange 직접 생성**:  DirectExchange, FanoutExchange, TopicExchange, HeadersExchange 를 사용해서 객체 생성한 것을 Bean으로 주입합니다.
+1. **Exchange 주입 :** Exchange 객체를 생성 하여 주입합니다.
+   *   **new 직접 생성:**  DirectExchange, FanoutExchange, TopicExchange, HeadersExchange 를 사용해서 객체 생성한 것을 Bean으로 주입합니다.
 
        <pre class="language-java"><code class="lang-java"><strong>@Bean
        </strong>public Exchange directExchange() {
@@ -96,8 +96,7 @@ Spring Boot에서 Exchange, Queue, Binding을 API로 생성하는 두 가지 방
            return new DirectExchange(DIRECT_EXCHANGE, true, false);
        } 
        </code></pre>
-   *   **ExchangeBuilder 통한 생성**: ExchangeBuilder 를 사용하여 객체를 생성하여 Bean으로 주입합니다.\
-
+   *   **ExchangeBuilder 통한 생성**: ExchangeBuilder 를 사용하여 객체를 생성하여 Bean으로 주입합니다.
 
        ```java
        @Bean
@@ -112,4 +111,24 @@ Spring Boot에서 Exchange, Queue, Binding을 API로 생성하는 두 가지 방
                    .durable(true).build();
        }
        ```
-2.
+2.  **Queue 주입: Queue 객체를 생성하여 주입**&#x20;
+
+    ```java
+    @Bean
+    public Queue createDirectEmailQueue() {
+        //For learning purpose - durable=false,
+        // in a real project you may need to set this as true.
+        return new Queue(DIRECT_QUEUE_EMAIL, true);
+    }
+    ```
+3.  **Binding 설정:**&#x20;
+
+    ```java
+    @Bean
+    public Binding queueDirectEmailBinding() {
+        return new Binding(DIRECT_QUEUE_EMAIL, Binding.DestinationType.QUEUE, DIRECT_EXCHANGE, "email", null);
+    }
+    ```
+4. Jons
+5. **ㅇㅁㄴㅇ**
+

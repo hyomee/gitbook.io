@@ -146,7 +146,7 @@
     * [Exchange-Header](message-service/rabbitmq/exchange-header.md)
     * [Exchange-Exchange](message-service/rabbitmq/exchange-exchange.md)
     * [정의된 Key 이외정보 라우팅](message-service/rabbitmq/key.md)
-    * [Spring Boot RabbitMQ](message-service/rabbitmq/spring-boot-rabbitmq.md)
+    * [Spring Boot RabbitMQ](message-service/rabbitmq/spring-rabbitmq.md)
   * [Kafka](message-service/kafka/README.md)
     * [개요](message-service/kafka/outline.md)
     * [프로듀서/컨슈머](message-service/kafka/undefined-1.md)
