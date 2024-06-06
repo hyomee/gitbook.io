@@ -982,3 +982,11 @@ public class MessageListener {
 {% endtab %}
 {% endtabs %}
 
+## 6. 사례
+
+메시징 대기열에는 다음과 같은 많은 사용 사례가 있습니다.
+
+* **분리(Decoupling)**: 서로 다른 서비스 또는 응용 프로그램 간의 통신을 분리하는 방법입니다.
+* **높은 응답 시간(High Response Time)**: 계산, 검색 또는 PDF 작성과 같이 요청의 응답 시간이 너무 긴 경우입니다.
+* **백그라운드 작업(Background Jobs)**: 많은 사용자에게 백그라운드 메시지, 이메일 또는 알림을 보냅니다.
+* **비동기 메시징(Asynchronous Messaging)**: 메시징 큐는 비동기 프로그래밍을 구현하는 가장 좋은 방법입니다."
