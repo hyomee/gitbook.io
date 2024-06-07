@@ -8,11 +8,13 @@
 
 자바가 설치 되어 있지 않으면 자바를 먼저 설치 합니다.
 
-```sh
-sudo apt update
-sudo apt upgrades
-udo apt install default-jdk // 1.8 버전 이상 설치
-```
+<pre class="language-sh"><code class="lang-sh">sudo apt update
+sudo apt upgrade
+<strong>sudo apt install default-jdk // 1.8 버전 이상 설치
+</strong><strong>
+</strong>$ sudo apt-get install openjdk-11-jdk
+$ sudo apt-get install openjdk-21-jdk
+</code></pre>
 
 ## 1. Kafka 설치
 
@@ -21,7 +23,7 @@ udo apt install default-jdk // 1.8 버전 이상 설치
 ### 1-1. 다운로드
 
 ```sh
-wget https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.7.0.tgz
+wget https://downloads.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
 ```
 
 * 파일 다운 로드 위치: [https://kafka.apache.org/downloads](https://kafka.apache.org/downloads)
@@ -31,8 +33,8 @@ wget https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.7.0.tgz
 <pre class="language-bash"><code class="lang-bash">$ tar -xzf kafka_2.13-3.7.0.tgz
 
 // 압축 해제 후 원하는 폴더로 이동 
-<strong>$ sudo mv kafka_2.13-3.2.0 /usr/local/kafka
-</strong>$ cd kafka_2.13-3.7.0
+<strong>$ sudo mv kafka_2.13-3.7.0 /usr/local/kafka
+</strong>$ cd /usr/local/kafka
 </code></pre>
 
 ## 2. Kafka 시작
@@ -168,6 +170,9 @@ $ bin/kafka-topics.sh --create
                       --replication-factor 1 
                       --partitions 1 
                       --topic iabacus-test
+                      
+// 실행 
+$ bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1  --partitions 1 --topic iabacus-test
 ```
 
 * Topic 확인 :&#x20;
