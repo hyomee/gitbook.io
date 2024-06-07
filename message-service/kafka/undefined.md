@@ -181,6 +181,8 @@ $ bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-f
 $ bin/kafka-topics.sh --describe 
                       --topic iabacus-test 
                       --bootstrap-server localhost:9092
+                      
+$ bin/kafka-topics.sh --describe --topic iabacus-test --bootstrap-server localhost:9092
 ```
 
 * 속성&#x20;
@@ -203,6 +205,9 @@ $ bin/kafka-topics.sh --describe
 ```sh
 $ bin/kafka-console-producer.sh --broker-list localhost:9092 
                                 --topic iabacus-test
+
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic iabacus-test
 ```
 
 * 컨슈머로 메세지 수신
@@ -210,6 +215,8 @@ $ bin/kafka-console-producer.sh --broker-list localhost:9092
 ```sh
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 
                               --topic iabacus-test 
+                              
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092  --topic iabacus-test 
 ```
 
 <figure><img src="../../.gitbook/assets/image (292).png" alt=""><figcaption></figcaption></figure>
