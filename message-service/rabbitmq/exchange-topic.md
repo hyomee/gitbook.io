@@ -29,14 +29,14 @@
 
 ## 1. 관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Exchange 이름:** My-Topic-Exchange&#x20;
 * Binding Queue
   *   My-Topic-Email-Q: Routing Key Pattern (email.\*)로 지정\
 
 
-      <figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Topic-Sms-Q: Routing Key Pattern (#.sms.\*)로 지정\
 
 

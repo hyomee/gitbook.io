@@ -94,6 +94,43 @@ advertised.listeners=PLAINTEXT://x.x.x.x:9092
 ```
 {% endcode %}
 
+* **wsl 설정시 ip add로 172.x.x.x ip를 확인 해야 한다.**
+  *   #### IPv6 (IPv6)[​](https://docs.conduktor.io/desktop/kafka-cluster-connection/setting-up-a-connection-to-kafka/connecting-to-kafka-running-on-windows-wsl-2/#ipv6) <a href="#ipv6" id="ipv6"></a>
+
+      * 브로커에서 IPv6 루프백 주소 사용(server.properties)
+
+      ```
+      listeners=PLAINTEXT://[::1]:9092
+      ```
+
+      * 부트 스트랩 주소에 대해 Conduktor에서도 동일합니다.
+
+      ```
+      [::1]:9092
+      ```
+
+      #### &#x20;<a href="#id-172x" id="id-172x"></a>
+  *   #### 172.엑스[​](https://docs.conduktor.io/desktop/kafka-cluster-connection/setting-up-a-connection-to-kafka/connecting-to-kafka-running-on-windows-wsl-2/#172x) <a href="#id-172x" id="id-172x"></a>
+
+      WSL 2 네트워크의 주소를 찾습니다.
+
+      ```
+      $ ip addr | grep "eth0"
+      172.x.y.z
+      ```
+
+      * 브로커(server.properties)에서 이 기능을 사용합니다.
+
+      ```
+      listeners=PLAINTEXT://172.x.y.z:9092
+      ```
+
+      * 부트 스트랩 주소에 대해 Conduktor에서도 동일합니다.
+
+      ```
+      172.x.y.z:9092
+      ```
+
 ### 2-2. 우분트 서비스  대몬
 
 서비스 대몬에 등록하기 위해서는 서비스 파일을 만들어서 시비스 등록을 해야 합니다.
