@@ -152,4 +152,6 @@
     * [프로듀서/컨슈머](message-service/kafka/undefined-1.md)
     * [설치](message-service/kafka/undefined.md)
     * [Kafka-Producer](message-service/kafka/kafka-producer.md)
+    * [Kafka-Consumer](message-service/kafka/kafka-consumer.md)
+    * [Kafka-Connect](message-service/kafka/kafka-connect.md)
   * [송수신 확인](message-service/amqpack.md)
