@@ -36,6 +36,8 @@ public class ProducerMain {
 
 ### 2-2. 카프카 연결 정보 설정
 
+참고: [카프카 프로듀서 설정 3.3 Producer Configs](https://kafka.apache.org/documentation/#producerconfigs)
+
 ```java
 public class KafkaProperties {
     public static String KARFA_SERVER_IP = "172.24.239.164:9092";
