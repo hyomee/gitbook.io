@@ -154,4 +154,5 @@
     * [Kafka-Producer](message-service/kafka/kafka-producer.md)
     * [Kafka-Consumer](message-service/kafka/kafka-consumer.md)
     * [Kafka-Connect](message-service/kafka/kafka-connect.md)
+    * [Kafka-Stream](message-service/kafka/kafka-stream.md)
   * [송수신 확인](message-service/amqpack.md)
