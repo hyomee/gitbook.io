@@ -131,7 +131,7 @@ public class ProducerRecord<K, V> {
 * value: 레코드의 값입니다. 실제 데이터를 포함하며 Kafka로 전송됩니다.&#x20;
 * headers: 레코드에 연결된 헤더 정보입니다. 헤더는 추가적인 메타데이터를 포함할 수 있습니다.&#x20;
 
-### 3-1. Key 파티서너(**Partitioner)**
+### 3-1. Key **Partitioner**
 
 카프카 메시지는 Key-Value 구조를 가지고 있는데 Key 없이  사용할 수 있습니다. Key의 역할은 메시지에 저장 되는 추가적인 정보이지만 하나의 토픽에 속한 여러개의 파티션 중 메시지가 저장될 파티션을 결정짓는 기준점입니다.
 
@@ -237,7 +237,7 @@ public class ProducerMain {
   * InterruptException: 전송 작업 중 인터럽트 오류
   * 재시도 오류는 재시도 횟수 지정으로 방지 할 수 있지만 초과시는 오류가 발생합니다.
 
-### **3-2. 지정 파티셔너(Partitioner)**
+### **3-2. 지정 Partitioner**
 
 기본 파티셔너는 키 값의 존재 여부에 따라 메시지를 어떤 파티션으로 보낼지 결정합니다. 메시지 키를 기준으로 지정되며, 같은 메시지 키를 가진 메시지는 동일한 파티션으로 전송됩니다. 파티션을 지정하면 해당 파티션에 저장됩니다&#x20;
 
@@ -279,7 +279,7 @@ for (int i = 0; i < 5; i++) {
 
 <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-### 3-3.  커스텀 파티셔너
+### 3-3.  Custom **Partitioner**
 
 key, value 를 사용 하여 특정 파티션에 메시지를 저장하는 하게 하는 기능으로 특정 메세지를 특정 파티션으로 보내어 많이 발생하는 메세지를 하나로 보내어 성능 향상을 할 수 있습니다.
 
@@ -649,3 +649,295 @@ Kafka 인터셉터는 클라이언트 모니터링, 엔드 투 엔드 시스템 
     topic.<topic_name>.quota.bytes.per.second=524288  # 초당 바이트 수 제한
     topic.<topic_name>.quota.messages.per.second=200  # 초당 메시지 수 제한
     ```
+
+## **9. 소스**
+
+{% tabs %}
+{% tab title="KafkaProperties " %}
+```java
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.RecordMetadata;
+
+import java.util.Properties;
+
+public class KafkaProperties {
+    public static String KARFA_SERVER_IP = "172.24.239.164:9092";
+    public static String KARFA_TOPIC = "iabacus-test";
+    public static String KARFA_TOPIC_P5 = "iabacus-p5";
+    public static int KARFA_TOPIC_PARTITION_3 = 3;
+
+    public static Properties getProducerProperties() {
+        Properties configs = new Properties();
+        // kafka server host 및 port
+        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
+        // acks 설정
+        configs.put(ProducerConfig.ACKS_CONFIG, "1");
+        
+        // key Serializer
+        configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG , "org.apache.kafka.common.serialization.StringSerializer");
+
+        // value Serializer 
+        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer"); 
+        
+        // CustomPartition  
+        configs.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, "kr.co.abacus.jmsbroker.kafka.CustomPartition");
+        return configs;
+    }
+
+
+    public static Properties getConsumerProperties() {
+        Properties configs = new Properties();
+        // kafka server host 및 port
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
+        // session 설정
+        configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
+
+        // topic 설정
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, KARFA_TOPIC);
+
+        // key deserializer
+        configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        
+        // value deserializer 
+        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");  
+
+        return configs;
+    }
+
+    public Callback producerCallback = (RecordMetadata metadata, Exception exception) -> {
+            System.out.println("onCompletion :: " + metadata);
+            if (exception != null) {
+                exception.printStackTrace();
+            }
+    };
+
+}
+```
+{% endtab %}
+
+{% tab title="ProducerMain " %}
+```java
+import com.google.gson.Gson;
+import kr.co.abacus.jmsbroker.kafka.dto.CustomerRecord;
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
+import java.util.concurrent.Future;
+
+
+public class ProducerMain {
+    public static void main(String[] args) throws IOException {
+
+        Properties configs = KafkaProperties.getProducerProperties();
+
+        // producer 생성
+        KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
+
+        // producer.send(new ProducerRecord<>(KafkaProperties.KARFA_TOPIC, "ff", "vv"));
+        // message 전달
+        // 비동기 전송을 위한 Call 함수
+        Callback onCompletion = new Callback() {
+            public void onCompletion(RecordMetadata metadata, Exception exception) {
+                System.out.println("onCompletion :: " + metadata.partition() + "::"+ metadata.toString());
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        };
+
+//        Callback onCompletion = (RecordMetadata metadata, Exception exception) -> {
+//            System.out.println("onCompletion :: " + metadata);
+//            if (exception != null) {
+//                exception.printStackTrace();
+//            }
+//        };
+
+        for (int i = 0; i < 5; i++) {
+            String v = "hello :: " + i;
+            String k = "key :: " + i;
+
+            // ProducerRecord producerRecord = new ProducerRecord<>(KafkaProperties.KARFA_TOPIC_P5,  v );
+
+            CustomerRecord customerRecord = new CustomerRecord(v, i);
+            Gson gson = new Gson();
+            String json = gson.toJson(customerRecord);
+
+            ProducerRecord producerRecord =
+                     new ProducerRecord<>(KafkaProperties.KARFA_TOPIC_P5, k , json );
+            producerRecord.headers().add("INPUT-CHANNEL", "IPHONE".getBytes(StandardCharsets.UTF_8));
+
+//            ProducerRecord producerRecord =
+//                    new ProducerRecord<>(KafkaProperties.KARFA_TOPIC_P5,
+//                            KafkaProperties.KARFA_TOPIC_PARTITION_3,
+//                            k ,
+//                            v );
+
+
+            try {
+                producer.send(producerRecord, onCompletion );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // 종료
+        producer.flush();
+        producer.close();
+    }
+
+    private static Callback producerCallback = (RecordMetadata metadata, Exception exception) -> {
+        System.out.println("onCompletion :: " + metadata);
+        if (exception != null) {
+            exception.printStackTrace();
+        }
+    };
+
+}
+
+```
+{% endtab %}
+
+{% tab title="ConsumerMain " %}
+```java
+import kr.co.abacus.jmsbroker.kafka.dto.CustomerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+
+import java.util.Arrays;
+import java.util.Properties;
+
+public class ConsumerMain {
+    public static void main(String[] args) {
+
+        System.out.println("Consumer Start ....");
+        Properties configs = KafkaProperties.getConsumerProperties();
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
+        consumer.subscribe(Arrays.asList(KafkaProperties.KARFA_TOPIC_P5)); // topic 설정
+
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(500);
+            for (ConsumerRecord<String, String> record : records) {
+                String input = record.topic();
+                if (KafkaProperties.KARFA_TOPIC.equals(input)) {
+                    printRecord(record);
+                } if (KafkaProperties.KARFA_TOPIC_P5.equals(input)) {
+                    printRecord(record);
+                } else {
+                    throw new IllegalStateException("get message on topic " + record.topic());
+                }
+            }
+        }
+    }
+
+    private static void printRecord(ConsumerRecord<String, String> record) {
+
+        System.out.println("topic = " + record.topic() +
+                            ":: partition = " + record.partition()  +
+                            ":: key = " + record.key() +
+                            ":: value = " + record.value());
+
+        record.headers().forEach(header -> {
+            System.out.println(header.key() + ": " + new String(header.value()));
+        });
+    }
+}
+
+```
+{% endtab %}
+
+{% tab title="CustomerRecord" %}
+```java
+public record CustomerRecord(String name,
+                             Integer age) {
+
+    public CustomerRecord {
+        if (name == null || age == null  ) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+
+    public String getInfo() {
+        return this.name + " " + this.age;
+    }
+}
+
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="CallBackProducer " %}
+```java
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.RecordMetadata;
+
+public class CallBackProducer implements Callback {
+    @Override
+    public void onCompletion(RecordMetadata metadata, Exception exception) {
+        System.out.println("onCompletion :: " + metadata.partition());
+        if (exception != null) {
+            exception.printStackTrace();
+        }
+    }
+}
+
+```
+{% endtab %}
+
+{% tab title="CustomPartition " %}
+```java
+import org.apache.kafka.clients.producer.Partitioner;
+import org.apache.kafka.common.Cluster;
+import org.apache.kafka.common.InvalidRecordException;
+import org.apache.kafka.common.PartitionInfo;
+import org.apache.kafka.common.utils.Utils;
+
+import java.util.List;
+import java.util.Map;
+
+public class CustomPartition implements Partitioner {
+    @Override
+    public int partition(String topic,
+                         Object key,
+                         byte[] keyBytes,
+                         Object value,
+                         byte[] valueBytes,
+                         Cluster cluster) {
+
+        List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
+        int numPartitions = partitions.size();
+
+        if (keyBytes == null || !(key instanceof String)) {
+            throw new InvalidRecordException("Invalid key for CustomPartitioner");
+        }
+
+        if (key.equals("key :: 3")){
+            return numPartitions - 1 ;
+        }
+
+         return Math.abs(Utils.murmur2(keyBytes)) % (numPartitions-1);
+    }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public void configure(Map<String, ?> map) {
+
+    }
+}
+
+```
+{% endtab %}
+{% endtabs %}
