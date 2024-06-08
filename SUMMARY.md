@@ -154,7 +154,7 @@
     * [프로듀서/컨슈머](message-service/kafka/undefined-1.md)
     * [설치](message-service/kafka/undefined.md)
     * [Kafka-Producer](message-service/kafka/kafka-producer.md)
-    * [Kafka-Consumer](message-service/kafka/kafka-consumer/README.md)
+    * [Kafka-Consumer](message-service/kafka/kafka-consumer.md)
       * [Parallel Consumer](message-service/kafka/kafka-consumer/parallel-consumer.md)
     * [Kafka-Connect](message-service/kafka/kafka-connect.md)
     * [Kafka-Stream](message-service/kafka/kafka-stream.md)
