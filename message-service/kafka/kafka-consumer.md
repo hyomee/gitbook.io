@@ -8,6 +8,7 @@ Kafka 브로커에서 메시지를,읽어와서  소비하는 역할을 하는�
    * Consumer는 브로커에게 가져올 파티션을 지정하는 “fetch” 요청을 보냅니다.
    * 각 요청은 로그 오프셋을 지정하며 해당 오프셋 위치부터 로그의 일부를 수신합니다.
    * Consumer는 위치를 제어하고 필요한 경우 데이터를 다시 소비할 수 있습니다.
+   * <mark style="color:purple;">할당된 파티션에서 데이터를 읽어오는 것으로 토픽 파티션에서 데이터를 읽어오는 등록 절차 입니다.</mark>
 2. **토픽(Topic) 및 파티션(Partition):**
    * **Topic**: 메세지 범주&#x20;
    * **Partition:** Topic에서 가장 작은 저장 단위로 Topic에 대한 파티션 수를 구성할 수 있습니다.
@@ -20,10 +21,30 @@ Kafka 브로커에서 메시지를,읽어와서  소비하는 역할을 하는�
    * 한 브로커가 그룹 코디네이터 역할을 하며 멤버와 할당을 관리합니다.
    * 코디네이터는 내부 오프셋 토픽(\_\_consumer\_offsets)의 리더 중에서 선택됩니다.
    * Consumer 그룹은 동일한 토픽에서 메시지를 병렬로 처리할 수 있도록 합니다.
-4. **오프셋 관리**:
+4. **Heartbeat:**
+   * Kafka 그룹 관리 기능을 사용할 때 컨슈머 코디네이터에게 주기적으로 보내는 신호입니다.
+   * 이 신호는 다음 목적으로 사용됩니다:
+     1. **세션 활성 유지**:
+        * Heartbeat은 컨슈머 세션이 활성 상태인지 확인합니다.
+        * 컨슈머가 살아있고 세션이 유지되는지 확인하며, 세션 타임아웃 시간보다 낮은 간격으로 전송됩니다.
+     2. **리밸런싱 지원**:
+        * 새로운 컨슈머가 그룹에 가입하거나 나가면 리밸런싱이 발생합니다.
+        * Heartbeat은 리밸런싱을 원활하게 지원합니다.
+        * 일반적으로 Heartbeat 간격은 세션 타임아웃 시간의 1/3 이하로 설정됩니다.
+5. **오프셋 관리**:
    * 할당을 받은 후 Consumer는 각 파티션에 대한 초기 위치를 결정합니다.
    * Consumer는 로그 내에서 위치를 조정할 수 있습니다.
    * Kafka는 동일한 토픽에 여러 Consumer 애플리케이션이 동시에 구독할 수 있도록 합니다.
+6. **Rewind (되감기):**
+   * 컨슈머가 특정 파티션에서 이전 오프셋으로 되돌아가는 것을 말합니다.
+   * 이는 특정 메시지를 다시 처리하거나 오류를 수정하는 데 유용합니다.
+   * 프로그래밍 방식으로 컨슈머 오프셋을 조작하려면 ConsumerSeekAware 인터페이스를 구현하면 됩니다. 예를 들어, Spring Kafka에서는 ConsumerSeekAware 를 사용하여 컨슈머 오프셋을 재설정할 수 있습니다.
+7. **Skip (건너뛰기):**
+   * 컨슈머가 특정 메시지를 건너뛰고 다음 메시지로 진행하는 것을 말합니다. 예를 들어, 오류가 있는 메시지를 건너뛰고 처리를 계속할 수 있습니다.
+   * 이는 ConsumerRecordFilter를 사용하여 구현할 수 있습니다.
+   * Spring Kafka에서는 SeekToCurrentErrorHandler를 사용하여 오류 메시지를 건너뛸 수 있습니다.
+8. **역직렬화:**&#x20;
+   *
 
 Kafka Consumer는 확장 가능하고 내결함성 있는 데이터 처리 파이프라인 구축에 중요한 역할을 합니다.
 
@@ -38,3 +59,5 @@ Kafka Consumer는 확장 가능하고 내결함성 있는 데이터 처리 파�
 
 
 참고: [https://docs.confluent.io/platform/current/clients/consumer.html](https://docs.confluent.io/platform/current/clients/consumer.html)
+
+참고: [https://www.confluent.io/blog/apache-kafka-data-access-semantics-consumers-and-membership/?session\_ref=https://harunpeksen.medium.com/how-apache-kafka-consumer-works-6cee4eb83147&\_ga=2.87875742.724744377.1718006844-1261962290.1705303831&\_gl=1\*17ejtkh\*\_gcl\_au\*MTc1ODYzODkyNi4xNzE2NTMwMjU2\*\_ga\*MTI2MTk2MjI5MC4xNzA1MzAzODMx\*\_ga\_D2D3EGKSGD\*MTcxODAwNjg0My43LjEuMTcxODAwNzEyNi40NC4wLjA.](https://www.confluent.io/blog/apache-kafka-data-access-semantics-consumers-and-membership/?session\_ref=https://harunpeksen.medium.com/how-apache-kafka-consumer-works-6cee4eb83147&\_ga=2.87875742.724744377.1718006844-1261962290.1705303831&\_gl=1\*17ejtkh\*\_gcl\_au\*MTc1ODYzODkyNi4xNzE2NTMwMjU2\*\_ga\*MTI2MTk2MjI5MC4xNzA1MzAzODMx\*\_ga\_D2D3EGKSGD\*MTcxODAwNjg0My43LjEuMTcxODAwNzEyNi40NC4wLjA.)
