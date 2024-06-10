@@ -45,5 +45,6 @@
   * [MariaDB 설치](undefined/mariadb.md)
   * [Redis 설치](undefined/redis.md)
   * [Kafka 설치](undefined/kafka.md)
+  * [Linux 기본 명령](undefined/linux.md)
 * [패턴](undefined-1/README.md)
   * [Flyweigt Pattern](undefined-1/flyweigt-pattern.md)
