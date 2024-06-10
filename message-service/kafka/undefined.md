@@ -55,6 +55,8 @@ $ bin/kafka-server-start.sh config/server.properties
 
 * **파일위치**: 카프카 설치 폴더/config
 
+#### 2-1-1. zookeeper.properties
+
 {% code title="zookeeper.properties" lineNumbers="true" %}
 ```sh
 # the directory where the snapshot is stored.
@@ -70,6 +72,10 @@ admin.enableServer=false
 
 ```
 {% endcode %}
+
+
+
+#### 2-1-2. server.properties
 
 {% code title="server.properties" lineNumbers="true" %}
 ```sh
@@ -130,6 +136,8 @@ advertised.listeners=PLAINTEXT://x.x.x.x:9092
       ```
       172.x.y.z:9092
       ```
+* 로그 디렉토리: log.dirs=/tmp/kafka-logs
+*
 
 ### 2-2. 우분트 서비스  대몬
 
@@ -264,3 +272,5 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092  --topic iabacus
     <figure><img src="../../.gitbook/assets/image (295).png" alt=""><figcaption></figcaption></figure>
 
 그외 카프카의 기능을 학습하기 위해서는 [https://kafka.apache.org/quickstart](https://kafka.apache.org/quickstart) 확인 해 보시기 바랍니다.
+
+## &#x20;
