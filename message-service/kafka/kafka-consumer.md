@@ -52,7 +52,192 @@ Kafka Consumer는 확장 가능하고 내결함성 있는 데이터 처리 파�
 
 <figure><img src="../../.gitbook/assets/image (345).png" alt=""><figcaption></figcaption></figure>
 
+### 1-1. 일반적인 구성&#x20;
 
+하나의 Consumer 에서 하나의 Consumer Grop에서 받는 경우는 group\_id에는 topic 명으로 작성하여 하나의 그룹으로 메시지를 수신 받게 합니다.
+
+```java
+public static Properties getConsumerBaseProperties() {
+    Properties configs = new Properties();
+    // kafka server host 및 port
+    configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
+    // session 설정
+    configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
+
+    // 그룹설정
+    configs.put(ConsumerConfig.GROUP_ID_CONFIG, KARFA_TOPIC_P5);
+
+    // key deserializer
+    configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+    // value deserializer
+    configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+    return configs;
+}
+```
+
+* Consumer.subscribe 메서드를 사용하여 Topic을 지정 합니다.
+
+```java
+Properties configs = KafkaProperties.getConsumerBaseProperties();
+
+KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
+consumer.subscribe(Collections.singletonList(KafkaProperties.KARFA_TOPIC_P5)); // topic 설정
+```
+
+### 1-2. 파티션을 기준으로 컨슈머 그룹 지정&#x20;
+
+* 1-1  그룹 설정에서 컨슈머 그룹을 지정 합니다. ( 2 Consumer - 2 Consumer group )
+
+```java
+public static Properties getConsumerProperties() {
+    Properties configs = new Properties();
+    // kafka server host 및 port
+    configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
+    // session 설정
+    configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
+
+    // 컨슈머 그룹 설정 
+    configs.put(ConsumerConfig.GROUP_ID_CONFIG, KARFA_TOPIC_GROUP_ID_00);
+
+    // key deserializer
+    configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+    // value deserializer
+    configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+    return configs;
+}
+
+public static Properties getConsumerProperties01() {
+    Properties configs = new Properties();
+    // kafka server host 및 port
+    configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
+    // session 설정
+    configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
+    
+    // 컨슈머 그룹 설정 
+    configs.put(ConsumerConfig.GROUP_ID_CONFIG, KARFA_TOPIC_GROUP_ID_01);
+
+    // key deserializer
+    configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+    // value deserializer
+    configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+    return configs;
+}
+```
+
+* Consumer 실행 할 Main Class를 각각 만듭니다.
+
+{% tabs %}
+{% tab title="ConsumerMain " %}
+
+
+```java
+public class ConsumerMain {
+    public static void main(String[] args) {
+
+        System.out.println("Consumer Start ....");
+        Properties configs = KafkaProperties.getConsumerProperties();
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
+
+        TopicPartition partition0 = 
+            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 0);
+            
+        TopicPartition partition1 = 
+            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 1);
+        
+        TopicPartition partition3 = 
+            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 3);
+
+        consumer.assign(Arrays.asList(partition0, partition1, partition3));
+        
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(500);
+            for (ConsumerRecord<String, String> record : records) {
+                String input = record.topic();
+                if (KafkaProperties.KARFA_TOPIC.equals(input)) {
+                    printRecord(record);
+                } if (KafkaProperties.KARFA_TOPIC_P5.equals(input)) {
+                    printRecord(record);
+                } else {
+                    throw new IllegalStateException("get message on topic " + record.topic());
+                }
+            }
+        }
+    }
+
+    private static void printRecord(ConsumerRecord<String, String> record) {
+
+        System.out.println("topic = " + record.topic() +
+                            ":: partition = " + record.partition()  +
+                            ":: key = " + record.key() +
+                            ":: value = " + record.value());
+
+
+
+        record.headers().forEach(header -> {
+            System.out.println(header.key() + ": " + new String(header.value()));
+        });
+    }
+}
+```
+{% endtab %}
+
+{% tab title="ConsumerMain01 " %}
+```java
+public class ConsumerMain01 {
+    public static void main(String[] args) {
+
+        System.out.println("Consumer Start ....");
+        Properties configs = KafkaProperties.getConsumerProperties01();
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
+
+        TopicPartition partition2 = 
+            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 2);
+            
+        TopicPartition partition3 = 
+            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 3);
+
+        consumer.assign(Arrays.asList(partition2, partition3));
+        
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(500);
+            for (ConsumerRecord<String, String> record : records) {
+                String input = record.topic();
+                if (KafkaProperties.KARFA_TOPIC.equals(input)) {
+                    printRecord(record);
+                } if (KafkaProperties.KARFA_TOPIC_P5.equals(input)) {
+                    printRecord(record);
+                } else {
+                    throw new IllegalStateException("get message on topic " + record.topic());
+                }
+            }
+        }
+    }
+
+    private static void printRecord(ConsumerRecord<String, String> record) {
+
+        System.out.println("topic = " + record.topic() +
+                            ":: partition = " + record.partition()  +
+                            ":: key = " + record.key() +
+                            ":: value = " + record.value());
+
+
+
+        record.headers().forEach(header -> {
+            System.out.println(header.key() + ": " + new String(header.value()));
+        });
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
 
 
 
