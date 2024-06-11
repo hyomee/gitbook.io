@@ -6,7 +6,7 @@ TCP/IP를 알아보기 전에 간략하게  OSI 7계층에 대해서 먼저 알�
 
 **OSI 7계층**은 **Open Systems Interconnection** 참조 모델로, 네트워크 통신에서 일어나는 과정을 7개의 계층으로 나누어 표준화한 모델입니다.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>OSI 7 계</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>OSI 7 계</p></figcaption></figure>
 
 1. **물리 계층 (Physical Layer)**: 사용자 데이터를 물리 매체상에서 소통이 가능한 통신 신호로 변환하여 전송하는 역할을 담당합니다. 전기적, 기능적, 절차적, 물리적 특성을 정의하며, 데이터를 규정된 신호로 변환하고 이를 케이블을 통해 전달합니다.
 2. **데이터링크 계층 (Data Link Layer)**: 직접 연결된 서로 다른 2개의 네트워킹 장치 간의 데이터 전송을 담당합니다. 데이터링크 계층에서 전송되는 데이터를 일반적으로 '프레임’이라고 합니다. 프레임의 종류, 길이 등을 정의하며, MAC (Media Access Control)을 사용하여 프레임을 전송합니다
@@ -26,7 +26,7 @@ TCP/IP를 알아보기 전에 간략하게  OSI 7계층에 대해서 먼저 알�
 * **TCP (전송 제어 프로토콜)**: 두 기기 간에 데이터를 전송하는 역할을 담당합니다. 데이터를 작은 패킷으로 나누어 효율적으로 전송하며, 연결형 서비스를 제공합니다.
 * **IP (인터넷 프로토콜)**: 데이터의 조각을 최대한 빨리 대상 IP 주소로 보내는 역할을 합니다. 데이터 전송의 과정에서 TCP와 함께 작동하여 인터넷 데이터 교환을 지원합니다.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>OSI 계층 참조 모델과 TCP/IP 프로토콜 4계층 참조 모</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>OSI 계층 참조 모델과 TCP/IP 프로토콜 4계층 참조 모</p></figcaption></figure>
 
 ### 2-1. TCP/IP 네트워크 동작 원리
 
