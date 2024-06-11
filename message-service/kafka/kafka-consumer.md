@@ -2,6 +2,12 @@
 
 Kafka 브로커에서 메시지를,읽어와서  소비하는 역할을 하는구것으로  지정돤 토픽의 데이터(메시지)를 레코드 단위로 가져와 소비합니다. 메시지를 읽을 때, 부하 분산과 가용성 및 처리량 증가에 도움이 되는 파티션을 사용하고, 오프셋을 통해 메시지를 추적합니다. 다음은 Kafka Consumer에 관한 주요 사항입니다.
 
+* 토픽 구독 (Topic Subscription)
+* 컨슈머 그룹 (Consumer Group)
+* 파티션 할당 (Partition Assignment)
+* 오프셋 관리 (Offset Management)
+* 커밋 (Commit)
+
 <figure><img src="../../.gitbook/assets/image (344).png" alt=""><figcaption></figcaption></figure>
 
 1. **데이터 가져오기(Kafka Consumer)**:
@@ -32,199 +38,7 @@ Kafka Consumer는 확장 가능하고 내결함성 있는 데이터 처리 파�
 
 ## 1. Consumer 그룹
 
-하나의 Consumer 에서 하나의 Consumer Grop에서 받는 경우는 group\_id에는 topic 명으로 작성하여 하나의 그룹으로 메시지를 수신 받게 합니다.
-
-```java
-public static Properties getConsumerBaseProperties() {
-    Properties configs = new Properties();
-    // kafka server host 및 port
-    configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
-    // session 설정
-    configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
-
-    // 그룹설정
-    configs.put(ConsumerConfig.GROUP_ID_CONFIG, KARFA_TOPIC_P5);
-
-    // key deserializer
-    configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-
-    // value deserializer
-    configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-
-    return configs;
-}
-```
-
-* Consumer.subscribe 메서드를 사용하여 Topic을 지정 합니다.
-
-```java
-Properties configs = KafkaProperties.getConsumerBaseProperties();
-
-KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
-consumer.subscribe(Collections.singletonList(KafkaProperties.KARFA_TOPIC_P5)); // topic 설정
-```
-
-### 1-2. 파티션을 기준으로 컨슈머 그룹 지정&#x20;
-
-* 1-1  그룹 설정에서 컨슈머 그룹을 지정 합니다. ( 2 Consumer - 2 Consumer group )
-
-```java
-public static Properties getConsumerProperties() {
-    Properties configs = new Properties();
-    // kafka server host 및 port
-    configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
-    // session 설정
-    configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
-
-    // 컨슈머 그룹 설정 
-    configs.put(ConsumerConfig.GROUP_ID_CONFIG, KARFA_TOPIC_GROUP_ID_00);
-
-    // key deserializer
-    configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-
-    // value deserializer
-    configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-
-    return configs;
-}
-
-public static Properties getConsumerProperties01() {
-    Properties configs = new Properties();
-    // kafka server host 및 port
-    configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
-    // session 설정
-    configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
-    
-    // 컨슈머 그룹 설정 
-    configs.put(ConsumerConfig.GROUP_ID_CONFIG, KARFA_TOPIC_GROUP_ID_01);
-
-    // key deserializer
-    configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-
-    // value deserializer
-    configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-
-    return configs;
-}
-```
-
-* Consumer 실행 할 Main Class를 각각 만듭니다.
-
-{% tabs %}
-{% tab title="ConsumerMain " %}
-
-
-```java
-public class ConsumerMain {
-    public static void main(String[] args) {
-
-        System.out.println("Consumer Start ....");
-        Properties configs = KafkaProperties.getConsumerProperties();
-
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
-
-        TopicPartition partition0 = 
-            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 0);
-            
-        TopicPartition partition1 = 
-            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 1);
-        
-        TopicPartition partition3 = 
-            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 3);
-
-        consumer.assign(Arrays.asList(partition0, partition1, partition3));
-        
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(500);
-            for (ConsumerRecord<String, String> record : records) {
-                String input = record.topic();
-                if (KafkaProperties.KARFA_TOPIC.equals(input)) {
-                    printRecord(record);
-                } if (KafkaProperties.KARFA_TOPIC_P5.equals(input)) {
-                    printRecord(record);
-                } else {
-                    throw new IllegalStateException("get message on topic " + record.topic());
-                }
-            }
-        }
-    }
-
-    private static void printRecord(ConsumerRecord<String, String> record) {
-
-        System.out.println("topic = " + record.topic() +
-                            ":: partition = " + record.partition()  +
-                            ":: key = " + record.key() +
-                            ":: value = " + record.value());
-
-
-
-        record.headers().forEach(header -> {
-            System.out.println(header.key() + ": " + new String(header.value()));
-        });
-    }
-}
-```
-{% endtab %}
-
-{% tab title="ConsumerMain01 " %}
-```java
-public class ConsumerMain01 {
-    public static void main(String[] args) {
-
-        System.out.println("Consumer Start ....");
-        Properties configs = KafkaProperties.getConsumerProperties01();
-
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
-
-        TopicPartition partition2 = 
-            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 2);
-            
-        TopicPartition partition3 = 
-            new TopicPartition(KafkaProperties.KARFA_TOPIC_P5, 3);
-
-        consumer.assign(Arrays.asList(partition2, partition3));
-        
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(500);
-            for (ConsumerRecord<String, String> record : records) {
-                String input = record.topic();
-                if (KafkaProperties.KARFA_TOPIC.equals(input)) {
-                    printRecord(record);
-                } if (KafkaProperties.KARFA_TOPIC_P5.equals(input)) {
-                    printRecord(record);
-                } else {
-                    throw new IllegalStateException("get message on topic " + record.topic());
-                }
-            }
-        }
-    }
-
-    private static void printRecord(ConsumerRecord<String, String> record) {
-
-        System.out.println("topic = " + record.topic() +
-                            ":: partition = " + record.partition()  +
-                            ":: key = " + record.key() +
-                            ":: value = " + record.value());
-
-
-
-        record.headers().forEach(header -> {
-            System.out.println(header.key() + ": " + new String(header.value()));
-        });
-    }
-}
-```
-{% endtab %}
-{% endtabs %}
-
-
-
-
-
 * 동일한  컨슈머 그룹에 속한 여러 개의 컨슈머들이 동일한 토픽을 구독할 경우, 각각의 컨슈머는 해당 토픽에서 서로 다른 파티션의 메세지를 받습니다.
-
-<figure><img src="../../.gitbook/assets/image (345).png" alt=""><figcaption></figcaption></figure>
-
 * Consumer 그룹은 group.id 속성으로 설정되고, group.id가 지정되지 않은 경우에는 임의로 생성됩니다.
 
 ### **1-1. 리밸런스(rebalance)**
@@ -269,36 +83,7 @@ public class ConsumerMain01 {
 
 <figure><img src="../../.gitbook/assets/image (347).png" alt=""><figcaption></figcaption></figure>
 
-### **2-2. 오프셋 커밋 유형**
-
-#### 2-2-1. 비명시적 오프셋 커밋 <a href="#undefined" id="undefined"></a>
-
-비명시적 오프셋 커밋은 poll() 메서드가 실행된 이후 일정 시간이 지나면 그 시점까지 읽은 오프셋을 커밋하는 방식입니다.
-
-* `enable.auto.commit:기본값 true` (비명시적 오프셋 커밋을 수행)
-* `auto.commit.interval.ms:` poll() 메서드가 실행된 이후 일정 시간 설정
-* 주의사항: poll() 호출 이후에 리밸런싱이 발생하거나, 컨슈머가 비정상적으로 종료되었을 때 메시지가 중복처리되거나 유실될 가능성이 있습니다.
-
-#### 2-2-2. 명시적 오프셋 커밋 <a href="#undefined" id="undefined"></a>
-
-명시적 오프셋 커밋은 poll() 메서드가 실행된 이후 commitSync() 메서드를 호출하여 가장 마지막 오프셋을 기준으로 커밋하는 방식입니다.
-
-* `enable.auto.commit: false`&#x20;
-* commitSync() 메서드를 호출하여 poll() 메서드를 통해 반환된 레코드의 가장 마지막 오프셋을 기준으로 커밋 합니다.
-* 주의사항:  비명시적 방식에 비해 단위 시간당 처리량이 낮습니다.
-
-#### 2-2-3. **commitAsync As** commitAsync
-
-* **commitAsync():** commitAsync() 메서드를 비동기적으로 사용하면 처리량을 증가시킬 수 있으며, 커밋 요청에 대한 응답을 기다리는 동안 데이터 처리가 가능합니다. 그러나 커밋에 실패할 경우 순서를 보장할 수 없고 데이터가 중복 처리될 위험이 있습니다.
-  * 블로킹되지 않으며, 콜백을 통해 성공 또는 실패 여부를 처리합니다.
-  * 호출 시 현재 스레드가 커밋 결과를 기다리지 않고 다음 작업을 진행합니다.
-  * 빠른 처리를 위해 사용하며, 콜백 함수를 통해 커밋 결과를 처리합니다.
-* **commitSync()**: 실패시 성공하거나 재시도할 수 없는 오류가 발생할 때 까지 재시도 합니다.&#x20;
-  * 커밋이 성공하거나 복구할 수 없는 오류가 발생할 때까지 블로킹됩니다.
-  * 호출 시 현재 스레드가 커밋이 완료될 때까지 대기합니다.
-  * 데이터 일관성을 보장하고자 할 때 사용합니다.
-
-#### 2-2-3. 초기 오프셋 전략 <a href="#undefined" id="undefined"></a>
+### 2-2. 초기 오프셋 전략 <a href="#undefined" id="undefined"></a>
 
 카프카의 초기 오프셋 전략은 컨슈머 그룹이 파티션에서 레코드를 읽을 때 오프셋이 지정되지 않았을 경우의 처리 방법을 정하는 것입니다. 이 전략은 'auto.offset.reset' 옵션으로 설정할 수 있으며, 데이터의 순서를 보장하고 컨슈머가 읽은 데이터의 위치를 추적하는 데 사용됩니다. 초기 오프셋 전략에는 세 가지 유형이 있습니다.
 
@@ -312,9 +97,445 @@ public class ConsumerMain01 {
 
 ## 2. Kafka Consumer 생성
 
-**Apache Kafka**에서 데이터를 소비하는 역할을 합니다. 이 클라이언트는 Kafka 클러스터에서 레코드를 소비하며, Kafka 브로커의 장애를 투명하게 처리하고, 가져온 토픽 파티션이 클러스터 내에서 이동할 때 자동으로 적응합니다[1](https://kafka.apache.org/22/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html). 간단히 말해, KafkaConsumer는 데이터 스트림을 구독하고 처리하는 애플리케이션으로.KafkaConsumer 생성으로 시작합니다.
+**Apache Kafka**에서 데이터를 소비하는 역할을 합니다. 이 클라이언트는 Kafka 클러스터에서 레코드를 소비하며, Kafka 브로커의 장애를 투명하게 처리하고, 가져온 토픽 파티션이 클러스터 내에서 이동할 때 자동으로 적응합니다. 간단히 말해, KafkaConsumer는 데이터 스트림을 구독하고 처리하는 애플리케이션으로.KafkaConsumer 생성으로 시작합니다.
 
 
+
+```sh
+sudo ./bin/kafka-topics.sh --create 
+          --bootstrap-server localhost:9092 
+          --replication-factor 1  
+          --partitions 4 
+          --topic topic-04
+          
+sudo ./bin/kafka-topics.sh --create 
+          --bootstrap-server localhost:9092 
+          --replication-factor 1  
+          --partitions 4 
+          --topic topic-partition-04
+```
+
+### 2-1. Kafka 속성 정의
+
+Consumer 속성을 설정하기 위한 코드 입니다.
+
+* getProducerProperties: Producer 속성 정의
+* setConsumerProperties: Consumer 속성 정의
+* getConsumerGroupid: group\_id 설정&#x20;
+
+{% code lineNumbers="true" %}
+```java
+public class KafkaProperties {
+    public static String KARFA_SERVER_IP = "172.24.239.164:9092";
+    public static String KARFA_TOPIC_04 = "topic-04";
+    public static String KARFA_TOPIC_GROUP_ID  = "topic-04_group";
+
+    public static String KARFA_TOPIC_PARTITION_04 = "topic-partition-04-p5";
+    public static String KARFA_TOPIC_GROUP_ID_00 = "iabacus-test_00";
+    public static String KARFA_TOPIC_GROUP_ID_01 = "iabacus-test_01";
+
+    public static String CURRENT_TOPIC = KafkaProperties.KARFA_TOPIC_04; 
+
+    public static Properties getProducerProperties() {
+        Properties configs = new Properties();
+        // kafka server host 및 port
+        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
+        // acks 설정
+        configs.put(ProducerConfig.ACKS_CONFIG, "1");
+
+        // key Serializer
+        configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG , "org.apache.kafka.common.serialization.StringSerializer");
+
+        // value Serializer
+        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+
+        return configs;
+    }
+
+    public static Properties getConsumerGroupid(String groupid) {
+        Properties configs = setConsumerProperties();
+        // Group Id 설정
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, groupid);
+        return configs;
+    }
+
+
+    private static Properties setConsumerProperties() {
+        Properties configs = new Properties();
+        // kafka server host 및 port
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KARFA_SERVER_IP);
+        // session 설정
+        configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "10000");
+
+        // key deserializer
+        configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+        // value deserializer
+        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+        return configs;
+    }
+
+    public Callback producerCallback = (RecordMetadata metadata, Exception exception) -> {
+            System.out.println("onCompletion :: " + metadata);
+            if (exception != null) {
+                exception.printStackTrace();
+            }
+    };
+}
+```
+{% endcode %}
+
+### 2-2. KafkaConsumer 생성&#x20;
+
+```java
+KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);
+```
+
+* &#x20;Producer 코드
+
+{% code lineNumbers="true" %}
+```java
+for (int i = 0; i < 4; i++) {
+        String v = "hello :: " + i;
+        String k = "key:: partition :: 0" + i;
+        
+        CustomerRecord customerRecord = new CustomerRecord(v, i);
+        Gson gson = new Gson();
+        String json = gson.toJson(customerRecord);
+        
+        
+        ProducerRecord producerRecord =
+                new ProducerRecord<>(KafkaProperties.CURRENT_TOPIC, 
+                                     i ,
+                                     k , 
+                                     json );
+                                     
+        producerRecord.headers().add("INPUT-CHANNEL", 
+                                "IPHONE".getBytes(StandardCharsets.UTF_8));
+        
+        
+        try {
+            producer.send(producerRecord, onCompletion );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}        
+```
+{% endcode %}
+
+* 11 Line: i는 Partition 위치 입니다.&#x20;
+
+## 3. 구독
+
+* Consumer 와 Consumer Group 관계
+
+<figure><img src="../../.gitbook/assets/image (345).png" alt=""><figcaption></figcaption></figure>
+
+### 3-1. **subscribe( 1** Consumer - 1 Consumer Group )
+
+**subscribe 메서드**를 사용하여 원하는 토픽을 구독하면, 해당 토픽의 모든 파티션에서 메시지가 지정된 컨슈머에게 전달됩니다. 이 과정에서 컨슈머 그룹은 단 하나입니다.
+
+```java
+ consumer.subscribe(Collections.singleton(KafkaProperties.CURRENT_TOPIC)); // topic 설정
+```
+
+컨슈머 그룹은 KafkaConsumer 객체 생성시 속성에 선언합니다.
+
+```java
+properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupid);
+```
+
+* Consumer 속성을 다음과 같이 설정한 컨슈머 코드는 다음과 같습니다.
+  * "group.id": topic-04\_group
+  * consumer.subscribe(): topic-04&#x20;
+
+{% tabs %}
+{% tab title="ConsumerMain " %}
+```java
+public class ConsumerMain {
+    public static void main(String[] args) {
+
+        System.out.println("Consumer Start ....");
+        Properties configs = 
+            KafkaProperties.getConsumerGroupid(KafkaProperties.KARFA_TOPIC_GROUP_ID);
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
+        consumer.subscribe(Collections.singleton(KafkaProperties.CURRENT_TOPIC)); // topic 설정
+
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(500);
+            for (ConsumerRecord<String, String> record : records) {
+                printRecord(record);
+            }
+        }
+    }
+
+    private static void printRecord(ConsumerRecord<String, String> record) {
+
+        System.out.println("topic = " + record.topic() +
+                            ":: partition = " + record.partition()  +
+                            ":: key = " + record.key() +
+                            ":: value = " + record.value());
+
+
+
+        record.headers().forEach(header -> {
+            System.out.println(header.key() + ": " + new String(header.value()));
+        });
+    }
+}
+```
+{% endtab %}
+
+{% tab title="KafkaProperties " %}
+{% code lineNumbers="true" %}
+```java
+public static String KARFA_TOPIC_04 = "topic-04";
+public static String KARFA_TOPIC_GROUP_ID  = "topic-04_group";
+
+public static String CURRENT_TOPIC = KafkaProperties.KARFA_TOPIC_04; 
+```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
+
+* Consumer 결과: "topic-04\_group" 에 모든 파티션의 메시지를 받을 것을 확인 할 수 있습니다.
+
+```log
+[main] INFO org.apache.kafka.clients.consumer.internals.SubscriptionState - [Consumer clientId=consumer-topic-04_group-1, groupId=topic-04_group]
+topic = topic-04:: partition = 3:: key = key:: partition :: 03:: value = {"name":"hello :: 3","age":3}
+INPUT-CHANNEL: IPHONE
+topic = topic-04:: partition = 2:: key = key:: partition :: 02:: value = {"name":"hello :: 2","age":2}
+INPUT-CHANNEL: IPHONE
+topic = topic-04:: partition = 1:: key = key:: partition :: 01:: value = {"name":"hello :: 1","age":1}
+INPUT-CHANNEL: IPHONE
+topic = topic-04:: partition = 0:: key = key:: partition :: 00:: value = {"name":"hello :: 0","age":0}
+INPUT-CHANNEL: IPHONE
+```
+
+### 3-2.   assign (2 Consumer - 2 Consumer Group)
+
+Consumer Group를 파티션별로 받기 위해서는 TopicPartition 객체를 사용해서 파티션을 지정 하고 assign 메서드를 사용하여 Consumer에 할당해야 합니다.
+
+```java
+// 토픽에 사용할 파티션 지정 0, 1
+TopicPartition partition2 = new TopicPartition(KafkaProperties.CURRENT_TOPIC, 2);
+TopicPartition partition4 = new TopicPartition(KafkaProperties.CURRENT_TOPIC, 3);
+
+// 컨슈머에 토픽 할당 
+consumer.assign(Arrays.asList(partition2, partition4));
+```
+
+* Consumer 속성을 다음과 같이 설정한 컨슈머 코드는 다음과 같습니다.
+  * group\_id: topic-partition\_01 설정
+    * TopicPartition : partition 0, 1 로 설정
+  * group\_id: topic-partition\_02 설정
+    * TopicPartition : partition 2, 3 로 설정
+
+{% tabs %}
+{% tab title="ConsumerGroupId01Main " %}
+```java
+public class ConsumerGroupId01Main {
+    public static void main(String[] args) {
+
+        System.out.println("Consumer Start ....");
+        // 그룹 아이디 설정 "topic-partition_01"
+        Properties configs = KafkaProperties.getConsumerGroupid(KafkaProperties.KARFA_TOPIC_GROUP_ID_23);
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
+
+        // 토픽에 사용할 파티션 지정 0, 1
+        TopicPartition partition2 = new TopicPartition(KafkaProperties.CURRENT_TOPIC, 2);
+        TopicPartition partition4 = new TopicPartition(KafkaProperties.CURRENT_TOPIC, 3);
+
+        // 컨슈머에 토픽 할당 
+        consumer.assign(Arrays.asList(partition2, partition4));
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(500);
+            for (ConsumerRecord<String, String> record : records) {
+                printRecord(record);
+            }
+        }
+    }
+
+    private static void printRecord(ConsumerRecord<String, String> record) {
+
+        System.out.println("topic = " + record.topic() +
+                            ":: partition = " + record.partition()  +
+                            ":: key = " + record.key() +
+                            ":: value = " + record.value());
+
+
+
+        record.headers().forEach(header -> {
+            System.out.println(header.key() + ": " + new String(header.value()));
+        });
+    }
+}
+```
+{% endtab %}
+
+{% tab title="ConsumerGroupId23Main " %}
+```java
+public class ConsumerGroupId23Main {
+    public static void main(String[] args) {
+
+        System.out.println("Consumer Start ....");
+        // 그룹 아이디 설정 "topic-partition_23"
+        Properties configs = KafkaProperties.getConsumerGroupid(KafkaProperties.KARFA_TOPIC_GROUP_ID_23);
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);    // consumer 생성
+
+        // 토픽에 사용할 파티션 지정 0, 1
+        TopicPartition partition2 = new TopicPartition(KafkaProperties.CURRENT_TOPIC, 2);
+        TopicPartition partition3 = new TopicPartition(KafkaProperties.CURRENT_TOPIC, 3);
+
+        // 컨슈머에 토픽 할당 
+        consumer.assign(Arrays.asList(partition2, partition3));
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(500);
+            for (ConsumerRecord<String, String> record : records) {
+                printRecord(record);
+            }
+        }
+    }
+
+    private static void printRecord(ConsumerRecord<String, String> record) {
+
+        System.out.println("topic = " + record.topic() +
+                            ":: partition = " + record.partition()  +
+                            ":: key = " + record.key() +
+                            ":: value = " + record.value());
+
+
+
+        record.headers().forEach(header -> {
+            System.out.println(header.key() + ": " + new String(header.value()));
+        });
+    }
+}
+
+```
+{% endtab %}
+
+{% tab title="속성" %}
+```java
+public static String KARFA_TOPIC_PARTITION_04 = "topic-partition-04";
+public static String KARFA_TOPIC_GROUP_ID_01 = "topic-partition_01";
+public static String KARFA_TOPIC_GROUP_ID_23 = "topic-partition_23";
+
+public static String CURRENT_TOPIC = KafkaProperties.KARFA_TOPIC_PARTITION_04;
+```
+{% endtab %}
+{% endtabs %}
+
+* ConsumerGroupId01Main 결과
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+* ConsumerGroupId23Main 결과
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+## 4. Polling Loop
+
+이것은 구독한 메시지를 폴링하는 간단한 루프로, 여기서 구독한 메시지들을 처리합니다. 구독한 메시지들은 '레코드'로 불리며, 읽지 않은 모든 메시지들을 포함합니다. 'ConsumerRecords'는 리스트 형태이기 때문에, for 문을 사용하여 각 레코드를 차례대로 처리합니다.
+
+```java
+while (true) {
+    ConsumerRecords<String, String> records = consumer.poll(500);
+    for (ConsumerRecord<String, String> record : records) {
+        printRecord(record);
+    }
+}
+           
+```
+
+## 5. **오프셋 커밋 유형**
+
+### 5-1. 비명시적 오프셋 커밋 <a href="#undefined" id="undefined"></a>
+
+비명시적 오프셋 커밋은 poll() 메서드가 실행된 이후 일정 시간이 지나면 그 시점까지 읽은 오프셋을 커밋하는 방식입니다.
+
+* `enable.auto.commit:기본값 true` (비명시적 오프셋 커밋을 수행)
+* `auto.commit.interval.ms:` poll() 메서드가 실행된 이후 일정 시간 설정
+* 주의사항: poll() 호출 이후에 리밸런싱이 발생하거나, 컨슈머가 비정상적으로 종료되었을 때 메시지가 중복처리되거나 유실될 가능성이 있습니다.
+
+### 5-2. 명시적 오프셋 커밋 <a href="#undefined" id="undefined"></a>
+
+명시적 오프셋 커밋은 poll() 메서드가 실행된 이후 commitSync() 메서드를 호출하여 가장 마지막 오프셋을 기준으로 커밋하는 방식입니다.
+
+* `enable.auto.commit: false`&#x20;
+* commitSync() 메서드를 호출하여 poll() 메서드를 통해 반환된 레코드의 가장 마지막 오프셋을 기준으로 커밋 합니다.
+* 주의사항:  비명시적 방식에 비해 단위 시간당 처리량이 낮습니다.
+
+### 5-3. **commitAsync As** commitAsync
+
+* **commitAsync():** commitAsync() 메서드를 비동기적으로 사용하면 처리량을 증가시킬 수 있으며, 커밋 요청에 대한 응답을 기다리는 동안 데이터 처리가 가능합니다. 그러나 커밋에 실패할 경우 순서를 보장할 수 없고 데이터가 중복 처리될 위험이 있습니다.
+  * 블로킹되지 않으며, 콜백을 통해 성공 또는 실패 여부를 처리합니다.
+  * 호출 시 현재 스레드가 커밋 결과를 기다리지 않고 다음 작업을 진행합니다.
+  *   빠른 처리를 위해 사용하며, 콜백 함수를 통해 커밋 결과를 처리합니다.
+
+      ```java
+      while (true) {
+          ConsumerRecords<String, String> records = consumer.poll(500);
+          for (ConsumerRecord<String, String> record : records) {
+              printRecord(record);
+          }
+          consumer.commitAsync();
+      }
+      ```
+* **commitSync()**: 실패시 성공하거나 재시도할 수 없는 오류가 발생할 때 까지 재시도 합니다.&#x20;
+  * 커밋이 성공하거나 복구할 수 없는 오류가 발생할 때까지 블로킹됩니다.
+  * 호출 시 현재 스레드가 커밋이 완료될 때까지 대기합니다.
+  *   데이터 일관성을 보장하고자 할 때 사용합니다.
+
+      <pre class="language-java"><code class="lang-java"><strong>while (true) {
+      </strong>    ConsumerRecords&#x3C;String, String> records = consumer.poll(500);
+          for (ConsumerRecord&#x3C;String, String> record : records) {
+              printRecord(record);
+          }
+          consumer.commitSync();
+      }
+
+      or 
+
+      while (true) {
+          ConsumerRecords&#x3C;String, String> records = consumer.poll(500);
+          for (ConsumerRecord&#x3C;String, String> record : records) {
+              printRecord(record);
+          }
+          consumer.commitAsync(new OffsetCommitCallback() {
+              @Override
+              public void onComplete(Map&#x3C;TopicPartition, OffsetAndMetadata> map, Exception e) {
+                  System.out.println("Consumer Committed Successfully");
+              }
+          });
+      }
+      </code></pre>
+
+      \
+
+  *   **commitAsync(), commitSync() 함꼐 사용**\
+
+
+      ```java
+      while (true) {
+          ConsumerRecords<String, String> records = consumer.poll(500);
+          for (ConsumerRecord<String, String> record : records) {
+              printRecord(record);
+          }
+          consumer.commitAsync(); 
+          // 커밋이 실패해도 다음 커밋이 있으므로 커밋이 성공하거나 회복 불가능 할때 까지 
+          // 재시도를 합니다.
+          consumer.commitSync();
+      }
+      - 
+      ```
+  *
+
+#### &#x20;<a href="#undefined" id="undefined"></a>
 
 참고: [https://d2.naver.com/helloworld/0974525](https://d2.naver.com/helloworld/0974525)
 
