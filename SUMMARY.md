@@ -156,6 +156,7 @@
     * [Kafka-Producer](message-service/kafka/kafka-producer.md)
     * [Kafka-Consumer](message-service/kafka/kafka-consumer.md)
       * [Parallel Consumer](message-service/kafka/kafka-consumer/parallel-consumer.md)
-    * [Kafka-Connect](message-service/kafka/kafka-connect.md)
+    * [Kafka-Connect](message-service/kafka/kafka-connect/README.md)
+      * [Debezium](message-service/kafka/kafka-connect/debezium.md)
     * [Kafka-Stream](message-service/kafka/kafka-stream.md)
   * [설계(사용사례)](message-service/message-case.md)

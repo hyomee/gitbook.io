@@ -6,7 +6,7 @@ Parallel Consumer는 메시지를 처리하기 전에 오프셋 메타데이터�
 
 Parallel Consumer의 내부 구조는 다음과 같습니다:
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 1. **아키텍처**:
    * Parallel Consumer는 Kafka의 기본 Consumer와 유사한 구조를 가지고 있습니다.
