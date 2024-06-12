@@ -28,7 +28,9 @@ Kafka-Connect의 주요 이점은 다음과 같습니다:
   * **Confluent Kafka Connect:** [**https://docs.confluent.io/platform/current/connect/index.html**](https://docs.confluent.io/platform/current/connect/index.html)
   * **Debezium Kafka Connect:** [**https://debezium.io/documentation/reference/2.6/tutorial.html**](https://debezium.io/documentation/reference/2.6/tutorial.html)
 
+참고: [https://kafka.apache.org/documentation/#connectconfigs](https://kafka.apache.org/documentation/#connectconfigs)
 
+참고: [https://debezium.io/](https://debezium.io/)
 
 참고: [https://www.confluent.io/ko-kr/blog/kafka-connect-tutorial/](https://www.confluent.io/ko-kr/blog/kafka-connect-tutorial/)
 
