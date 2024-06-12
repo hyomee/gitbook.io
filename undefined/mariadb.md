@@ -159,3 +159,19 @@ Query OK, 0 rows affected (0.005 sec)
 MariaDB [(none)]> flush privileges;
 Query OK, 0 rows affected (0.001 sec)
 ```
+
+\=======================================
+
+[https://mariadb.org/download/?t=repo-config\&d=22.04+%22jammy%22\&v=11.4\&r\_m=blendbyte](https://mariadb.org/download/?t=repo-config\&d=22.04+%22jammy%22\&v=11.4\&r\_m=blendbyte)
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+```
+
+sudo apt-get install apt-transport-https curl
+sudo mkdir -p /etc/apt/keyrings
+sudo curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+
+sudo apt-get update
+sudo apt-get install mariadb-server
+```
