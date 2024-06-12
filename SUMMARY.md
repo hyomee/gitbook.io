@@ -21,6 +21,7 @@
       * [JPA - 모든 테이블에 생성자 추가](page1/spring/db-jpa/jpa.md)
       * [JPA -  페이징](page1/spring/db-jpa/jpa-1.md)
       * [SpringBoot - MariaDB 연동](page1/spring/db-jpa/springboot-mariadb.md)
+    * [Spring Boot 성능](page1/spring/spring-boot.md)
   * [JSON 관련](page1/json/README.md)
     * [Gson Java1.8 직렬화/역직열화](page1/json/gson-java1.8.md)
   * [JAVA](page1/undefined/README.md)
