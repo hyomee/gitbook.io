@@ -123,6 +123,19 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
       * mysql> show global variables like 'binlog\_format';
       * mysql> SET GLOBAL binlog\_format = ROW;
       * mysql> flush privileges;
+    * 오류: BINARY LOGS 관련 오류
+      * DB확인: SHOW BINARY LOGS;
+      *   설정:  sudo nano /etc/my.cnf
+
+          ```
+          [client]
+          [mysqld] 
+          log-bin=mysql-bin 
+          expire-logs-days=1
+          binlog_format=ROW 
+          ```
+      * 파일 기본 위치: /var/lib/mysql
+      * 확인: show variables like 'log\_bin';
     *   결과 확인 : http://localhost:8083/connectors\
 
 
@@ -142,12 +155,14 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
         \
         참고: [https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties)\
 
-6. asd\
-   curl -XPOST http://localhost:8083/connectors/connector\_name/restart \
+6. topic 확인\
+   bin/kafka-topics.sh -- list --bootstrap-server localhost:9092\
+
+7. curl -XPOST http://localhost:8083/connectors/connector\_name/restart \
    curl -XPOST http://localhost:8083/connectors/connector\_name/tasks/n/restart \
    curl -XPUT http://localhost:8083/connectors/connector\_name/pause \
    curl -XPUT http://localhost:8083/connectors/connector\_name/resume
-7.
+8.
 
 
 
