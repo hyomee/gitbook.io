@@ -70,6 +70,10 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
     ]
     ```
 
+```
+http://localhost:8083/connectors
+```
+
 
 
 ```json
