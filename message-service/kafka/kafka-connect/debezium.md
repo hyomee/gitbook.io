@@ -72,6 +72,33 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
 
 
 
-
+```json
+{
+    "name": "source-mysql",
+    "config": {
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "tasks.max": "1",
+        "connector.adapter": "mariadb",
+        "database.protocol": "jdbc:mariadb",
+        "database.jdbc.driver": "org.mariadb.jdbc.Driver",
+        "database.hostname": "xxx",
+        "database.port": "3306",
+        "database.user": "xxx",
+        "database.password": "xxx",
+        "database.ssl.mode": "disabled",
+        "database.server.id": "184054",
+        "topic.prefix": "mydb",
+        "database.history.kafka.bootstrap.servers": "localhost:9092",
+        "database.history.kafka.topic": "dbhistory.mydb",
+        "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "key.converter.schemas.enable": "true",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": "true",
+        "name": "source-mysql"
+    },
+    "tasks": [],
+    "type": "source"
+}
+```
 
 [https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties)
