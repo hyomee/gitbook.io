@@ -63,9 +63,11 @@ $sudo mysql -u root -p
     $ mysql_secure_installation
     $ sudo service mysql restart
     ```
-* ```sh
-  mysql> SHOW GRANTS FOR 'root'@'localhost';
-  ```
+*   ㅌ
+
+    ```sh
+    mysql> SHOW GRANTS FOR 'root'@'localhost';
+    ```
 *   사용자 권한 보는 법
 
     ```sh
