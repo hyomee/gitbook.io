@@ -40,7 +40,7 @@
   *   My-Topic-Sms-Q: Routing Key Pattern (#.sms.\*)로 지정\
 
 
-      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Topic-Sns-Q: Routing Key Pattern (#.sns)로 지정\
 
 

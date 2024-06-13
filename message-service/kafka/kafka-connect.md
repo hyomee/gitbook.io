@@ -2,7 +2,7 @@
 
 Kafka-Connect는 Apache Kafka의 일부로 데이터 시스템과 Kafka사이에서 데이터를 스트리밍하는 통합 프레임워크로 데이터를 Kafka로부터 가져오거나 Kafka로 보내는 커넥터를 정의하는 공통 프레임워크를 제공하며, 이를 통해 데이터를 실시간으로 스트리밍하고, 전체 데이터베이스를 적재하거나, 애플리케이션 서버에서 메트릭을 수집하여 낮은 지연 시간으로 스트림 처리를 할 수 있게 합니다.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Kafka-Connect의 주요 이점은 다음과 같습니다:
 

@@ -436,7 +436,7 @@ public static String CURRENT_TOPIC = KafkaProperties.KARFA_TOPIC_PARTITION_04;
 
 * ConsumerGroupId23Main 결과
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Polling Loop
 

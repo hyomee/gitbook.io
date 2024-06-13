@@ -114,7 +114,7 @@
    * **응답(Reply)**: 메시지를 수신하는 측은 요청을 처리하고, 응답 메시지를 발신자에게 보냅니다.
    *   1:1 통신을 지원하며, 메시지의 안정성과 순서를 보장합니다. 요청과 응답이 짝지어져 있으므로, 특정 작업을 수행하고 그 결과를 돌려받아야 할 때 유용하게 사용됩니다
 
-       <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **3-2. Publish-Subscribe (Pub/Sub) 모델**:
 

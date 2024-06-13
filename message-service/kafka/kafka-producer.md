@@ -166,7 +166,7 @@ for (int i = 0; i < 5; i++) {
 
 * &#x20;Consumer 결과: 발송 할 때 마다 파티션이 변경됨
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **3-1-2.** Key = 있음:&#x20;
 

@@ -30,7 +30,7 @@ TCP/IP를 알아보기 전에 간략하게  OSI 7계층에 대해서 먼저 알�
 
 ### 2-1. TCP/IP 네트워크 동작 원리
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 2-2. 패킷 해더 구조
 

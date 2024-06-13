@@ -34,7 +34,7 @@
       | type2:   | sms   |
       | x-match: | all   |
 
-      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Header-Sns-Q: Arguments\
       \- x-match 가 any 이므로 type1, type2 의 값이 둘 중에 하나라도 맞으면 큐에 전당
 
