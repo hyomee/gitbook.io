@@ -164,7 +164,7 @@ Query OK, 0 rows affected (0.001 sec)
 
 [https://mariadb.org/download/?t=repo-config\&d=22.04+%22jammy%22\&v=11.4\&r\_m=blendbyte](https://mariadb.org/download/?t=repo-config\&d=22.04+%22jammy%22\&v=11.4\&r\_m=blendbyte)
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 
@@ -174,4 +174,19 @@ sudo curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_
 
 sudo apt-get update
 sudo apt-get install mariadb-server
+```
+
+* 삭제: sudo apt-get purge을 사용해서 모두 지운다.
+
+```sh
+:~$ sudo dpkg -l | grep mariadb
+[sudo] password for hyomee:
+ii  libmariadb3:amd64                                1:10.6.16-0ubuntu0.22.04.1              amd64        MariaDB database client library
+ii  mariadb-client-10.6                              1:10.6.16-0ubuntu0.22.04.1              amd64        MariaDB database client binaries
+ii  mariadb-client-core-10.6                         1:10.6.16-0ubuntu0.22.04.1              amd64        MariaDB database core client binaries
+ii  mariadb-common                                   1:10.6.16-0ubuntu0.22.04.1              all          MariaDB common configuration files
+ii  mariadb-server                                   1:10.6.16-0ubuntu0.22.04.1              all          MariaDB database server (metapackage depending on the latest version)
+ii  mariadb-server-10.6                              1:10.6.16-0ubuntu0.22.04.1              amd64        MariaDB database server binaries
+ii  mariadb-server-core-10.6                         1:10.6.16-0ubuntu0.22.04.1              amd64        MariaDB database core server files
+$ sudo apt-get purge mariadb-server
 ```

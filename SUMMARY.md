@@ -44,6 +44,7 @@
   * [VS Code 확장팩](undefined/vs-code.md)
   * [윈도우에 curl 설치](undefined/curl.md)
   * [MariaDB 설치](undefined/mariadb.md)
+  * [MySQL 설치](undefined/mysql.md)
   * [Redis 설치](undefined/redis.md)
   * [Kafka 설치](undefined/kafka.md)
   * [Linux 기본 명령](undefined/linux.md)
