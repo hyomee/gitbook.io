@@ -36,6 +36,8 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
 
        // 카프카 distributed 시젇
        $ bin/connect-distributed.sh config/connect-distributed.properties
+
+       $ bin/kafka-topics.sh --list --bootstrap-server localhost:9092 
        ```
    *   확인
 
@@ -91,16 +93,15 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
         "database.port": "3306",
         "database.user": "hong",
         "database.password": "1234",
-        "database.server.id": "12345",
+        "database.server.id": "112233",
         "database.server.name": "hong",
-        "database.ssl.mode": "disabled",
-        "database.whitelist": "hong",
+        "database.ssl.mode": "disabled", 
         "database.allowPublicKeyRetrieval":"true",     
         "database.history.kafka.bootstrap.servers": "localhost:9092", 
         "database.history.kafka.topic": "dbhistory.hong",   
         "snapshot.mode": "when_needed",
         "include.schema.changes": "false",
-        "topic.prefix": "topic.debezium.hong",
+        "topic.prefix": "debezium.prfix",
         "table.include.list": "kafka_connect",
         "skip.messages.without.change": "true",
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
