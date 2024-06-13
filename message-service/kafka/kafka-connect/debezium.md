@@ -167,7 +167,35 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
 
 
 
+MySQL 설정 : https://debezium.io/documentation/reference/2.6/connectors/mysql.html#setting-up-mysql
 
+1. 사용자 생성:
+   * CREATE USER 'hong'@'%' IDENTIFIED BY 'password';
+     * CREATE USER 'hong'@'localhost' IDENTIFIED BY 'password';
+2. 비밀번호 생성:
+   * set password for 'hong'@'%' = password('hong1234');
+   * set password for 'hong'@'localhost' = password('hong1234');
+3. 적용: - flush privileges;
+4. 권한 부여 적용 - 전체 권한: - grant all privileges on hong.\* to 'hong'@'%'; - grant all privileges on hong.\* to 'hong'@'localhost';
+   * 일부 권한 : Debesium 을 사용해서 Kafka Connect 하는 경우 필요한 권한
+     * GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON _._ TO 'hong' IDENTIFIED BY 'password';
+     * GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON _._ TO 'hong'@'%' IDENTIFIED BY 'password';
+     * GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON _._ TO 'hong'@'localhost' IDENTIFIED BY 'password';
+     * flush privileges;
+5. binlog 사용 설정
+   * binary logging checking: SHOW BINARY LOGS;
+   *   my.cnf 구성 \[mysqld]
+
+       ### Querying variable is called server\_id, e.g.
+
+       ### SELECT variable\_value FROM information\_schema.global\_variables WHERE variable\_name='server\_id';
+
+       server-id = 112233 log\_bin = mysql-bin binlog\_format = ROW binlog\_row\_image = FULL binlog\_expire\_logs\_seconds = 180000 expire-logs-days = 1
+6. binlog 이벤트에 대한 원래 문보기 활성화
+   * binlog\_rows\_query\_log\_events=ON : SET sql\_log\_bin = 0;
+   * binlog\_annotate\_row\_events=ON
+
+CREATE TABLE IF NOT EXISTS test ( id int NOT NULL PRIMARY KEY, name varchar(100), email varchar(200), department varchar(200) );
 
 <pre><code><strong>http://localhost:8083/connectors
 </strong></code></pre>
