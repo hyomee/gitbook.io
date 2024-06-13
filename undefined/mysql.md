@@ -63,11 +63,11 @@ $sudo mysql -u root -p
     $ mysql_secure_installation
     $ sudo service mysql restart
     ```
-*   ㅌ
+*   DB 생성
 
-    ```sh
-    mysql> SHOW GRANTS FOR 'root'@'localhost';
-    ```
+    <pre class="language-sh"><code class="lang-sh">mysql> CREATE DATABASE 테이블명
+    <strong>mysql> FLUSH PRIVILEGES;
+    </strong></code></pre>
 *   사용자 권한 보는 법
 
     ```sh
@@ -77,7 +77,16 @@ $sudo mysql -u root -p
 
     ```sh
     mysql> CREATE USER 'hong'@'localhost' IDENTIFIED WITH mysql_native_password BY '등록할비밀번호';
+    mysql> FLUSH PRIVILEGES;
 
     ** 삭제 : drop user 'hong'@'localhost';
+    ```
+*   사용자에게 db 권한 설정
+
+    ```sh
+    mysql> GRANT ALL PRIVILEGES ON hongdb.* TO 'hong'@'localhost';
+    mysql> FLUSH PRIVILEGES;
+    mysql> SHOW GRANTS FOR 'hong'@'localhost';
+
     ```
 
