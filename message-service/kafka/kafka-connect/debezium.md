@@ -75,7 +75,7 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
 
       ```
 
-## &#x20;**2. Connector Config**: &#x20;
+## **2. Source Connector**&#x20;
 
 ### 2-1. MySQL 충족 조건
 
@@ -214,455 +214,457 @@ curl --location 'localhost:8083/connectors' \
 
 
 
+<details>
 
+<summary>JSON 결과 </summary>
 
-    ```json
-    {
-        "schema": {
-            "type": "struct",
-            "fields": [
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "int32",
-                            "optional": false,
-                            "field": "id"
+<pre class="language-json"><code class="lang-json"><strong>{
+</strong>    "schema": {
+        "type": "struct",
+        "fields": [
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "name"
+                    }
+                ],
+                "optional": true,
+                "name": "mysql_topic.hongdb.kafka_connect.Value",
+                "field": "before"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "name"
+                    }
+                ],
+                "optional": true,
+                "name": "mysql_topic.hongdb.kafka_connect.Value",
+                "field": "after"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "version"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "connector"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "name"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "ts_ms"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "name": "io.debezium.data.Enum",
+                        "version": 1,
+                        "parameters": {
+                            "allowed": "true,last,false,incremental"
                         },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "name"
-                        }
-                    ],
-                    "optional": true,
-                    "name": "mysql_topic.hongdb.kafka_connect.Value",
-                    "field": "before"
-                },
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "int32",
-                            "optional": false,
-                            "field": "id"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "name"
-                        }
-                    ],
-                    "optional": true,
-                    "name": "mysql_topic.hongdb.kafka_connect.Value",
-                    "field": "after"
-                },
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "version"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "connector"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "name"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "ts_ms"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "name": "io.debezium.data.Enum",
-                            "version": 1,
-                            "parameters": {
-                                "allowed": "true,last,false,incremental"
-                            },
-                            "default": "false",
-                            "field": "snapshot"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "db"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "sequence"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": true,
-                            "field": "ts_us"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": true,
-                            "field": "ts_ns"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "table"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "server_id"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "gtid"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "file"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "pos"
-                        },
-                        {
-                            "type": "int32",
-                            "optional": false,
-                            "field": "row"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": true,
-                            "field": "thread"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "query"
-                        }
-                    ],
-                    "optional": false,
-                    "name": "io.debezium.connector.mysql.Source",
-                    "field": "source"
-                },
-                {
-                    "type": "string",
-                    "optional": false,
-                    "field": "op"
-                },
-                {
-                    "type": "int64",
-                    "optional": true,
-                    "field": "ts_ms"
-                },
-                {
-                    "type": "int64",
-                    "optional": true,
-                    "field": "ts_us"
-                },
-                {
-                    "type": "int64",
-                    "optional": true,
-                    "field": "ts_ns"
-                },
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "id"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "total_order"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "data_collection_order"
-                        }
-                    ],
-                    "optional": true,
-                    "name": "event.block",
-                    "version": 1,
-                    "field": "transaction"
-                }
-            ],
-            "optional": false,
-            "name": "mysql_topic.hongdb.kafka_connect.Envelope",
-            "version": 2
+                        "default": "false",
+                        "field": "snapshot"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "db"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "sequence"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "ts_us"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "ts_ns"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "table"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "server_id"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "gtid"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "file"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "pos"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "row"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "thread"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "query"
+                    }
+                ],
+                "optional": false,
+                "name": "io.debezium.connector.mysql.Source",
+                "field": "source"
+            },
+            {
+                "type": "string",
+                "optional": false,
+                "field": "op"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_ms"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_us"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_ns"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "total_order"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "data_collection_order"
+                    }
+                ],
+                "optional": true,
+                "name": "event.block",
+                "version": 1,
+                "field": "transaction"
+            }
+        ],
+        "optional": false,
+        "name": "mysql_topic.hongdb.kafka_connect.Envelope",
+        "version": 2
+    },
+    "payload": {
+        "before": null,
+        "after": {
+            "id": 75,
+            "name": "홍길동"
         },
-        "payload": {
-            "before": null,
-            "after": {
-                "id": 75,
-                "name": "홍길동"
-            },
-            "source": {
-                "version": "2.6.2.Final",
-                "connector": "mysql",
-                "name": "mysql_topic",
-                "ts_ms": 1718303427000,
-                "snapshot": "false",
-                "db": "hongdb",
-                "sequence": null,
-                "ts_us": 1718303427000000,
-                "ts_ns": 1718303427000000000,
-                "table": "kafka_connect",
-                "server_id": 112233,
-                "gtid": null,
-                "file": "mysql-bin.000010",
-                "pos": 17182,
-                "row": 0,
-                "thread": 15,
-                "query": null
-            },
-            "op": "c",
-            "ts_ms": 1718303427385,
-            "ts_us": 1718303427385117,
-            "ts_ns": 1718303427385117710,
-            "transaction": null
-        }
-    }
-    {
-        "schema": {
-            "type": "struct",
-            "fields": [
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "int32",
-                            "optional": false,
-                            "field": "id"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "name"
-                        }
-                    ],
-                    "optional": true,
-                    "name": "mysql_topic.hongdb.kafka_connect.Value",
-                    "field": "before"
-                },
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "int32",
-                            "optional": false,
-                            "field": "id"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "name"
-                        }
-                    ],
-                    "optional": true,
-                    "name": "mysql_topic.hongdb.kafka_connect.Value",
-                    "field": "after"
-                },
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "version"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "connector"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "name"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "ts_ms"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "name": "io.debezium.data.Enum",
-                            "version": 1,
-                            "parameters": {
-                                "allowed": "true,last,false,incremental"
-                            },
-                            "default": "false",
-                            "field": "snapshot"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "db"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "sequence"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": true,
-                            "field": "ts_us"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": true,
-                            "field": "ts_ns"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "table"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "server_id"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "gtid"
-                        },
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "file"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "pos"
-                        },
-                        {
-                            "type": "int32",
-                            "optional": false,
-                            "field": "row"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": true,
-                            "field": "thread"
-                        },
-                        {
-                            "type": "string",
-                            "optional": true,
-                            "field": "query"
-                        }
-                    ],
-                    "optional": false,
-                    "name": "io.debezium.connector.mysql.Source",
-                    "field": "source"
-                },
-                {
-                    "type": "string",
-                    "optional": false,
-                    "field": "op"
-                },
-                {
-                    "type": "int64",
-                    "optional": true,
-                    "field": "ts_ms"
-                },
-                {
-                    "type": "int64",
-                    "optional": true,
-                    "field": "ts_us"
-                },
-                {
-                    "type": "int64",
-                    "optional": true,
-                    "field": "ts_ns"
-                },
-                {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "type": "string",
-                            "optional": false,
-                            "field": "id"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "total_order"
-                        },
-                        {
-                            "type": "int64",
-                            "optional": false,
-                            "field": "data_collection_order"
-                        }
-                    ],
-                    "optional": true,
-                    "name": "event.block",
-                    "version": 1,
-                    "field": "transaction"
-                }
-            ],
-            "optional": false,
-            "name": "mysql_topic.hongdb.kafka_connect.Envelope",
-            "version": 2
+        "source": {
+            "version": "2.6.2.Final",
+            "connector": "mysql",
+            "name": "mysql_topic",
+            "ts_ms": 1718303427000,
+            "snapshot": "false",
+            "db": "hongdb",
+            "sequence": null,
+            "ts_us": 1718303427000000,
+            "ts_ns": 1718303427000000000,
+            "table": "kafka_connect",
+            "server_id": 112233,
+            "gtid": null,
+            "file": "mysql-bin.000010",
+            "pos": 17182,
+            "row": 0,
+            "thread": 15,
+            "query": null
         },
-        "payload": {
-            "before": null,
-            "after": {
-                "id": 76,
-                "name": "김길동"
-            },
-            "source": {
-                "version": "2.6.2.Final",
-                "connector": "mysql",
-                "name": "mysql_topic",
-                "ts_ms": 1718303427000,
-                "snapshot": "false",
-                "db": "hongdb",
-                "sequence": null,
-                "ts_us": 1718303427000000,
-                "ts_ns": 1718303427000000000,
-                "table": "kafka_connect",
-                "server_id": 112233,
-                "gtid": null,
-                "file": "mysql-bin.000010",
-                "pos": 17489,
-                "row": 0,
-                "thread": 15,
-                "query": null
-            },
-            "op": "c",
-            "ts_ms": 1718303427497,
-            "ts_us": 1718303427497570,
-            "ts_ns": 1718303427497570905,
-            "transaction": null
-        }
+        "op": "c",
+        "ts_ms": 1718303427385,
+        "ts_us": 1718303427385117,
+        "ts_ns": 1718303427385117710,
+        "transaction": null
     }
-    ```
+}
+{
+    "schema": {
+        "type": "struct",
+        "fields": [
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "name"
+                    }
+                ],
+                "optional": true,
+                "name": "mysql_topic.hongdb.kafka_connect.Value",
+                "field": "before"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "name"
+                    }
+                ],
+                "optional": true,
+                "name": "mysql_topic.hongdb.kafka_connect.Value",
+                "field": "after"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "version"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "connector"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "name"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "ts_ms"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "name": "io.debezium.data.Enum",
+                        "version": 1,
+                        "parameters": {
+                            "allowed": "true,last,false,incremental"
+                        },
+                        "default": "false",
+                        "field": "snapshot"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "db"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "sequence"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "ts_us"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "ts_ns"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "table"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "server_id"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "gtid"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "file"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "pos"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "row"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "thread"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "query"
+                    }
+                ],
+                "optional": false,
+                "name": "io.debezium.connector.mysql.Source",
+                "field": "source"
+            },
+            {
+                "type": "string",
+                "optional": false,
+                "field": "op"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_ms"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_us"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_ns"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "total_order"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "data_collection_order"
+                    }
+                ],
+                "optional": true,
+                "name": "event.block",
+                "version": 1,
+                "field": "transaction"
+            }
+        ],
+        "optional": false,
+        "name": "mysql_topic.hongdb.kafka_connect.Envelope",
+        "version": 2
+    },
+    "payload": {
+        "before": null,
+        "after": {
+            "id": 76,
+            "name": "김길동"
+        },
+        "source": {
+            "version": "2.6.2.Final",
+            "connector": "mysql",
+            "name": "mysql_topic",
+            "ts_ms": 1718303427000,
+            "snapshot": "false",
+            "db": "hongdb",
+            "sequence": null,
+            "ts_us": 1718303427000000,
+            "ts_ns": 1718303427000000000,
+            "table": "kafka_connect",
+            "server_id": 112233,
+            "gtid": null,
+            "file": "mysql-bin.000010",
+            "pos": 17489,
+            "row": 0,
+            "thread": 15,
+            "query": null
+        },
+        "op": "c",
+        "ts_ms": 1718303427497,
+        "ts_us": 1718303427497570,
+        "ts_ns": 1718303427497570905,
+        "transaction": null
+    }
+}
+</code></pre>
 
-    \
+</details>
 
+<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+## **3. Sink Connector**&#x20;
 
 ***
 
