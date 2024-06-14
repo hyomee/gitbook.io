@@ -81,7 +81,7 @@ JMS는 PTP(Point-To-Point)와 Pub/Sub 모델을 제공하며, JMS 응용 프로�
 
 ## 4. 예제 코드&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```java
 import jakarta.jms.*;
