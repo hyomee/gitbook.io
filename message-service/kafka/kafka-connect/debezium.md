@@ -163,14 +163,14 @@ curl --location 'localhost:8083/connectors' \
       \- 예: http://localhost:8083/connectors/debezium-mysql-01/config\
 
 
-      <figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
       * **삭제**:\
         \-  curl --location --request DELETE 'http://localhost:8083/connectors/{connector-name}
 *   **topic 확인**\
     \-  sudo ./bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 
-    <figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 * 그와  사용 API
   * curl -XPOST http://localhost:8083/connectors/connector\_name/restart&#x20;
   * curl -XPOST http://localhost:8083/connectors/connector\_name/tasks/n/restart&#x20;
@@ -690,7 +690,7 @@ schema-history-01
 
 </details>
 
-<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -701,34 +701,148 @@ schema-history-01
 
 ## **3. Sink Connector**
 
-Kafka Connect의 Sink 커넥터 구현으로, 여러 소스 토픽에서 이벤트를 소비한 다음 JDBC 드라이버를 사용하여 해당 이벤트를 관계형 데이터베이스에 메시지를.저장합니다.   이 커넥터는 Db2, MySQL, Oracle, PostgreSQL 및 SQL Server와 같은 다양한 데이터베이스 방언을 지원합니다**.**&#x20;
+Debezium JDBC 커넥터는 Kafka Connect의 Sink 커넥터 구현으로, 여러 소스 토픽에서 이벤트를 소비한 후 JDBC 드라이버를 사용해 이벤트를 관계형 데이터베이스에 저장합니다.&#x20;
 
+* Debezium JDBC 커넥터는 Kafka Connect의 싱크 커넥터이기 때문에 Kafka Connect 런타임이 필요합니다.&#x20;
+* 구독 중인 Kafka 토픽을 주기적으로 폴링하여 토픽의 이벤트를 가져오고, 이를 구성된 관계형 데이터베이스에 기록합니다.
+* Db2, MySQL, Oracle, PostgreSQL 및 SQL Server를 포함한 다양한 데이터베이스 언어를 지원합니다.
 * **동작 방식**:
   * 커넥터는 주기적으로 구독하는 Kafka 토픽에서 이벤트를 가져와 설정된 관계형 데이터베이스에 메시지를.저장합니다
-  * Idempotent한 쓰기 작업을 지원하며, upsert 세맨틱과 기본 스키마 진화를 사용합니다.
+  * 커넥터는 upsert  및 기본 스키마를 사용하여 멱등성 쓰기 작업을 지원합니다.
   * 다음과 같은 기능을 제공합니다:
-    * 복잡한 Debezium 변경 이벤트 소비
-    * 최소 한 번 이상의 전달 보장
-    * 여러 작업 실행
-    * 데이터 및 열 유형 매핑
-    * 기본 키 처리
-    * 삭제 모드
-    * Idempotent한 쓰기
-    * 스키마 진화
-    * 인용 및 대소문자 구분
-    * 연결 유휴 시간 초과
+    * [Consuming complex Debezium change events](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-consume-complex-debezium-events) (복잡한 Debezium 변경 이벤트 소비)
+    * [At-least-once delivery](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-at-least-once-delivery) (최소 한 번 이상의 전달 보장)
+    * [Multiple tasks](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-multiple-tasks) (여러 작업 실행): tasks.max
+    * [Data and column type mappings](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-data-and-type-mappings) (데이터 및 열 유형 매핑)
+    * [Primary key handling](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-primary-key-handling) (기본 키 생성): 이벤트 기본키 정
+      * primary.key.mode: none, kafka, record\_key, record\_value 등
+      * primary.key.fields 속성 합니다.
+    * [Delete mode](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-delete-mode) (행 삭제 여부): delete.enabled=true를 명시적으로 설정해야 합니다
+      * delete.enabled: true, none
+    *   [Idempotent writes](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-idempotent-writes) ( 멱등성 쓰기 )\
 
 
+        | Dialect    | Upsert Syntax                               |
+        | ---------- | ------------------------------------------- |
+        | Db2        | `MERGE …​`                                  |
+        | MySQL      | `INSERT …​ ON DUPLICATE KEY UPDATE …​`      |
+        | Oracle     | `MERGE …​`                                  |
+        | PostgreSQL | `INSERT …​ ON CONFLICT …​ DO UPDATE SET …​` |
+        | SQL Server | `MERGE …​`                                  |
+    * [Schema evolution](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-schema-evolution) (테이블을 자동으로 생성하거나 변경)
+      * schema.evolution: none, basic
+    * [Quoting and case sensitivity](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-quoting-case-sensitivity) (DDL (스키마 변경), DML(데이터 변경)  에)대한 대소문자 구분)
+      * quote.identifiers: true(테이블 및 필드 이름의 대소문자를 명시적으로 유지), false&#x20;
+    * [Connection Idle Timeouts](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-connection-idle-timeouts) (연결 유휴 시간 초과)
 
-<details>
+### 3-1.  사용 방법
 
-<summary>멱등성(Idempotent)</summary>
+#### 3-1-1. 필수 구성 요소
 
+* [Apache ZooKeeper](https://zookeeper.apache.org/), [Apache Kafka](http://kafka.apache.org/) 및 [Kafka Connect](https://kafka.apache.org/documentation.html#connect)가 설치되어 있습니다.
+* 대상 데이터베이스가 설치되고 JDBC 연결을 허용하도록 구성됩니다.
 
+#### 3-1-2. 절차
 
-</details>
+1. Debezium [JDBC 커넥터 플러그인 아카이브](https://repo1.maven.org/maven2/io/debezium/debezium-connector-jdbc/2.6.2.Final/debezium-connector-jdbc-2.6.2.Final-plugin.tar.gz)를 다운로드합니다.
+2. Kafka Connect 환경으로 파일을 추출합니다.
+3. 필요에 따라 Maven Central에서 JDBC 드라이버를 다운로드하고 다운로드한 드라이버 파일을 JDBC 싱크 커넥터 JAR 파일이 포함된 디렉토리에 추출합니다.
+4. JDBC 싱크 커넥터가 설치된 경로에 드라이버 JAR 파일을 추가합니다.
+5. JDBC 싱크 커넥터를 설치하는 경로가 [Kafka Connect `plugin.path`](https://kafka.apache.org/documentation/#connectconfigs)의 일부인지 확인합니다.
+6. Kafka Connect 프로세스를 다시 시작하여 새 JAR 파일을 선택합니다.
+
+### 3-2.  Debezium JDBC 커넥터 구성
+
+커넥터 속성은 다음에서 참고합니다.
+
+* [JCBC 커넥터 일반 특성](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-connector-properties-generic)
+* [JDBC 커넥터 연결 특성](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-connector-properties-connection)
+* [JDBC 커넥터 런타임 특성](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-connector-properties-runtime)
+* [JDBC 커넥터 확장 가능 특성](https://debezium.io/documentation/reference/stable/connectors/jdbc.html#jdbc-connector-properties-extendable)
+
+```concurnas
+curl --location 'localhost:8083/connectors' \
+--header 'Content-Type: application/json' \
+--data '{ 
+    "name": "debezium-mysql-sink-connector",  
+    "config": {
+        // 제네릭 속성
+        "connector.class": "io.debezium.connector.jdbc.JdbcSinkConnector",  
+        "tasks.max": "1",
+        "topics": "mysql_topic.hongdb.kafka_connect",                // 사용할 항목 목록으로, 쉼표로 구분
+        //"topics.regex":"mysql_topic.hongdb.*", // topics와 함꼐 사용하지 못함
+        "heartbeat.interval.ms": "3000",                                                            
+        "autoReconnect":"true",           
+        // JDBC 커넥터 연결 특성
+        "connection.url":"jdbc:mysql://localhost:3306/hong",   
+        "connection.username": "hong",  
+        "connection.password": "hong1234" ,
+        "connection.pool.min_size": 5,
+        "connection.pool.max_size": 32,
+        // JDBC 커넥터 런타임 특성
+        "delete.enabled": "true",         // 커넥터가 이벤트를 처리할지 또는 삭제 표시 이벤트를 처리할지 여부를 지정
+        "database.time_zone": "UTC",      // 임시 필드 유형을 작성할 때 사용되는 시간대를 지정
+        "insert.mode": "upsert",          // 데이터베이스에 이벤트를 삽입하는 데 사용되는 전략을 지정
+        "primary.key.mode": "record_key", // 기본 키 열을 확인하는 데 사용되는 방법을 지정
+        "quote.identifiers":"true",
+        "schema.evolution": "basic",      // 커넥터가 대상 테이블 스키마를 전개시키는 방법을 지정
+        "table.name.format": "kafka_connect",
+        // "table.name.format": "${topic}",  // 이벤트의 주제 이름에 따라 대상 테이블 이름의 형식을 지정하는 방법을 결정하는 문자열을 지정
+        //  JDBC 커넥터 확장 가능 특성
+        "auto.evolve": "true",            // Target DB 열이없을 경우, 자동으로 만들지 여부 지정                           
+        "auto.create":"true",             // Target DB에 해당 테이블이 없을 경우, 자동으로 만들지 여부 지정                           
+        "value.converter.schemas.enable":"true",              
+        "value.converter":"org.apache.kafka.connect.json.JsonConverter",       
+        "pk.mode" :"kafka" // Primary Key (PK) 모드를 설정하는 데 사용
+  }
+} 
+```
+
+* 추가 속성 으로 싱크 커넥터에 다음 구성을 추가하여 데이터를 변환하고 해당 구성을 다시 적용할 수 있습니다
+
+```
+"transforms": "unwrap, rename",
+"transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+"transforms.rename.type": "org.apache.kafka.connect.transforms.RegexRouter",
+"transforms.rename.regex": ".*\\.(.*)",
+"transforms.rename.replacement": "$1",
+```
+
+### 3-3. 결과
+
+#### 3-3-1. 생성 확인&#x20;
+
+````
+localhost:8083/connectors
+
+```json
+[
+    "debezium-mysql-01",
+    "debezium-mysql-sink-connector"
+]
+```
+
+````
+
+#### 3-3-2. 테스트
+
+* Source DB 에서 INSERT
+
+```xquery
+INSERT INTO hongdb.kafka_connect (name) VALUES ('홍길동 나라');
+INSERT INTO hongdb.kafka_connect (name) VALUES ('김길동 나라');
+commit;
+```
+
+* Target DB  확인
+
+<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption><p>수핸전</p></figcaption></figure>
+
+<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption><p>수행후</p></figcaption></figure>
 
 ***
 
 **참고:** [**https://debezium.io/documentation/reference/stable/connectors/jdbc.html**](https://debezium.io/documentation/reference/stable/connectors/jdbc.html)
+
+참고: [Kafka Connect, Debezium로 PostgreSQL CDC 구성하기](https://thekoguryo.github.io/oci/chapter17/oci-oss-cdc-postgresql-debezium/) &#x20;
 

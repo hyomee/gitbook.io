@@ -9,17 +9,17 @@
 
 ## 1. 관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Exchange 이름:** My-Fanout-Exchange:&#x20;
 * Binding Queue
   *   My-Fanout-Email-Q: Routing Key (email)로 지정\
 
 
-      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Fanout-Sms-Q: Routing Key 지정 하지 않음&#x20;
 
-      <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Fanout-Sns-Q: Routing Key 지정 하지 않음
 
       <figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
