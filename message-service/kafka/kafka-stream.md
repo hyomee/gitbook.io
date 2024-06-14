@@ -13,3 +13,5 @@ Kafka Streams API는 다음과 같은 특징을 제공합니다:
 * 별도의 처리 클러스터 필요 없음&#x20;
 
 Kafka Streams API는 실시간 애플리케이션과 마이크로서비스 구축에 효과적으로, Kafka의 강력한 기능을 활용하여 사용됩니다. 스트림 프레임워크인 Storm, Samza, Spark Streaming을 사용하기 위해서는 클러스터를 구축하고, 그 위에 주요 애플리케이션을 개발해야 합니다.
+
+참고:  [AFKA STREAMS](https://kafka.apache.org/documentation/streams/)

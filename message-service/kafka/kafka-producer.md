@@ -146,7 +146,7 @@ public ProducerRecord(String topic, V value)
 *   아파치 카프카 2.4 부터는 접착성 처리를 하기 위해 라운드 로빈 알고리즘을 사용 합니다. 즉 프로듀서가 메시지를 배치 할 떄 이전 배치를 먼저 채우게 하여 더 적은 요청을 같은 수의 메시지를 전송하게하여 지연시간을 줄이고 브로커의 CPU 사용량을 줄입니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>파티션에서의 접착성 차이</p></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>파티션에서의 접착성 차이</p></figcaption></figure>
 
     \
 
