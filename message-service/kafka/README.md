@@ -35,7 +35,15 @@ Kafka는 대량의 데이터를 높은 처리량과 실시간 처리를 위한 �
   * Streams API -> Kafka Streams 제공&#x20;
 * **신뢰성**: 메시지 전달 보증으로 데이터 상실은 허용 하지 않습니다.
 
-## 4. 메시지 전달 보증
+## 4. 멱등성(**Idempotence**)
+
+**멱등성(Idempotence)**는 컴퓨터 과학에서 특정 작업이 초기 적용 이후에도 결과를 변경하지 않고 여러 번 적용할 수 있는 성질을 의미합니다. 이는 중복 없이 메시지를 전송하고 재시도 시 중복을 제거하는 데 사용됩니다
+
+**Kafka에서 Idempotent Producer**는 메시지를 보낼 때 중복을 피하고 메시지가 정확히 한 번만 전송되도록 합니다. 이는 메시지 전송에 강력한 보장을 제공하며 오류가 발생해도 메시지가 중복되지 않습니다. 따라서 Kafka에서 메시지를 안전하게 보내고자 할 때 Idempotent Producer를 사용합니다.&#x20;
+
+멱등성을 보장하면 약 20%의 성능 저하가 발생할 수 있으나, 멱등성 적용이 권장됩니다. 성능 저하는 클러스터 확장을 통해 대응할 수 있습니다. Kafka 3.0 이상에서는 멱등성 보장이 기본 설정으로 제공됩니다.
+
+* **메시지 전달 보증**
 
 <table data-header-hidden><thead><tr><th></th><th width="168"></th><th width="74"></th><th width="69"></th><th></th></tr></thead><tbody><tr><td>종류</td><td>개요</td><td>재전송</td><td>중복삭제</td><td>비고</td></tr><tr><td>At Most Once</td><td>1회는 전달 시도</td><td>X</td><td>X</td><td>메시지 중복 없음, 상실 있음</td></tr><tr><td>At Least Once</td><td>적어도 1회는 전달</td><td>O</td><td>X</td><td><p>메시지 중복 가능성 존재, 상실 없음</p><p>Ack, Offset Commit</p></td></tr><tr><td>Exactly Once</td><td>1회만 전달</td><td>O</td><td>O</td><td><p>메시지 중복 없음, 상실 없음, 성능 저하</p><p>Ack, Offset Commit</p><p>트랜잭션 Abort/Timeout</p></td></tr></tbody></table>
 

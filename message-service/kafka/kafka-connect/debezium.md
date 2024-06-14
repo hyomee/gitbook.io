@@ -41,7 +41,7 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
       ```
   *   **확인**
 
-      ```
+      ````
       $ curl http://localhost:8083
       {
           "version": "3.7.0",
@@ -50,7 +50,13 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
       }
 
       $ curl --location --request GET http://localhost:8083/connector-plugins
+      ```json
       [
+          {
+              "class": "io.debezium.connector.jdbc.JdbcSinkConnector",
+              "type": "sink",
+              "version": "2.6.2.Final"
+          },
           {
               "class": "io.debezium.connector.mysql.MySqlConnector",
               "type": "source",
@@ -72,8 +78,9 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
               "version": "3.7.0"
           }
       ]
-
       ```
+
+      ````
 
 ## **2. Source Connector**&#x20;
 
@@ -115,22 +122,25 @@ curl --location 'localhost:8083/connectors' \
     "database.hostname": "localhost",
     "database.port": "3306",
     "database.user": "hong",
-    "database.password": "hongxxxx",
-    // my.cnf 설정한 server-id와 같아여 함
+    "database.password": "hong1234",
     "database.server.id": "112233",
     "database.server.name": "mysql",
-    "topic.prefix": "mysql_topic",
-    "database.whitelist": "hongdb",
-    // 아래 주석 부분 주석을 풀면 Database Topic 이 생성 되지 않음 
-    // "database.include.list": "hongdb",
-    // "table.include.list": "hongdb.kafka_connect",
-    "table.whitelist": "hongdb.kafka_connect",
-    "database.history.kafka.bootstrap.servers": "172.24.239.164:9092",
+    "topic.prefix": "mysql_topic",                  // prefix for topiucs   
+    "database.include.list": "hongdb",              // select a DB to replicate
+    "table.include.list": "hongdb.kafka_connect",   // 변경 이벤트 레코드에 포함할 테이블을 정규 표현식으로 지정
+    "database.whitelist": "hongdb",                 // monitor a DB
+    "table.whitelist": "hongdb.kafka_connect",      // 연결할 데이터베이스 테이블을 지정
+    "topic.creation.enable": "true",                //  auto-create topics  
+    "topic.creation.default.replication.factor": 1,  
+    "topic.creation.default.partitions": 3,  
+    "topic.creation.default.cleanup.policy": "compact",  
+    "topic.creation.default.compression.type": "lz4",       
+    "database.history.kafka.bootstrap.servers": "localhost:9092", // list of brokers
     "database.history.kafka.recovery.attempts": "10000",
     "database.history.kafka.topic": "debezium.dbhistory.mysql",    
     "schema.history.internal.kafka.topic": "schema-history-01",
-    "schema.history.internal.kafka.bootstrap.servers": "172.24.239.164:9092",
-    "include.schema.changes": "true"  
+    "schema.history.internal.kafka.bootstrap.servers": "localhost:9092",
+    "include.schema.changes": "true" 
   }
 }'
 
@@ -181,23 +191,43 @@ curl --location 'localhost:8083/connectors' \
         name varchar(100) null
     );
     ```
-*   **Kafka 실행**:
+* **Kafka 실행**:
 
-    ```sh
-    // 주키퍼 시작
-    $ bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+// 주키퍼 시작
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
 
-    // 카프카 시작 
-    $ bin/kafka-server-start.sh config/server.properties
+// 카프카 시작 
+$ bin/kafka-server-start.sh config/server.properties
+```
 
-    // 카프카 distributed 시젇
-    $ bin/connect-distributed.sh config/connect-distributed.properties
+* **카프카 distributed 실행**
 
-    $ bin/kafka-topics.sh --list --bootstrap-server localhost:9092 
+```sh
+// 카프카 distributed 실행
+$ bin/connect-distributed.sh config/connect-distributed.properties
 
-    ```
-*   insert 진행 \
+$ bin/kafka-topics.sh --list --bootstrap-server localhost:9092 
+__consumer_offsets
+connect-configs
+connect-offsets
+connect-status
+```
 
+* **Topic 생성**: 2-1 Connect Topic 생성 curl 실행&#x20;
+
+```sh
+$ bin/kafka-topics.sh --list --bootstrap-server localhost:9092 
+__consumer_offsets
+connect-configs
+connect-offsets
+connect-status
+mysql_topic
+mysql_topic.hongdb.kafka_connect
+schema-history-01
+```
+
+*   **MsSql  insert 쿼리  실행**&#x20;
 
     ```xquery
     INSERT INTO hongdb.kafka_connect (name) VALUES ('홍길동');
@@ -211,8 +241,6 @@ curl --location 'localhost:8083/connectors' \
     ```sh
     $ sudo ./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mysql_topic.hongdb.kafka_connect
     ```
-
-
 
 <details>
 
@@ -664,10 +692,43 @@ curl --location 'localhost:8083/connectors' \
 
 <figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-## **3. Sink Connector**&#x20;
+***
+
+참고
+
+* [https://debezium.io/documentation/reference/2.6/connectors/mysql.html#setting-up-mysql](https://debezium.io/documentation/reference/2.6/connectors/mysql.html#setting-up-mysql)
+* [https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties)
+
+## **3. Sink Connector**
+
+Kafka Connect의 Sink 커넥터 구현으로, 여러 소스 토픽에서 이벤트를 소비한 다음 JDBC 드라이버를 사용하여 해당 이벤트를 관계형 데이터베이스에 메시지를.저장합니다.   이 커넥터는 Db2, MySQL, Oracle, PostgreSQL 및 SQL Server와 같은 다양한 데이터베이스 방언을 지원합니다**.**&#x20;
+
+* **동작 방식**:
+  * 커넥터는 주기적으로 구독하는 Kafka 토픽에서 이벤트를 가져와 설정된 관계형 데이터베이스에 메시지를.저장합니다
+  * Idempotent한 쓰기 작업을 지원하며, upsert 세맨틱과 기본 스키마 진화를 사용합니다.
+  * 다음과 같은 기능을 제공합니다:
+    * 복잡한 Debezium 변경 이벤트 소비
+    * 최소 한 번 이상의 전달 보장
+    * 여러 작업 실행
+    * 데이터 및 열 유형 매핑
+    * 기본 키 처리
+    * 삭제 모드
+    * Idempotent한 쓰기
+    * 스키마 진화
+    * 인용 및 대소문자 구분
+    * 연결 유휴 시간 초과
+
+
+
+<details>
+
+<summary>멱등성(Idempotent)</summary>
+
+
+
+</details>
 
 ***
 
-* 참고
-  * [https://debezium.io/documentation/reference/2.6/connectors/mysql.html#setting-up-mysql](https://debezium.io/documentation/reference/2.6/connectors/mysql.html#setting-up-mysql)
-  * [https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties)
+**참고:** [**https://debezium.io/documentation/reference/stable/connectors/jdbc.html**](https://debezium.io/documentation/reference/stable/connectors/jdbc.html)
+
