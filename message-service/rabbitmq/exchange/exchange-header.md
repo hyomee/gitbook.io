@@ -7,7 +7,7 @@
 
 **Topic  Exchange 흐름**
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 허용 되는 해더(x-match)에는 any, all 두가지 유형이 있습니다.
   * any: Exchange로 보내는 메시지에 Queue가 연결된 헤더 중 하나 이상이 포함되어야 함을 의미
@@ -18,14 +18,14 @@
 *   **Exchange 이름:** My-Header-Exchange \
 
 
-    <figure><img src="../../.gitbook/assets/image (335).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (335).png" alt=""><figcaption></figcaption></figure>
 * Binding Queue
   *   My-Header-Email-Q: Arguments\
       \- x-match 가 any 이므로 type1, type2 의 값이 둘 중에 하나라도 맞으면 큐에 전당
 
       <table data-header-hidden><thead><tr><th width="157">키</th><th>값</th></tr></thead><tbody><tr><td>type1:</td><td>email</td></tr><tr><td>type2:</td><td>mail</td></tr><tr><td>x-match:</td><td>any</td></tr></tbody></table>
 
-      <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Header-Sms-Q: Arguments\
       \- x-match 가 all이므로 type1, type2 의 값이 모두 맞아야 전달&#x20;
 
@@ -34,7 +34,7 @@
       | type2:   | sms   |
       | x-match: | all   |
 
-      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
   *   My-Header-Sns-Q: Arguments\
       \- x-match 가 any 이므로 type1, type2 의 값이 둘 중에 하나라도 맞으면 큐에 전당
 
@@ -43,7 +43,7 @@
       | type2:   | sns   |
       | x-match: | any   |
 
-      <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. 소스
 

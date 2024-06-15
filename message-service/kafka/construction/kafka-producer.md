@@ -6,7 +6,7 @@
 
 애플리케이션이 Kafka에 메시지를 써야 하는 이유는 메트릭 기록, 로그 메시지 저장, 데이터베이스에 쓰기 전 정보 버퍼링, 센서에서 가져온 데이터 기록 등 여러 가지가 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt="" width="563"><figcaption><p>카프카:프로듀서  요소 참조:<a href="https://dzone.com/articles/take-a-deep-dive-into-kafka-producer-api">https://dzone.com/articles/take-a-deep-dive-into-kafka-producer-api</a></p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6).png" alt="" width="563"><figcaption><p>카프카:프로듀서  요소 참조:<a href="https://dzone.com/articles/take-a-deep-dive-into-kafka-producer-api">https://dzone.com/articles/take-a-deep-dive-into-kafka-producer-api</a></p></figcaption></figure>
 
 * 카프카 메시지를 작성하려면 ProducerRecord 객체를 생성하여 카프카 브로커에 메시지를 전송해야 합니다. 메시지가 저장될 토픽(Topic)과 값(Value)은 필수 요소이며, 파티션(Partition)과 메시지 키(Key)는 선택적으로 설정할 수 있습니다.
 * 메시지는 Send 메서드를 사용하여 전송되며, 직렬화 과정을 거쳐 배열로 변환된 후 명시적으로 지정된 파티션으로 전달됩니다. 지정된 파티션이 없을 경우에는 파티셔너가 메시지를 처리합니다.
@@ -146,7 +146,7 @@ public ProducerRecord(String topic, V value)
 *   아파치 카프카 2.4 부터는 접착성 처리를 하기 위해 라운드 로빈 알고리즘을 사용 합니다. 즉 프로듀서가 메시지를 배치 할 떄 이전 배치를 먼저 채우게 하여 더 적은 요청을 같은 수의 메시지를 전송하게하여 지연시간을 줄이고 브로커의 CPU 사용량을 줄입니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>파티션에서의 접착성 차이</p></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>파티션에서의 접착성 차이</p></figcaption></figure>
 
     \
 
@@ -166,7 +166,7 @@ for (int i = 0; i < 5; i++) {
 
 * &#x20;Consumer 결과: 발송 할 때 마다 파티션이 변경됨
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **3-1-2.** Key = 있음:&#x20;
 
@@ -189,7 +189,7 @@ for (int i = 0; i < 5; i++) {
 *   &#x20;Consumer 결과: key에  의해 파티션이 고정됨\
 
 
-    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 다음은 기본적인 메시지 전달코드 입니다.
 
@@ -277,7 +277,7 @@ for (int i = 0; i < 5; i++) {
 
 * Consumer 결과: 지정된 파티션에 고정
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 3-3.  Custom **Partitioner**
 
@@ -416,7 +416,7 @@ for (int i = 0; i < 5; i++) {
 
 ## 4. Sender
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 프로듀서가 메시지를 전송하는 방식은 다음과 같습니다.&#x20;
 

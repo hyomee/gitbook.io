@@ -4,7 +4,7 @@
 
 **Stream이란** 데이터의 추상화된 흐름을 의미로 데이터를 연속적으로 처리하기 위한 수단으로 사용됩니다. 자바 1.8에서는  스트림 API를 통해 데이터를 추상화하여 다루며, 배열이나 컬렉션과 같은 다양한 데이터 소스에서 생성할 수 있습니다.
 
-<figure><img src="../../../.gitbook/assets/image (350).png" alt=""><figcaption><p>Java Stream</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (350).png" alt=""><figcaption><p>Java Stream</p></figcaption></figure>
 
 스트림을 사용하는 방법은 다음과 같은 순서로 이루어집니다:
 
@@ -44,7 +44,7 @@ Kafka Streams API는 Apache Kafka의 스트림 처리를 위한 공식 프레임
 
 Kafka Streams는 Kafka 생산자 및 소비자 라이브러리 위에 구축되어 Kafka의 핵심 기능을 활용함으로써 데이터 병렬 처리, 분산 조정, 내결함성 및 운영의 단순화를 통해 애플리케이션 개발을 간소화합니다. 아래 그림은 Kafka Streams 라이브러리를 활용하는 애플리케이션의 구조를 나타냅니다.
 
-<figure><img src="../../../.gitbook/assets/image (351).png" alt=""><figcaption><p>카프카 스트림 구조 (참고:<a href="https://kafka.apache.org/37/documentation/streams/architecture">https://kafka.apache.org/37/documentation/streams/architecture</a>)</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (351).png" alt=""><figcaption><p>카프카 스트림 구조 (참고:<a href="https://kafka.apache.org/37/documentation/streams/architecture">https://kafka.apache.org/37/documentation/streams/architecture</a>)</p></figcaption></figure>
 
 * **핵심 AP**I: Kafka Streams는 두 가지 주요 API를 제공합니다. KStream은 레코드 스트림을 나타내며, KTable은 변경 가능한 테이블을 나타냅니다.&#x20;
 * **Topology**: 스트림 처리를 위한 연산자들이 어떻게 연결되어 데이터를 처리하는지를 나타내는 논리적인 처리 그래프입니다.&#x20;

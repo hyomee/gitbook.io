@@ -10,13 +10,13 @@ description: 'Exchange Type: Direct'
 
 아래 이미지와 같은 서비스 코드를 작성 하면서 Binding에 대한 이해를 하고자 합니다.
 
-<figure><img src="../../.gitbook/assets/image (330).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (330).png" alt=""><figcaption></figcaption></figure>
 
 ## 1. Exchange&#x20;
 
 ### 1-1. Exchange 설정  방법 (관리자 UI)
 
-<figure><img src="../../.gitbook/assets/image (319).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (319).png" alt=""><figcaption></figcaption></figure>
 
 * 관리자 UI / Exchanges / Add a new exchange 버튼을 클릭 하고 이름, type 등을 선택 한 후 "Add exchange"버튼을 클릭하여 생성합니다.
 
@@ -111,7 +111,7 @@ Exchange를 만드는 동안 Name, Durable, Auto-delete 및 Exchange 유형의 3
 
 #### 1-3-1.  관리자 UI 에서 Exchange 생성 전 화면입니다.
 
-<figure><img src="../../.gitbook/assets/image (316).png" alt=""><figcaption><p>관리 Tool</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (316).png" alt=""><figcaption><p>관리 Tool</p></figcaption></figure>
 
 #### **1-3-2. Exchange 생성 코드**&#x20;
 
@@ -139,7 +139,7 @@ public class CreateExchange {
 
 #### **1-2-3. 생성 결과 확인** &#x20;
 
-<figure><img src="../../.gitbook/assets/image (318).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (318).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. Queue
 
@@ -154,7 +154,7 @@ Queue는 반드시 미리 정의되어야 하며, 이름, 내구성, 자동 삭�
 
 ### 2-1.  관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (321).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (321).png" alt=""><figcaption></figcaption></figure>
 
 Add a new queue 영역에서 큐 정보를 입력 후 생성 합니다.
 
@@ -162,7 +162,7 @@ Add a new queue 영역에서 큐 정보를 입력 후 생성 합니다.
 
 #### 2-2-1.  관리자 UI를 통한 프로그램 방식으로 이전 화면
 
-<figure><img src="../../.gitbook/assets/image (321).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (321).png" alt=""><figcaption></figcaption></figure>
 
 #### 2-2-2.  프로그램&#x20;
 
@@ -217,7 +217,7 @@ public class CreateExchange {
 
 "My-Direct-xxx"로 된 3개의 큐가 생성 된 것을 확인 할 수 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (322).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (322).png" alt=""><figcaption></figcaption></figure>
 
 ## 3. Exchange 와 Queue 바인딩
 
@@ -263,7 +263,7 @@ public interface Channel extends ShutdownNotifier, AutoCloseable {
 
 ### 3-1. 바인딩 전 관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (323).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (323).png" alt=""><figcaption></figcaption></figure>
 
 ### 3-2. 바인딩 코드 추가
 
@@ -301,7 +301,7 @@ public class CreateExchange {
 
 ### &#x20;3-3. 바인딩 코드 후 관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (324).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (324).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Publisher/Consumer
 
@@ -368,15 +368,15 @@ public class ExchangeConsumer {
 
 Consumer를 먼저 실행 하고 Publisher 를 실행하여 결과를 확인합니다.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (328).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (328).png" alt=""><figcaption></figcaption></figure>
 
 * **My-Direct-Email-Q의 관리자 UI**
 
-<figure><img src="../../.gitbook/assets/image (325).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (325).png" alt=""><figcaption></figcaption></figure>
 
 * **My-Direct-SMS-Q의 관리자 UI**
 
-<figure><img src="../../.gitbook/assets/image (326).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (326).png" alt=""><figcaption></figcaption></figure>
 
 ## 5. 전체 소스
 
@@ -552,7 +552,7 @@ public class CommonConfigs {
 
 * 실행 결과
 
-<figure><img src="../../.gitbook/assets/image (329).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (329).png" alt=""><figcaption></figcaption></figure>
 
 ## 6. Type:Direct
 
@@ -710,4 +710,4 @@ public class DiectExchange {
 
 * 결과&#x20;
 
-<figure><img src="../../.gitbook/assets/image (331).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (331).png" alt=""><figcaption></figcaption></figure>

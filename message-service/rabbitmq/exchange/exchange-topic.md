@@ -21,7 +21,7 @@
 *   **Topic  Exchange 흐름**\
 
 
-    <figure><img src="../../.gitbook/assets/image (334).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (334).png" alt=""><figcaption></figcaption></figure>
 
     * 큐는 라우팅 키 패턴을 사용하여 Exchange애 바인딩 됩니다.
     * Publisher가 메시지를 게시 할 때 라우팅 key를 포함해서 Exchange에 보냅니다.
@@ -29,22 +29,22 @@
 
 ## 1. 관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 * **Exchange 이름:** My-Topic-Exchange&#x20;
 * Binding Queue
   *   My-Topic-Email-Q: Routing Key Pattern (email.\*)로 지정\
 
 
-      <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Topic-Sms-Q: Routing Key Pattern (#.sms.\*)로 지정\
 
 
-      <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
   *   My-Topic-Sns-Q: Routing Key Pattern (#.sns)로 지정\
 
 
-      <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. Topic 소스
 
@@ -194,4 +194,4 @@ public class TopicExchange {
 - Envelope(deliveryTag=3, redeliver=false, exchange=My-Topic-Exchange, routingKey=kakao.sns)
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>

@@ -23,7 +23,7 @@ Debezium은 데이터베이스 변경사항을 캡처하기 위한 오픈 소스
     *   plugin.path=/usr/local/kafka/connectors \
 
 
-        <figure><img src="../../../.gitbook/assets/image (348).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../../../.gitbook/assets/image (348).png" alt=""><figcaption></figcaption></figure>
 * &#x20;**설치 테스트**: 다음과 같이 실행 합니다.
   *   **실행**
 
@@ -158,19 +158,19 @@ curl --location 'localhost:8083/connectors' \
   *   **Connectors** :  http://localhost:8083/connectors\
 
 
-      <figure><img src="../../../.gitbook/assets/image (348) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../../.gitbook/assets/image (348) (1).png" alt=""><figcaption></figcaption></figure>
   *   **설정정보**:  http://localhost:8083/connectors/{connector-name}/config\
       \- 예: http://localhost:8083/connectors/debezium-mysql-01/config\
 
 
-      <figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
       * **삭제**:\
         \-  curl --location --request DELETE 'http://localhost:8083/connectors/{connector-name}
 *   **topic 확인**\
     \-  sudo ./bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 
-    <figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * 그와  사용 API
   * curl -XPOST http://localhost:8083/connectors/connector\_name/restart&#x20;
   * curl -XPOST http://localhost:8083/connectors/connector\_name/tasks/n/restart&#x20;
@@ -690,7 +690,7 @@ schema-history-01
 
 </details>
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -836,9 +836,9 @@ commit;
 
 * Target DB  확인
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>수핸전</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>수핸전</p></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>수행후</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>수행후</p></figcaption></figure>
 
 ***
 

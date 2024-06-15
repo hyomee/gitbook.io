@@ -8,7 +8,7 @@ Kafka 브로커에서 메시지를,읽어와서  소비하는 역할을 하는�
 * 오프셋 관리 (Offset Management)
 * 커밋 (Commit)
 
-<figure><img src="../../.gitbook/assets/image (344).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (344).png" alt=""><figcaption></figcaption></figure>
 
 1. **데이터 가져오기(Kafka Consumer)**:
    * Consumer는 브로커에게 가져올 파티션을 지정하는 “fetch” 요청을 보냅니다.
@@ -81,7 +81,7 @@ Kafka Consumer는 확장 가능하고 내결함성 있는 데이터 처리 파�
     * 이는 ConsumerRecordFilter를 사용하여 구현할 수 있습니다.
     * Spring Kafka에서는 SeekToCurrentErrorHandler를 사용하여 오류 메시지를 건너뛸 수 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (347).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (347).png" alt=""><figcaption></figcaption></figure>
 
 ### 2-2. 초기 오프셋 전략 <a href="#undefined" id="undefined"></a>
 
@@ -230,7 +230,7 @@ for (int i = 0; i < 4; i++) {
 
 * Consumer 와 Consumer Group 관계
 
-<figure><img src="../../.gitbook/assets/image (345).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (345).png" alt=""><figcaption></figcaption></figure>
 
 ### 3-1. **subscribe( 1** Consumer - 1 Consumer Group )
 
@@ -432,11 +432,11 @@ public static String CURRENT_TOPIC = KafkaProperties.KARFA_TOPIC_PARTITION_04;
 
 * ConsumerGroupId01Main 결과
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * ConsumerGroupId23Main 결과
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Polling Loop
 

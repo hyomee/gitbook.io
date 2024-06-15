@@ -7,7 +7,7 @@ Exchanges-Queues 바인딩을 사용하듯이 Exchange 타입이 Direct인 경�
 **Exchange To Exchange 흐름**\
 
 
-<figure><img src="../../.gitbook/assets/image (340).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (340).png" alt=""><figcaption></figcaption></figure>
 
 * Publisher에서 발송한 메시지를 받는 Exchange(My-First-Exchange)에서 바인딩으로 큐를 지정(queuebind) 하듯이 Exchange를 exchangeBind를 사용하여 Exchange 바인딩(My-Second-Exchange)을 합니다.
 * Publisher에서 발송한 메시지의 라우트 키가 바인딩 키와 동일 하면 동일한 My-First-Exchange에 바인딩 된 Queue와 Exchange로 메시지를 전달합니다.
@@ -15,7 +15,7 @@ Exchanges-Queues 바인딩을 사용하듯이 Exchange 타입이 Direct인 경�
 
 ## 1. 관리자 UI
 
-<figure><img src="../../.gitbook/assets/image (341).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (341).png" alt=""><figcaption></figcaption></figure>
 
 * My-First-Exchange에 3개의 Queue와 1개의 Exchanger가 라우팅 키에 의해 바인딩 되어 있습니다.
 * My-Second-Exchange는 My-First-Exchange에서 라우팅키가 email, messaheq인 경우 메세지를 전달 받습니다.
@@ -197,7 +197,7 @@ public class ExchangeExchange {
 
 ## 3. 결과
 
-<figure><img src="../../.gitbook/assets/image (342).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (342).png" alt=""><figcaption></figcaption></figure>
 
 * email 라우팅키에 대해서 My-First-Email-Q(My-First-Exchange)와 My-Second-Email-Q(My-Second-Exchange)에서 메시지를 수신 받습니다.
 * messageq라우팅키에 대해서 My-Second-Message-Q(My-Second-Exchange)에서 메시지를 수신 받습니다.
