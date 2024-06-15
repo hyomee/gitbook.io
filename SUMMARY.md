@@ -160,4 +160,6 @@
       * [Debezium](message-service/kafka/kafka-connect/debezium.md)
     * [Kafka-Stream](message-service/kafka/kafka-stream/README.md)
       * [Basic Kafka Stram](message-service/kafka/kafka-stream/basic-kafka-stram.md)
+      * [Stateful and Stateless](message-service/kafka/kafka-stream/stateful-and-stateless.md)
+      * [Windowing](message-service/kafka/kafka-stream/windowing.md)
   * [설계(사용사례)](message-service/message-case.md)
