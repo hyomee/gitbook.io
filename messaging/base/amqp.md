@@ -8,7 +8,7 @@ AMQP(Advanced Message Queuing Protocol)는 메시지 지향 미들웨어를 위�
 
 **AMQ (**Advanced Message Queuing) **모델**은 메시지 라우팅 동작을 정의하는 메세지 브로커의 새가지 추상 컴포넌트를 다음과 같습니다.
 
-<figure><img src="../.gitbook/assets/image (310).png" alt="" width="563"><figcaption><p>AMQ Model</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (310).png" alt="" width="563"><figcaption><p>AMQ Model</p></figcaption></figure>
 
 * **익스체인지(Exchange)**: 클라이언트에서 받은 메세지를 큐로 전달하는 컴포넌트
 * **큐(Queue)**: 메시지를 저장하는 디스크상의 자료 구조
@@ -16,7 +16,7 @@ AMQP(Advanced Message Queuing Protocol)는 메시지 지향 미들웨어를 위�
 
 ## 2. **AMQP**
 
-<figure><img src="../.gitbook/assets/image (306).png" alt=""><figcaption><p>AMQP 개념</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (306).png" alt=""><figcaption><p>AMQP 개념</p></figcaption></figure>
 
 생산자/게시자(Publish/Producer)는 메시지를 만들어 브로커에보내고  브로커는  컨슈머에게 순차적으로 전달합니다. 여기서 보로커는 메세지를 하나 이상의 큐로 라우팅하는 역할을 하는 Exchange(교환기) 를 가지고 있습니다. AMQP는생산자, 메시지 브로커 및 소비자 간의 상호 운용성을 만들어&#x20;
 

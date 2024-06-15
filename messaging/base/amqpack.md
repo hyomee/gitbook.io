@@ -6,7 +6,7 @@ AMQP(Advanced Message Queuing Protocol)는 메시지 브로커 시스템에서 �
 
 카프카의 메세지 승인은 Kafka 브로커(서버)와 클라이언트(생산자 및 소비자) 간의 메시지 전달의 안정성을 보장하는 데 매우 중요합니다. Kafka에서 메시지 승인이 작동하는 방식은 다음과 같습니다.
 
-<figure><img src="../.gitbook/assets/image (297).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (297).png" alt=""><figcaption></figcaption></figure>
 
 ### 1-1. **Producer 측에서의 Acknowledgment**
 
@@ -72,7 +72,7 @@ RabbitMQ의  메시지를 성공적으로 받았음을 확인하는 메커니즘
 * 이 모델은 메시지 손실을 최소화하고, Consumer가 메시지를 안전하게 처리할 수 있도록 합니다.
 * 참고: [https://www.rabbitmq.com/docs/confirms](https://www.rabbitmq.com/docs/confirms)
 
-<figure><img src="../.gitbook/assets/image (298).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (298).png" alt=""><figcaption></figcaption></figure>
 
 **2-2-1. Consumer Acknowledgements (소비자 확인)**:
 
