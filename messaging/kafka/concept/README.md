@@ -4,9 +4,9 @@ description: >-
   소스 분산 이벤트 스트리밍 플랫폼으로 시스템과 시스템을 연결하는 역활을 합니다
 ---
 
-# Kafka
+# 개념
 
-<figure><img src="../../.gitbook/assets/image (274) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (274) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 1. 이벤트 스트리밍&#x20;
 
@@ -22,7 +22,7 @@ description: >-
 * 이벤트 스트림을 원하는 기간 동안 지속적이고 안정적으로 **저장합니다**.
 * 이벤트 스트림이 발생할 때 또는 소급하여 **처리합니다**.
 
-<figure><img src="../../.gitbook/assets/image (290).png" alt=""><figcaption><p>카프카 부 구조</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (290).png" alt=""><figcaption><p>카프카 부 구조</p></figcaption></figure>
 
 ## 3. Kafka 특징
 
@@ -57,7 +57,7 @@ At Most Once는메시지를 **최대 한 번만 전송**합니다. 보내는 쪽
 
 카프카는 Ack와 Offset Commit라는 개념을 도입하여 프로듀서가 메세지를 브로커에 보내면 브로커가 메세지를 수신 후 Ack를 프로듀서에 수신 완료했다고 응답 하고 컨슈머는 브로커로부터 메세지를 받을 때 컨슈머가 메세지를 어디까지 받았는기 관리 하기 위해 Offset을 사용하며 전달 완료를 브로커에 알리기 위해 Offset Commit를 합니다. Ack와 Offset Commit은 재전송여부를 판단할 때 사용합니다.
 
-<figure><img src="../../.gitbook/assets/image (276).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (276).png" alt=""><figcaption></figcaption></figure>
 
 **Kafka At Least Once** 방식은 다음과 같은 특징을 가집니다:
 
@@ -73,7 +73,7 @@ At Most Once는메시지를 **최대 한 번만 전송**합니다. 보내는 쪽
 * **Idempotent Producers**: 동일한 메시지를 중복해서 보내더라도 결과가 동일하게 처리되도록 하여 메시지 중복을 방지하고 정확한 전달을 보장합니다.
 * **소비자의 확인 관리**: 소비자는 메시지를 정확히 한 번만 처리하기 위해 확인(acknowledgement)을 적절히 관리합니다.
 
-<figure><img src="../../.gitbook/assets/image (277).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (277).png" alt=""><figcaption></figcaption></figure>
 
 
 

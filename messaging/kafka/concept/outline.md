@@ -4,7 +4,7 @@ description: >-
   소스 분산 이벤트 스트리밍 플랫폼
 ---
 
-# 개요
+# 모델/구조
 
 ## 1. 일반적인 메세지 모델
 
@@ -12,7 +12,7 @@ description: >-
 
 여러 Consumer가 분산 처리로 메시지를 소비하는 모델로  프로듀서에서 메세지가 큐에 담기고 컨슈머가 큐에서 메세지를 추출하는 방법으로 추출한 메세지는 컨슈머 중 하나가 처리합니다. &#x20;
 
-<figure><img src="../../.gitbook/assets/image (275).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (275).png" alt=""><figcaption></figcaption></figure>
 
 * Queue에서 메시지를 Consumer하나가 전달 받으면 다른 Consumer는 동일 메시지를 받을 수 없습니다.
 
@@ -20,7 +20,7 @@ description: >-
 
 여러 Subscriber에 동일한 메시지를 전달 하고, Topic 기반으로 전달 내용을 변경하는 모델로 다음과 같은 특징이 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 * 퍼블리셔가 발행한 메시지는 브로커의 토픽에 저장되며, 메시지가 어떻게 소비되는지는 퍼블리셔에게 중요하지 않습니다.
 * 구독자(Subscriber)는 다양한 토픽 중에서 관심 있는 것을 선택하여 메시지를 받아볼 수 있습니다. 이렇게 하면, 여러 구독자가 같은 토픽을 구독하여 같은 메시지를 받아보는 것이 가능합니다..
@@ -34,7 +34,7 @@ description: >-
 
 ## 3. Kafka 구성 요소
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
 
 * **Broker**: 데이터를 수신하고 전달하는 기능은 서버(인스턴스)마다 하나의 데몬으로 운영되며, 클러스터 구성을 통해 처리량을 증가시킬 수 있습니다. 또한, 수신된 데이터는 파일로 저장됩니다.
 * **Message**: 데이터의 최소 단위, key/value 구조, 전송 시 Partition 이용&#x20;
@@ -50,7 +50,7 @@ description: >-
 
 ## 4. Kafka 시스템 구성
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
 
 * **API**: Producer, Consumer개발을 위한 API&#x20;
 * **ZooKeeper**: 분산 처리를 위한 관리 도구로 필요하며 산 메시징의 메타 데이터 (Topic, Partition )를 관리하기 위한 기능입니다.
@@ -68,7 +68,7 @@ description: >-
   *   **클러스터 구성**\
 
 
-      <figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
       * 브로커, 프로듀서, 컨슈머, 카프카 클라이언트는 각각의 서버에서 담당
       * Zookeeper는 데이터 쓰기가 과반수 서버에 성공했을 떄 성공으로 간주하므로 홀수 노드 수가 바람직하며, Kafka와 동일 서버에 설치 여부는 시스템 요구 사항에 따라서 달라진다.
@@ -77,7 +77,7 @@ description: >-
 
 다양한 제품과 연동을 위해 제공하는 API로 Connect API와 Stream API 을 제공하고 있으며 각각 다음과 같은 역활을 합니다.
 
-<figure><img src="../../.gitbook/assets/image (274).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (274).png" alt=""><figcaption></figcaption></figure>
 
 #### 4-1-1. Kafka Producer API
 
@@ -140,7 +140,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 ### 4-1. 논리적 구조
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
 
 * **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
   * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
@@ -159,7 +159,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 ### 4-2. 물리적 구조
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
 
 카프카 클러스터는 다중 브로커로 구성이 되며 클러스터에 대한 쓰기/읽기 작업의 부하 분산을 도와주고 있으며 각 브로커의 상태는 주키퍼를 사용 합니다.
 
@@ -210,7 +210,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 카프카는 장애 대응을 위해 메인 브로커가 다운되더라도 리플리케이션되고 있는 브로커가 메인 허브로서의 역할을 수행하는데 이것을 리더와 팔로워라 합니다. 즉 각각의 토픽 파티션에는 리더(leader)로 할동하는 브로커가 하나씩 있고, 0개 이상의 팔로워(flower)를 갖는다. \
 
 
-<figure><img src="../../.gitbook/assets/image (269).png" alt=""><figcaption><p>카프카 복제(리더와 팔로워)</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (269).png" alt=""><figcaption><p>카프카 복제(리더와 팔로워)</p></figcaption></figure>
 
 #### 5-3-2. 리더 선정 방식
 

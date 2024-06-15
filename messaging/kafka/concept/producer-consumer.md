@@ -8,7 +8,7 @@ description: Apache Kafka는 반드시 한 메시지 단위로 송수신 하는 
 
 ## 1. 프로듀서 메세지 송신
 
-<figure><img src="../../.gitbook/assets/image (278).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (278).png" alt=""><figcaption></figcaption></figure>
 
 * **하나의 메세지 송신**: 기본 설정 값으로 하나의 메세지를 송신하는 방법
 * **배치 처리**: 처리량 향상을 위해 프로듀서에서 일정량의 메세지를 모아서 송신하는 방법으로 프로듀서의 메모리를 사용하며 송신 데이터는 설정한 크기(batch.size),  지정된 시간(linger.ms) 까지 축척 후 송신합니다.&#x20;
@@ -23,7 +23,7 @@ description: Apache Kafka는 반드시 한 메시지 단위로 송수신 하는 
 
 토픽과 파티션에 대해서 Current Offset 위티에서 마지막으로 취득한 메시지 부터 브로커에 요청 하여 브로커에 보관 되어 있는 최신 메시지까지 수신하므로 브로커 요청 간격이 길수록 모인 메시지가 많아 집니다.
 
-<figure><img src="../../.gitbook/assets/image (279).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (279).png" alt=""><figcaption></figcaption></figure>
 
 <mark style="color:purple;">모아서 받는 경우 프로듀서 송신과 컨슈머 수신의 지연 시간이 발생 할 수 있으므로 처리령과 대기 시간의 트레이드 오프를 고려한 설계를 해야 합니다.</mark>
 
@@ -33,17 +33,17 @@ Offset Commit의 구조를 이용해 컨슈머 처리 실패, 고장 시 롤백 
 
 * Commit Offset update 직전 고장의 경우: 중복 메시지가 수신 될 수 있으므로 고려 해야 함 (At Least Once)
 
-<figure><img src="../../.gitbook/assets/image (280).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (280).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (281).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (281).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (282).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (282).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (283).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (283).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (284).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (284).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (285).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (285).png" alt=""><figcaption></figcaption></figure>
 
 ## 3.  프로듀서 파티서닝
 
@@ -52,11 +52,11 @@ Offset Commit의 구조를 이용해 컨슈머 처리 실패, 고장 시 롤백 
 *   **Key 해시 값을 사용한 송신**: 메시지 key를 명시적으로 지정 함으로 Key에 따라서 파티션을 결정 하는 로직으로 **동일한** <mark style="color:orange;">Key를 가진 메시지는 동일한 ID를 가진 파티션에 송신</mark> 됩니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   **라운드 로빈에 의한 송신**: 메시지 Key를 지정 하지 않고 null로 하면 여러 파티션에 라운드 로빈 방식으로 송신 됩니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     1. DefaultPartitioner Class이용해서 구현합니다.
     2. Producer API에서 제공 하는 Partitioner 인터페이스를 구현함으로써 Key,Value 값에 따라서 송신 로직을 커스텀으로 구현합니다.
@@ -97,7 +97,7 @@ Offset Commit의 구조를 이용해 컨슈머 처리 실패, 고장 시 롤백 
 
 Loader는 Producer와 Consumer와의 데이터 교환 역할을 담당 하고 Follower는 Leader로 부터 메시지를 받아서 복제를 유지 하는 기능을 담당합니다.
 
-<figure><img src="../../.gitbook/assets/image (286).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (286).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 **매시지 순서 보장**
@@ -121,15 +121,15 @@ Loader는 Producer와 Consumer와의 데이터 교환 역할을 담당 하고 Fo
 * Log End Offset과 동일하거나 오래된 Offset를 나타냄&#x20;
 * 컨슈머는 High Watermark까지 기록된 메시지를 수신 할 수 있음
 
-<figure><img src="../../.gitbook/assets/image (289).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (289).png" alt=""><figcaption></figcaption></figure>
 
 ## 6. In-Sync Replica와 Ack 관계
 
 *   min.insync.replicas = 3, Ack = all , Replica = 3
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   min.insync.replicas = 2, Ack = all , Replica = 3\
 
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
