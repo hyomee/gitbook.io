@@ -148,6 +148,7 @@
     * [Exchange-Header](message-service/rabbitmq/exchange-header.md)
     * [Exchange-Exchange](message-service/rabbitmq/exchange-exchange.md)
     * [정의된 Key 이외정보 라우팅](message-service/rabbitmq/key.md)
+    * [Streams](message-service/rabbitmq/streams.md)
     * [Spring Boot RabbitMQ](message-service/rabbitmq/spring-rabbitmq.md)
   * [Kafka](message-service/kafka/README.md)
     * [개요](message-service/kafka/outline.md)
@@ -162,4 +163,5 @@
       * [Basic Kafka Stram](message-service/kafka/kafka-stream/basic-kafka-stram.md)
       * [Stateful and Stateless](message-service/kafka/kafka-stream/stateful-and-stateless.md)
       * [Windowing](message-service/kafka/kafka-stream/windowing.md)
+    * [Spring Boot](message-service/kafka/spring-boot.md)
   * [설계(사용사례)](message-service/message-case.md)
