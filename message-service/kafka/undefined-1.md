@@ -52,7 +52,7 @@ Offset Commit의 구조를 이용해 컨슈머 처리 실패, 고장 시 롤백 
 *   **Key 해시 값을 사용한 송신**: 메시지 key를 명시적으로 지정 함으로 Key에 따라서 파티션을 결정 하는 로직으로 **동일한** <mark style="color:orange;">Key를 가진 메시지는 동일한 ID를 가진 파티션에 송신</mark> 됩니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   **라운드 로빈에 의한 송신**: 메시지 Key를 지정 하지 않고 null로 하면 여러 파티션에 라운드 로빈 방식으로 송신 됩니다.\
 
 

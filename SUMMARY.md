@@ -158,5 +158,6 @@
       * [Parallel Consumer](message-service/kafka/kafka-consumer/parallel-consumer.md)
     * [Kafka-Connect](message-service/kafka/kafka-connect.md)
       * [Debezium](message-service/kafka/kafka-connect/debezium.md)
-    * [Kafka-Stream](message-service/kafka/kafka-stream.md)
+    * [Kafka-Stream](message-service/kafka/kafka-stream/README.md)
+      * [Basic Kafka Stram](message-service/kafka/kafka-stream/basic-kafka-stram.md)
   * [설계(사용사례)](message-service/message-case.md)
