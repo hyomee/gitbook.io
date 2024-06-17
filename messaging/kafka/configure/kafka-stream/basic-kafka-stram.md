@@ -37,7 +37,7 @@ $ bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 
 프로듀서에서 발행된 메시지를 Topic(source-topic)에서 받아서 Topic(target-topic)으로 전달하는 기본적인 응용프로그램 입니다.
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Topic To Topic</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Topic To Topic</p></figcaption></figure>
 
 #### 3-1-1. Topic 생성: source-topic, target-topic
 
