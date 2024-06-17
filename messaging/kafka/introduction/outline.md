@@ -50,7 +50,7 @@ description: >-
 
 ## 4. Kafka 시스템 구성
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
 
 * **API**: Producer, Consumer개발을 위한 API&#x20;
 * **ZooKeeper**: 분산 처리를 위한 관리 도구로 필요하며 산 메시징의 메타 데이터 (Topic, Partition )를 관리하기 위한 기능입니다.

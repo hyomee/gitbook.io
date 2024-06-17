@@ -52,7 +52,7 @@
 *   **메세지(Data P**acket**)**: 네트워크 통신에서 데이터 전송의 기본 단위는 패킷이며, 이는 데이터를 작은 조각으로 나누어 이동시킵니다. 패킷은 제어 정보와 사용자 데이터, 즉 페이로드로 구성됩니다. 보통 패킷은 헤더, 데이터, 트레일러로 구성되어 있습니다.\
 
 
-    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <details>
 
@@ -108,7 +108,7 @@
    *   이러한 상태 없는(stateless) 메시지 교환은 확장성 있는 메시징 시스템에서 효과적으로 사용됩니다. 즉, 메시지를 보낸 후 추가적인 처리나 응답을 기다리지 않고 다음 작업을 수행하는 방식입니다.\
 
 
-       <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 2. **Request/reply Model:**
    * **요청(Request)**: 메시지를 발신하는 측이 메시지를 보내고, 응답을 기다립니다.
    * **응답(Reply)**: 메시지를 수신하는 측은 요청을 처리하고, 응답 메시지를 발신자에게 보냅니다.
