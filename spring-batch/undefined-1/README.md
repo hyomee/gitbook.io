@@ -7,7 +7,7 @@ Spring Batch는 순착적으로 실행된다. 즉 기본이 단일 스레드에�
   * 사용하는 Reader/Writer이 스레드에 안전(thread-safe)해야 한다.
   * 만약스레드에 안전하지 않으며 [SynchronizedItemStreamReader](https://docs.spring.io/spring-batch/docs/current/api/org/springframework/batch/item/support/SynchronizedItemStreamReader.html)을 이용해 **thread-safe**로 변환해서 사용해야 한다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ## 1. 사용 가능한 TaskExecutor
 

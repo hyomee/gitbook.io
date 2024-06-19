@@ -170,7 +170,7 @@ curl --location 'localhost:8083/connectors' \
 *   **topic 확인**\
     \-  sudo ./bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 
-    <figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * 그와  사용 API
   * curl -XPOST http://localhost:8083/connectors/connector\_name/restart&#x20;
   * curl -XPOST http://localhost:8083/connectors/connector\_name/tasks/n/restart&#x20;
@@ -836,7 +836,7 @@ commit;
 
 * Target DB  확인
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>수핸전</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>수핸전</p></figcaption></figure>
 
 <figure><img src="../../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>수행후</p></figcaption></figure>
 
