@@ -194,4 +194,4 @@ public class TopicExchange {
 - Envelope(deliveryTag=3, redeliver=false, exchange=My-Topic-Exchange, routingKey=kakao.sns)
 ```
 
-<figure><img src="../../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>

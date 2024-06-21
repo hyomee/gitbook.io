@@ -57,7 +57,7 @@ TCP/IP를 알아보기 전에 간략하게  OSI 7계층에 대해서 먼저 알�
 
 #### 2-2-2. IP Header
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **버전 (Version)**: IPv4인지 IPv6인지를 나타냅니다.
 * **헤더 길이 (Header Length)**: IP 헤더의 크기를 나타냅니다. 해더가 가변적이고 IP Option에 따라 길이가 달라집니다.
@@ -87,7 +87,7 @@ TCP/IP를 알아보기 전에 간략하게  OSI 7계층에 대해서 먼저 알�
 
 ### 2-4. TCP/IP life Cycle
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

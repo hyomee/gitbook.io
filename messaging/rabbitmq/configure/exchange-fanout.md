@@ -22,7 +22,7 @@
       <figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
   *   My-Fanout-Sns-Q: Routing Key 지정 하지 않음
 
-      <figure><img src="../../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../.gitbook/assets/image (4) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. 소스 코드
 

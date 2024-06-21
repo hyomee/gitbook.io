@@ -34,7 +34,7 @@ description: >-
 
 ## 3. Kafka 구성 요소
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 개념도</p></figcaption></figure>
 
 * **Broker**: 데이터를 수신하고 전달하는 기능은 서버(인스턴스)마다 하나의 데몬으로 운영되며, 클러스터 구성을 통해 처리량을 증가시킬 수 있습니다. 또한, 수신된 데이터는 파일로 저장됩니다.
 * **Message**: 데이터의 최소 단위, key/value 구조, 전송 시 Partition 이용&#x20;
@@ -50,7 +50,7 @@ description: >-
 
 ## 4. Kafka 시스템 구성
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Kafka 구성</p></figcaption></figure>
 
 * **API**: Producer, Consumer개발을 위한 API&#x20;
 * **ZooKeeper**: 분산 처리를 위한 관리 도구로 필요하며 산 메시징의 메타 데이터 (Topic, Partition )를 관리하기 위한 기능입니다.
@@ -140,7 +140,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 ### 4-1. 논리적 구조
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 분산 메세지 구조</p></figcaption></figure>
 
 * **Topic**: 카프카 클러스터에서 여러개 만들 수 있으며 하나의 토픽은 n개 이상의 파티션(Partition)으로 구성되어 있습니다다.
   * 물리적으로 각 토픽은 각각의 토픽에 대해 하나 이상의 파티션을 소유하는 다른 카프카 브로커에게 전달합니다.
@@ -159,7 +159,7 @@ Kafka 클러스터를 관리하고 관리하는 데 사용되는 Kafka API로 �
 
 ### 4-2. 물리적 구조
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>카프카 물리적 구조</p></figcaption></figure>
 
 카프카 클러스터는 다중 브로커로 구성이 되며 클러스터에 대한 쓰기/읽기 작업의 부하 분산을 도와주고 있으며 각 브로커의 상태는 주키퍼를 사용 합니다.
 

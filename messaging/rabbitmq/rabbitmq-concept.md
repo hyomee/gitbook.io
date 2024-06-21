@@ -67,7 +67,7 @@ RabbitMQ는 AMQP(Advanced Message Queuing Protocol)를 구현한 오픈소스 �
 
 ## 3. RabbitMQ의 주요 개념
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Producer**: 메시지를 보내는 주체로, 보내고자 하는 메시지를 Exchange에 publish합니다.
 * **Consumer**: Producer로부터 메시지를 받아 처리하는 주체입니다.
@@ -128,7 +128,7 @@ RPC (원격 프로시저 호출)는 프로세스 간 통신을 위한 방법 중
 
 Exchange와 Queue를 연결하는 관계로 Exchange 타입과 binding 규칙에 따라 적절한 Queue로 전달됩니다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * API 참고: [https://www.rabbitmq.com/client-libraries/java-client](https://www.rabbitmq.com/client-libraries/java-client)
 

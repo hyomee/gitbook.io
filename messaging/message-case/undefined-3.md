@@ -45,7 +45,7 @@
 
 사용자 수집은 일반적으로 사용자 정보 수집은 회원 가입, 마겟팅 동의, 구독 신청 등을 통해서 기본 정보를 받는 과정으로 다음과 같은 경로로 받아 DB에 저장 합니다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>사용자 수집</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>사용자 수집</p></figcaption></figure>
 
 * 회원 가입시 마켓팅 동의한 회원 정보
 * 웹 사이트에서 정보 수신을 위한 이메일 또는 SMS 정보를 등록한 사용자
@@ -55,7 +55,7 @@
 
 알림 지원 유형에 따라서 필요한 알림 처리를 하는 자원은 다음과 같습니다.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 * 이메일: 이메일 서비스&#x20;
 * SMS: SMS 서비스&#x20;
@@ -73,7 +73,7 @@
 
 연동 시스템은 크게  일반적으로 다음 포인트에서 오류가 발생하며 그에 대한 재처리 방안입니다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>일반적인 재처리</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>일반적인 재처리</p></figcaption></figure>
 
 * 서비스 서버 오류: 서비스 서버 오류는 다양한 유형이 있지만, 대부분의 경우 서버에서 오류가 발생하면 즉시 재처리하지 않고 배치 또는 데몬을 통해 재처리합니다..
 * 서비스 제공자 관련 오류: 서비스 제공자에 위한 오류는 일반적으로 다음과 같은 오류가 발생합니다.

@@ -2,13 +2,13 @@
 
 **동시성(Concurrency)**은 하나의 쓰레드에서 여러 Task를 관리하므로 동시에 처리하는 것처림 보이게 하는 것이다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **멀티태스팅(Multitasking**)은 하나의 시스템이 여러 작업을 동시에 처리하는 것처럼 동작하는 하는 것으로 동시성과 개념이 비슷하지만 멀티태스팅은 주로 운영 체계에서 제공된다.&#x20;
 
 **병렬성(Parallelism)**은 여러 작업을 실제로 동시에 처리하는 것이다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <table><thead><tr><th width="145">구분</th><th>동시성</th><th>병렬성</th></tr></thead><tbody><tr><td>개념</td><td>동시에 처리하는 것처럼 보이게 하는 것</td><td>여러 작업을 실제로 동시에 처리하는 것</td></tr><tr><td>사용 코어 수</td><td>싱글 코어</td><td>멀티 코어</td></tr><tr><td>동작 방식</td><td>싱글 코어에서 멀티 쓰레드(Multi thread)를 동작 시키는 방식</td><td>멀티 코어에서 멀티 쓰레드(Multi thread)를 동작시키는 방식</td></tr><tr><td>개념적 차이</td><td>논리적인 개념</td><td>물리적인 개념</td></tr></tbody></table>
 
@@ -198,7 +198,7 @@ public class FutureCommandLineRunner implements CommandLineRunner {
 * 19 Line: 비동기 작업 결과 값을 출력 한다.
 * 20 Line: 비동기 작업을 종료 한다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>실행 결과</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>실행 결과</p></figcaption></figure>
 
 Java 8에 도입된 _CompletableFuture_ 클래스를 사용하면 _Runnable_을 비동기적으로 실행하여 값을 반환하지 않는 작업과 값을 반환하는 _Supplier_ 작업을 수행할 수 있다. _Supplier_ 는 _get ()_ 이라는 인수가없는 단일 메소드를 포함하고 _Callable_ 과 같은 결과를 반환하는 기능적 인터페이스이다.
 
