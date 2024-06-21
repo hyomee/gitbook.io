@@ -62,7 +62,7 @@
 
 이 프로그램은 농장에서 재배되는 작물을 등록하고, 해당 작물의 재배에 사용되는 장비와 연동하여 재배 작물의 데이터셋을 구축하는 데 사용됩니다. 다음은 작물 관리 프로그램 목록입니다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 <table><thead><tr><th width="150">프로그램</th><th width="92" align="center">구분</th><th>기능</th></tr></thead><tbody><tr><td>작물목록화면</td><td align="center">화면</td><td>작물의 이름, 수확시기등을 조건으로 조회하여 화면에 표시합니다.</td></tr><tr><td>작물상세화면</td><td align="center">화면</td><td>작물목록 화면에서 선택한 작물에 대한 상세정보를 조회하여 팝업화면에 표시합니다.</td></tr><tr><td>작물등록화면</td><td align="center">화면</td><td><p>작물을 등록하는 화면에는 다음과 같은 항목들이 포함됩니다:</p><ul><li>작물이름</li><li>모종시기, 수확시기 등</li><li>설명</li></ul></td></tr><tr><td>작물수정화면</td><td align="center">화면</td><td><p>작물을 수정하는 화면에는 다음과 같은 항목들이 포함됩니다:</p><ul><li>작물이름</li><li>모종시기, 수확시기 등</li><li>설명</li></ul></td></tr><tr><td>작물삭제</td><td align="center">화면</td><td>작물을 삭제하는 기능 입니다.</td></tr><tr><td>작물목록조회</td><td align="center">RestAPI</td><td>작물 화면에서 조회 조건을 받아 데이터베이스에 조회 요청을 하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>작물상세조회</td><td align="center">RestAPI</td><td>작물코드를 검색 조건으로 사용하여 데이터베이스에서 정보를 조회하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>작물등록</td><td align="center">RestAPI</td><td><p>작물 데이터를 생성합니다. 입력 항목은 다음과 같습니다.</p><ul><li>작물이름</li><li>모종시기, 수확시기 등</li><li>설명</li></ul></td></tr><tr><td>작물수정</td><td align="center">RestAPI</td><td><p>작물 데이터를  수정합니다. 입력 항목은 다음과 같습니다.</p><ul><li>작물이름</li><li>모종시기, 수확시기 등</li><li>설명</li></ul></td></tr><tr><td>작물삭제</td><td align="center">RestAPI</td><td>작물 코드를 입력받아 동일한 데이터가 삭제됩니다.</td></tr></tbody></table>
 
