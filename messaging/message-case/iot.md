@@ -1,6 +1,6 @@
 # IoT
 
-그림사물인터넷(IoT)은 다양한 기기와 센서를 인터넷에 연결해 데이터를 수집 및 분석하는 기술입니다. IoT 플랫폼을 설계할 때 고려해야 할 주요 사항은 다음과 같습니다.
+추가장비메타장비장비에그림사물인터넷(IoT)은 다양한 기기와 센서를 인터넷에 연결해 데이터를 수집 및 분석하는 기술입니다. IoT 플랫폼을 설계할 때 고려해야 할 주요 사항은 다음과 같습니다.
 
 1. **디바이스 연결 및 관리**: 다양한 IoT 기기와 센서를 효율적으로 연결하고 관리할 수 있는 시스템을 구축해야 합니다.
 2. **데이터 수집 및 처리**: 센서에서 수집된 데이터를 저장하고 분석할 수 있는 능력이 필요합니다. 이는 클라우드 기반 서비스를 통해 이루어질 수 있습니다.
@@ -38,21 +38,29 @@
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>그림: 메타관리프로그램</p></figcaption></figure>
 
-<table><thead><tr><th width="150">프로그램</th><th width="92" align="center">구분</th><th>기능</th></tr></thead><tbody><tr><td>메타목록화면</td><td align="center">화면</td><td>메타(속성)의 이름, 분류, 코드를 조회 조건으로 사용하여 메타(속성)을 검색하고, 결과를 페이지 단위로 화면에 표시합니다.</td></tr><tr><td>메타상세화면</td><td align="center">화면</td><td>메타 목록 화면에서 선택한 메타(속성)에 대한 상세정보를 조호하여 팝업화면에 표시합니다.</td></tr><tr><td>메타등록화면</td><td align="center">화면</td><td><p>메타(속성)을 등록하는 화면에는 다음과 같은 항목들이 포함됩니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>메타수정화면</td><td align="center">화면</td><td>메타(속성)을 수정하는 화면 입니다.</td></tr><tr><td>메타삭제</td><td align="center">화면</td><td>메타(속성)을 삭제하는 기능 입니다.</td></tr><tr><td>메타목록조회</td><td align="center">RestAPI</td><td>이 서비스는 메타목록 화면에서 조회 조건을 받아 데이터베이스에 조회 요청을 하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>메타상세조회</td><td align="center">RestAPI</td><td>메터(속성)코드를 검색 조건으로 사용하여 데이터베이스에서 정보를 조회하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>메타등록</td><td align="center">RestAPI</td><td><p>메타(속성)을 기반으로 데이터를 생성합니다. 입력 항목은 다음과 같습니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>메타수정</td><td align="center">RestAPI</td><td><p>메타(속성)을 기반으로 데이터를  수정합니다. 입력 항목은 다음과 같습니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>메타삭제</td><td align="center">RestAPI</td><td>메타(속성) 코드를 입력하면 동일한 데이터가 삭제됩니다.</td></tr></tbody></table>
+<table><thead><tr><th width="150">프로그램</th><th width="92" align="center">구분</th><th>기능</th></tr></thead><tbody><tr><td>메타목록화면</td><td align="center">화면</td><td>메타(속성)의 이름, 분류, 코드를 조회 조건으로 사용하여 메타(속성)을 검색하고, 결과를 페이지 단위로 화면에 표시합니다.</td></tr><tr><td>메타상세화면</td><td align="center">화면</td><td>메타 목록 화면에서 선택한 메타(속성)에 대한 상세정보를 조회하여 팝업화면에 표시합니다.</td></tr><tr><td>메타등록화면</td><td align="center">화면</td><td><p>메타(속성)을 등록하는 화면에는 다음과 같은 항목들이 포함됩니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>메타수정화면</td><td align="center">화면</td><td>메타(속성)을 수정하는 화면 입니다.</td></tr><tr><td>메타삭제</td><td align="center">화면</td><td>메타(속성)을 삭제하는 기능 입니다.</td></tr><tr><td>메타목록조회</td><td align="center">RestAPI</td><td>이 서비스는 메타목록 화면에서 조회 조건을 받아 데이터베이스에 조회 요청을 하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>메타상세조회</td><td align="center">RestAPI</td><td>메터(속성)코드를 검색 조건으로 사용하여 데이터베이스에서 정보를 조회하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>메타등록</td><td align="center">RestAPI</td><td><p>메타(속성)을 기반으로 데이터를 생성합니다. 입력 항목은 다음과 같습니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>메타수정</td><td align="center">RestAPI</td><td><p>메타(속성)을 기반으로 데이터를  수정합니다. 입력 항목은 다음과 같습니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>메타삭제</td><td align="center">RestAPI</td><td>메타(속성) 코드를 입력받아 동일한 데이터가 삭제됩니다.</td></tr></tbody></table>
 
 
 
 **1-1-1-2.** 장비관리프로그램
 
-팜에서 사용되는 모든 장비를 등록하는 프로그램으로 제조사, 모델코드, 모델명, 사진이미지,  장비 스펙을 가지고 있으며 시설환경에 관한 장비와 구동기 제어로 분류 되어 각각의 장비는 매타(속성)과 매핑이 됩니다.  예를 들면 앵액기는 전원 ON/OFF, 밸브 ON/FF, 양액공급량, 공급횟수등의 속성과 매핑됩니다.&#x20;
+팜에서 사용되는 모든 장비를 등록하는 프로그램은 제조사, 모델 코드, 모델명, 사진 이미지, 장비 스펙을 포함하여 관리하며, 시설 환경과 관련된 장비 및 구동기 제어를 분류하여 관리합니다. 다음은 장비 관리 프로그램의 목록입니다.
 
-<figure><img src="../../.gitbook/assets/image (354).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
 
-<table><thead><tr><th width="150">프로그램</th><th width="92" align="center">구분</th><th>기능</th></tr></thead><tbody><tr><td>장비목록화면</td><td align="center">화면</td><td>장비의 이름,제조사, 모델, 모델명, 스펙 정보를 입력 받아 </td></tr><tr><td>장비상세화면</td><td align="center">화면</td><td>메타 목록 화면에서 선택한 메타(속성)에 대한 상세정보를 조호하여 팝업화면에 표시합니다.</td></tr><tr><td>장비등록화면</td><td align="center">화면</td><td><p>메타(속성)을 등록하는 화면에는 다음과 같은 항목들이 포함됩니다:</p><ul><li>장비 모델 , 모델명</li><li>제조사</li><li>ㅈ (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>장비수정화면</td><td align="center">화면</td><td>메타(속성)을 수정하는 화면 입니다.</td></tr><tr><td>장비삭제</td><td align="center">화면</td><td>메타(속성)을 삭제하는 기능 입니다.</td></tr><tr><td>장비목록조회</td><td align="center">RestAPI</td><td>이 서비스는 메타목록 화면에서 조회 조건을 받아 데이터베이스에 조회 요청을 하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>장비상세조회</td><td align="center">RestAPI</td><td>메터(속성)코드를 검색 조건으로 사용하여 데이터베이스에서 정보를 조회하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>장비등록</td><td align="center">RestAPI</td><td><p>메타(속성)을 기반으로 데이터를 생성합니다. 입력 항목은 다음과 같습니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>장비수정</td><td align="center">RestAPI</td><td><p>메타(속성)을 기반으로 데이터를  수정합니다. 입력 항목은 다음과 같습니다:</p><ul><li>메타(속성) 코드</li><li>메타(속성) 코드명</li><li>메타(속성) 한글명</li><li>메타(속성) 분류 (예: 환경, 제어장비, 토양 등)</li><li>설명</li></ul></td></tr><tr><td>장비삭제</td><td align="center">RestAPI</td><td>메타(속성) 코드를 입력하면 동일한 데이터가 삭제됩니다.</td></tr></tbody></table>
+<table><thead><tr><th width="150">프로그램</th><th width="92" align="center">구분</th><th>기능</th></tr></thead><tbody><tr><td>장비목록화면</td><td align="center">화면</td><td>장비의 이름,제조사, 모델, 모델명등을 조건으로 조회하여 화면에 표시합니다.</td></tr><tr><td>장비상세화면</td><td align="center">화면</td><td>장비 화면에서 선택한 장비에 대한 상세정보를 조회하여 팝업화면에 표시합니다.</td></tr><tr><td>장비등록화면</td><td align="center">화면</td><td><p>장비을 등록하는 화면에는 다음과 같은 항목들이 포함됩니다:</p><ul><li>장비 모델 , 모델명, 제조사</li><li>장비 스펙 ( 재원 사양)</li><li>장비 구분 ( 센싱, 제어, 센싱 &#x26; 제어 )</li><li>설명</li></ul></td></tr><tr><td>장비수정화면</td><td align="center">화면</td><td>장비)을 수정하는 화면 입니다.</td></tr><tr><td>장비삭제</td><td align="center">화면</td><td>장비을 삭제하는 기능 입니다.</td></tr><tr><td>장비목록조회</td><td align="center">RestAPI</td><td>장비 화면에서 조회 조건을 받아 데이터베이스에 조회 요청을 하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>장비상세조회</td><td align="center">RestAPI</td><td>장비코드를 검색 조건으로 사용하여 데이터베이스에서 정보를 조회하고 결과를 반환하는 서비스입니다.</td></tr><tr><td>장비등록</td><td align="center">RestAPI</td><td><p>장비 속성 데이터를 생성합니다. 입력 항목은 다음과 같습니다.</p><ul><li>장비 모델 , 모델명, 제조사</li><li>장비 스펙 ( 재원 사양)</li><li>장비 구분 ( 센싱, 제어, 센싱 &#x26; 제어 )</li><li>설명</li></ul></td></tr><tr><td>장비수정</td><td align="center">RestAPI</td><td><p>장비 속성 데이터를  수정합니다. 입력 항목은 다음과 같습니다:</p><ul><li>장비 모델 , 모델명, 제조사</li><li>장비 스펙 ( 재원 사양)</li><li>장비 구분 ( 센싱, 제어, 센싱 &#x26; 제어 )</li><li>설명</li></ul></td></tr><tr><td>장비삭제</td><td align="center">RestAPI</td><td>장비 코드를 입력받아 동일한 데이터가 삭제됩니다.</td></tr></tbody></table>
+
+**1-1-1-3.** 장비 메타 데이터 연결 프로그램&#x20;
+
+이 프로그램은 장비에서 사용되는 센싱 정보와 제어 정보를 메타(속성) 데이터와 연결합니다. 예를 들어, 액비기는 전원 ON/OFF, 밸브 ON/OFF, 양액 공급 횟수, 양액 공급량(cc) 등의 메타 속성을 가집니다. 장비 메타 데이터 연결 프로그램은 장비 목록 화면에서 장비를 선택하고 '메타(속성) 매핑' 버튼을 클릭할 때 시작되며, 이후 장비 속성 목록 화면이 열립니다. 다음은 장비 메타 데이터 연결 프로그램의 목록입니다.
+
+<figure><img src="../../.gitbook/assets/image (358).png" alt=""><figcaption></figcaption></figure>
+
+<table><thead><tr><th width="150">프로그램</th><th width="92" align="center">구분</th><th>기능</th></tr></thead><tbody><tr><td>장비 메타(속성) 목록 화면</td><td align="center">화면</td><td> 장비에 연결되어 있는 장비 메타(속성) 목록을 조회하여 화면에 표시합니다.</td></tr><tr><td> 장비 메타(속성)  추가</td><td align="center">화면<br>기능</td><td>메타(속성) 목록 화면을 팝업으로 오픈하고 오픈된 화면에서 속성을 선택하면 장바 메타 목록 화면에 추가 됩니다.<br>- 전원 ON/OFF, 밸브 ON/OFF, 양액 공급 횟수, 양액 공급량(cc) 등 선택<br>- 선택된 메타 정보는 저장 버튼 클릭시 저장 처리 됩니다.</td></tr><tr><td>장비 메타(속성)  삭제 체크</td><td align="center">화면<br>기능</td><td>장비 메타(속성) 목록 화면에서 삭제 체크를 합니다.<br>- 선택된 메타 정보는 저장 버튼 클릭시 삭제 처리 됩니다.</td></tr><tr><td>장비 메타(속성) 저장</td><td align="center">화면</td><td> 추가 및 삭제 선택된 장비 메타(속성)을 저장 또는 삭제 처리를 합니다.</td></tr></tbody></table>
 
 **1-1-1-2.** 작물관리프로그램
 
-**1-1-1-3.** 장비관리프로그램&#x20;
+
 
 **1-1-1-4. 지역관리 프로그램**
 
