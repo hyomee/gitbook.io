@@ -171,6 +171,7 @@
     * [Spring Boot](messaging/kafka/spring-boot.md)
   * [설계(사용사례)](messaging/message-case/README.md)
     * [IoT](messaging/message-case/iot.md)
+    * [Copy of IoT](messaging/message-case/copy-of-iot.md)
     * [데이터허브](messaging/message-case/undefined.md)
     * [로그수집](messaging/message-case/undefined-1.md)
     * [이벤트소싱](messaging/message-case/undefined-2.md)
