@@ -28,3 +28,4 @@
     * [쉽고 빠르게 익히는 실전 LLM](book/2024/llm.md)
     * [챗 GPT API를 활용한 챗봇 만들기](book/2024/creategpt.md)
     * [겐트 벡의 Tidy First](book/2024/tidy-first.md)
+    * [부트캠프 QA편](book/2024/qa.md)
