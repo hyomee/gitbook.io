@@ -53,6 +53,7 @@
     * [Open Session In View](spring-data/spring-data-jpa/open-session-in-view.md)
     * [Pageable](spring-data/spring-data-jpa/pageable.md)
   * [Spring Data Elasticsearch](spring-data/spring-data-elasticsearch.md)
+  * [Spring Cache](spring-data/spring-cache.md)
   * [Spring Data Redis](spring-data/spring-data-redis/README.md)
     * [Redis CacheManager](spring-data/spring-data-redis/redis-cachemanager.md)
     * [Redis Repository](spring-data/spring-data-redis/redis-repository.md)
