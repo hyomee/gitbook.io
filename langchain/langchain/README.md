@@ -1,803 +1,158 @@
-# Langchain
+---
+description: 자연어처리를 위한 파이선 라이브러리
+---
 
-LangChain은 LLM 기반 에이전트와 애플리케이션 구축을 시작하는 가장 쉬운 방법으로 10줄 미만의 코드로 OpenAI, Anthropic, Google 등에 연결할 수 있다.
+# LangChain
 
-* 철학: [https://docs.langchain.com/oss/python/langchain/philosophy](https://docs.langchain.com/oss/python/langchain/philosophy)
-* Release Notes: [https://docs.langchain.com/oss/python/releases/langchain-v1](https://docs.langchain.com/oss/python/releases/langchain-v1)
-* Migration Guide: [https://docs.langchain.com/oss/python/migrate/langchain-v1](https://docs.langchain.com/oss/python/migrate/langchain-v1)
+자연어처리를 위한 파이선 라이브러리로 대화형 AI 시스템을 구축하는데 유용한 도구로 다음과 같은 특징이 있습니다.
 
-## 1. 주요기능
+## 1. 특징
 
-* **다양한 LLM 통합:** OpenAI의 GPT, Anthropic의 Claude, Google의 PaLM 등 여러 LLM과 원활하게 연동할 수 있는 인터페이스를 제공한다.
-* **외부 데이터 소스 연결:** 데이터베이스, API, 파일 시스템 등 다양한 데이터 소스에서 실시간으로 데이터를 가져와 모델의 응답에 활용할 수 있게 한다.
-* **체인(Chains):** 여러 AI 구성 요소를 순차적으로 연결해 복잡한 비즈니스 로직을 처리하는 워크플로를 자동화한다.
-* **에이전트(Agents):** 사용자 요청에 따라 필요한 도구를 스스로 결정하고 실행하는 기능을 제공합니다. 이를 통해 언어 모델이 인터넷 검색과 같은 외부 환경과 상호작용하며 최신 정보를 기반으로 답변을 생성할 수 있다.
-* **메모리(Memory):** 대화형 애플리케이션에서 이전 상호작용의 정보를 기억하고 활용하여 연속적인 대화를 가능하게 한다.
-* **검색 증강 생성(RAG):** 외부 데이터를 활용해 LLM의 응답을 보강하는 기술로, 모델의 '환각(hallucination)' 문제를 줄이고 더 정확한 답변을 생성하도록 돕는다.
-* **LangGraph:** LangChain의 확장 기능으로, 그래프 기반의 구조를 사용해 복잡한 조건부 로직과 다중 에이전트 협업을 구현할 수 있다.
+**1. 모듈식 구조**
 
-## 2. 구성요소
+* LangChain은 LLM 애플리케이션 개발에 필요한 여러 컴포넌트를 모듈화하여 제공하여 모듈등을 체인 형태로 조합되어 복잡한 작업을 수행할 수 있습니다
+* 주요 모듈로는 모델 I/O, 프롬프트 관리, 데이터 연결, 체인, 에이전트, 메모리 등이 있습니다
 
-### 2-1. Models
+**2. 다양한 데이터 소스 통합**
 
-LLM(대규모 언어 모델)이나 Embedding 모델을 추상화한 객체로. LangChain에서 모델과 상호작용하는 주요 방식은 **invoke**(단일 호출), **stream**(실시간 스트리밍), **batch**(배치 처리)가 있다
+* LangChain은 데이터베이스, 파일 시스템, API 등 다양한 외부 데이터 소스와 통합을 지원하여 실시간 데이터와 상호작용하는 애플리케이션을 개발할 수 있습니다
+* 검색 증강 생성(RAG)을 활용하여 문서 기반의 검색 및 생성 작업을 수행할 수 있습니다
 
-```python
-from langchain_openai import ChatOpenAI
+**3. 프롬프트 관리 및 커스터마이징**
 
-# 모델 초기화
-model = ChatOpenAI(
-    model="gpt-4o",
-    temperature=0.7,
-    max_tokens=1000,
-    timeout=30
-)
+* 프롬프트 템플릿을 통해 다양한 프롬프트를 효율적으로 관리하고, 이를 통해 언어 모델의 학습과 응답 품질을 최적화할 수 있습니다
+* 프롬프트 최적화와 출력 파싱 기능을 제공하여 다양한 포맷의 출력 데이터를 생성할 수 있습니다
 
-# 단일 호출
-response = model.invoke("LangChain이 무엇인가요?")
-print(response.content)
+**4. 다중 모델 지원**
 
-# 메시지 형식으로 호출
-messages = [
-    ("system", "당신은 친절한 AI 어시스턴트입니다."),
-    ("human", "Python에 대해 설명해주세요.")
-]
-response = model.invoke(messages)
-print(response.content)
-```
+* OpenAI, Hugging Face, Cohere 등 여러 LLM 플랫폼과의 호환성을 제공하며, 각 모델의 장점을 활용하여 애플리케이션을 설계할 수 있습니다
 
-**LangChain v1.0에서는 \*\*`init_chat_model`\*\*을 사용하여 통합된 방식으로 모델을 초기화 한다**
+**5. 체인 및 에이전트 기능**
 
-#### 2-1-1. 기본 모델 초기화
+* 체인은 여러 작업을 순차적 또는 병렬적으로 연결하여 프로세스를 자동화하고, 에이전트는 작업 순서를 동적으로 결정하는 로직을 제공합니다
+* 이를 통해 복잡한 문제를 해결하거나 멀티스텝 작업을 쉽게 관리할 수 있습니다
 
-```python
-from langchain.chat_models import init_chat_model
+**6. 메모리 기능**
 
-# OpenAI 모델
-model = init_chat_model("gpt-4o", model_provider="openai", temperature=0)
+* LangChain은 대화의 흐름을 유지하기 위해 장기적 또는 요약된 형태로 대화 데이터를 저장하고 이를 활용할 수 있습니다
 
-# Ollama 모델 (로컬)
-ollama_model = init_chat_model("llama3.2", model_provider="ollama", temperature=0)
+**7. 개발 편의성 및 오픈소스**
 
-# Anthropic 모델
-claude = init_chat_model("claude-3-5-sonnet-latest", model_provider="anthropic")
+* LangChain은 코드 재사용과 빠른 프로토타이핑을 강조하며, Python 및 JavaScript 기반으로 제공됩니다. 이는 비전문가도 쉽게 사용 가능하게 하며, 오픈소스 커뮤니티의 지원을 받을 수 있습니다
 
-# 모델 호출 - OpenAI
-response = model.invoke("LangChain v1.0에 대해 설명해주세요")
-print(response.content)
+**8. 확장성과 커스터마이징**
 
-# 모델 호출 - Ollama
-ollama_response = ollama_model.invoke("LangChain v1.0에 대해 설명해주세요")
-print(ollama_response.content)
+* LangChain은 모듈식 설계와 분산 아키텍처를 통해 확장 가능하며, 사용자가 필요에 따라 체인과 에이전트를 재구성하여 맞춤형 솔루션을 구현할 수 있습니다
 
-```
+## 2. LangChain 모듈
 
-#### 2-1-2. 메시지 형식으로 호출
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption><p>LangChain Module</p></figcaption></figure>
 
-```python
-from langchain.messages import HumanMessage, SystemMessage
+LangChain은 모듈들을 유기적으로 결합하여 언어 모델을 더 강력하고 유연하게 사용할 수 있도록 설계되었습니다. 각 모듈은 특정 역할을 맡아 모델이 단순한 텍스트 생성을 넘어 문서 검색, 외부 도구 활용, 데이터 처리 등 다양한 작업을 수행할 수 있게 합니다
 
-messages = [
-    SystemMessage(content="당신은 친절한 AI 어시스턴트입니다."),
-    HumanMessage(content="Python에 대해 설명해주세요.")
-]
+#### 다이어그램의 중심 (Chains)
 
-# OpenAI로 호출
-response_openai = model.invoke(messages)
-print("OpenAI:", response_openai.content)
+* 다이어그램 중앙에 있는 "Chains"는 LangChain의 핵심 개념으로, 위의 모듈들을 연결하여 복잡한 워크플로우를 구성하는 역할을 합니다.
+* 예를 들어, 문서를 로드(Document Loader) → 텍스트를 분할(Text Splitters) → 벡터로 변환하여 저장(Vector Stores) → 프롬프트와 함께 모델에 전달(Prompts) → 결과를 파싱(Output Parsers)하는 일련의 과정을 Chain으로 묶을 수 있습니다.
 
-# Ollama로 호출
-response_ollama = ollama_model.invoke(messages)
-print("Ollama:", response_ollama.content)
+***
 
-```
+<details>
 
-#### 2-1-3. 런타임 구성 가능 모델
+<summary>LangChain 구성요소</summary>
 
-```python
-# 실행 시점에 모델 변경 가능
-configurable_model = init_chat_model(temperature=0)
 
-# OpenAI 사용
-result1 = configurable_model.invoke(
-    "안녕하세요",
-    config={"configurable": {"model": "gpt-4o"}}
-)
 
-# Ollama 사용
-result2 = configurable_model.invoke(
-    "안녕하세요",
-    config={"configurable": {"model": "llama3.2", "model_provider": "ollama"}}
-)
+* **Models (모델)**
+  * LangChain에서 사용하는 핵심 구성 요소로, 대규모 언어 모델(LLM)이나 기타 AI 모델을 의미합니다. 예를 들어, OpenAI의 GPT 모델, Hugging Face의 모델 등이 이에 해당합니다.
+  * LangChain은 이러한 모델을 쉽게 통합하고 호출할 수 있도록 API나 인터페이스를 제공합니다.
+  * 역할: 텍스트 생성, 질문 답변, 요약 등 다양한 작업을 수행합니다.
+* **Tools (도구)**
+  * LangChain에서 모델이 외부 시스템과 상호작용하거나 추가 기능을 수행할 수 있도록 지원하는 도구들입니다.
+  * 예를 들어, 웹 검색, 데이터베이스 쿼리, 파일 읽기/쓰기, API 호출 등이 포함됩니다.
+  * 역할: 모델이 단순히 텍스트 생성에 그치지 않고, 외부 환경과 연결되어 더 복잡한 작업을 수행할 수 있게 합니다.
+* **Example Selectors (예제 선택기)**
+  * 모델이 더 나은 응답을 생성하도록 돕기 위해 관련 예제를 선택하는 모듈입니다.
+  * 특히 "Few-shot Learning"에서 유용하며, 모델에게 특정 작업에 대한 예제를 제공하여 더 정확한 결과를 얻을 수 있도록 합니다.
+  * 역할: 모델이 새로운 작업을 수행할 때 참고할 수 있는 적절한 예제를 선택합니다.
+* **Prompts (프롬프트)**
+  * 모델에 입력으로 제공되는 텍스트 지침입니다. LangChain은 프롬프트 템플릿을 제공하여 사용자가 모델에 효과적으로 질문을 던질 수 있도록 돕습니다.
+  * 예를 들어, "다음 문장을 요약해줘: {문장}"과 같은 템플릿을 사용하여 일관된 프롬프트를 생성할 수 있습니다.
+  * 역할: 모델이 원하는 방식으로 응답하도록 유도합니다.
+* **Vector Stores (벡터 저장소)**
+  * 텍스트 데이터를 벡터 형태로 저장하고 검색하는 데 사용됩니다. 이는 주로 임베딩(embedding)과 관련이 있습니다.
+  * 예를 들어, 문서의 의미를 벡터로 변환한 후, 유사한 문서를 빠르게 검색할 수 있습니다. Pinecone, FAISS, Chroma 같은 벡터 데이터베이스가 여기에 해당합니다.
+  * 역할: 대량의 데이터를 효율적으로 검색하고, 모델이 관련 정보를 찾도록 돕습니다.
+* **Document Loader (문서 로더)**
+  * 외부 데이터를 LangChain으로 가져오는 모듈입니다. PDF, Word, 텍스트 파일, 웹 페이지 등 다양한 형식의 문서를 로드할 수 있습니다.
+  * 예를 들어, PDF 파일을 읽어 텍스트로 변환하거나, 웹사이트에서 데이터를 스크래핑하여 사용할 수 있습니다.
+  * 역할: 모델이 처리할 수 있는 형태로 데이터를 준비합니다.
+* **Text Splitters (텍스트 분할기)**
+  * 긴 문서를 작은 조각으로 나누는 데 사용됩니다. 이는 모델이 한 번에 처리할 수 있는 토큰 수의 제한 때문에 필요합니다.
+  * 예를 들어, 10,000단어 문서를 500단어씩 나누어 처리할 수 있도록 합니다.
+  * 역할: 대규모 텍스트를 관리 가능한 크기로 나누어 모델이 효율적으로 처리하도록 돕습니다.
+* **Output Parsers (출력 파서)**
+  * 모델의 출력을 구조화된 형태로 변환하는 모듈입니다.
+  * 예를 들어, 모델이 생성한 텍스트에서 JSON 형식으로 데이터를 추출하거나, 특정 패턴에 맞게 결과를 정리할 수 있습니다.
+  * 역할: 모델의 출력을 애플리케이션에서 더 쉽게 사용할 수 있도록 가공합니다.
 
-```
+</details>
 
-#### 2-1-4. 임베딩 모델
+## 3. LLM에 외부 데이터 소스 연동 방법
 
-```python
-from langchain.embeddings import init_embeddings
+LangChain을 사용하면 다음과 같은 방법으로 통해 LLM을 다양한 외부 데이터 소스와 쉽게 통합하여, 실시간 데이터 처리 및 애플리케이션 개발이 간소화됩니다.
 
-# OpenAI 임베딩 모델
-embeddings_openai = init_embeddings("text-embedding-3-small", provider="openai")
+#### **1. API와의 통합**
 
-# Ollama 임베딩 모델
-embeddings_ollama = init_embeddings("nomic-embed-text", provider="ollama")
+LangChain은 API를 통해 실시간 데이터를 가져와 언어 모델에 제공할 수 있습니다. 이를 통해 모델은 최신 정보를 활용하여 응답을 생성할 수 있습니다. 예를 들어, 금융 서비스에서 시장 데이터를 실시간으로 분석하거나, 의료 분야에서 환자 기록을 즉각적으로 조회하는 애플리케이션을 구축할 수 있습니다
 
-# 텍스트 임베딩 - OpenAI
-text_embedding_openai = embeddings_openai.embed_query("LangChain v1.0")
+#### **2. 데이터베이스 연결**
 
-# 텍스트 임베딩 - Ollama
-text_embedding_ollama = embeddings_ollama.embed_query("LangChain v1.0")
+LangChain은 SQL 및 NoSQL 데이터베이스와의 연결을 지원합니다. 이를 통해 데이터베이스에서 직접 데이터를 검색하고 이를 언어 모델에 활용할 수 있습니다. 이는 복잡한 애플리케이션에서 실시간으로 다양한 정보를 처리하는 데 유용합니다
 
-# 문서 임베딩
-docs_embeddings = embeddings_openai.embed_documents(["문서1", "문서2"])
+#### **3. 파일 시스템 통합**
 
-```
+LangChain은 파일 시스템과도 통합되어, 텍스트 파일이나 문서 등 다양한 형태의 데이터를 가져와 언어 모델에 제공할 수 있습니다. 이는 대규모 문서 데이터를 처리하거나 요약하는 작업에 매우 유리합니다
 
-### 2-2. Prompts
+#### **4. 검색 증강 생성(RAG)**
 
-**Prompts**는 모델에 전달할 입력을 구조화하고 템플릿화하는 컴포넌트로 변수 삽입, 다중 메시지 구성, Few-shot 예제 포함 등이 가능합니다
+LangChain은 RAG 워크플로를 통해 언어 모델의 출력을 보강합니다. 이는 문서 기반의 검색 기능을 활용하여 모델의 응답 정확도를 높여줍니다
 
-#### 2-2-1.  기본 프롬프트 템플릿
+#### **5. 에이전트와 도구 통합**
 
-```python
-from langchain_core.prompts import PromptTemplate
+LangChain은 다양한 에이전트와 도구를 통해 외부 데이터 소스를 관리합니다. 예를 들어, 검색 엔진, 계산기, 위키피디아, Wolfram Alpha 등의 도구와 통합하여 에이전트가 복잡한 작업을 수행하도록 도와줍니다
 
-# 단순 템플릿
-prompt = PromptTemplate.from_template(
-    "{subject}에 대해 {style} 스타일로 설명해주세요."
-)
-formatted = prompt.format(subject="AI", style="초보자가 이해할 수 있는")
-print(formatted)
-```
+#### **6. 체인 기능**
 
-#### 2-2-2. Chat 프롬프트 템플릿
+LangChain은 복잡한 작업을 여러 단계의 체인으로 나누어 자동화할 수 있습니다. 이를 통해 사용자의 요청을 받아 데이터를 검색하고, 그 데이터를 바탕으로 답변을 생성하는 등의 프로세스를 간단하게 구현할 수 있습니다
 
-```python
-from langchain_core.prompts import ChatPromptTemplate
+## 4. LangChain 장점
 
-chat_prompt = ChatPromptTemplate.from_messages([
-    ("system", "당신은 {role} 전문가입니다."),
-    ("human", "{question}"),
-    ("ai", "네, 도와드리겠습니다."),
-    ("human", "{follow_up}")
-])
+#### **1. 손쉬운 구현**
 
-messages = chat_prompt.format_messages(
-    role="Python 개발",
-    question="FastAPI에 대해 알려주세요",
-    follow_up="장점은 무엇인가요?"
-)
+* LangChain은 복잡한 LLM을 몇 줄의 코드로 쉽게 구현할 수 있도록 설계되었습니다. 이를 통해 개발자는 더 짧고 간결한 코드로 강력한 AI 애플리케이션을 개발할 수 있습니다
 
-```
+#### **2. 다양한 LLM 통합**
 
-#### 2-2-3. Few-Shot 프롬프트
+* LangChain은 OpenAI GPT-4, Hugging Face의 여러 모델, Google의 PaLM 등 다양한 언어 모델과 쉽게 통합할 수 있습니다. 이를 통해 개발자는 특정 사용 사례에 가장 적합한 모델을 선택하고 사용할 수 있으며, 필요에 따라 여러 모델을 혼합하여 사용할 수도 있습니다
 
-```python
-from langchain_core.prompts import FewShotPromptTemplate, PromptTemplate
+#### **3. 복잡한 작업의 자동화**
 
-# 예제 데이터
-examples = [
-    {"input": "happy", "output": "sad"},
-    {"input": "tall", "output": "short"},
-    {"input": "sunny", "output": "gloomy"}
-]
+* LangChain은 여러 단계를 거치는 작업을 "체인"으로 구성하여 쉽게 처리할 수 있습니다. 예를 들어, 사용자의 질문을 받아 데이터베이스에서 정보를 검색하고, 그 정보를 바탕으로 답변을 생성하는 복합적인 프로세스를 자동화하여 효율성을 높입니다
 
-# 예제 포맷 템플릿
-example_prompt = PromptTemplate(
-    input_variables=["input", "output"],
-    template="입력: {input}\n출력: {output}"
-)
+#### **4. 외부 데이터 소스와의 연동**
 
-# Few-shot 프롬프트 생성
-few_shot_prompt = FewShotPromptTemplate(
-    examples=examples,
-    example_prompt=example_prompt,
-    suffix="입력: {word}\n출력:",
-    input_variables=["word"]
-)
+* LangChain은 데이터베이스, API, 파일 시스템 등 다양한 외부 데이터 소스와의 통합을 지원하여, 실시간 데이터를 활용한 보다 정교한 응답 생성을 가능하게 합니다. 이를 통해 모델이 훈련된 데이터 외의 최신 정보를 사용할 수 있습니다
 
-print(few_shot_prompt.format(word="energetic"))
+#### **5. 유연한 프롬프트 및 컨텍스트 관리**
 
-```
+* 프롬프트 관리 기능을 통해 사용자가 필요로 하는 입력을 구성하고, 대화의 맥락을 유지할 수 있도록 도와줍니다. 이는 사용자 경험을 개선하고 자연스러운 대화를 유지하는 데 필수적입니다
 
-#### 2-2-4. LCEL을 사용한 프롬프트 체인
+#### **6. 활발한 오픈소스 커뮤니티**
 
-```python
-from langchain.chat_models import init_chat_model
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+* LangChain은 오픈소스 프레임워크로서, 전 세계 개발자들이 참여하는 커뮤니티의 지속적인 지원을 받고 있습니다. 이 커뮤니티는 새로운 기능 개발과 버그 수정, 다양한 사용 사례 공유를 통해 LangChain의 발전에 기여하고 있습니다
 
-# 프롬프트 정의
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "당신은 {role} 전문가입니다."),
-    ("human", "{question}")
-])
+#### **7. 높은 확장성**
 
-# OpenAI 모델 체인
-model_openai = init_chat_model("gpt-4o", temperature=0)
-chain_openai = prompt | model_openai | StrOutputParser()
+* LangChain은 다양한 비즈니스 요구에 맞춰 애플리케이션을 쉽게 확장할 수 있는 구조를 가지고 있습니다. 필요에 따라 새로운 기능을 추가하거나 기존 기능을 수정하여 맞춤형 솔루션을 개발할 수 있습니다
 
-# Ollama 모델 체인
-model_ollama = init_chat_model("llama3.2", model_provider="ollama", temperature=0)
-chain_ollama = prompt | model_ollama | StrOutputParser()
-
-# 실행
-result_openai = chain_openai.invoke({
-    "role": "Python 개발",
-    "question": "비동기 프로그래밍을 설명해주세요"
-})
-
-result_ollama = chain_ollama.invoke({
-    "role": "Python 개발",
-    "question": "비동기 프로그래밍을 설명해주세요"
-})
-
-print("OpenAI:", result_openai)
-print("Ollama:", result_ollama)
-
-```
-
-### 2-3. Output Parsers
-
-**Output Parsers**는 LLM의 문자열 출력을 구조화된 데이터(JSON, Pydantic 객체 등)로 변환한다.
-
-#### 2-3-1. PydanticOutputParser
-
-```python
-from langchain_core.output_parsers import PydanticOutputParser
-from langchain_core.prompts import PromptTemplate
-from langchain.chat_models import init_chat_model
-from pydantic import BaseModel, Field
-
-# Pydantic 모델 정의
-class BookInfo(BaseModel):
-    title: str = Field(description="책 제목")
-    author: str = Field(description="저자 이름")
-    year: int = Field(description="출판 연도")
-
-# 파서 생성
-parser = PydanticOutputParser(pydantic_object=BookInfo)
-
-# 프롬프트에 포맷 지시사항 추가
-prompt = PromptTemplate(
-    template="다음 책 정보를 제공해주세요: {book}\n\n{format_instructions}",
-    input_variables=["book"],
-    partial_variables={"format_instructions": parser.get_format_instructions()}
-)
-
-# OpenAI 체인
-model_openai = init_chat_model("gpt-4o", temperature=0)
-chain_openai = prompt | model_openai | parser
-
-# Ollama 체인
-model_ollama = init_chat_model("llama3.2", model_provider="ollama", temperature=0)
-chain_ollama = prompt | model_ollama | parser
-
-# 실행 - OpenAI
-result_openai = chain_openai.invoke({"book": "해리포터"})
-print(f"OpenAI - 제목: {result_openai.title}, 저자: {result_openai.author}, 연도: {result_openai.year}")
-
-# 실행 - Ollama
-result_ollama = chain_ollama.invoke({"book": "해리포터"})
-print(f"Ollama - 제목: {result_ollama.title}, 저자: {result_ollama.author}, 연도: {result_ollama.year}")
-
-```
-
-#### 2-3-2. JsonOutputParser
-
-```python
-from langchain_core.output_parsers import JsonOutputParser
-
-parser = JsonOutputParser()
-
-# JSON 문자열 파싱
-json_string = '{"name": "철수", "age": 25, "city": "서울"}'
-parsed = parser.parse(json_string)
-print(parsed)  # {'name': '철수', 'age': 25, 'city': '서울'}
-
-
-
-```
-
-#### 2-3-3. StructuredOutputParser
-
-```python
-from langchain.output_parsers import StructuredOutputParser, ResponseSchema
-
-# 응답 스키마 정의
-response_schemas = [
-    ResponseSchema(name="answer", description="질문에 대한 답변"),
-    ResponseSchema(name="confidence", description="답변의 확신도 (0-100)")
-]
-
-parser = StructuredOutputParser.from_response_schemas(response_schemas)
-format_instructions = parser.get_format_instructions()
-
-# 프롬프트에 포함
-prompt = PromptTemplate(
-    template="질문: {query}\n\n{format_instructions}",
-    input_variables=["query"],
-    partial_variables={"format_instructions": format_instructions}
-)
-```
-
-### 2-4. Document Loaders, TextSplites, Vector Stores
-
-이 컴포넌트들은 **RAG(Retrieval-Augmented Generation)** 구현에 핵심적요소 이다.
-
-#### 2-4-1. Document Loaders
-
-```python
-from langchain_community.document_loaders import PyPDFLoader
-
-# PDF 로더
-loader = PyPDFLoader("document.pdf")
-pages = loader.load()
-
-# 페이지별 내용 확인
-for i, page in enumerate(pages):
-    print(f"페이지 {i+1}: {page.page_content[:100]}...")
-    print(f"메타데이터: {page.metadata}")
-
-```
-
-#### 2-4-2. TextSplitters
-
-```python
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-
-# RecursiveCharacterTextSplitter (권장)
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,        # 청크 최대 크기
-    chunk_overlap=200,      # 청크 간 중복 문자 수
-    length_function=len,
-    separators=["\n\n", "\n", " ", ""]  # 분할 우선순위
-)
-
-# 문서 분할
-documents = text_splitter.split_documents(pages)
-print(f"총 {len(documents)}개 청크 생성")
-
-```
-
-#### 2-4-3. Vector Stores
-
-```python
-from langchain_chroma import Chroma
-from langchain.embeddings import init_embeddings
-
-# OpenAI 임베딩 사용
-embeddings_openai = init_embeddings("text-embedding-3-small", provider="openai")
-vectorstore_openai = Chroma.from_documents(
-    documents=documents,
-    embedding=embeddings_openai,
-    persist_directory="./chroma_db_openai"
-)
-
-# Ollama 임베딩 사용
-embeddings_ollama = init_embeddings("nomic-embed-text", provider="ollama")
-vectorstore_ollama = Chroma.from_documents(
-    documents=documents,
-    embedding=embeddings_ollama,
-    persist_directory="./chroma_db_ollama"
-)
-
-# 유사도 검색 - OpenAI
-query = "LangChain이란?"
-results_openai = vectorstore_openai.similarity_search(query, k=3)
-print("OpenAI 검색 결과:")
-for doc in results_openai:
-    print(doc.page_content)
-
-# 유사도 검색 - Ollama
-results_ollama = vectorstore_ollama.similarity_search(query, k=3)
-print("\nOllama 검색 결과:")
-for doc in results_ollama:
-    print(doc.page_content)
-
-# Retriever로 사용
-retriever_openai = vectorstore_openai.as_retriever(search_kwargs={"k": 3})
-retriever_ollama = vectorstore_ollama.as_retriever(search_kwargs={"k": 3})
-
-```
-
-#### 2-4-4. FAISS 사용 예시
-
-```python
-from langchain_community.vectorstores import FAISS
-from langchain.embeddings import init_embeddings
-
-# OpenAI 임베딩
-embeddings_openai = init_embeddings("text-embedding-3-small", provider="openai")
-vectorstore_faiss_openai = FAISS.from_documents(documents, embeddings_openai)
-
-# Ollama 임베딩
-embeddings_ollama = init_embeddings("nomic-embed-text", provider="ollama")
-vectorstore_faiss_ollama = FAISS.from_documents(documents, embeddings_ollama)
-
-# 저장 및 로드
-vectorstore_faiss_openai.save_local("faiss_index_openai")
-vectorstore_faiss_ollama.save_local("faiss_index_ollama")
-
-new_vectorstore_openai = FAISS.load_local(
-    "faiss_index_openai", 
-    embeddings_openai,
-    allow_dangerous_deserialization=True
-)
-
-```
-
-### 2-5. Tools
-
-**Tools**는 에이전트가 외부 기능(검색, 계산, API 호출 등)을 실행할 수 있도록 연결하는 함수이다.
-
-#### 2-5-1. @tool 데코레이터 사용
-
-```python
-from langchain.tools import tool
-
-@tool
-def search_database(query: str, limit: int = 10) -> str:
-    """데이터베이스에서 쿼리와 일치하는 레코드를 검색합니다.
-    
-    Args:
-        query: 검색어
-        limit: 반환할 최대 결과 수
-    """
-    # 실제 검색 로직
-    return f"{limit}개의 결과를 찾았습니다: {query}"
-
-# Tool 정보 확인
-print(search_database.name)
-print(search_database.description)
-
-# Tool 실행
-result = search_database.invoke({"query": "Python 튜토리얼", "limit": 5})
-print(result)
-
-```
-
-#### 2-5-2. 커스텀 Tool 이름과 스키마
-
-```python
-from langchain.tools import tool
-from pydantic import BaseModel, Field
-
-class CalculatorInput(BaseModel):
-    expression: str = Field(description="계산할 수식")
-
-@tool("calculator", args_schema=CalculatorInput)
-def calculate(expression: str) -> str:
-    """수학 표현식을 계산합니다."""
-    try:
-        result = eval(expression)
-        return f"결과: {result}"
-    except:
-        return "계산 오류"
-
-print(calculate.invoke({"expression": "2 + 3 * 4"}))
-```
-
-#### 2-5-3. 여러 Tool 정의
-
-```python
-from langchain.tools import tool
-
-@tool
-def get_current_weather(location: str) -> str:
-    """특정 위치의 현재 날씨를 가져옵니다."""
-    return f"{location}의 날씨: 맑음, 23도"
-
-@tool
-def get_word_length(word: str) -> int:
-    """문자열의 길이를 반환합니다."""
-    return len(word)
-
-@tool
-def multiply(a: int, b: int) -> int:
-    """두 숫자를 곱합니다."""
-    return a * b
-
-@tool
-def add(a: int, b: int) -> int:
-    """두 숫자를 더합니다."""
-    return a + b
-
-tools = [search_database, 
-         calculate, 
-         get_current_weather, 
-         get_word_length, 
-         multiply, 
-         add]
-
-```
-
-### 2-5. Agent
-
-**Agent**는 LLM을 사용하여 어떤 행동(Tool 호출)을 취할지 결정하는 시스템으로  LangChain v1.0에서는 \*\*`langchain.agents.create_agent`\*\*를 사용한다.
-
-#### 2-5-1. 기본 Agent 생성
-
-```python
-from langchain.agents import create_agent
-from langchain.tools import tool
-
-# Tool 정의
-@tool
-def multiply(a: int, b: int) -> int:
-    """두 숫자를 곱합니다."""
-    return a * b
-
-@tool
-def add(a: int, b: int) -> int:
-    """두 숫자를 더합니다."""
-    return a + b
-
-tools = [multiply, add]
-
-# OpenAI Agent
-agent_openai = create_agent(
-    model="openai:gpt-4o",
-    tools=tools,
-    system_prompt="당신은 수학 문제를 단계별로 해결하는 전문가입니다."
-)
-
-# Ollama Agent
-agent_ollama = create_agent(
-    model="ollama:llama3.2",
-    tools=tools,
-    system_prompt="당신은 수학 문제를 단계별로 해결하는 전문가입니다."
-)
-
-# Agent 실행 - OpenAI
-result_openai = agent_openai.invoke({
-    "messages": [{"role": "user", "content": "5와 3을 곱한 후 7을 더하면?"}]
-})
-print("OpenAI:", result_openai["messages"][-1].content)
-
-# Agent 실행 - Ollama
-result_ollama = agent_ollama.invoke({
-    "messages": [{"role": "user", "content": "5와 3을 곱한 후 7을 더하면?"}]
-})
-print("Ollama:", result_ollama["messages"][-1].content)
-
-```
-
-#### 2-5-2. 메모리가 있는 Agent (Checkpointing)
-
-```python
-from langchain.agents import create_agent
-from langgraph.checkpoint.memory import MemorySaver
-
-# Checkpointer 생성
-memory = MemorySaver()
-
-# OpenAI Agent (메모리 포함)
-agent_openai = create_agent(
-    model="openai:gpt-4o",
-    tools=tools,
-    system_prompt="당신은 친절한 어시스턴트입니다.",
-    checkpointer=memory
-)
-
-# Ollama Agent (메모리 포함)
-agent_ollama = create_agent(
-    model="ollama:llama3.2",
-    tools=tools,
-    system_prompt="당신은 친절한 어시스턴트입니다.",
-    checkpointer=memory
-)
-
-# 대화 세션 설정
-config_openai = {"configurable": {"thread_id": "openai-session-123"}}
-config_ollama = {"configurable": {"thread_id": "ollama-session-456"}}
-
-# 첫 번째 대화 - OpenAI
-response1_openai = agent_openai.invoke(
-    {"messages": [{"role": "user", "content": "안녕, 내 이름은 철수야"}]},
-    config_openai
-)
-
-# 두 번째 대화 - OpenAI (이전 대화 기억)
-response2_openai = agent_openai.invoke(
-    {"messages": [{"role": "user", "content": "내 이름이 뭐였지?"}]},
-    config_openai
-)
-print("OpenAI:", response2_openai["messages"][-1].content)
-
-# 첫 번째 대화 - Ollama
-response1_ollama = agent_ollama.invoke(
-    {"messages": [{"role": "user", "content": "안녕, 내 이름은 영희야"}]},
-    config_ollama
-)
-
-# 두 번째 대화 - Ollama (이전 대화 기억)
-response2_ollama = agent_ollama.invoke(
-    {"messages": [{"role": "user", "content": "내 이름이 뭐였지?"}]},
-    config_ollama
-)
-print("Ollama:", response2_ollama["messages"][-1].content)
-
-```
-
-#### 2-5-3. Context를 활용한 Agent
-
-```python
-from dataclasses import dataclass
-from langchain.agents import create_agent
-
-# Context 스키마 정의
-@dataclass
-class Context:
-    user_id: str
-    session_id: str
-    user_level: str = "beginner"
-
-# OpenAI Agent
-agent_openai = create_agent(
-    model="openai:gpt-4o",
-    tools=tools,
-    system_prompt="당신은 사용자 수준에 맞춰 설명하는 튜터입니다.",
-    context_schema=Context
-)
-
-# Ollama Agent
-agent_ollama = create_agent(
-    model="ollama:llama3.2",
-    tools=tools,
-    system_prompt="당신은 사용자 수준에 맞춰 설명하는 튜터입니다.",
-    context_schema=Context
-)
-
-# Context와 함께 실행 - OpenAI
-result_openai = agent_openai.invoke(
-    {"messages": [{"role": "user", "content": "비동기 프로그래밍을 설명해줘"}]},
-    context=Context(user_id="123", session_id="abc", user_level="expert")
-)
-
-# Context와 함께 실행 - Ollama
-result_ollama = agent_ollama.invoke(
-    {"messages": [{"role": "user", "content": "비동기 프로그래밍을 설명해줘"}]},
-    context=Context(user_id="456", session_id="def", user_level="beginner")
-)
-
-```
-
-#### 2-5-4. Agent 스트리밍
-
-```python
-from langchain.agents import create_agent
-
-# OpenAI Agent 스트리밍
-agent_openai = create_agent(
-    model="openai:gpt-4o",
-    tools=tools,
-    system_prompt="당신은 실시간으로 응답하는 어시스턴트입니다."
-)
-
-print("OpenAI 스트리밍:")
-for chunk in agent_openai.stream(
-    {"messages": [{"role": "user", "content": "3 곱하기 5는?"}]},
-    stream_mode="updates"
-):
-    print(chunk)
-    print("---")
-
-# Ollama Agent 스트리밍
-agent_ollama = create_agent(
-    model="ollama:llama3.2",
-    tools=tools,
-    system_prompt="당신은 실시간으로 응답하는 어시스턴트입니다."
-)
-
-print("\nOllama 스트리밍:")
-for chunk in agent_ollama.stream(
-    {"messages": [{"role": "user", "content": "3 곱하기 5는?"}]},
-    stream_mode="updates"
-):
-    print(chunk)
-    print("---")
-
-```
-
-### 2-6. Example Selects
-
-**Example Selectors**는 프롬프트에 포함할 예제를 동적으로 선택하는 컴포넌트이다.
-
-#### 2-6-1. SemanticSimilarityExampleSelector
-
-```python
-from langchain_chroma import Chroma
-from langchain_core.example_selectors import SemanticSimilarityExampleSelector
-from langchain_core.prompts import FewShotPromptTemplate, PromptTemplate
-from langchain.embeddings import init_embeddings
-
-# 예제 정의
-examples = [
-    {"input": "happy", "output": "sad"},
-    {"input": "tall", "output": "short"},
-    {"input": "energetic", "output": "lethargic"},
-    {"input": "sunny", "output": "gloomy"},
-    {"input": "windy", "output": "calm"}
-]
-
-# 예제 포맷 템플릿
-example_prompt = PromptTemplate(
-    input_variables=["input", "output"],
-    template="입력: {input}\n출력: {output}"
-)
-
-# OpenAI 임베딩 사용
-embeddings_openai = init_embeddings("text-embedding-3-small", provider="openai")
-example_selector_openai = SemanticSimilarityExampleSelector.from_examples(
-    examples,
-    embeddings_openai,
-    Chroma,
-    k=2
-)
-
-# Ollama 임베딩 사용
-embeddings_ollama = init_embeddings("nomic-embed-text", provider="ollama")
-example_selector_ollama = SemanticSimilarityExampleSelector.from_examples(
-    examples,
-    embeddings_ollama,
-    Chroma,
-    k=2
-)
-
-# Few-shot 프롬프트 - OpenAI
-similar_prompt_openai = FewShotPromptTemplate(
-    example_selector=example_selector_openai,
-    example_prompt=example_prompt,
-    prefix="다음 입력의 반대말을 제시하세요",
-    suffix="입력: {adjective}\n출력:",
-    input_variables=["adjective"]
-)
-
-# Few-shot 프롬프트 - Ollama
-similar_prompt_ollama = FewShotPromptTemplate(
-    example_selector=example_selector_ollama,
-    example_prompt=example_prompt,
-    prefix="다음 입력의 반대말을 제시하세요",
-    suffix="입력: {adjective}\n출력:",
-    input_variables=["adjective"]
-)
-
-# 실행
-print("OpenAI 임베딩 기반 선택:")
-print(similar_prompt_openai.format(adjective="excited"))
-
-print("\nOllama 임베딩 기반 선택:")
-print(similar_prompt_ollama.format(adjective="excited"))
-
-```
-
-#### 2-6-2. LengthBasedExampleSelector
-
-```python
-from langchain_core.example_selectors import LengthBasedExampleSelector
-
-examples = [
-    {"input": "안녕", "output": "반가워"},
-    {"input": "좋은 아침입니다", "output": "좋은 아침이에요"},
-    {"input": "오늘 날씨가 정말 좋네요", "output": "네, 화창하네요"}
-]
-
-example_selector = LengthBasedExampleSelector(
-    examples=examples,
-    example_prompt=example_prompt,
-    max_length=25
-)
-
-dynamic_prompt = FewShotPromptTemplate(
-    example_selector=example_selector,
-    example_prompt=example_prompt,
-    prefix="대화 예시:",
-    suffix="입력: {input}\n출력:",
-    input_variables=["input"]
-)
-
-print(dynamic_prompt.format(input="안녕하세요"))
-
-```
