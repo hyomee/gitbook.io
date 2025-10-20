@@ -51,3 +51,5 @@
 ## AI 일반 <a href="#ai_common" id="ai_common"></a>
 
 * [프롬프트](ai_common/prompt.md)
+* [RAG 기반 에이전트 개발을 위한 주요 기능](ai_common/rag.md)
+* [RAG 인프라 DevOps  가이드](ai_common/rag-devops.md)
