@@ -12,7 +12,7 @@
     * [RAG 기반 에이전트 개발을 위한 주요 기능](llm_rag/rag/rag-1.md)
     * [RAG 인프라 DevOps  가이드](llm_rag/rag/rag-devops.md)
   * [Ollama API 호출](llm_rag/ollama-api.md)
-  * [파인튜닝](llm_rag/undefined.md)
+* [파인튜닝](undefined.md)
 * [Python Framework](python-framework/README.md)
   * [LangChain](langchain/README.md)
     * [LangChain](langchain/langchain/README.md)
@@ -60,9 +60,9 @@
     * [Strands Agents](python-framework/aws/strands-agents.md)
 * [Java Framework](java-framework/README.md)
   * [Spring AI](java-framework/spring-ai.md)
-* [개방형 프로토콜](undefined/README.md)
-  * [A2A (Agent-to-Agent)](undefined/a2a-agent-to-agent.md)
-  * [MCP (Model Context Protocol)](undefined/mcp-model-context-protocol.md)
+* [개방형 프로토콜](undefined-1/README.md)
+  * [A2A (Agent-to-Agent)](undefined-1/a2a-agent-to-agent.md)
+  * [MCP (Model Context Protocol)](undefined-1/mcp-model-context-protocol.md)
 
 ## AI 일반 <a href="#ai_common" id="ai_common"></a>
 
