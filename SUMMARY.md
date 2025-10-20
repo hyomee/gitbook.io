@@ -58,7 +58,8 @@
   * [AWS](python-framework/aws/README.md)
     * [Agent Squad](python-framework/aws/agent-squad.md)
     * [Strands Agents](python-framework/aws/strands-agents.md)
-* [Java Framework](java-framework.md)
+* [Java Framework](java-framework/README.md)
+  * [Spring AI](java-framework/spring-ai.md)
 
 ## AI 일반 <a href="#ai_common" id="ai_common"></a>
 
