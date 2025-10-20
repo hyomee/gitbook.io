@@ -1,8 +1,8 @@
 ---
-description: LLM RAG 학습 공간
+description: 본LLM RAG 학습 공간
 ---
 
-# LLM\_RAG
+# LLM\_RAG 기본
 
 ## 1. 파이선 환경 구성
 
