@@ -1,6 +1,8 @@
 # Table of contents
 
-* [RAG](README.md)
+* [AI 일반](README.md)
+  * [프롬프트](ai/prompt.md)
+* [RAG](<README (1).md>)
   * [RAG란](llm_rag/rag.md)
   * [RAG 기반 에이전트 개발을 위한 주요 기능](llm_rag/rag-1.md)
   * [RAG 인프라 DevOps  가이드](llm_rag/rag-devops.md)
@@ -63,7 +65,3 @@
 * [개방형 프로토콜](undefined/README.md)
   * [A2A (Agent-to-Agent)](undefined/a2a-agent-to-agent.md)
   * [MCP (Model Context Protocol)](undefined/mcp-model-context-protocol.md)
-
-## AI 일반 <a href="#ai_common" id="ai_common"></a>
-
-* [프롬프트](ai_common/prompt.md)
