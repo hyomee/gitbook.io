@@ -46,7 +46,7 @@ description: 자연어처리를 위한 파이선 라이브러리
 
 ## 2. LangChain 모듈
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption><p>LangChain Module</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (8).png" alt=""><figcaption><p>LangChain Module</p></figcaption></figure>
 
 LangChain은 모듈들을 유기적으로 결합하여 언어 모델을 더 강력하고 유연하게 사용할 수 있도록 설계되었습니다. 각 모듈은 특정 역할을 맡아 모델이 단순한 텍스트 생성을 넘어 문서 검색, 외부 도구 활용, 데이터 처리 등 다양한 작업을 수행할 수 있게 합니다
 

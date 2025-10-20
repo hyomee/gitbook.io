@@ -19,7 +19,7 @@
 
 
 
-    <figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption><p>파이썬 함수</p></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (11).png" alt=""><figcaption><p>파이썬 함수</p></figcaption></figure>
 
 ```python
 def basic_operations(value1=1, value2=1, operation: str = 'add'):
