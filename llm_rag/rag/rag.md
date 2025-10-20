@@ -1,15 +1,15 @@
 ---
-description: Retrieval-augmented generation
+description: 란Retrieval-augmented generation
 ---
 
-# RAG
+# RAG란
 
 LLM에 포함되지 않는 데이터에 대한 주입방법으로 LLM의 할로시네이션(왜곡)에 대한 대응 방법으로 Fine-Tuning, RAG(Retrieval-augmented generation)이 있습니다.
 
 1. Fine-Turning: 새로운 데이터를 이용해서 LLM의 파라미터를 조정&#x20;
 2. RAG: 새로운 데이터를 다양한 방법(Embedding->Vector DB, File, RDB 등)을 통해 데이터를 가지고 와서 프롬프트로 구성한 뒤 LLM에서 답변을 얻음
 
-<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption><p>RAG</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption><p>RAG</p></figcaption></figure>
 
 ## 1. RAG의 작동 원리 <a href="#h1-ac6ade17e1d7bfcfd69d3eefea237ea294d9dbee43aac5af332651e8e36df882" id="h1-ac6ade17e1d7bfcfd69d3eefea237ea294d9dbee43aac5af332651e8e36df882"></a>
 

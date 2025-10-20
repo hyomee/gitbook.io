@@ -7,7 +7,10 @@
     * [Class](llm_rag/quick-python/class.md)
     * [Exception](llm_rag/quick-python/exception.md)
     * [Other](llm_rag/quick-python/other.md)
-  * [RAG](llm_rag/rag.md)
+  * [RAG](llm_rag/rag/README.md)
+    * [RAG란](llm_rag/rag/rag.md)
+    * [RAG 기반 에이전트 개발을 위한 주요 기능](llm_rag/rag/rag-1.md)
+    * [RAG 인프라 DevOps  가이드](llm_rag/rag/rag-devops.md)
   * [Ollama API 호출](llm_rag/ollama-api.md)
 * [LangChain](langchain/README.md)
   * [맛보기](langchain/langchain_00.md)
@@ -51,5 +54,3 @@
 ## AI 일반 <a href="#ai_common" id="ai_common"></a>
 
 * [프롬프트](ai_common/prompt.md)
-* [RAG 기반 에이전트 개발을 위한 주요 기능](ai_common/rag.md)
-* [RAG 인프라 DevOps  가이드](ai_common/rag-devops.md)
