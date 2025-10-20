@@ -60,6 +60,9 @@
     * [Strands Agents](python-framework/aws/strands-agents.md)
 * [Java Framework](java-framework/README.md)
   * [Spring AI](java-framework/spring-ai.md)
+* [개방형 프로토콜](undefined/README.md)
+  * [A2A (Agent-to-Agent)](undefined/a2a-agent-to-agent.md)
+  * [MCP (Model Context Protocol)](undefined/mcp-model-context-protocol.md)
 
 ## AI 일반 <a href="#ai_common" id="ai_common"></a>
 
