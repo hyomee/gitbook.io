@@ -2,6 +2,7 @@
 
 * [AI 일반](README.md)
   * [프롬프트](ai/prompt.md)
+  * [RAG 관련 활용](ai/rag.md)
 * [RAG](<README (1).md>)
   * [RAG란](llm_rag/rag.md)
   * [RAG 기반 에이전트 개발을 위한 주요 기능](llm_rag/rag-1.md)
