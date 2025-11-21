@@ -63,7 +63,7 @@
       * [Strands Agents](framework/python-framework/aws/strands-agents.md)
   * [Java Framework](framework/java-framework/README.md)
     * [Spring AI](framework/java-framework/spring-ai/README.md)
-      * [Spring AI 기본 구조](framework/java-framework/spring-ai/spring-ai.md)
+      * [Spring AI MVC WebFlex](framework/java-framework/spring-ai/spring-ai-mvc-webflex.md)
 * [개방형 프로토콜](undefined/README.md)
   * [A2A (Agent-to-Agent)](undefined/a2a-agent-to-agent.md)
   * [MCP (Model Context Protocol)](undefined/mcp-model-context-protocol.md)
