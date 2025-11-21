@@ -65,6 +65,7 @@
     * [Spring AI](framework/java-framework/spring-ai/README.md)
       * [Spring AI MVC WebFlex](framework/java-framework/spring-ai/spring-ai-mvc-webflex.md)
       * [Spring AI 기본 구조](framework/java-framework/spring-ai/spring-ai.md)
+      * [Spring AI 아키텍처 1](framework/java-framework/spring-ai/spring-ai-1.md)
 * [개방형 프로토콜](undefined/README.md)
   * [A2A (Agent-to-Agent)](undefined/a2a-agent-to-agent.md)
   * [MCP (Model Context Protocol)](undefined/mcp-model-context-protocol.md)
