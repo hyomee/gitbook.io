@@ -15,4 +15,4 @@
     4. KoSBERT 등 한국어 임베딩 모델로 벡터화
     5. Chroma/FAISS 등 벡터DB에 인덱스 등록
 
-    \
+    <br>

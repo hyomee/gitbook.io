@@ -2,7 +2,7 @@
 description: 본LLM RAG 학습 공간
 ---
 
-# LLM\_RAG 기본
+# RAG
 
 ## 1. 파이선 환경 구성
 
@@ -33,8 +33,7 @@ description: 본LLM RAG 학습 공간
 ## 3. Model 다운로드
 
 1. ollama model(https://www.ollama.com/search)애서 모델을 선택 한다.
-2.  올라마(Ollama) 모델을 다운로드하는 명령은 아래와 같이 모델 이름을 입력하면 설치 됩니다.\
-
+2.  올라마(Ollama) 모델을 다운로드하는 명령은 아래와 같이 모델 이름을 입력하면 설치 됩니다.<br>
 
     ```shell
     # ollama run <모델 이름>
@@ -55,8 +54,7 @@ description: 본LLM RAG 학습 공간
     | Solar     | 10.7B      | 6.1GB | `ollama run solar`      |
 
 
-3.  올라마 설치 확인\
-
+3.  올라마 설치 확인<br>
 
     ```sh
     ollama list  
@@ -83,4 +81,4 @@ description: 본LLM RAG 학습 공간
     | deepseek-r1:1.5b         | a42b25d8c10a | 1.1 GB | 6 weeks ago  |
     | codellama:latest         | 8fdf8f752f6e | 3.8 GB | 6 months ago |
 
-    \
+    <br>
