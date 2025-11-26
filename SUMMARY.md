@@ -1,7 +1,8 @@
 # Table of contents
 
 * [AI 일반](README.md)
-  * [프롬프트](ai/prompt.md)
+  * [프롬프트](ai/prompt/README.md)
+    * [프롬프트 엔지니어링](ai/prompt/undefined.md)
   * [RAG 관련 활용](ai/rag.md)
 * [RAG](<README (1).md>)
   * [RAG란](llm_rag/rag.md)

@@ -26,11 +26,11 @@ LLM(대규모 언어 모델)에 효과적으로 명령을 내리고, 원하는 �
 
 * **지시사항(Instruction)**: 모델에 특정 작업(예: 요약, 번역, 설명 등)을 명확히 요구하는 부분.
 
-<table><thead><tr><th width="177.0458984375">일반</th><th width="582.001953125">지시사항</th></tr></thead><tbody><tr><td>일반 질의</td><td><div><figure><img src="../.gitbook/assets/image (3).png" alt="" width="526"><figcaption></figcaption></figure></div></td></tr><tr><td>지시사항: 다음 질문을 한문장으로  답해줘</td><td><div><figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure></div></td></tr></tbody></table>
+<table><thead><tr><th width="177.0458984375">일반</th><th width="582.001953125">지시사항</th></tr></thead><tbody><tr><td>일반 질의</td><td><div><figure><img src="../../.gitbook/assets/image (3).png" alt="" width="526"><figcaption></figcaption></figure></div></td></tr><tr><td>지시사항: 다음 질문을 한문장으로  답해줘</td><td><div><figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure></div></td></tr></tbody></table>
 
 * **맥락(Context)**: 요청이 이루어지는 배경 정보나 필요에 따라 추가적인 설명, 예시, 상황 등을 포함.
 
-<table><thead><tr><th width="177.0458984375">일반</th><th width="582.001953125">지시사항</th></tr></thead><tbody><tr><td>신입사원용</td><td><div><figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure></div></td></tr><tr><td>팀장용</td><td><div><figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure></div></td></tr></tbody></table>
+<table><thead><tr><th width="177.0458984375">일반</th><th width="582.001953125">지시사항</th></tr></thead><tbody><tr><td>신입사원용</td><td><div><figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure></div></td></tr><tr><td>팀장용</td><td><div><figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure></div></td></tr></tbody></table>
 
 * **역할/페르소나(Role/Persona)** - AI에게 특정 전문가나 역할을 부여하여 답변의 스타일과 품질을 조정한다. "당신은 10년 경력의 마케팅 전문가입니다"처럼 역할을 명시합니다
 * **입력 데이터(Input data)**: 모델이 처리하게 될 실제 정보, 질문, 데이터 등을 제공. 분석할 문서, 번역할 텍스트, 검토할 코드 등이 해당합니다
