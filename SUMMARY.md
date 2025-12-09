@@ -70,3 +70,8 @@
 * [개방형 프로토콜](undefined/README.md)
   * [A2A (Agent-to-Agent)](undefined/a2a-agent-to-agent.md)
   * [MCP (Model Context Protocol)](undefined/mcp-model-context-protocol.md)
+
+## 파일럿프로젯트 <a href="#aaca" id="aaca"></a>
+
+* [기본 RAG 구축](aaca/rag/README.md)
+  * [인증서버(Keycloak)](aaca/rag/keycloak.md)
