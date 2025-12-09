@@ -440,3 +440,193 @@ onKeycloakTokens = (tokens) => {
 }
 export default App
 ```
+
+## 7. FastAPI 연동
+
+{% code title="# .env" %}
+```wikitext
+KEYCLOAK_URL=http://localhost:8080
+KEYCLOAK_REALM=myrealm
+KEYCLOAK_AUDIENCE=myclient        # Keycloak clientId
+KEYCLOAK_ALGO=RS256
+```
+{% endcode %}
+
+{% code title="# auth/keycloak.py" %}
+```python
+import os
+import requests
+from fastapi import HTTPException, status, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from jose import jwt
+from pydantic import BaseModel
+from typing import List, Dict, Any
+
+KEYCLOAK_URL = os.environ["KEYCLOAK_URL"]
+REALM = os.environ["KEYCLOAK_REALM"]
+AUDIENCE = os.environ["KEYCLOAK_AUDIENCE"]
+ALGO = os.environ.get("KEYCLOAK_ALGO", "RS256")
+
+security = HTTPBearer(auto_error=True)
+
+# JWK 캐시 (단순 예시)
+_jwks: Dict[str, Any] | None = None
+
+
+def get_jwks() -> Dict[str, Any]:
+    global _jwks
+    if _jwks is None:
+        jwks_url = (
+            f"{KEYCLOAK_URL}/realms/{REALM}/protocol/openid-connect/certs"
+        )
+        resp = requests.get(jwks_url)
+        if resp.status_code != 200:
+            raise RuntimeError("Cannot fetch Keycloak JWKs")
+        _jwks = resp.json()
+    return _jwks
+
+
+def get_public_key(header_kid: str) -> str:
+    jwks = get_jwks()
+    for key in jwks["keys"]:
+        if key["kid"] == header_kid:
+            from jose.utils import base64url_decode
+            # RSA public key 생성 (jose가 내부에서 처리하므로 jwk 직접 전달해도 됨)
+            return jwt.algorithms.RSAAlgorithm.from_jwk(key)  # type: ignore
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid token key id",
+    )
+
+
+class KeycloakUser(BaseModel):
+    sub: str
+    preferred_username: str | None = None
+    email: str | None = None
+    roles: List[str] = []
+
+
+def decode_token(token: str) -> KeycloakUser:
+    try:
+        unverified_header = jwt.get_unverified_header(token)
+        public_key = get_public_key(unverified_header["kid"])
+
+        payload = jwt.decode(
+            token,
+            public_key,
+            algorithms=[ALGO],
+            audience=AUDIENCE,
+            options={"verify_aud": True},
+        )
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token",
+        )
+
+    # realm role / client role에서 roles 추출  
+    roles: List[str] = []
+    resource_access = payload.get("resource_access") or {}
+    client_access = resource_access.get(AUDIENCE) or {}
+    client_roles = client_access.get("roles") or []
+    roles.extend(client_roles)
+
+    realm_access = payload.get("realm_access") or {}
+    realm_roles = realm_access.get("roles") or []
+    roles.extend(realm_roles)
+
+    ## resource_access[clientId].roles와 realm_access.roles에서 합쳐서 가져오고, 
+    ## 이 값을 기반으로 역할 체크
+    return KeycloakUser(
+        sub=payload.get("sub"),
+        preferred_username=payload.get("preferred_username"),
+        email=payload.get("email"),
+        roles=list(set(roles)),
+    )
+
+
+def get_current_user(
+    cred: HTTPAuthorizationCredentials = Depends(security),
+) -> KeycloakUser:
+    if cred.scheme.lower() != "bearer":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid auth scheme",
+        )
+    return decode_token(cred.credentials)
+
+```
+{% endcode %}
+
+```python
+# main.py
+from fastapi import FastAPI, Depends, HTTPException, status
+from auth.keycloak import get_current_user, KeycloakUser
+
+app = FastAPI()
+
+
+def require_role(role: str):
+    ## get_current_user를 Depends로 쓰면, 
+    ## Spring의 JwtAuthenticationToken처럼 FastAPI 라우트에서 바로 유저 정보
+    def checker(user: KeycloakUser = Depends(get_current_user)) -> KeycloakUser:
+        if role not in user.roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Role '{role}' required",
+            )
+        return user
+    return checker
+
+
+@app.get("/test/anonymous")
+def anonymous():
+    return {"message": "anonymous ok"}
+
+## Keycloak에 user 역할이 있는 사용자만 접근 가능
+@app.get("/test/user")
+def user_endpoint(user: KeycloakUser = Depends(require_role("user"))):
+    return {
+        "message": "user ok",
+        "username": user.preferred_username,
+        "roles": user.roles,
+    }
+
+## admin 역할이 있는 사용자만 접근 가능
+@app.get("/test/admin")
+def admin_endpoint(user: KeycloakUser = Depends(require_role("admin"))):
+    return {
+        "message": "admin ok",
+        "username": user.preferred_username,
+        "roles": user.roles,
+    }
+
+```
+
+```ts
+// api/client.ts
+import axios from "axios";
+import { getKeycloak } from "./keycloak"; // keycloak 인스턴스 반환하도록 래핑
+
+const api = axios.create({
+  baseURL: "http://localhost:8000",
+});
+
+api.interceptors.request.use(async (config) => {
+  const keycloak = getKeycloak();
+  if (keycloak?.authenticated) {
+    // 필요 시 updateToken 호출
+    await keycloak.updateToken(30).catch(() => {
+      keycloak.logout();
+    });
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${keycloak.token}`,
+    };
+  }
+  return config;
+});
+
+export default api;
+
+```
